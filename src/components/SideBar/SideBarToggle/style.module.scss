@@ -1,0 +1,15 @@
+.SideBarToggle {
+  height: var(--side-bar-toggle-height);
+  width: var(--side-bar-toggle-width);
+  border-radius: 100%;
+  position: absolute;
+  top: calc(50% - var(--side-bar-toggle-height) / 2);
+  right: calc(-1 * var(--side-bar-toggle-width) / 2);
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+}

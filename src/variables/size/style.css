@@ -1,0 +1,6 @@
+:root {
+    --side-bar-toggle-width: 24px;
+    --side-bar-toggle-height: 24px;
+    --side-bar-width: 300px;
+    --side-bar-collapsed-width: 60px;
+}
