@@ -1,0 +1,17 @@
+.SideBar {
+  width: 60px;
+  border: 1px solid red;
+  overflow: hidden;
+}
+
+.itemsWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.openedSideBar {
+  width: 200px;
+}
