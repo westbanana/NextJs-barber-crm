@@ -1,0 +1,17 @@
+.EmployeesList {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.optionsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.actvieBasket {
+  svg {
+    color: red
+  }
+}

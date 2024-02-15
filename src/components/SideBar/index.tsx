@@ -7,6 +7,7 @@ import { sidebarItems } from '@/constants/sidebar-items';
 import SideBarItem from '@/components/SideBar/SideBarItem';
 import SideBarToggle from '@/components/SideBar/SideBarToggle';
 import { classNames, Mods } from '@/lib/classNames/classNames';
+import ThemeSwitcher from '@/components/SideBar/ThemeSwitcher';
 
 const SideBar = memo(() => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -33,6 +34,7 @@ const SideBar = memo(() => {
         ))}
         <SideBarToggle onClick={handleToggle} className={cls.toggle} />
       </div>
+      <ThemeSwitcher />
     </div>
   );
 });

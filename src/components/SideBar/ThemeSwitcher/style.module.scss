@@ -1,0 +1,30 @@
+.ThemeSwitcher {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  position: relative;
+  padding: 12px 0;
+  transition: background-color var(--transition);
+  &:hover {
+    background-color: var(--hover-color);
+  }
+  svg {
+    animation: svg-show var(--transition) forwards;
+  }
+}
+
+@keyframes svg-show {
+  from {
+    opacity: 0;
+    transform: rotate(360deg);
+    //transform: scale(0.5) translateX(-10px) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg);
+    //transform: scale(1) translateX(0) translateY(0);
+  }
+}

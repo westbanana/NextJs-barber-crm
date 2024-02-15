@@ -1,0 +1,21 @@
+body[data-theme = "lightTheme"] {
+    --bg-color: white;
+    /*--bg-color: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(231,231,231,1) 100%);*/
+    --bg-color-inverted: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+    --primary-color: black;
+    --primary-color-inverted: white;
+    --text-color: black;
+    --border-color: rgba(0, 0, 0, 0.14);
+    --hover-color: rgba(0, 0, 0, 0.14)
+}
+
+body[data-theme = "darkTheme"] {
+    --bg-color: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 100%);
+    --bg-color-inverted: white;
+    /*--bg-color-inverted: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(231,231,231,1) 100%);;*/
+    --text-color: white;
+    --primary-color: white;
+    --primary-color-inverted: black;
+    --border-color: rgba(255, 255, 255, 0.14);
+    --hover-color: rgba(255, 255, 255, 0.14);
+}

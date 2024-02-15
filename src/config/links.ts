@@ -1,11 +1,24 @@
+import { UrlObject } from 'url'; // Импортируйте UrlObject из 'url'
+
 class PAGES_LINKS {
-  private BASE = 'http://localhost:3000';
+  private BASE: UrlObject = {
+    protocol: 'http',
+    hostname: 'localhost',
+    port: 3000,
+    pathname: '',
+  };
 
-  public HOME = this.BASE;
+  public get HOME(): UrlObject {
+    return { ...this.BASE, pathname: '/' };
+  }
 
-  public EMPLOYEES = `${this.BASE}/employees`;
+  public get EMPLOYEES(): UrlObject {
+    return { ...this.BASE, pathname: '/employees' };
+  }
 
-  public SETTINGS = `${this.BASE}/settings`;
+  public get SETTINGS(): UrlObject {
+    return { ...this.BASE, pathname: '/settings' };
+  }
 }
 
 export const PAGES_LINKS_INSTANCE = new PAGES_LINKS();

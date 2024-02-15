@@ -6,26 +6,28 @@
           background-color 0.3s ease-in-out,
           padding-left 0.3s ease-in-out;
   padding: 12px 0 12px 17px;
-  svg {
-    transition: transform 0.3s ease-in-out;
-  }
 
   .title {
     animation: item_text_showed 0.3s ease-in-out;
   }
 
-  &:not(.collapsed):hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: var(--hover-color);
     padding-left: 25px;
   }
 
   &.collapsed:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: var(--hover-color);
+    padding-left: 17px;
 
     svg {
       transform: scale(1.2);
     }
   }
+}
+
+.active {
+  background-color: red;
 }
 
 @keyframes item_text_showed {
