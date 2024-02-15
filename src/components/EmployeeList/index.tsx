@@ -28,7 +28,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 2,
       name: 'Ілля Вінівітін',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 10:00-12:00',
+      work_schedule: 'Пн-Нд 10:00-12:00',
       services_provided: [],
     },
     {
@@ -49,7 +49,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 5,
       name: 'Олег Олегов',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 09:00-11:00',
+      work_schedule: 'Пн-Нд 09:00-11:00',
       services_provided: [],
     },
     {
@@ -70,7 +70,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 8,
       name: 'Алексей Алексеев',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 10:00-12:00',
+      work_schedule: 'Пн-Нд 10:00-12:00',
       services_provided: [],
     },
     {
@@ -91,7 +91,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 11,
       name: 'Дмитрий Дмитриев',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 10:00-12:00',
+      work_schedule: 'Пн-Нд 10:00-12:00',
       services_provided: [],
     },
     {
@@ -119,7 +119,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 15,
       name: 'Владимир Владимиров',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 09:00-11:00',
+      work_schedule: 'Пн-Нд 09:00-11:00',
       services_provided: [],
     },
     {
@@ -140,7 +140,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 18,
       name: 'Антон Антонов',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 10:00-12:00',
+      work_schedule: 'Пн-Нд 10:00-12:00',
       services_provided: [],
     },
     {
@@ -161,7 +161,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       id: 21,
       name: 'Денис Денисов',
       position: 'Прибиральник',
-      work_schedule: 'Пн-ВС 10:00-12:00',
+      work_schedule: 'Пн-Нд 10:00-12:00',
       services_provided: [],
     },
     {
