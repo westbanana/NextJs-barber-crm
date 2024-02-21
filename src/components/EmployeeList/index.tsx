@@ -4,16 +4,20 @@ import React, {
   useCallback, useMemo, useRef, useState,
 } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import { ColDef, ITooltipParams } from 'ag-grid-community';
+import { ColDef, ITooltipParams, ValueGetterParams } from 'ag-grid-community';
 import { Trash2 } from 'lucide-react';
-import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
-import { classNames, Mods } from '@/lib/classNames/classNames';
 
-import cls from './style.module.scss';
+import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
+import EditRowCell from '@/components/EmployeeList/EditRowCell';
+import Button from '@/components/ui/Button/Button';
+import { classNames } from '@/lib/classNames/classNames';
+
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+
+import cls from './style.module.scss';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const [employees, setEmployees] = useState<IEmployee[]>([
@@ -186,6 +190,13 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     },
     { field: 'position', headerName: 'Посада', tooltipField: 'Посада' },
     { field: 'work_schedule', headerName: 'Графік роботи', tooltipField: 'Графік роботи' },
+    {
+      field: '',
+      sortable: false,
+      flex: 0,
+      valueGetter: (params: ValueGetterParams) => params.data,
+      cellRenderer: EditRowCell,
+    },
   ]);
   const defaultColProps = useMemo<ColDef>(() => ({
     resizable: false,
@@ -206,20 +217,12 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     }
   };
 
-  const trashBasketMods:Mods = {
-    [cls.actvieBasket]: selectedRow?.length > 0,
-  };
-
   return (
-    <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz'])}>
+    <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
       <div className={cls.optionsWrapper}>
-        <button
-          onClick={deleteRow}
-          className={classNames(cls.trashBacket, trashBasketMods, [])}
-          type="button"
-        >
+        <Button onClick={deleteRow} disabled={!selectedRow?.length} className={cls.trashBacket}>
           <Trash2 />
-        </button>
+        </Button>
       </div>
       <AgGridReact
         ref={gridRef}

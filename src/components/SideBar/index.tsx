@@ -2,21 +2,21 @@
 
 import React, { memo, useState } from 'react';
 import { QrCode } from 'lucide-react';
-import cls from './style.module.scss';
+
 import { sidebarItems } from '@/constants/sidebar-items';
 import SideBarItem from '@/components/SideBar/SideBarItem';
 import SideBarToggle from '@/components/SideBar/SideBarToggle';
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import ThemeSwitcher from '@/components/SideBar/ThemeSwitcher';
 
+import cls from './style.module.scss';
+
 const SideBar = memo(() => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const handleToggle = () => setIsCollapsed((prev) => !prev);
-
   const mods: Mods = {
     [cls.collapsed]: isCollapsed,
   };
-
   return (
     <div className={classNames(cls.SideBar, mods, [])}>
       <div className={cls.logoWrapper}>
