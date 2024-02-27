@@ -1,6 +1,7 @@
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
-import useTheme, { Theme } from '@/helpers/hooks/useTheme';
+
+import useTheme, { Theme } from '@/lib/hooks/useTheme';
 
 import cls from './style.module.scss';
 

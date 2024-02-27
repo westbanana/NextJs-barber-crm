@@ -1,0 +1,51 @@
+.container {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 100%;
+  background-color: var(--bg-color-inverted);
+  color: var(--text-color-inverted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition);
+  &:hover {
+    .uploadIconContainer {
+      opacity: 1;
+    }
+  }
+}
+
+.uploadIconContainer {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  backdrop-filter: blur(1px);
+  transition: opacity 0.15s linear;
+}
+
+.uploadIcon {
+  color: var(--text-color-inverted);
+  font-size: 20px;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.uploadInput {
+  position: absolute;
+  height: 40px;
+  left: 0;
+  width: 40px;
+  opacity: 0;
+}

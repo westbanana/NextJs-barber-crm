@@ -1,8 +1,3 @@
-.ag-row:hover {
-    transition: background-color var(--transition);
-    background-color: transparent;
-}
-
 .no-border.ag-cell {
     border: none !important;
     outline: none;
