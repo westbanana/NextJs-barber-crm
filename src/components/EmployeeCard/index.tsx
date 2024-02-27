@@ -1,7 +1,6 @@
 'use client';
 
 import React, { memo, useEffect, useRef } from 'react';
-import { Upload } from 'lucide-react';
 import { useFormik } from 'formik';
 
 import Portal from '@/components/Portal';
@@ -23,7 +22,7 @@ const EmployeeCard = memo(({
   mode,
 }:EmployeeEditCardProps) => {
   const dispatch = useAppDispatch();
-  const refEditCard = useRef<HTMLDivElement>(null);
+  const refEditCard = useRef<HTMLFormElement>(null);
 
   const formik = useFormik({
     initialValues: employeeData,
@@ -46,48 +45,43 @@ const EmployeeCard = memo(({
   return (
     <Portal>
       <div className={cls.EmployeeCardBg}>
-        <div
-          ref={refEditCard}
-          className={cls.EmployeeCard}
-        >
-          <form onSubmit={formik.handleSubmit}>
-            <div className={cls.userIconContainer}>
-              <UserIcon
-                userName={employeeData?.name}
-                withUpload
-                id="userIcon"
-                value={formik.values?.userIcon}
-                onChange={formik.handleChange}
-              />
-            </div>
-            <div className={cls.inputsWrapper}>
-              <Input
-                id="name"
-                label="Ім'я"
-                value={formik.values?.name}
-                onChange={formik.handleChange}
-              />
-              <Input
-                id="position"
-                label="Посада"
-                value={formik.values?.position}
-                onChange={formik.handleChange}
-              />
-            </div>
-            <div className={cls.buttonsWrapper}>
-              {mode === 'edit' && (
-                <Button onClick={formik.handleSubmit}>
-                  Зберегти
-                </Button>
-              )}
-              {mode === 'create' && (
-                <Button onClick={formik.submitForm}>
-                  Створити
-                </Button>
-              )}
-            </div>
-          </form>
-        </div>
+        <form ref={refEditCard} className={cls.form} onSubmit={formik.handleSubmit}>
+          <div className={cls.userIconContainer}>
+            <UserIcon
+              userName={employeeData?.name}
+              withUpload
+              id="userIcon"
+              value={formik.values?.userIcon}
+              onChange={formik.handleChange}
+            />
+          </div>
+          <div className={cls.inputsWrapper}>
+            <Input
+              id="name"
+              label="Ім'я"
+              value={formik.values?.name}
+              onChange={formik.handleChange}
+            />
+            <Input
+              id="position"
+              label="Посада"
+              value={formik.values?.position}
+              onChange={formik.handleChange}
+            />
+          </div>
+          <div className={cls.buttonsWrapper}>
+            {mode === 'edit' && (
+              <Button onClick={formik.handleSubmit}>
+                Зберегти
+              </Button>
+            )}
+            {mode === 'create' && (
+              <Button onClick={formik.submitForm}>
+                Створити
+              </Button>
+            )}
+          </div>
+        </form>
       </div>
     </Portal>
   );
