@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   cursor: default;
-  &:not(.empty),
+  &:has(.Input:not([value=""])),
   &:focus-within {
     .Label {
       transform: translateY(-12px) translateX(10px);

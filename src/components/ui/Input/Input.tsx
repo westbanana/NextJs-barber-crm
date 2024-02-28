@@ -8,9 +8,7 @@ import cls from './style.module.scss';
 const Input = ({
   value = '', onChange, label, id,
 }:InputProps) => {
-  const mods:Mods = {
-    [cls.empty]: !value,
-  };
+  const mods:Mods = {};
   return (
     <div className={classNames(cls.inputContainer, mods, [])}>
       <label

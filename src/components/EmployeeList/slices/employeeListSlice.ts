@@ -1,54 +1,94 @@
-import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
+import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
+import { updateEmployee } from '@/components/EmployeeList/services/updateEmployee';
+import { createEmployee } from '@/components/EmployeeList/services/createEmployee';
+import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
 
 export interface EmployeeListState {
   data: IEmployee[]
+  loading: boolean,
+  openedCard: EmployeeCardMode | undefined,
+  error: string | undefined
 }
 
 const initialState: EmployeeListState = {
-  data: [{
-    id: 1,
-    name: 'Петро Петров',
-    position: 'Барбер',
-    userIcon: undefined,
-    work_schedule: 'Пн-Пт 10:00-19:00',
-    services_provided: [],
-  },
-  {
-    id: 2,
-    name: 'Ілля Вінівітін',
-    userIcon: undefined,
-    position: 'Прибиральник',
-    work_schedule: 'Пн-Нд 10:00-12:00',
-    services_provided: [],
-  }],
+  data: [],
+  loading: false,
+  openedCard: undefined,
+  error: undefined,
 };
 
 export const employeeListSlice = createSlice({
   name: 'employeeList',
   initialState,
   reducers: {
-    deleteEmployee: (state, action: PayloadAction<number>) => {
-      state.data = state.data.filter((employee) => employee.id !== action.payload);
+    openCard: (state, action: PayloadAction<EmployeeCardMode | undefined>) => {
+      state.openedCard = action.payload;
     },
-    createEmployee: (state, action: PayloadAction<IEmployee>) => {
-      state.data.push(action.payload);
-    },
-    updateEmployee: (state, action: PayloadAction<IEmployee>) => {
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchEmployeeList.pending, (state, action) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(fetchEmployeeList.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload;
+    });
+    builder.addCase(fetchEmployeeList.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(updateEmployee.pending, (state, action) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(updateEmployee.fulfilled, (state, action) => {
+      state.loading = false;
       state.data = state.data.map((employee) => {
         if (employee.id === action.payload.id) {
           return action.payload;
         }
         return employee;
       });
-    },
+      state.openedCard = undefined;
+    });
+    builder.addCase(updateEmployee.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(createEmployee.pending, (state, action) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(createEmployee.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data.push(action.payload);
+      state.openedCard = undefined;
+    });
+    builder.addCase(createEmployee.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(deleteEmployee.pending, (state, action) => {
+      state.error = undefined;
+    });
+    builder.addCase(deleteEmployee.fulfilled, (state, action:PayloadAction<IEmployee>) => {
+      state.loading = false;
+      state.data = state.data.filter((employee) => employee.id !== action.payload.id);
+    });
+    builder.addCase(deleteEmployee.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
   },
 });
-
 export const {
-  deleteEmployee, updateEmployee,
+  openCard,
 } = employeeListSlice.actions;
 
 export default employeeListSlice.reducer;

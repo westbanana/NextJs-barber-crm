@@ -4,20 +4,20 @@ import React, { memo, useEffect, useRef } from 'react';
 import { useFormik } from 'formik';
 
 import Portal from '@/components/Portal';
-import { EmployeeEditCardProps } from '@/components/EmployeeCard/employee-card.type';
+import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/EmployeeCard/employee-card.type';
 import { outsideClick } from '@/helpers/outSideClick';
 import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
 import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import Button from '@/components/ui/Button/Button';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import { updateEmployee } from '@/components/EmployeeList/slices/employeeListSlice';
+import { createEmployee } from '@/components/EmployeeList/services/createEmployee';
+import { updateEmployee } from '@/components/EmployeeList/services/updateEmployee';
 
 import cls from './style.module.scss';
 
 const EmployeeCard = memo(({
   employeeData = {} as IEmployee,
-  isOpened,
   onClose,
   mode,
 }:EmployeeEditCardProps) => {
@@ -27,12 +27,17 @@ const EmployeeCard = memo(({
   const formik = useFormik({
     initialValues: employeeData,
     onSubmit: (values:IEmployee) => {
-      dispatch(updateEmployee(values));
+      if (mode === EmployeeCardMode.EDIT) {
+        dispatch(updateEmployee(values));
+      }
+      if (mode === EmployeeCardMode.CREATE) {
+        dispatch(createEmployee(values));
+      }
     },
   });
 
   useEffect(() => {
-    if (isOpened) {
+    if (mode) {
       document.addEventListener('click', (e) => {
         outsideClick(e, onClose, refEditCard);
       });
@@ -40,7 +45,7 @@ const EmployeeCard = memo(({
     return () => {
       document.removeEventListener('click', () => null);
     };
-  }, [isOpened, onClose]);
+  }, [mode, onClose]);
 
   return (
     <Portal>
@@ -76,7 +81,7 @@ const EmployeeCard = memo(({
               </Button>
             )}
             {mode === 'create' && (
-              <Button onClick={formik.submitForm}>
+              <Button onClick={formik.handleSubmit}>
                 Створити
               </Button>
             )}

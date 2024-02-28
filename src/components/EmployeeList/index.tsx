@@ -1,8 +1,12 @@
 'use client';
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
+import { toast, Toaster } from 'react-hot-toast';
+import { Simulate } from 'react-dom/test-utils';
 
 import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
 import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
@@ -11,22 +15,36 @@ import { classNames } from '@/lib/classNames/classNames';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { getEmployeeList } from '@/components/EmployeeList/selectors/getEmployeeList';
 import { ColDefs, defaultColProps } from '@/constants/colDefs';
+import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
+import EmployeeCard from '@/components/EmployeeCard';
+import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
+import { getEmployeeCardMod } from '@/components/EmployeeList/selectors/getEmployeeCardMod';
+import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
+import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
 
 import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import { deleteEmployee } from '@/components/EmployeeList/slices/employeeListSlice';
-import EmployeeCard from '@/components/EmployeeCard';
-import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
+import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
+import LoadingProvider from '@/helpers/LoadingProvider/LoadingProvider';
+import { getEmployeeError } from '@/components/EmployeeList/selectors/getEmployeeError';
+
+import load = Simulate.load;
+import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
+  const loading = useAppSelector(getEmployeeLoading);
+  const error = useAppSelector(getEmployeeError);
+  const cardMod = useAppSelector(getEmployeeCardMod);
   const dispatch = useAppDispatch();
   const [selectedRow, setSelectedRow] = useState<IEmployee[]>([]);
-  const [isCreated, setIsCreated] = useState(false);
   const gridRef = useRef<AgGridReact<IEmployee>>(null);
+
+  useEffect(() => {
+    dispatch(fetchEmployeeList());
+  }, [dispatch]);
 
   const onSelectionChanged = useCallback(() => {
     const selectedRow = gridRef.current!.api.getSelectedRows();
@@ -39,8 +57,12 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     }
   };
 
-  const createEmployee = () => {
-    setIsCreated(true);
+  const openCreateCard = () => {
+    dispatch(openCard(EmployeeCardMode.CREATE));
+  };
+
+  const closeCard = () => {
+    dispatch(openCard(undefined));
   };
 
   return (
@@ -49,23 +71,25 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
         <Button onClick={deleteRow} disabled={!selectedRow?.length} className={cls.trashBacket}>
           <Trash2 />
         </Button>
-        <Button onClick={createEmployee}>
+        <Button onClick={openCreateCard}>
           <PlusSquare />
         </Button>
       </div>
-      <AgGridReact
-        ref={gridRef}
-        rowData={employees}
-        columnDefs={ColDefs}
-        rowSelection="single"
-        defaultColDef={defaultColProps}
-        onSelectionChanged={onSelectionChanged}
-      />
-      {isCreated && (
+      <LoadingProvider isLoading={loading}>
+        <AgGridReact
+          ref={gridRef}
+          rowData={employees}
+          columnDefs={ColDefs}
+          rowSelection="single"
+          defaultColDef={defaultColProps}
+          onSelectionChanged={onSelectionChanged}
+        />
+      </LoadingProvider>
+      <Toaster />
+      {cardMod && (
         <EmployeeCard
-          mode={EmployeeCardMode.CREATE}
-          isOpened={isCreated}
-          onClose={() => setIsCreated(false)}
+          mode={cardMod}
+          onClose={closeCard}
         />
       )}
     </div>

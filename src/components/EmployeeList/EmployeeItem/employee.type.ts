@@ -1,5 +1,5 @@
 export interface IEmployee {
-  id: number,
+  id: string,
   name: string,
   position: string,
   userIcon?: string,

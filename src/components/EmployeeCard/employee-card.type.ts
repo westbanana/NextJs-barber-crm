@@ -7,7 +7,6 @@ export enum EmployeeCardMode {
 
 export interface EmployeeEditCardProps {
   employeeData?: IEmployee;
-  isOpened: boolean;
   onClose: () => void;
   mode: EmployeeCardMode
 }
