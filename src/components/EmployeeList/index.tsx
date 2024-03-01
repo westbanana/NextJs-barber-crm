@@ -5,8 +5,6 @@ import React, {
 } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
-import { toast, Toaster } from 'react-hot-toast';
-import { Simulate } from 'react-dom/test-utils';
 
 import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
 import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
@@ -21,17 +19,15 @@ import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
 import { getEmployeeCardMod } from '@/components/EmployeeList/selectors/getEmployeeCardMod';
 import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
 import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
+import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
+import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
+import LoadingProvider from '@/helpers/LoadingProvider/LoadingProvider';
+import { getEmployeeError } from '@/components/EmployeeList/selectors/getEmployeeError';
 
 import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
-import LoadingProvider from '@/helpers/LoadingProvider/LoadingProvider';
-import { getEmployeeError } from '@/components/EmployeeList/selectors/getEmployeeError';
-
-import load = Simulate.load;
-import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
@@ -41,8 +37,8 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   const dispatch = useAppDispatch();
   const [selectedRow, setSelectedRow] = useState<IEmployee[]>([]);
   const gridRef = useRef<AgGridReact<IEmployee>>(null);
-
   useEffect(() => {
+    console.log('ONCE _-------------------');
     dispatch(fetchEmployeeList());
   }, [dispatch]);
 
@@ -53,7 +49,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
 
   const deleteRow = () => {
     if (selectedRow) {
-      dispatch(deleteEmployee(selectedRow[0]?.id));
+      dispatch(deleteEmployee(selectedRow[0]));
     }
   };
 
@@ -66,16 +62,16 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   };
 
   return (
-    <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
-      <div className={cls.optionsWrapper}>
-        <Button onClick={deleteRow} disabled={!selectedRow?.length} className={cls.trashBacket}>
-          <Trash2 />
-        </Button>
-        <Button onClick={openCreateCard}>
-          <PlusSquare />
-        </Button>
-      </div>
-      <LoadingProvider isLoading={loading}>
+    <LoadingProvider isLoading={loading} toastMode>
+      <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
+        <div className={cls.optionsWrapper}>
+          <Button onClick={deleteRow} disabled={!selectedRow?.length} className={cls.trashBacket}>
+            <Trash2 />
+          </Button>
+          <Button onClick={openCreateCard}>
+            <PlusSquare />
+          </Button>
+        </div>
         <AgGridReact
           ref={gridRef}
           rowData={employees}
@@ -84,15 +80,14 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
           defaultColDef={defaultColProps}
           onSelectionChanged={onSelectionChanged}
         />
-      </LoadingProvider>
-      <Toaster />
-      {cardMod && (
-        <EmployeeCard
-          mode={cardMod}
-          onClose={closeCard}
-        />
-      )}
-    </div>
+        {cardMod && (
+          <EmployeeCard
+            mode={cardMod}
+            onClose={closeCard}
+          />
+        )}
+      </div>
+    </LoadingProvider>
   );
 };
 

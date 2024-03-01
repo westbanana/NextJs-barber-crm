@@ -12,4 +12,5 @@ export interface ButtonProps {
   disabled?: boolean;
   className?: string;
   alignVerticalText?: AlignVerticalText;
+  loading?: boolean;
 }

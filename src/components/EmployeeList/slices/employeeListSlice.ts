@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
 import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
-import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
+import { ErrorResponse, fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
 import { updateEmployee } from '@/components/EmployeeList/services/updateEmployee';
 import { createEmployee } from '@/components/EmployeeList/services/createEmployee';
 import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
@@ -40,21 +40,22 @@ export const employeeListSlice = createSlice({
       state.data = action.payload;
     });
     builder.addCase(fetchEmployeeList.rejected, (state, action) => {
+      const { message } = action.payload as ErrorResponse;
       state.loading = false;
-      state.error = action.error.message;
+      state.error = message;
     });
     builder.addCase(updateEmployee.pending, (state, action) => {
       state.error = undefined;
       state.loading = true;
     });
     builder.addCase(updateEmployee.fulfilled, (state, action) => {
-      state.loading = false;
       state.data = state.data.map((employee) => {
         if (employee.id === action.payload.id) {
           return action.payload;
         }
         return employee;
       });
+      state.loading = false;
       state.openedCard = undefined;
     });
     builder.addCase(updateEmployee.rejected, (state, action) => {
@@ -76,6 +77,7 @@ export const employeeListSlice = createSlice({
     });
     builder.addCase(deleteEmployee.pending, (state, action) => {
       state.error = undefined;
+      state.loading = true;
     });
     builder.addCase(deleteEmployee.fulfilled, (state, action:PayloadAction<IEmployee>) => {
       state.loading = false;

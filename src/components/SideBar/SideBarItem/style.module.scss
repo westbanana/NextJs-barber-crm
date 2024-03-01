@@ -1,33 +1,37 @@
 .SideBarItem {
   display: inline-flex;
+  align-items: center;
   gap: 10px;
   width: 100%;
-  transition:
-          background-color 0.3s ease-in-out,
-          padding-left 0.3s ease-in-out;
+  transition: all var(--transition);
   padding: 12px 0 12px 17px;
 
   .title {
     animation: item_text_showed 0.3s ease-in-out;
   }
 
-  &:hover {
+  &:not(.active):hover {
     background-color: var(--hover-color);
     padding-left: 25px;
+    transform: scale(1);
   }
 
-  &.collapsed:hover {
+  &.collapsed:not(.active):hover {
     background-color: var(--hover-color);
     padding-left: 17px;
+    filter: blur(0);
 
     svg {
       transform: scale(1.2);
     }
   }
+  &:not(.active) {
+    transform: scale(0.7);
+  }
 }
 
 .active {
-  background-color: red;
+  flex-grow: 0.1;
 }
 
 @keyframes item_text_showed {

@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, memo, useState } from 'react';
 import { Upload } from 'lucide-react';
 
 import { UserIconProps } from '@/components/ui/UserIcon/user-icon.type';
 
 import cls from './style.module.scss';
 
-const UserIcon = ({
+const UserIcon = memo(({
   userName = 'User Icon', withUpload = false, onChange, value,
 }:UserIconProps) => {
   const [firstName, lastName] = userName.split(' ');
@@ -22,6 +22,8 @@ const UserIcon = ({
     }
   };
 
+  const iconLetters = lastName ? `${firstName[0]}${lastName[0]}` : firstName[0];
+
   return (
     <div className={cls.container}>
       {withUpload && (
@@ -32,9 +34,9 @@ const UserIcon = ({
       )}
       {value
         ? <img className={cls.image} src={value} alt="user icon" />
-        : <span>{firstName[0] + lastName[0]}</span>}
+        : <span>{iconLetters}</span>}
     </div>
   );
-};
+});
 
 export default UserIcon;

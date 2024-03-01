@@ -2,9 +2,12 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 
 import MainLayout from '@/components/MainLayout';
+
 import './globals.css';
 import '@/variables/size/style.css';
 import '@/variables/colors/style.css';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
@@ -27,6 +30,7 @@ export default function RootLayout({
         <MainLayout>
           {children}
         </MainLayout>
+        <ToastContainer stacked />
       </body>
     </html>
   );

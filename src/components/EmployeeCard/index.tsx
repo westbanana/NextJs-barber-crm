@@ -1,7 +1,10 @@
 'use client';
 
-import React, { memo, useEffect, useRef } from 'react';
-import { useFormik } from 'formik';
+import React, {
+  memo, useEffect, useMemo, useRef,
+} from 'react';
+import { Formik } from 'formik';
+import { Trash2, X } from 'lucide-react';
 
 import Portal from '@/components/Portal';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/EmployeeCard/employee-card.type';
@@ -13,6 +16,10 @@ import Button from '@/components/ui/Button/Button';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import { createEmployee } from '@/components/EmployeeList/services/createEmployee';
 import { updateEmployee } from '@/components/EmployeeList/services/updateEmployee';
+import { useAppSelector } from '@/lib/hooks/useAppSelector';
+import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
+import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
+import { EmployeeSchema } from '@/components/EmployeeCard/validation';
 
 import cls from './style.module.scss';
 
@@ -22,19 +29,17 @@ const EmployeeCard = memo(({
   mode,
 }:EmployeeEditCardProps) => {
   const dispatch = useAppDispatch();
+  const loading = useAppSelector(getEmployeeLoading);
   const refEditCard = useRef<HTMLFormElement>(null);
 
-  const formik = useFormik({
-    initialValues: employeeData,
-    onSubmit: (values:IEmployee) => {
-      if (mode === EmployeeCardMode.EDIT) {
-        dispatch(updateEmployee(values));
-      }
-      if (mode === EmployeeCardMode.CREATE) {
-        dispatch(createEmployee(values));
-      }
-    },
-  });
+  const onSubmitFormik = (values:IEmployee) => {
+    if (mode === EmployeeCardMode.EDIT) {
+      dispatch(updateEmployee(values));
+    }
+    if (mode === EmployeeCardMode.CREATE) {
+      dispatch(createEmployee(values));
+    }
+  };
 
   useEffect(() => {
     if (mode) {
@@ -47,46 +52,81 @@ const EmployeeCard = memo(({
     };
   }, [mode, onClose]);
 
+  const deleteCurrentEmployee = () => {
+    dispatch(deleteEmployee(employeeData));
+  };
+
   return (
     <Portal>
       <div className={cls.EmployeeCardBg}>
-        <form ref={refEditCard} className={cls.form} onSubmit={formik.handleSubmit}>
-          <div className={cls.userIconContainer}>
-            <UserIcon
-              userName={employeeData?.name}
-              withUpload
-              id="userIcon"
-              value={formik.values?.userIcon}
-              onChange={formik.handleChange}
-            />
-          </div>
-          <div className={cls.inputsWrapper}>
-            <Input
-              id="name"
-              label="Ім'я"
-              value={formik.values?.name}
-              onChange={formik.handleChange}
-            />
-            <Input
-              id="position"
-              label="Посада"
-              value={formik.values?.position}
-              onChange={formik.handleChange}
-            />
-          </div>
-          <div className={cls.buttonsWrapper}>
-            {mode === 'edit' && (
-              <Button onClick={formik.handleSubmit}>
-                Зберегти
-              </Button>
-            )}
-            {mode === 'create' && (
-              <Button onClick={formik.handleSubmit}>
-                Створити
-              </Button>
-            )}
-          </div>
-        </form>
+        <Formik initialValues={employeeData} onSubmit={onSubmitFormik} validationSchema={EmployeeSchema}>
+          {({
+            handleSubmit,
+            values,
+            handleChange,
+            errors,
+            touched,
+          }) => (
+            <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
+              <X
+                onClick={onClose}
+                className={cls.xMark}
+              />
+              <div className={cls.userIconContainer}>
+                <UserIcon
+                  userName={employeeData?.name}
+                  withUpload
+                  id="userIcon"
+                  value={values?.userIcon}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className={cls.inputsWrapper}>
+                <Input
+                  id="name"
+                  label="Ім'я"
+                  value={values?.name}
+                  onChange={handleChange}
+                />
+                {errors.name && touched.name ? (
+                  <div>{errors.name}</div>
+                ) : null}
+                <Input
+                  id="position"
+                  label="Посада"
+                  value={values?.position}
+                  onChange={handleChange}
+                />
+                {errors.position && touched.position ? (
+                  <div>{errors.position}</div>
+                ) : null}
+              </div>
+              <div className={cls.buttonsWrapper}>
+                {mode === 'edit' && (
+                  <>
+                    <Button
+                      onClick={handleSubmit}
+                      loading={loading}
+                    >
+                      Зберегти
+                    </Button>
+                    <Button onClick={deleteCurrentEmployee}>
+                      <Trash2 />
+                    </Button>
+                  </>
+                )}
+                {mode === 'create' && (
+                  <Button
+                    onClick={handleSubmit}
+                    loading={loading}
+                  >
+                    Створити
+                  </Button>
+                )}
+              </div>
+            </form>
+          )}
+        </Formik>
       </div>
     </Portal>
   );

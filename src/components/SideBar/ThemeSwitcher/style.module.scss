@@ -11,9 +11,9 @@
   &:hover {
     background-color: var(--hover-color);
   }
-  svg {
-    animation: svg-show var(--transition) forwards;
-  }
+  //svg {
+  //  animation: svg-show var(--transition) forwards;
+  //}
 }
 
 @keyframes svg-show {

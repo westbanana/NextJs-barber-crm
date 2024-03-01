@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { LOCAL_STORAGE_THEME_KEY } from '@/constants/local-storage-keys';
 
 export enum Theme {
@@ -8,7 +9,9 @@ export enum Theme {
   LIGHT = 'lightTheme',
 }
 
-const defaultTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme || Theme.DARK;
+const defaultTheme = typeof window !== 'undefined'
+  ? localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme || Theme.DARK
+  : Theme.DARK;
 
 const useTheme = () => {
   const [theme, setTheme] = useState(defaultTheme);
