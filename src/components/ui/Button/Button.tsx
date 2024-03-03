@@ -8,11 +8,11 @@ import cls from './style.module.scss';
 
 const Button = memo(({
   children,
-  onClick,
   disabled,
   className,
   loading = false,
   alignVerticalText = AlignVerticalText.CENTER,
+  ...otherProps
 }:ButtonProps) => {
   const mods: Mods = {
     [cls.disabled]: disabled,
@@ -20,8 +20,8 @@ const Button = memo(({
   };
   return (
     <button
+      {...otherProps}
       type="button"
-      onClick={onClick}
       disabled={disabled}
       className={classNames(cls.Button, mods, [className])}
     >

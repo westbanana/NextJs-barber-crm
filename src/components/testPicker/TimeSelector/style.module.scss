@@ -1,0 +1,44 @@
+.time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px var(--border-color) solid;
+  background-color: var(--bg-color);
+  position: absolute;
+  z-index: 3;
+  animation: mount var(--transition) forwards;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes mount {
+  from  {
+    opacity: 0;
+    left: 0;
+  }
+  to {
+    opacity: 1;
+    left: calc(100% + 10px);
+  }
+}
+
+.input {
+  input {
+    width: 80px;
+    text-align: center;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+}

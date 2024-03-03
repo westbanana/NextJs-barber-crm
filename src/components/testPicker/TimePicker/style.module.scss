@@ -1,0 +1,31 @@
+.timePicker {
+  border: 1px var(--border-color) solid;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  cursor: pointer;
+  flex: 1;
+  text-align: center;
+}
+
+.label {
+  position: absolute;
+  top: -12px; /* половина высоты метки */
+  transition: 0.125s ease-in;
+  background-color: var(--bg-color);
+  padding: 0 5px;
+  height: 15px;
+  line-height: 15px; /* изменено на высоту метки */
+  margin-top: 5px;
+  margin-left: 5px;
+  border-radius: 10px;
+  opacity: 0.7;
+  color: var(--text-color);
+  pointer-events: none;
+}

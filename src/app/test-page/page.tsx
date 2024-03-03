@@ -1,19 +1,24 @@
 import React from 'react';
 
-import TestPicker from '@/components/testPicker/TestPicker';
+import TimePicker from '@/components/testPicker/TimePicker';
 
 const TestPage = () => (
+
   <div
     style={{
       display: 'flex',
-      flexDirection: 'column',
+      position: 'relative',
+      flexDirection: 'row',
+      gap: '20px',
       alignItems: 'center',
       justifyContent: 'center',
       height: '100vh',
       width: '100%',
     }}
   >
-    <TestPicker />
+    Час роботи
+    <TimePicker label="З" />
+    <TimePicker label="По" />
   </div>
 );
 

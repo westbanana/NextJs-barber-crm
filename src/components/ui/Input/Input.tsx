@@ -6,11 +6,11 @@ import { classNames, Mods } from '@/lib/classNames/classNames';
 import cls from './style.module.scss';
 
 const Input = memo(({
-  value = '', onChange, label, id,
+  value = '', onChange, label, id, className, ...otherProps
 }:InputProps) => {
   const mods:Mods = {};
   return (
-    <div className={classNames(cls.inputContainer, mods, [])}>
+    <div className={classNames(cls.inputContainer, mods, [className])}>
       <label
         htmlFor={id}
         className={cls.Label}
@@ -18,10 +18,10 @@ const Input = memo(({
         {label}
       </label>
       <input
+        {...otherProps}
         id={id}
         onChange={onChange}
         className={cls.Input}
-        type="text"
         value={value}
       />
     </div>

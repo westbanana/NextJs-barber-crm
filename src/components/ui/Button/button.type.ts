@@ -6,8 +6,7 @@ export enum AlignVerticalText {
   BOTTOM = 'textVerticalBottom',
 }
 
-export interface ButtonProps {
-  onClick: () => void;
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
   children: React.ReactNode;
   disabled?: boolean;
   className?: string;

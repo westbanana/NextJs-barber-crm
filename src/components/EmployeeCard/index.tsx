@@ -20,6 +20,7 @@ import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
 import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
 import { EmployeeSchema } from '@/components/EmployeeCard/validation';
+import TimePicker from '@/components/testPicker/TimePicker';
 
 import cls from './style.module.scss';
 
@@ -88,24 +89,25 @@ const EmployeeCard = memo(({
                   value={values?.name}
                   onChange={handleChange}
                 />
-                {errors.name && touched.name ? (
-                  <div>{errors.name}</div>
-                ) : null}
                 <Input
                   id="position"
                   label="Посада"
                   value={values?.position}
                   onChange={handleChange}
                 />
-                {errors.position && touched.position ? (
-                  <div>{errors.position}</div>
-                ) : null}
+                <div className={cls.workScheduleTime}>
+                  Час роботи
+                  <div className={cls.timeSelector}>
+                    <TimePicker label="З" />
+                    <TimePicker label="По" />
+                  </div>
+                </div>
               </div>
               <div className={cls.buttonsWrapper}>
                 {mode === 'edit' && (
                   <>
                     <Button
-                      onClick={handleSubmit}
+                      onClick={() => handleSubmit()}
                       loading={loading}
                     >
                       Зберегти
@@ -117,7 +119,7 @@ const EmployeeCard = memo(({
                 )}
                 {mode === 'create' && (
                   <Button
-                    onClick={handleSubmit}
+                    onClick={() => handleSubmit()}
                     loading={loading}
                   >
                     Створити

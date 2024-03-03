@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 
 export interface PortalProps {
   children: React.ReactNode;
-  element?: HTMLElement;
+  element?: RefObject<HTMLElement>| HTMLElement | undefined;
 }
