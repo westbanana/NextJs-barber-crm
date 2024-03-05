@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  HTMLProps, memo, RefObject, useRef, useState,
+  HTMLProps, memo, useRef, useState,
 } from 'react';
 
 import TimeSelector from '@/components/testPicker/TimeSelector';
@@ -21,7 +21,6 @@ export interface TestPickerProps extends HTMLProps<HTMLDivElement>{
 const TimePicker = memo(({
   label,
   workScheduleTime = { from: '00', to: '00' },
-  ...otherProps
 }:TestPickerProps) => {
   const [time, setTime] = useState<Time>(workScheduleTime);
   const [open, setOpen] = useState<boolean>(false);
@@ -33,7 +32,6 @@ const TimePicker = memo(({
     setTime((prevState) => {
       const { from, to } = prevState;
       const fromNumber = Number(from);
-      const toNumber = Number(to);
 
       if (value > inputMaxNumber && field === 'to') {
         if (fromNumber >= 24) {
@@ -56,6 +54,7 @@ const TimePicker = memo(({
       };
     });
   };
+
   const onClose = () => {
     setOpen(false);
   };
@@ -65,7 +64,6 @@ const TimePicker = memo(({
       id="timePicker"
       ref={refTimePicker}
       className={cls.timePicker}
-      {...otherProps}
       onClick={(e) => {
         e.stopPropagation();
         setOpen(true);
@@ -77,7 +75,9 @@ const TimePicker = memo(({
         <TimeSelector
           onChange={onChangeHandler}
           time={time}
+          opened={open}
           onClose={onClose}
+          parentId="timePicker"
           parentRef={refTimePicker}
         />
       )}

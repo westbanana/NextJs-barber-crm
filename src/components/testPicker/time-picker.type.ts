@@ -1,4 +1,4 @@
-import React, { Ref, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 export type Time = {
   from: string;
@@ -10,4 +10,6 @@ export interface TimeSelectorProps {
   time: Time;
   onClose: () => void;
   parentRef: RefObject<HTMLDivElement>| undefined;
+  opened: boolean;
+  parentId?: string;
 }

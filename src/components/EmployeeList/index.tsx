@@ -32,13 +32,11 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
   const loading = useAppSelector(getEmployeeLoading);
-  const error = useAppSelector(getEmployeeError);
   const cardMod = useAppSelector(getEmployeeCardMod);
   const dispatch = useAppDispatch();
   const [selectedRow, setSelectedRow] = useState<IEmployee[]>([]);
   const gridRef = useRef<AgGridReact<IEmployee>>(null);
   useEffect(() => {
-    console.log('ONCE _-------------------');
     dispatch(fetchEmployeeList());
   }, [dispatch]);
 

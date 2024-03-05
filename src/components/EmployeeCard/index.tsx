@@ -1,7 +1,8 @@
 'use client';
 
 import React, {
-  memo, useEffect, useMemo, useRef,
+  useCallback,
+  useEffect, useRef,
 } from 'react';
 import { Formik } from 'formik';
 import { Trash2, X } from 'lucide-react';
@@ -24,7 +25,7 @@ import TimePicker from '@/components/testPicker/TimePicker';
 
 import cls from './style.module.scss';
 
-const EmployeeCard = memo(({
+const EmployeeCard = ({
   employeeData = {} as IEmployee,
   onClose,
   mode,
@@ -42,16 +43,18 @@ const EmployeeCard = memo(({
     }
   };
 
+  const handleOutsideClick = useCallback((e: MouseEvent) => {
+    outsideClick(e, onClose, refEditCard, 'EmployeeCard');
+  }, [onClose]);
+
   useEffect(() => {
     if (mode) {
-      document.addEventListener('click', (e) => {
-        outsideClick(e, onClose, refEditCard);
-      });
+      document.addEventListener('click', handleOutsideClick);
     }
     return () => {
-      document.removeEventListener('click', () => null);
+      document.removeEventListener('click', handleOutsideClick);
     };
-  }, [mode, onClose]);
+  }, [handleOutsideClick, mode, onClose]);
 
   const deleteCurrentEmployee = () => {
     dispatch(deleteEmployee(employeeData));
@@ -65,8 +68,6 @@ const EmployeeCard = memo(({
             handleSubmit,
             values,
             handleChange,
-            errors,
-            touched,
           }) => (
             <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
               <X
@@ -132,6 +133,5 @@ const EmployeeCard = memo(({
       </div>
     </Portal>
   );
-});
-
+};
 export default EmployeeCard;
