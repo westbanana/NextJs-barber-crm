@@ -4,7 +4,9 @@ import React, {
   useCallback,
   useEffect, useRef,
 } from 'react';
-import { Formik } from 'formik';
+import {
+  Field, FieldInputProps, FieldProps, Formik,
+} from 'formik';
 import { Trash2, X } from 'lucide-react';
 
 import Portal from '@/components/Portal';
@@ -22,6 +24,7 @@ import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmplo
 import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
 import { EmployeeSchema } from '@/components/EmployeeCard/validation';
 import TimePicker from '@/components/testPicker/TimePicker';
+import TimeInput from '@/components/testPicker/TimeInput';
 
 import cls from './style.module.scss';
 
@@ -35,12 +38,13 @@ const EmployeeCard = ({
   const refEditCard = useRef<HTMLFormElement>(null);
 
   const onSubmitFormik = (values:IEmployee) => {
-    if (mode === EmployeeCardMode.EDIT) {
-      dispatch(updateEmployee(values));
-    }
-    if (mode === EmployeeCardMode.CREATE) {
-      dispatch(createEmployee(values));
-    }
+    console.log(values);
+    // if (mode === EmployeeCardMode.EDIT) {
+    //   dispatch(updateEmployee(values));
+    // }
+    // if (mode === EmployeeCardMode.CREATE) {
+    //   dispatch(createEmployee(values));
+    // }
   };
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
@@ -58,6 +62,16 @@ const EmployeeCard = ({
 
   const deleteCurrentEmployee = () => {
     dispatch(deleteEmployee(employeeData));
+  };
+
+  const changeField = (newValue: string, field: FieldInputProps<any>) => {
+    const { name, onChange } = field;
+    onChange({
+      target: {
+        name,
+        value: newValue,
+      },
+    });
   };
 
   return (
@@ -99,8 +113,29 @@ const EmployeeCard = ({
                 <div className={cls.workScheduleTime}>
                   Час роботи
                   <div className={cls.timeSelector}>
-                    <TimePicker label="З" />
-                    <TimePicker label="По" />
+                    <Field
+                      name="work_schedule.time.from"
+                      render={(props: FieldProps) => (
+                        <TimeInput
+                          callback={(value) => {
+                            changeField(value, props.field);
+                          }}
+                          time={values?.work_schedule.time.from}
+                        />
+
+                      )}
+                    />
+                    <Field
+                      name="work_schedule.time.to"
+                      render={(props: FieldProps) => (
+                        <TimeInput
+                          callback={(value) => {
+                            changeField(value, props.field);
+                          }}
+                          time={values?.work_schedule.time.to}
+                        />
+                      )}
+                    />
                   </div>
                 </div>
               </div>

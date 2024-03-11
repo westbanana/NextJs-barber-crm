@@ -4,7 +4,16 @@
       "id": "1709430714078",
       "name": "Ілля Лисенко ",
       "position": "Лох",
-      "work_schedule": "",
+      "work_schedule": {
+        "time": {
+          "from": "01:00",
+          "to": "02:30"
+        },
+        "days": {
+          "from": "",
+          "to": ""
+        }
+      },
       "services_provided": []
     }
   ]

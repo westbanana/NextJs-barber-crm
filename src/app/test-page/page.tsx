@@ -1,9 +1,9 @@
 import React from 'react';
 
 import TimePicker from '@/components/testPicker/TimePicker';
+import TimeInput from '@/components/testPicker/TimeInput';
 
 const TestPage = () => (
-
   <div
     style={{
       display: 'flex',
@@ -17,8 +17,7 @@ const TestPage = () => (
     }}
   >
     Час роботи
-    <TimePicker label="З" />
-    <TimePicker label="По" />
+
   </div>
 );
 
