@@ -13,7 +13,6 @@ export const createEmployee = createAsyncThunk(
           body: JSON.stringify({
             ...employee,
             id: `${Date.now()}`,
-            work_schedule: '',
             services_provided: [],
           }),
         }),

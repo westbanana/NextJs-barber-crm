@@ -1,10 +1,15 @@
 {
   "employees": [
     {
-      "id": "1710800293512",
-      "name": "qqwe qwe",
-      "position": "qweqew",
-      "work_schedule": "",
+      "id": "1710897144424",
+      "name": "Ілля",
+      "position": "Попуск",
+      "work_schedule": {
+        "time": {
+          "from": "11:23",
+          "to": "22:22"
+        }
+      },
       "services_provided": []
     }
   ]

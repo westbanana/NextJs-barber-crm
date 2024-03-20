@@ -35,7 +35,6 @@ const EmployeeCard = ({
   const dispatch = useAppDispatch();
   const loading = useAppSelector(getEmployeeLoading);
   const refEditCard = useRef<HTMLFormElement>(null);
-
   const onSubmitFormik = (values:IEmployee) => {
     if (mode === EmployeeCardMode.EDIT) {
       dispatch(updateEmployee(values));

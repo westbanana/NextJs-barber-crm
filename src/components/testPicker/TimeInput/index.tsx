@@ -10,7 +10,6 @@ export enum timeFieldType {
 }
 
 const TimeInput = ({ time = '00:00', callback }: {time: string, callback: (value: string) => void}) => {
-  console.log('@', time);
   const [hour, minute] = time.split(':');
   const [hourValue, setHoursValue] = useState(hour);
   const [minuteValue, setMinuteValue] = useState(minute);
@@ -48,7 +47,6 @@ const TimeInput = ({ time = '00:00', callback }: {time: string, callback: (value
     setOldValue: (value: string) => void,
     oldValue: string,
   ) => {
-    console.log('onblur');
     const max = Number(e.target.max);
     const min = Number(e.target.min);
     const targetValue = Number(e.target.value);
