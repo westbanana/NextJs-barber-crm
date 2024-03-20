@@ -6,7 +6,6 @@ import React, {
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
 
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
 import Button from '@/components/ui/Button/Button';
 import { classNames } from '@/lib/classNames/classNames';
@@ -19,14 +18,15 @@ import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
 import { getEmployeeCardMod } from '@/components/EmployeeCard/selectors/getEmployeeCardMod';
 import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
 import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
-import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
 import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
-import LoadingProvider from '@/components/LoadingProvider/LoadingProvider';
 
 import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
+import LoadingProvider from '@/components/LoadingProvider/LoadingProvider';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);

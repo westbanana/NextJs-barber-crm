@@ -12,7 +12,6 @@ import { Trash2, X } from 'lucide-react';
 import Portal from '@/components/Portal';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/EmployeeCard/employee-card.type';
 import { outsideClick } from '@/helpers/outSideClick';
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import Button from '@/components/ui/Button/Button';
@@ -21,9 +20,10 @@ import { createEmployee } from '@/components/EmployeeCard/services/createEmploye
 import { updateEmployee } from '@/components/EmployeeCard/services/updateEmployee';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
-import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
 import { EmployeeSchema } from '@/components/EmployeeCard/validation';
 import TimeInput from '@/components/testPicker/TimeInput';
+import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
 import cls from './style.module.scss';
 
