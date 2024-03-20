@@ -19,14 +19,14 @@ import { getEmployeeCardMod } from '@/components/EmployeeCard/selectors/getEmplo
 import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
 import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
 import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
+import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
+import LoadingProvider from '@/components/LoadingProvider/LoadingProvider';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
 import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
-import LoadingProvider from '@/components/LoadingProvider/LoadingProvider';
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
@@ -62,10 +62,18 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     <LoadingProvider isLoading={loading} toastMode>
       <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
         <div className={cls.optionsWrapper}>
-          <Button onClick={deleteRow} disabled={!selectedRow?.length} className={cls.trashBacket}>
+          <Button
+            onClick={deleteRow}
+            disabled={!selectedRow?.length}
+            className={cls.trashBacket}
+            withoutBorder
+          >
             <Trash2 />
           </Button>
-          <Button onClick={openCreateCard}>
+          <Button
+            withoutBorder
+            onClick={openCreateCard}
+          >
             <PlusSquare />
           </Button>
         </div>

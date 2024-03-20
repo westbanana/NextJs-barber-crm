@@ -12,4 +12,5 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   className?: string;
   alignVerticalText?: AlignVerticalText;
   loading?: boolean;
+  withoutBorder?: boolean
 }

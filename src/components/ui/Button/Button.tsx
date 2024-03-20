@@ -12,18 +12,20 @@ const Button = memo(({
   className,
   loading = false,
   alignVerticalText = AlignVerticalText.CENTER,
+  withoutBorder = false,
   ...otherProps
 }:ButtonProps) => {
   const mods: Mods = {
     [cls.disabled]: disabled,
     [cls[alignVerticalText]]: true,
+    [cls.withoutBorder]: withoutBorder,
   };
   return (
     <button
-      {...otherProps}
       type="button"
       disabled={disabled}
       className={classNames(cls.Button, mods, [className])}
+      {...otherProps}
     >
       {loading
         ? (<Loader className={cls.loader} />)
