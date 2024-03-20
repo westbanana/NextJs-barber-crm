@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Select from '@/components/ui/Select/Select';
+
 const TestPage = () => (
   <div
     style={{
@@ -13,7 +15,7 @@ const TestPage = () => (
       width: '100%',
     }}
   >
-    Час роботи
+    <Select />
 
   </div>
 );
