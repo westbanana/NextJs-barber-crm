@@ -39,12 +39,12 @@ const EmployeeCard = ({
 
   const onSubmitFormik = (values:IEmployee) => {
     console.log(values);
-    // if (mode === EmployeeCardMode.EDIT) {
-    //   dispatch(updateEmployee(values));
-    // }
-    // if (mode === EmployeeCardMode.CREATE) {
-    //   dispatch(createEmployee(values));
-    // }
+    if (mode === EmployeeCardMode.EDIT) {
+      dispatch(updateEmployee(values));
+    }
+    if (mode === EmployeeCardMode.CREATE) {
+      dispatch(createEmployee(values));
+    }
   };
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
@@ -120,7 +120,7 @@ const EmployeeCard = ({
                           callback={(value) => {
                             changeField(value, props.field);
                           }}
-                          time={values?.work_schedule.time.from}
+                          time={values?.work_schedule?.time.from}
                         />
 
                       )}
@@ -132,7 +132,7 @@ const EmployeeCard = ({
                           callback={(value) => {
                             changeField(value, props.field);
                           }}
-                          time={values?.work_schedule.time.to}
+                          time={values?.work_schedule?.time.to}
                         />
                       )}
                     />

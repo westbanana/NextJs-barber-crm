@@ -9,8 +9,8 @@ export enum timeFieldType {
   MINUTE = 'minute',
 }
 
-const TimeInput = ({ time, callback }: {time: string, callback: (value: string) => void}) => {
-  console.log(time);
+const TimeInput = ({ time = '00:00', callback }: {time: string, callback: (value: string) => void}) => {
+  console.log('@', time);
   const [hour, minute] = time.split(':');
   const [hourValue, setHoursValue] = useState(hour);
   const [minuteValue, setMinuteValue] = useState(minute);
