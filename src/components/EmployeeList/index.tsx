@@ -6,7 +6,7 @@ import React, {
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
 
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
 import Button from '@/components/ui/Button/Button';
 import { classNames } from '@/lib/classNames/classNames';
@@ -16,13 +16,12 @@ import { ColDefs, defaultColProps } from '@/constants/colDefs';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import EmployeeCard from '@/components/EmployeeCard';
 import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
-import { getEmployeeCardMod } from '@/components/EmployeeList/selectors/getEmployeeCardMod';
+import { getEmployeeCardMod } from '@/components/EmployeeCard/selectors/getEmployeeCardMod';
 import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
 import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
-import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
-import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
-import LoadingProvider from '@/helpers/LoadingProvider/LoadingProvider';
-import { getEmployeeError } from '@/components/EmployeeList/selectors/getEmployeeError';
+import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
+import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
+import LoadingProvider from '@/components/LoadingProvider/LoadingProvider';
 
 import cls from './style.module.scss';
 import './ag-grid.css';

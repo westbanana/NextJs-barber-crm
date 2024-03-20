@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
 import { ErrorResponse, fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
-import { updateEmployee } from '@/components/EmployeeList/services/updateEmployee';
-import { createEmployee } from '@/components/EmployeeList/services/createEmployee';
-import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
+import { updateEmployee } from '@/components/EmployeeCard/services/updateEmployee';
+import { createEmployee } from '@/components/EmployeeCard/services/createEmployee';
+import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
 
 export interface EmployeeListState {
   data: IEmployee[]
@@ -31,7 +31,7 @@ export const employeeListSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchEmployeeList.pending, (state, action) => {
+    builder.addCase(fetchEmployeeList.pending, (state) => {
       state.error = undefined;
       state.loading = true;
     });
@@ -44,7 +44,7 @@ export const employeeListSlice = createSlice({
       state.loading = false;
       state.error = message;
     });
-    builder.addCase(updateEmployee.pending, (state, action) => {
+    builder.addCase(updateEmployee.pending, (state) => {
       state.error = undefined;
       state.loading = true;
     });
@@ -62,7 +62,7 @@ export const employeeListSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
-    builder.addCase(createEmployee.pending, (state, action) => {
+    builder.addCase(createEmployee.pending, (state) => {
       state.error = undefined;
       state.loading = true;
     });
@@ -75,7 +75,7 @@ export const employeeListSlice = createSlice({
       state.loading = false;
       state.error = action.error.message;
     });
-    builder.addCase(deleteEmployee.pending, (state, action) => {
+    builder.addCase(deleteEmployee.pending, (state) => {
       state.error = undefined;
       state.loading = true;
     });

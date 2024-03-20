@@ -12,18 +12,17 @@ import { Trash2, X } from 'lucide-react';
 import Portal from '@/components/Portal';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/EmployeeCard/employee-card.type';
 import { outsideClick } from '@/helpers/outSideClick';
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import Button from '@/components/ui/Button/Button';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import { createEmployee } from '@/components/EmployeeList/services/createEmployee';
-import { updateEmployee } from '@/components/EmployeeList/services/updateEmployee';
+import { createEmployee } from '@/components/EmployeeCard/services/createEmployee';
+import { updateEmployee } from '@/components/EmployeeCard/services/updateEmployee';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
-import { getEmployeeLoading } from '@/components/EmployeeList/selectors/getEmployeeLoading';
-import { deleteEmployee } from '@/components/EmployeeList/services/deleteEmployee';
+import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
+import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
 import { EmployeeSchema } from '@/components/EmployeeCard/validation';
-import TimePicker from '@/components/testPicker/TimePicker';
 import TimeInput from '@/components/testPicker/TimeInput';
 
 import cls from './style.module.scss';
@@ -38,7 +37,6 @@ const EmployeeCard = ({
   const refEditCard = useRef<HTMLFormElement>(null);
 
   const onSubmitFormik = (values:IEmployee) => {
-    console.log(values);
     if (mode === EmployeeCardMode.EDIT) {
       dispatch(updateEmployee(values));
     }

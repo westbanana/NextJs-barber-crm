@@ -1,25 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
-export const createEmployee = createAsyncThunk(
-  'employee/createEmployee',
+export const updateEmployee = createAsyncThunk(
+  'employee/updateEmployeeAsync',
   async (employee:IEmployee, { rejectWithValue }) => {
     try {
       const response = await toast.promise(
-        fetch('http://localhost:4000/employees', {
-          method: 'POST',
-          body: JSON.stringify({
-            ...employee,
-            id: `${Date.now()}`,
-            work_schedule: '',
-            services_provided: [],
-          }),
+        fetch(`http://localhost:4000/employees/${employee.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(employee),
         }),
         {
-          pending: `Відбувається Створення ${employee.name} 🤔`,
-          success: `Робітник ${employee.name} створений! 🎉`,
+          pending: 'Відбувається оновлення робітника 🤔',
+          success: 'Інформація робітника оновлена! 🎉',
           error: 'Щось пішло не так 😔',
         },
         {

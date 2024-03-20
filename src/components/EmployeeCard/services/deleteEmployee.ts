@@ -1,20 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
-export const updateEmployee = createAsyncThunk(
-  'employee/updateEmployeeAsync',
+export const deleteEmployee = createAsyncThunk(
+  'employee/deleteEmployee',
   async (employee:IEmployee, { rejectWithValue }) => {
+    const { id, name } = employee;
     try {
       const response = await toast.promise(
-        fetch(`http://localhost:4000/employees/${employee.id}`, {
-          method: 'PUT',
-          body: JSON.stringify(employee),
-        }),
+        fetch(`http://localhost:4000/employees/${id}`, { method: 'DELETE' }),
         {
-          pending: 'Відбувається оновлення робітника 🤔',
-          success: 'Інформація робітника оновлена! 🎉',
+          pending: `Відбувається видалення ${name} 🤔`,
+          success: `${name} видалений! ☠`,
           error: 'Щось пішло не так 😔',
         },
         {

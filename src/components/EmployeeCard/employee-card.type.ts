@@ -1,4 +1,4 @@
-import { IEmployee } from '@/components/EmployeeList/EmployeeItem/employee.type';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
 
 export enum EmployeeCardMode {
   CREATE = 'create',
