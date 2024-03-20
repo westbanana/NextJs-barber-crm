@@ -3,5 +3,5 @@
     --side-bar-toggle-height: 24px;
     --side-bar-width: 300px;
     --side-bar-collapsed-width: 60px;
-    --transition: 0.3s ease-in-out;
+    --transition: 0.3s linear;
 }
