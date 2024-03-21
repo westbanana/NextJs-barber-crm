@@ -82,6 +82,7 @@ $transition-timing-ease-out: ease-out;
   border: none;
   outline: none;
   padding: 0;
+  color: var(--text-color)
 }
 
 .list {
@@ -126,7 +127,7 @@ $transition-timing-ease-out: ease-out;
 }
 
 .isClosing {
-  @include animation(close-list, $transition-duration-fast, $transition-timing-ease-out, forwards);
+  @include animation(close-list, $transition-duration-fast, $transition-timing-linear, forwards);
 }
 
 .arrow {
