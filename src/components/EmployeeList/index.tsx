@@ -27,6 +27,7 @@ import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import Skeleton from '@/components/ui/Skeleton/Skeleton';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
@@ -57,42 +58,40 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   const closeCard = () => {
     dispatch(openCard(undefined));
   };
-
-  return (
-    <LoadingProvider isLoading={loading} toastMode>
-      <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
-        <div className={cls.optionsWrapper}>
-          <Button
-            onClick={deleteRow}
-            disabled={!selectedRow?.length}
-            className={cls.trashBacket}
-            withoutBorder
-          >
-            <Trash2 />
-          </Button>
-          <Button
-            withoutBorder
-            onClick={openCreateCard}
-          >
-            <PlusSquare />
-          </Button>
-        </div>
-        <AgGridReact
-          ref={gridRef}
-          rowData={employees}
-          columnDefs={ColDefs}
-          rowSelection="single"
-          defaultColDef={defaultColProps}
-          onSelectionChanged={onSelectionChanged}
-        />
-        {cardMod && (
-          <EmployeeCard
-            mode={cardMod}
-            onClose={closeCard}
-          />
-        )}
+  console.log(loading);
+  return loading ? (<Skeleton />) : (
+    <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
+      <div className={cls.optionsWrapper}>
+        <Button
+          onClick={deleteRow}
+          disabled={!selectedRow?.length}
+          className={cls.trashBacket}
+          withoutBorder
+        >
+          <Trash2 />
+        </Button>
+        <Button
+          withoutBorder
+          onClick={openCreateCard}
+        >
+          <PlusSquare />
+        </Button>
       </div>
-    </LoadingProvider>
+      <AgGridReact
+        ref={gridRef}
+        rowData={employees}
+        columnDefs={ColDefs}
+        rowSelection="single"
+        defaultColDef={defaultColProps}
+        onSelectionChanged={onSelectionChanged}
+      />
+      {cardMod && (
+        <EmployeeCard
+          mode={cardMod}
+          onClose={closeCard}
+        />
+      )}
+    </div>
   );
 };
 

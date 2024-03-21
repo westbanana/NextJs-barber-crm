@@ -21,9 +21,7 @@ const TestPage = () => (
       width: '200px',
       height: '46px',
     }}
-    >
-      <Select label="Select" data={days} />
-    </div>
+    />
 
   </div>
 );
