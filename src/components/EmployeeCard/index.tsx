@@ -24,6 +24,8 @@ import { EmployeeSchema } from '@/components/EmployeeCard/validation';
 import TimeInput from '@/components/testPicker/TimeInput';
 import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import { days } from '@/constants/days';
+import Select from '@/components/ui/Select/Select';
 
 import cls from './style.module.scss';
 
@@ -45,7 +47,7 @@ const EmployeeCard = ({
   };
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, onClose, refEditCard, 'EmployeeCard');
+    outsideClick(e, onClose, refEditCard);
   }, [onClose]);
 
   useEffect(() => {
@@ -95,44 +97,80 @@ const EmployeeCard = ({
                 />
               </div>
               <div className={cls.inputsWrapper}>
-                <Input
-                  id="name"
-                  label="Ім'я"
-                  value={values?.name}
-                  onChange={handleChange}
-                />
-                <Input
-                  id="position"
-                  label="Посада"
-                  value={values?.position}
-                  onChange={handleChange}
-                />
-                <div className={cls.workScheduleTime}>
-                  Час роботи
-                  <div className={cls.timeSelector}>
-                    <Field
-                      name="work_schedule.time.from"
-                      render={(props: FieldProps) => (
-                        <TimeInput
-                          callback={(value) => {
-                            changeField(value, props.field);
-                          }}
-                          time={values?.work_schedule?.time.from}
-                        />
+                <div className={cls.nameInputs}>
+                  <Input
+                    id="name"
+                    label="Ім'я"
+                    value={values?.name}
+                    onChange={handleChange}
+                  />
+                  <Input
+                    id="position"
+                    label="Посада"
+                    value={values?.position}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className={cls.dateInputs}>
+                  <div className={cls.workScheduleTime}>
+                    Час роботи
+                    <div className={cls.timeSelector}>
+                      <Field
+                        name="work_schedule.time.from"
+                        render={(props: FieldProps) => (
+                          <TimeInput
+                            callback={(value) => {
+                              changeField(value, props.field);
+                            }}
+                            time={values?.work_schedule?.time.from}
+                          />
 
-                      )}
-                    />
-                    <Field
-                      name="work_schedule.time.to"
-                      render={(props: FieldProps) => (
-                        <TimeInput
-                          callback={(value) => {
-                            changeField(value, props.field);
-                          }}
-                          time={values?.work_schedule?.time.to}
-                        />
-                      )}
-                    />
+                        )}
+                      />
+                      <Field
+                        name="work_schedule.time.to"
+                        render={(props: FieldProps) => (
+                          <TimeInput
+                            callback={(value) => {
+                              changeField(value, props.field);
+                            }}
+                            time={values?.work_schedule?.time.to}
+                          />
+                        )}
+                      />
+                    </div>
+                  </div>
+                  <div className={cls.workScheduleTime}>
+                    Дні роботи
+                    <div className={cls.timeSelector}>
+                      <Field
+                        name="work_schedule.days.from"
+                        render={(props: FieldProps) => (
+                          <Select
+                            callback={(value) => {
+                              changeField(value, props.field);
+                            }}
+                            className={cls.DataSelect}
+                            label="From"
+                            data={days}
+                          />
+
+                        )}
+                      />
+                      <Field
+                        name="work_schedule.days.to"
+                        render={(props: FieldProps) => (
+                          <Select
+                            callback={(value) => {
+                              changeField(value, props.field);
+                            }}
+                            className={cls.DataSelect}
+                            label="To"
+                            data={days}
+                          />
+                        )}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -145,7 +183,7 @@ const EmployeeCard = ({
                     >
                       Зберегти
                     </Button>
-                    <Button onClick={deleteCurrentEmployee}>
+                    <Button withoutBorder onClick={deleteCurrentEmployee}>
                       <Trash2 />
                     </Button>
                   </>

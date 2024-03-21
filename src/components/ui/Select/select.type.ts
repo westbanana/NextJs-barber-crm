@@ -1,4 +1,6 @@
 export interface SelectProps {
   data: string[];
-  callback: () => void
+  callback?: (result:string) => void
+  label:string
+  className?: string
 }

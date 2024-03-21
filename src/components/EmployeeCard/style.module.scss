@@ -32,15 +32,20 @@
   gap: 20px;
   align-items: center;
   justify-content: center;
+  flex: 1;
 }
 
 .timeSelector {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  gap: 10px;
+  gap: 20px;
   position: relative;
   align-self: stretch; /* Растягиваем на всю доступную ширину */
+}
+
+.DataSelect {
+  max-width: 100px;
 }
 
 .xMark {
@@ -51,32 +56,43 @@
 }
 
 .form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   position: relative;
   cursor: default;
-  min-height: 400px;
-  min-width: 200px;
+  gap: 20px;
+  //min-height: 400px;
+  //min-width: 200px;
   background: var(--bg-color);
   padding: 20px;
   border-radius: 5px;
   border: var(--border-color) 1px solid;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 10px;
 }
 
 .userIconContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .inputsWrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex-grow: 1;
+  gap: 20px;
+}
+
+.nameInputs {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.dateInputs {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  margin-bottom: 16px;
 }
 
 .buttonsWrapper {

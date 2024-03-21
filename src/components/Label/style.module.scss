@@ -1,0 +1,15 @@
+.Label {
+  position: absolute;
+  transition: 0.125s ease-in;
+  background-color: var(--bg-color);
+  //height: 15px;//delete
+  //line-height: 35px;//delete
+  //margin-top: 5px;//delete
+  margin-left: 5px;
+  left: 0;
+  top: 0;
+  transform: translateY(50%);
+  border-radius: 10px;
+  color: var(--hover-color);
+  pointer-events: none;
+}

@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import { toastDefaultParams, updateEmployeeToasts } from '@/constants/toast-constants';
 
 export const updateEmployee = createAsyncThunk(
   'employee/updateEmployeeAsync',
@@ -12,16 +13,8 @@ export const updateEmployee = createAsyncThunk(
           method: 'PUT',
           body: JSON.stringify(employee),
         }),
-        {
-          pending: 'Відбувається оновлення робітника 🤔',
-          success: 'Інформація робітника оновлена! 🎉',
-          error: 'Щось пішло не так 😔',
-        },
-        {
-          closeOnClick: true,
-          autoClose: 1500,
-          pauseOnHover: true,
-        },
+        updateEmployeeToasts,
+        toastDefaultParams,
       );
 
       if (!response.ok) {

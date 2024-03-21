@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 import { InputProps } from '@/components/ui/Input/input.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
+import Label from '@/components/Label/Label';
 
 import cls from './style.module.scss';
 
@@ -11,12 +12,7 @@ const Input = memo(({
   const mods:Mods = {};
   return (
     <div className={classNames(cls.inputContainer, mods, [className])}>
-      <label
-        htmlFor={id}
-        className={cls.Label}
-      >
-        {label}
-      </label>
+      <Label className={cls.label} label={label!!} id={id!!} />
       <input
         {...otherProps}
         id={id}

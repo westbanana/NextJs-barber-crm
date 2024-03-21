@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import { createEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
 
 export const createEmployee = createAsyncThunk(
   'employee/createEmployee',
@@ -16,16 +17,8 @@ export const createEmployee = createAsyncThunk(
             services_provided: [],
           }),
         }),
-        {
-          pending: `Відбувається Створення ${employee.name} 🤔`,
-          success: `Робітник ${employee.name} створений! 🎉`,
-          error: 'Щось пішло не так 😔',
-        },
-        {
-          closeOnClick: true,
-          autoClose: 1500,
-          pauseOnHover: true,
-        },
+        createEmployeeToasts(employee),
+        toastDefaultParams,
       );
 
       if (!response.ok) {

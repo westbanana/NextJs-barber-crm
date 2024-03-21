@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Select from '@/components/ui/Select/Select';
+import { days } from '@/constants/days';
 
 const TestPage = () => (
   <div
@@ -15,7 +16,14 @@ const TestPage = () => (
       width: '100%',
     }}
   >
-    <Select />
+    <div style={{
+      display: 'flex',
+      width: '200px',
+      height: '46px',
+    }}
+    >
+      <Select label="Select" data={days} />
+    </div>
 
   </div>
 );

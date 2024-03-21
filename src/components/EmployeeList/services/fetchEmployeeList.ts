@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
+import { fetchEmployeeListToasts, toastDefaultParams } from '@/constants/toast-constants';
+
 export interface ErrorResponse {
   message: string;
 }
@@ -11,16 +13,8 @@ export const fetchEmployeeList = createAsyncThunk(
     try {
       const response = await toast.promise(
         fetch('http://localhost:4000/employees'),
-        {
-          pending: 'Отримання робітників... 🤔',
-          success: 'Робітники отримані! 🎉',
-          error: 'Щось пішло не так... 😔',
-        },
-        {
-          closeOnClick: true,
-          autoClose: 1500,
-          pauseOnHover: true,
-        },
+        fetchEmployeeListToasts,
+        toastDefaultParams,
       );
 
       if (!response.ok) {

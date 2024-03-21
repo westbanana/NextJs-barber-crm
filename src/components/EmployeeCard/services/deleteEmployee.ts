@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import { deleteEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
 
 export const deleteEmployee = createAsyncThunk(
   'employee/deleteEmployee',
@@ -10,16 +11,8 @@ export const deleteEmployee = createAsyncThunk(
     try {
       const response = await toast.promise(
         fetch(`http://localhost:4000/employees/${id}`, { method: 'DELETE' }),
-        {
-          pending: `Відбувається видалення ${name} 🤔`,
-          success: `${name} видалений! ☠`,
-          error: 'Щось пішло не так 😔',
-        },
-        {
-          closeOnClick: true,
-          autoClose: 1500,
-          pauseOnHover: true,
-        },
+        deleteEmployeeToasts(name),
+        toastDefaultParams,
       );
 
       if (!response.ok) {

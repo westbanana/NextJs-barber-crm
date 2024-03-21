@@ -1,49 +1,25 @@
-.mainContainer {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg-color);
-  border: 1px var(--border-color) solid;
-  border-radius: 5px;
-  padding: 10px;
-  min-width: 90px;
-  max-width: 90px;
-  min-height: 46px;
-  position: relative;
-  transition: height 0.3s linear;
+$transition-duration-slow: 0.3s;
+$transition-duration-fast: 0.15s;
+$transition-timing-linear: linear;
+$transition-timing-ease-out: ease-out;
+
+
+@mixin animation($name, $duration, $timing-function, $fill-mode) {
+  animation: $name $duration $timing-function $fill-mode;
 }
 
-.result {
-
-}
-
-.list {
-  min-width: 90px;
-  max-width: 90px;
-  background-color: var(--bg-color);
-  border: 1px var(--border-color) solid;
-  border-radius: 0 0 5px 5px;
-  border-top: none;
-  position: absolute;
-  padding: 0 10px 10px 10px;
-  top: 40px;
-  left: -1px;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  overflow: auto;
-  animation: show 0.3s linear forwards;
+@mixin scrollbar-style($width, $height, $thumb-height, $thumb-border-radius, $thumb-color, $thumb-shadow-top, $thumb-shadow-bottom) {
   &::-webkit-scrollbar {
-    width: 14px;
-    height: 18px;
+    width: $width;
+    height: $height;
   }
   &::-webkit-scrollbar-thumb {
-    height: 6px;
+    height: $thumb-height;
     border: 4px solid rgba(0, 0, 0, 0);
     background-clip: padding-box;
-    border-radius: 7px;
-    background-color: rgba(0, 0, 0, 0.15);
-    box-shadow: inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05);
+    border-radius: $thumb-border-radius;
+    background-color: $thumb-color;
+    box-shadow: $thumb-shadow-top, $thumb-shadow-bottom;
   }
   &::-webkit-scrollbar-button {
     width: 0;
@@ -55,7 +31,113 @@
   }
 }
 
-@keyframes show {
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: var(--border-radius);
+  padding: 10px 25px 10px 10px;
+  min-width: 90px;
+  //max-width: 90px;
+  min-height: 46px;
+  position: relative;
+  &:has(.list:not(.isClosing)) {
+    .arrow {
+      transform:  translateY(-50%) rotate(180deg);
+    }
+    .label {
+          transform: translateY(-50%) translateX(10px);
+          font-size: 12px;
+          padding: 0 5px;
+          color: var(--text-color);
+          opacity: 1;
+          background-color: var(--bg-color);
+    }
+  }
+  &:has(.result:not([value=""])) {
+    .label {
+      transform: translateY(-50%) translateX(10px);
+      font-size: 12px;
+      padding: 0 5px;
+      color: var(--text-color);
+      opacity: 1;
+      background-color: var(--bg-color);
+    }
+  }
+}
+.resultWrapper {
+  display: flex;
+  cursor: pointer;
+  user-select: none;
+}
+
+.result {
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  min-width: 90px;
+  background-color: var(--bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  border-top: none;
+  padding: 0 10px 10px 0;
+  position: absolute;
+  top: 40px;
+  left: -1px;
+  right: -1px;
+  z-index: 9;
+  @include animation(open-list, $transition-duration-fast, $transition-timing-ease-out, forwards);
+  @include scrollbar-style(14px, 18px, 6px, 7px, rgba(0, 0, 0, 0.15), inset -1px -1px 0px rgba(0, 0, 0, 0.05), inset 1px 1px 0px rgba(0, 0, 0, 0.05));
+}
+
+.item {
+  position: relative;
+  padding-left: 10px;
+  background-color: transparent;
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: opacity $transition-duration-slow $transition-timing-linear;
+  }
+  &:hover::before {
+    opacity: 1;
+    left: 0;
+  }
+}
+
+.isClosing {
+  @include animation(close-list, $transition-duration-fast, $transition-timing-ease-out, forwards);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transition: $transition-duration-slow;
+  transform: translateY(-50%) rotate(0);
+}
+
+@keyframes open-list {
   from {
     max-height: 0;
   }
@@ -64,24 +146,11 @@
   }
 }
 
-.item {
-  position: relative;
-  background-color: transparent;
-}
-
-.item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%);
-  opacity: 0;
-  transition: opacity 0.3s linear;
-}
-
-.item:hover::before {
-  opacity: 1;
-  left: 0;
+@keyframes close-list {
+  from {
+    max-height: 100px;
+  }
+  to {
+    max-height: 0;
+  }
 }

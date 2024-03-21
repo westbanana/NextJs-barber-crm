@@ -4,10 +4,9 @@
   cursor: default;
   &:has(.Input:not([value=""])),
   &:focus-within {
-    .Label {
-      transform: translateY(-12px) translateX(10px);
+    .label {
+      transform: translateY(-50%) translateX(10px);
       font-size: 12px;
-      line-height: 15px;
       padding: 0 5px;
       color: var(--text-color);
       opacity: 1;
@@ -19,19 +18,6 @@
       border: 1px lightblue solid;
     }
   }
-}
-
-.Label {
-  position: absolute;
-  transition: 0.125s ease-in;
-  background-color: var(--bg-color);
-  height: 15px;
-  line-height: 35px;
-  margin-top: 5px;
-  margin-left: 5px;
-  border-radius: 10px;
-  color: var(--hover-color);
-  pointer-events: none;
 }
 
 .Input {
