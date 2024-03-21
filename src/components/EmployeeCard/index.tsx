@@ -26,11 +26,12 @@ import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmploye
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { days } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
+import { newEmployee } from '@/constants/employee';
 
 import cls from './style.module.scss';
 
 const EmployeeCard = ({
-  employeeData = {} as IEmployee,
+  employeeData = newEmployee,
   onClose,
   mode,
 }:EmployeeEditCardProps) => {
@@ -117,27 +118,29 @@ const EmployeeCard = ({
                     <div className={cls.timeSelector}>
                       <Field
                         name="work_schedule.time.from"
-                        render={(props: FieldProps) => (
+                      >
+                        {(props: FieldProps) => (
                           <TimeInput
                             callback={(value) => {
                               changeField(value, props.field);
                             }}
-                            time={values?.work_schedule?.time.from}
+                            time={employeeData?.work_schedule?.time.from}
                           />
 
                         )}
-                      />
+                      </Field>
                       <Field
                         name="work_schedule.time.to"
-                        render={(props: FieldProps) => (
+                      >
+                        {(props: FieldProps) => (
                           <TimeInput
                             callback={(value) => {
                               changeField(value, props.field);
                             }}
-                            time={values?.work_schedule?.time.to}
+                            time={employeeData?.work_schedule?.time.to}
                           />
                         )}
-                      />
+                      </Field>
                     </div>
                   </div>
                   <div className={cls.workScheduleTime}>
@@ -145,22 +148,25 @@ const EmployeeCard = ({
                     <div className={cls.timeSelector}>
                       <Field
                         name="work_schedule.days.from"
-                        render={(props: FieldProps) => (
+                      >
+                        {(props: FieldProps) => (
                           <Select
                             callback={(value) => {
                               changeField(value, props.field);
                             }}
+                            defaultValue={employeeData?.work_schedule?.days?.from}
                             className={cls.DataSelect}
                             label="From"
                             data={days}
                           />
-
                         )}
-                      />
+                      </Field>
                       <Field
                         name="work_schedule.days.to"
-                        render={(props: FieldProps) => (
+                      >
+                        {(props: FieldProps) => (
                           <Select
+                            defaultValue={employeeData?.work_schedule?.days?.to}
                             callback={(value) => {
                               changeField(value, props.field);
                             }}
@@ -169,7 +175,7 @@ const EmployeeCard = ({
                             data={days}
                           />
                         )}
-                      />
+                      </Field>
                     </div>
                   </div>
                 </div>

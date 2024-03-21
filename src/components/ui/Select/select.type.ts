@@ -3,4 +3,5 @@ export interface SelectProps {
   callback?: (result:string) => void
   label:string
   className?: string
+  defaultValue: string
 }

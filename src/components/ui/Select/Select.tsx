@@ -14,9 +14,9 @@ import { closeSelectTimeout } from './constants/close-select-timeout';
 import cls from './style.module.scss';
 
 const Select = ({
-  data, callback, label, className,
+  data, callback, label, className, defaultValue = '',
 }:SelectProps) => {
-  const [result, setResult] = useState<string>(data.join(','));
+  const [result, setResult] = useState<string>(defaultValue || '');
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
