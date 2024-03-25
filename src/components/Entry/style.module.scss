@@ -1,0 +1,156 @@
+@mixin overflow-text-ellipsis($max-width: 90px) {
+  max-width: $max-width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin entry-field() {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.entry {
+  background-color: var(--bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-size: 10px;
+  padding: 28px 36px ;
+  min-width: 170px;
+  max-width: 170px;
+  min-height: 93px;
+  max-height: 93px;
+}
+
+.master {
+  position: absolute;
+  left: 7px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.name {
+  @include overflow-text-ellipsis(90px)
+}
+
+.timeContainer {
+
+}
+
+.fieldIcon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  svg {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.time {
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  right: 7px;
+  transform: translateY(-50%);
+}
+
+.client {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.clientInfo {
+  @include entry-field()
+}
+
+.servicesContainer {
+  @include entry-field();
+}
+
+.services {
+  @include overflow-text-ellipsis(90px)
+}
+
+.totalPrice {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  color: var(--text-color)
+}
+
+.buttons {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: translateX(50%);
+}
+
+.button {
+  height: 10px;
+  width: 10px;
+  background-color: var(--bg-color);
+  border-radius: 100%;
+  border: 1px var(--border-color) solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  svg {
+    height: 10px;
+    width: 10px;
+  }
+}
+
+.entryInfo {
+  position: absolute;
+  display: flex;
+  left: 7px;
+  bottom: 4px;
+  transition: var(--transition);
+  cursor: help;
+  svg {
+    height: 9px;
+    width: 9px;
+    path,
+    circle {
+      color: var(--border-color);
+    }
+  }
+  &:hover {
+    svg {
+      path,
+      circle {
+        color: var(--bg-color-inverted);
+      }
+    }
+  }
+}
+
+.iconSize {
+  height: 19px !important;
+  width: 19px !important;
+  min-width: 19px;
+}
+
+.withBg {
+  background-color: var(--bg-color);
+  border-radius: var(--border-radius-label);
+  border: 1px var(--border-color) solid;
+  padding: 0 4px;
+}

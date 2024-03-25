@@ -6,9 +6,10 @@ export type FormObject = {
 }
 
 export interface UserIconProps {
-  id?:string;
-  userName: string;
+  id?:string | undefined;
+  userName: string | undefined;
   value?: string;
   onChange?: (e: FormObject) => void;
   withUpload?: boolean;
+  className?: string;
 }

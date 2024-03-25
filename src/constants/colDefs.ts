@@ -28,7 +28,9 @@ export const ColDefs:ColDef[] = [
   {
     field: '',
     sortable: false,
-    flex: 0,
+    minWidth: 100,
+    maxWidth: 100,
+    flex: 1,
     valueGetter: (params: ValueGetterParams) => params.data,
     cellRenderer: EditRowCell,
   },

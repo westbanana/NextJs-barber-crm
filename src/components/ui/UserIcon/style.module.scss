@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   transition: opacity var(--transition);
+  user-select: none;
   &:hover {
     .uploadIconContainer {
       opacity: 1;

@@ -20,14 +20,13 @@ import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
 import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
 import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
 import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
-import LoadingProvider from '@/components/LoadingProvider/LoadingProvider';
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import Skeleton from '@/components/ui/Skeleton/Skeleton';
 
 import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import Skeleton from '@/components/ui/Skeleton/Skeleton';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
@@ -48,6 +47,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   const deleteRow = () => {
     if (selectedRow) {
       dispatch(deleteEmployee(selectedRow[0]));
+      setSelectedRow([]);
     }
   };
 
@@ -58,7 +58,6 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   const closeCard = () => {
     dispatch(openCard(undefined));
   };
-  console.log(loading);
   return loading ? (<Skeleton />) : (
     <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
       <div className={cls.optionsWrapper}>
@@ -79,6 +78,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       </div>
       <AgGridReact
         ref={gridRef}
+        overlayNoRowsTemplate="Робітники відсутні🤷‍♂️"
         rowData={employees}
         columnDefs={ColDefs}
         rowSelection="single"

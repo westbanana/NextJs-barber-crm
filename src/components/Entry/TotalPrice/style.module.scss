@@ -1,0 +1,43 @@
+.totalPriceContainer {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  color: var(--text-color);
+  cursor: help;
+}
+
+.pricesContainer {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(100%);
+  left: 0;
+  display: flex;
+  animation: test-show 0.3s linear;
+  background-color: var(--bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: var(--border-radius);
+  z-index: 999;
+  padding: 10px;
+  min-width: 170px;
+}
+
+@keyframes test-show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pricesList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.price {
+  white-space: nowrap;
+}

@@ -9,9 +9,9 @@ export type workScheduleType = {
 }
 
 export interface IEmployee {
-  id: string,
-  name: string,
-  position: string,
+  id: string | undefined,
+  name: string | undefined,
+  position: string | undefined,
   userIcon?: string,
   work_schedule: workScheduleType,
   services_provided: string[],

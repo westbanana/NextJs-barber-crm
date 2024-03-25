@@ -3,13 +3,14 @@ import { Upload } from 'lucide-react';
 
 import { UserIconProps } from '@/components/ui/UserIcon/user-icon.type';
 import { imageUpload } from '@/helpers/imageUpload';
+import { classNames } from '@/lib/classNames/classNames';
 
 import cls from './style.module.scss';
 
 export const imageMaxSizeKB = 20;
 
 const UserIcon = memo(({
-  userName = 'User Icon', withUpload = false, onChange, value,
+  userName = 'User Icon', withUpload = false, onChange, value, className,
 }: UserIconProps) => {
   const [firstName, lastName] = userName.split(' ');
   const iconLetters = lastName ? `${firstName[0]}${lastName[0]}` : firstName[0];
@@ -17,7 +18,7 @@ const UserIcon = memo(({
     imageUpload({ onChange, event, maxSizeKb: imageMaxSizeKB });
   };
   return (
-    <div className={cls.container}>
+    <div className={classNames(cls.container, {}, [className])}>
       {withUpload && (
         <div className={cls.uploadIconContainer}>
           <input onChange={uploadImageHandler} className={cls.uploadInput} type="file" />
