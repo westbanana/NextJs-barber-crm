@@ -17,7 +17,7 @@ export type IClient = {
   clientIcon: string
 }
 
-export type EntriesProps = {
+export type EntryProps = {
   id: string,
   employee: IEmployee,
   client: IClient,

@@ -21,6 +21,12 @@
   min-width: 170px;
 }
 
+.tooltip {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  border: 1px var(--border-color) solid;
+}
+
 @keyframes test-show {
   from {
     opacity: 0;

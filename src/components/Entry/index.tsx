@@ -1,19 +1,21 @@
 import React from 'react';
 import {
-  Check, Info, Menu, User, X,
+  Check, Menu, User, X,
 } from 'lucide-react';
 
-import { EntriesProps } from '@/components/Entry/entries.type';
+import { EntryProps } from '@/components/Entry/entries.type';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import { classNames } from '@/lib/classNames/classNames';
 import { barberServices, IBarberServices } from '@/constants/barber-services';
 import TotalPrice from '@/components/Entry/TotalPrice';
+import { EntryInfo } from '@/components/Entry/Info/info.type';
+import Info from '@/components/Entry/Info';
 
 import cls from './style.module.scss';
 
 const Entry = ({
-  employee, time, client, services, id,
-}:EntriesProps) => {
+  employee, time, client, services, id, date,
+}:EntryProps) => {
   const [employeeFirstName, employeeLastName] = employee.name!!.split(' ');
   const [clientFirstName, clientLastName] = client.name.split(' ');
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
@@ -24,6 +26,13 @@ const Entry = ({
     (accumulator:number, currentValue:IBarberServices) => accumulator + currentValue.price,
     0,
   );
+  const entryInfo:EntryInfo = {
+    client,
+    employee,
+    time,
+    services: selectedServices,
+    date: date!!,
+  };
   return (
     <div className={cls.entry}>
       <div className={cls.master}>
@@ -70,7 +79,7 @@ const Entry = ({
           </span>
         </div>
         <div className={cls.entryInfo}>
-          <Info />
+          <Info entryInfo={entryInfo} entryId={id} />
         </div>
         <TotalPrice services={selectedServices} totalPrice={totalPrice} entryId={id} />
       </div>
