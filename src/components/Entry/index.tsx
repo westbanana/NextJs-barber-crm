@@ -12,7 +12,7 @@ import TotalPrice from '@/components/Entry/TotalPrice';
 import cls from './style.module.scss';
 
 const Entry = ({
-  employee, time, client, services,
+  employee, time, client, services, id,
 }:EntriesProps) => {
   const [employeeFirstName, employeeLastName] = employee.name!!.split(' ');
   const [clientFirstName, clientLastName] = client.name.split(' ');
@@ -72,7 +72,7 @@ const Entry = ({
         <div className={cls.entryInfo}>
           <Info />
         </div>
-        <TotalPrice services={selectedServices} totalPrice={totalPrice} />
+        <TotalPrice services={selectedServices} totalPrice={totalPrice} entryId={id} />
       </div>
     </div>
   );

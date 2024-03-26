@@ -29,11 +29,20 @@ const TestPage = async () => {
       className={cls.test}
     >
       {entries.map(({
-        employee, client, time, services,
+        employee, client, time, services, id,
       }) => {
         const currentEmployee = employees.find((empl:IEmployee) => empl.id === employee);
         const currentClient = clients.find((cl:IClient) => cl.id === client);
-        return <Entry employee={currentEmployee} client={currentClient} time={time} services={services} />;
+        return (
+          <Entry
+            id={id}
+            key={id}
+            employee={currentEmployee}
+            client={currentClient}
+            time={time}
+            services={services}
+          />
+        );
       })}
     </div>
   );

@@ -18,9 +18,10 @@ export type IClient = {
 }
 
 export type EntriesProps = {
+  id: string,
   employee: IEmployee,
   client: IClient,
   date?: string,
-  time: string
-  services: string[]
+  time: string,
+  services: string[],
 }
