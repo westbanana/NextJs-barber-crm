@@ -1,0 +1,15 @@
+.mainContainer {
+  position: relative;
+}
+
+.list {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-gap: 20px 12px;
+  position: relative;
+  border-radius: var(--border-radius);
+  border: 1px var(--border-color) solid;
+}
+
+//Z_INDEX

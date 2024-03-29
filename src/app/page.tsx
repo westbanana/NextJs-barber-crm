@@ -1,12 +1,11 @@
-import TodayEntries from '@/app/(todayEntries)';
+import TodayEntries from '@/components/TodayEntries';
+import Page from '@/components/ui/Page/Page';
+
+import cls from './style.module.scss';
 
 const Home = () => (
-  <div style={{
-    width: '100%',
-    height: '100vh',
-  }}
-  >
+  <Page className={cls.mainPage}>
     <TodayEntries />
-  </div>
+  </Page>
 );
 export default Home;
