@@ -4,17 +4,7 @@
     border: 1px var(--border-color) solid !important;
     border-radius: 5px !important;
     z-index: 999 !important;
-    animation: show var(--transition) linear forwards !important;
 }
 .react-tooltip > .react-tooltip-arrow {
     opacity: 0;
-}
-
-@keyframes show {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
 }
