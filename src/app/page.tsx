@@ -1,12 +1,12 @@
+import TodayEntries from '@/app/(todayEntries)';
+
 const Home = () => (
   <div style={{
     width: '100%',
     height: '100vh',
-    textAlign: 'center',
-    lineHeight: '100vh',
   }}
   >
-    main page
+    <TodayEntries />
   </div>
 );
 export default Home;

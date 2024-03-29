@@ -11,7 +11,7 @@ export const deleteEmployee = createAsyncThunk(
     try {
       const response = await toast.promise(
         fetch(`http://localhost:4000/employees/${id}`, { method: 'DELETE' }),
-        deleteEmployeeToasts(name),
+        deleteEmployeeToasts(name!!),
         toastDefaultParams,
       );
 
