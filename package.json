@@ -10,8 +10,12 @@
     "server": "json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "@emotion/cache": "^11.11.0",
+    "@mui/material-nextjs": "^5.15.11",
+    "@mui/x-date-pickers": "^7.1.0",
     "@reduxjs/toolkit": "^2.2.1",
     "ag-grid-react": "^31.0.3",
+    "dayjs": "^1.11.10",
     "formik": "^2.4.5",
     "json-server": "^1.0.0-alpha.23",
     "lucide-react": "^0.330.0",

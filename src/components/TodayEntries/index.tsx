@@ -1,4 +1,5 @@
 import React from 'react';
+import { Plus } from 'lucide-react';
 
 import { IClient, IEntries } from '@/components/Entry/entries.type';
 import { getEntries } from '@/components/TodayEntries/services/getEntries';
@@ -19,6 +20,9 @@ const TodayEntries = async () => {
   return (
     <div className={cls.mainContainer}>
       <Label label="Today entries" className={cls.todayEntriesLabel} alwaysOnBorder />
+      <div className={cls.addEntryContainer}>
+        <Plus className={cls.addEntryButton} />
+      </div>
       <div
         className={cls.list}
       >

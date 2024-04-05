@@ -1,0 +1,135 @@
+/*change text-color for OK button*/
+body .mui-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    color: var(--text-color);
+}
+
+/*change bg-color for OK button*/
+body .mui-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+    background-color: var(--hover-color);
+}
+
+/*when component clicked - remove blue border*/
+body .mui-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--hover-color);
+    border-width: 1px;
+}
+
+/*input size*/
+body .mui-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 10px 0 10px 10px;
+    height: 26px;
+}
+
+/*remove transition*/
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root {
+    transition: none;
+}
+
+/*scroll for time selects*/
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+}
+
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.05), inset 1px 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/*selected day color*/
+body .mui-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
+    background-color: var(--hover-color);
+}
+
+body .mui-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
+    background-color: var(--bg-color-inverted);
+}
+
+/*selected year color*/
+body .mui-innj4t-MuiPickersYear-yearButton.Mui-selected {
+    background-color: var(--bg-color-inverted);
+}
+
+/*time item hover*/
+body .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item:hover {
+    background-color: var(--hover-color);
+}
+/*selected time color*/
+body .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected {
+    background-color: var(--bg-color-inverted);
+}
+
+/*calendar scrollbar*/
+body .mui-1vs7z2v-MuiYearCalendar-root::-webkit-scrollbar {
+    width: 14px;
+    height: 18px;
+}
+
+body .mui-1vs7z2v-MuiYearCalendar-root::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 7px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.05), inset 1px 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+body .mui-1vs7z2v-MuiYearCalendar-root::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
+body .mui-1vs7z2v-MuiYearCalendar-root::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/*year button hover*/
+body .mui-1ep1a8e-MuiPickersYear-root .mui-innj4t-MuiPickersYear-yearButton:hover {
+    background-color: var(--hover-color);
+}
+
+/*ul width*/
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul {
+    width: 66px;
+}
+
+body .mui-1t0788u-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition .mui-23p0if-MuiButtonBase-root-MuiPickersDay-root:focus,
+body .mui-1t0788u-MuiPickersSlideTransition-root-MuiDayCalendar-slideTransition .mui-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root:hover{
+    background-color: var(--hover-color);
+}
+body .mui-14iq4xa-MuiDayCalendar-root .mui-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root:focus.Mui-selected,
+body .mui-14iq4xa-MuiDayCalendar-root .mui-23p0if-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:focus-visible,
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:hover {
+    background-color: var(--bg-color-inverted);
+}
+
+body .mui-z3c6am-MuiFormControl-root-MuiTextField-root:hover .mui-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: var(--border-color);
+}
+
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-disabled {
+    display: none;
+}
+
+/*body .mui-14iq4xa-MuiDayCalendar-root .mui-23p0if-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {*/
+/*    background-color: red;*/
+/*}*/
+body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul::after {
+    display: none;
+}

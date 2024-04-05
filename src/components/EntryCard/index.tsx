@@ -27,7 +27,6 @@ import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { days } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
-import DateTimePicker from '@/components/DatePicker';
 
 import cls from './style.module.scss';
 
@@ -77,7 +76,7 @@ const EmployeeCard = ({
 
   return (
     <Portal>
-      <div className={cls.EmployeeCardBg}>
+      <div className={cls.EntryCardBg}>
         <Formik initialValues={employeeData} onSubmit={onSubmitFormik} validationSchema={EmployeeSchema}>
           {({
             handleSubmit,
@@ -89,98 +88,10 @@ const EmployeeCard = ({
                 onClick={onClose}
                 className={cls.xMark}
               />
-              <div className={cls.userIconContainer}>
-                <UserIcon
-                  userName={employeeData?.name}
-                  withUpload
-                  id="userIcon"
-                  value={values?.userIcon}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={cls.inputsWrapper}>
-                <div className={cls.nameInputs}>
-                  <Input
-                    id="name"
-                    label="Ім'я"
-                    value={values?.name}
-                    onChange={handleChange}
-                  />
-                  <Input
-                    id="position"
-                    label="Посада"
-                    value={values?.position}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className={cls.dateInputs}>
-                  <div className={cls.workScheduleTime}>
-                    Час роботи
-                    <div className={cls.timeSelector}>
-                      <Field
-                        name="work_schedule.time.from"
-                      >
-                        {(props: FieldProps) => (
-                          <TimeInput
-                            callback={(value) => {
-                              changeField(value, props.field);
-                            }}
-                            time={employeeData?.work_schedule?.time.from}
-                          />
-
-                        )}
-                      </Field>
-                      <Field
-                        name="work_schedule.time.to"
-                      >
-                        {(props: FieldProps) => (
-                          <TimeInput
-                            callback={(value) => {
-                              changeField(value, props.field);
-                            }}
-                            time={employeeData?.work_schedule?.time.to}
-                          />
-                        )}
-                      </Field>
-                    </div>
-                  </div>
-                  <div className={cls.workScheduleTime}>
-                    Дні роботи
-                    <div className={cls.timeSelector}>
-                      <Field
-                        name="work_schedule.days.from"
-                      >
-                        {(props: FieldProps) => (
-                          <Select
-                            callback={(value) => {
-                              changeField(value, props.field);
-                            }}
-                            defaultValue={employeeData?.work_schedule?.days?.from}
-                            className={cls.DataSelect}
-                            label="From"
-                            data={days}
-                          />
-                        )}
-                      </Field>
-                      <Field
-                        name="work_schedule.days.to"
-                      >
-                        {(props: FieldProps) => (
-                          <Select
-                            defaultValue={employeeData?.work_schedule?.days?.to}
-                            callback={(value) => {
-                              changeField(value, props.field);
-                            }}
-                            className={cls.DataSelect}
-                            label="To"
-                            data={days}
-                          />
-                        )}
-                      </Field>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              client: client
+              employee: employee
+              date: date
+              services
               <div className={cls.buttonsWrapper}>
                 {mode === 'edit' && (
                   <>

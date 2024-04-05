@@ -1,11 +1,12 @@
 import React from 'react';
 
-import cls from './style.module.scss';
 import { IPageProps } from '@/components/ui/Page/page.type';
 import { classNames } from '@/lib/classNames/classNames';
 
-const Page = ({ children, className }: IPageProps) => (
-  <div className={classNames(cls.Page, {}, [className])}>
+import cls from './style.module.scss';
+
+const Page = ({ children, className, id }: IPageProps) => (
+  <div id={id} className={classNames(cls.Page, {}, [className])}>
     {children}
   </div>
 );

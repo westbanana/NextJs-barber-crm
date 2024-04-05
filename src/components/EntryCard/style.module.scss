@@ -1,0 +1,103 @@
+.EntryCardBg {
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  backdrop-filter: blur(10px);
+  animation: show-card var(--transition) forwards;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+@keyframes show-card {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.workScheduleTime {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.timeSelector {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 20px;
+  position: relative;
+  align-self: stretch; /* Растягиваем на всю доступную ширину */
+}
+
+.DataSelect {
+  max-width: 100px;
+}
+
+.xMark {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+
+.form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+  cursor: default;
+  gap: 20px;
+  //min-height: 400px;
+  //min-width: 200px;
+  background: var(--bg-color);
+  padding: 20px;
+  border-radius: 5px;
+  border: var(--border-color) 1px solid;
+}
+
+.userIconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.nameInputs {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.dateInputs {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
