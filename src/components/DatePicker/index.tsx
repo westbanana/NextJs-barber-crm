@@ -14,7 +14,12 @@ import { log } from 'node:util';
 
 import cls from './style.module.scss';
 
-const DateTimePicker = ({ dates }: {dates: string[]}) => {
+export type DateTimePickerProps = {
+  dates: string[],
+  defaultValue: dayjs.Dayjs | undefined | null
+}
+
+const DateTimePicker = ({ dates, defaultValue }: DateTimePickerProps) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
   const maxTime = selectedDate.set('hour', 19).set('minute', 0);
@@ -63,6 +68,7 @@ const DateTimePicker = ({ dates }: {dates: string[]}) => {
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={cls.dateTimePickerWrapper}>
         <MuiDateTimePicker
+          defaultValue={defaultValue}
           className={cls.dateTimePicker}
           ampm={false}
           disablePast

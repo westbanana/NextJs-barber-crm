@@ -29,6 +29,9 @@ export const employeeListSlice = createSlice({
     openCard: (state, action: PayloadAction<EmployeeCardMode | undefined>) => {
       state.openedCard = action.payload;
     },
+    closeCard: (state) => {
+      state.openedCard = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchEmployeeList.pending, (state) => {
@@ -91,6 +94,7 @@ export const employeeListSlice = createSlice({
 });
 export const {
   openCard,
+  closeCard,
 } = employeeListSlice.actions;
 
 export default employeeListSlice.reducer;

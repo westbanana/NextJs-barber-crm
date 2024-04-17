@@ -28,6 +28,7 @@ import { days } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
 import DateTimePicker from '@/components/DatePicker';
+import CardBackground from '@/components/ui/CardBackground/CardBackground';
 
 import cls from './style.module.scss';
 
@@ -77,7 +78,7 @@ const EmployeeCard = ({
 
   return (
     <Portal>
-      <div className={cls.EmployeeCardBg}>
+      <CardBackground>
         <Formik initialValues={employeeData} onSubmit={onSubmitFormik} validationSchema={EmployeeSchema}>
           {({
             handleSubmit,
@@ -207,7 +208,7 @@ const EmployeeCard = ({
             </form>
           )}
         </Formik>
-      </div>
+      </CardBackground>
     </Portal>
   );
 };

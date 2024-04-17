@@ -25,6 +25,8 @@
   max-width: 170px;
   min-height: 93px;
   max-height: 93px;
+  user-select: none;
+  cursor: pointer;
   &:hover {
     .buttons {
       opacity: 1;

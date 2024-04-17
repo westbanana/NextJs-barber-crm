@@ -5,18 +5,21 @@ import React, {
 } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-import { SelectProps } from '@/components/ui/Select/select.type';
+import { SelectItem, SelectMode, SelectProps } from '@/components/ui/Select/select.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { outsideClick } from '@/helpers/outSideClick';
 import Label from '@/components/Label/Label';
+import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import { IClient } from '@/components/Entry/entries.type';
+import { IBarberServices } from '@/constants/barber-services';
 
 import { closeSelectTimeout } from './constants/close-select-timeout';
 import cls from './style.module.scss';
 
 const Select = ({
-  data, callback, label, className, defaultValue = '',
+  data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT,
 }:SelectProps) => {
-  const [result, setResult] = useState<string>(defaultValue || '');
+  const [result, setResult] = useState<SelectItem[]>(defaultValue);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
@@ -30,18 +33,33 @@ const Select = ({
 
   const closeHandler = useCallback(() => {
     if (isOpened) {
+      if (selectMode === SelectMode.MULTISELECT) {
+        callback?.(result);
+      }
       setIsClosing(true);
       timerRef.current = setTimeout(() => {
         setIsOpened(false);
       }, closeSelectTimeout);
     }
-  }, [isOpened]);
+  }, [callback, isOpened, result, selectMode]);
 
-  const selectItem = (el: string, e: React.MouseEvent) => {
+  const selectItem = (el: SelectItem, e: React.MouseEvent) => {
     e.stopPropagation();
-    setResult(el);
-    closeHandler();
-    callback?.(el);
+    if (selectMode === SelectMode.MULTISELECT) {
+      setResult((prev) => {
+        const contained = typeof el === 'object'
+          ? prev.some((item) => item.id === el.id)
+          : prev.some((item) => item === el);
+        if (contained) {
+          return prev.filter((item) => item.id !== el.id);
+        }
+        return [el, ...prev];
+      });
+    } else {
+      setResult([el]);
+      closeHandler();
+      callback?.([el]);
+    }
   };
 
   const listMods: Mods = {
@@ -61,11 +79,14 @@ const Select = ({
     };
   }, [handleOutsideClick, isOpened]);
 
+  const resultStroke = typeof result[0] === 'string'
+    ? result.join(',')
+    : result.map((item) => item?.name).join(',');
   return (
     <div className={classNames(cls.mainContainer, {}, [className])} ref={refContainer}>
       <Label label={label} id={label} className={cls.label} />
       <div className={cls.resultWrapper} onClick={openSelectList}>
-        <input type="text" readOnly className={cls.result} value={result} />
+        <div className={cls.result}>{resultStroke}</div>
         {/* <span className={cls.result}>{result}</span> */}
         <ChevronDown className={cls.arrow} />
       </div>
@@ -73,11 +94,11 @@ const Select = ({
         <div className={classNames(cls.list, listMods, [])}>
           {data.map((item) => (
             <div
-              key={item}
+              key={typeof item === 'object' ? item.id : item}
               className={cls.item}
               onClick={(e) => selectItem(item, e)}
             >
-              {item}
+              {typeof item === 'object' ? item?.name : item}
             </div>
           ))}
         </div>

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import employeeListReducer from '@/components/EmployeeList/slices/employeeListSlice';
+import entriesReducer from '@/components/Entry/slices/entrySlice';
 
 export const makeStore = () => configureStore({
   reducer: {
     employeeList: employeeListReducer,
+    entries: entriesReducer,
   },
 });
 

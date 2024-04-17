@@ -16,7 +16,7 @@ import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import EmployeeCard from '@/components/EmployeeCard';
 import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
 import { getEmployeeCardMod } from '@/components/EmployeeCard/selectors/getEmployeeCardMod';
-import { openCard } from '@/components/EmployeeList/slices/employeeListSlice';
+import { closeCard, openCard } from '@/components/EmployeeList/slices/employeeListSlice';
 import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
 import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
 import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
@@ -27,6 +27,7 @@ import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import { fetchEntriesDates } from '@/components/Entry/services/fetchEntriesDates';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);
@@ -55,8 +56,8 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     dispatch(openCard(EmployeeCardMode.CREATE));
   };
 
-  const closeCard = () => {
-    dispatch(openCard(undefined));
+  const closeEmployeeCard = () => {
+    dispatch(closeCard());
   };
   return loading ? (<Skeleton />) : (
     <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
@@ -88,7 +89,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
       {cardMod && (
         <EmployeeCard
           mode={cardMod}
-          onClose={closeCard}
+          onClose={closeEmployeeCard}
         />
       )}
     </div>

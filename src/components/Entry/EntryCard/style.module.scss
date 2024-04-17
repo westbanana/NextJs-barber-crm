@@ -13,7 +13,7 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 99;
 }
 
 @keyframes show-card {
@@ -65,7 +65,7 @@
   //min-height: 400px;
   //min-width: 200px;
   background: var(--bg-color);
-  padding: 20px;
+  padding: 40px;
   border-radius: 5px;
   border: var(--border-color) 1px solid;
 }
@@ -100,4 +100,10 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+}
+
+.employee,
+.client,
+.services {
+  max-width: 255px;
 }

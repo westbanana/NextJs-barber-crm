@@ -24,10 +24,10 @@ const Info = ({ entryInfo, entryId }:InfoProps) => {
             {`Клієнт: ${client.name}`}
           </li>
           <li>
-            {`Дата: ${time}-${date}`}
+            {`Дата: ${time}/${date}`}
           </li>
           <li>
-            {`Послуги: ${services.map((serv) => serv.serviceName).join(', ')}.`}
+            {`Послуги: ${services.map((serv) => serv.name).join(', ')}.`}
           </li>
         </ul>
       </Tooltip>

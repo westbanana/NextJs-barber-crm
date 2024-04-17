@@ -18,6 +18,7 @@ export type IClient = {
 }
 
 export type EntryProps = {
+  currentEntry: IEntries
   id: string,
   employee: IEmployee,
   client: IClient,

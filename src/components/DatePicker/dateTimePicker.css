@@ -119,7 +119,8 @@ body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul .mui-1e3wlyl-MuiButton
     background-color: var(--bg-color-inverted);
 }
 
-body .mui-z3c6am-MuiFormControl-root-MuiTextField-root:hover .mui-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+body .mui-z3c6am-MuiFormControl-root-MuiTextField-root:hover .mui-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+body .mui-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
     border-color: var(--border-color);
 }
 

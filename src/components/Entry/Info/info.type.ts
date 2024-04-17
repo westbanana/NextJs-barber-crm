@@ -3,6 +3,7 @@ import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { IClient } from '@/components/Entry/entries.type';
 
 export type EntryInfo = {
+  id: string | number;
   employee: IEmployee;
   client: IClient;
   date: string;

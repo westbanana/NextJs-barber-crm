@@ -18,7 +18,7 @@ const TotalPrice = ({ totalPrice, services, entryId }:TotalPriceProps) => (
     <Tooltip id={`price-list-${entryId}`}>
       <ul className={cls.pricesList}>
         {services.map(({
-          serviceName,
+          name,
           price,
           id,
         }: IBarberServices) => (
@@ -26,7 +26,7 @@ const TotalPrice = ({ totalPrice, services, entryId }:TotalPriceProps) => (
             className={cls.price}
             key={id}
           >
-            {`${serviceName}: ${price}₴`}
+            {`${name}: ${price}₴`}
           </li>
         ))}
       </ul>
