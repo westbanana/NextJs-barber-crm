@@ -9,9 +9,6 @@ import { SelectItem, SelectMode, SelectProps } from '@/components/ui/Select/sele
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { outsideClick } from '@/helpers/outSideClick';
 import Label from '@/components/Label/Label';
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
-import { IClient } from '@/components/Entry/entries.type';
-import { IBarberServices } from '@/constants/barber-services';
 
 import { closeSelectTimeout } from './constants/close-select-timeout';
 import cls from './style.module.scss';
@@ -83,9 +80,13 @@ const Select = ({
     ? result.join(',')
     : result.map((item) => item?.name).join(',');
   return (
-    <div className={classNames(cls.mainContainer, {}, [className])} ref={refContainer}>
+    <div
+      className={classNames(cls.mainContainer, {}, [className])}
+      ref={refContainer}
+      onClick={openSelectList}
+    >
       <Label label={label} id={label} className={cls.label} />
-      <div className={cls.resultWrapper} onClick={openSelectList}>
+      <div className={cls.resultWrapper}>
         <div className={cls.result}>{resultStroke}</div>
         {/* <span className={cls.result}>{result}</span> */}
         <ChevronDown className={cls.arrow} />
@@ -95,7 +96,7 @@ const Select = ({
           {data.map((item) => (
             <div
               key={typeof item === 'object' ? item.id : item}
-              className={cls.item}
+              className={classNames(cls.item, { [cls.selectedItem]: result.some((el) => el.id === item.id) }, [])}
               onClick={(e) => selectItem(item, e)}
             >
               {typeof item === 'object' ? item?.name : item}

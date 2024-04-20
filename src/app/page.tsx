@@ -1,7 +1,6 @@
-import TodayEntries from '@/components/TodayEntries';
 import Page from '@/components/ui/Page/Page';
 
-import cls from './style.module.scss';
+import TodayEntries from '../components/Entry/TodayEntries';
 
 const Home = () => (
   <Page>
