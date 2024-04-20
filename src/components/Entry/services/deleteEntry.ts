@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { deleteEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
 import { EntryInfo } from '@/components/Entry/Info/info.type';
 

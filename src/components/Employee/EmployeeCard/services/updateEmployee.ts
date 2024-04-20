@@ -1,17 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
-import { deleteEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
+import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
+import { toastDefaultParams, updateEmployeeToasts } from '@/constants/toast-constants';
 
-export const deleteEmployee = createAsyncThunk(
-  'employee/deleteEmployee',
+export const updateEmployee = createAsyncThunk(
+  'employee/updateEmployeeAsync',
   async (employee:IEmployee, { rejectWithValue }) => {
-    const { id, name } = employee;
     try {
       const response = await toast.promise(
-        fetch(`http://localhost:4000/employees/${id}`, { method: 'DELETE' }),
-        deleteEmployeeToasts(name!!),
+        fetch(`http://localhost:4000/employees/${employee.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(employee),
+        }),
+        updateEmployeeToasts,
         toastDefaultParams,
       );
 

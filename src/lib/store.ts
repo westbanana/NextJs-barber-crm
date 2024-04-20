@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import employeeListReducer from '@/components/EmployeeList/slices/employeeListSlice';
+import employeeListReducer from '@/components/Employee/EmployeeList/slices/employeeListSlice';
 import entriesReducer from '@/components/Entry/slices/entrySlice';
 
 export const makeStore = () => configureStore({

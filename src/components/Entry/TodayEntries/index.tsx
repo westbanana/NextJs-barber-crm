@@ -1,11 +1,11 @@
 import React from 'react';
 import { Plus } from 'lucide-react';
+import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
+import MiniEntry from '@components/Entry/MiniEntry';
 
-import { IClient, IEntries } from '@/components/Entry/entries.type';
 import { getClients } from '@/components/Entry/services/getClients';
 import { getEmployees } from '@/components/Entry/services/getEmployees';
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
-import Entry from '@/components/Entry';
+import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import Label from '@/components/Label/Label';
 import { getTodayEntries } from '@/components/Entry/services/getTodayEntries';
 
@@ -39,7 +39,7 @@ const TodayEntries = async () => {
             const currentEmployee = employees.find((element: IEmployee) => element.id === employee);
             const currentClient = clients.find((element: IClient) => element.id === client);
             return (
-              <Entry
+              <MiniEntry
                 currentEntry={entry}
                 id={id}
                 key={id}

@@ -1,6 +1,6 @@
 import { ColDef, ValueGetterParams, ITooltipParams } from 'ag-grid-community';
 
-import EditRowCell from '@/components/EmployeeList/EditRowCell';
+import EditRowCell from '@/components/Employee/EmployeeList/EditRowCell';
 
 export const defaultColProps: ColDef = {
   resizable: false,

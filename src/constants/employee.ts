@@ -1,4 +1,4 @@
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 
 export const newEmployee: IEmployee = {
   id: undefined,

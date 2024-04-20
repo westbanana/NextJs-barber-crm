@@ -3,19 +3,18 @@ import {
   Check, ExternalLink, Menu, User, X,
 } from 'lucide-react';
 import dayjs from 'dayjs';
-
-import UserIcon from '@/components/ui/UserIcon/UserIcon';
-import TotalPrice from '@/components/Entry/TotalPrice';
-import Info from '@/components/Entry/Info';
-import { classNames } from '@/lib/classNames/classNames';
-import { EntryProps } from '@/components/Entry/entries.type';
-import { EntryInfo } from '@/components/Entry/Info/info.type';
-import { barberServices, IBarberServices } from '@/constants/barber-services';
-import EntryOpener from '@/components/Entry/EntryOpener';
+import UserIcon from '@components/ui/UserIcon/UserIcon';
+import TotalPrice from '@components/Entry/TotalPrice';
+import Info from '@components/Entry/Info';
+import { classNames } from '@lib/classNames/classNames';
+import { EntryProps } from '@components/Entry/MiniEntry/entries.type';
+import { EntryInfo } from '@components/Entry/Info/info.type';
+import { barberServices, IBarberServices } from '@constants/barber-services';
+import EntryOpener from '@components/Entry/EntryOpener';
 
 import cls from './style.module.scss';
 
-const Entry = ({
+const MiniEntry = ({
   employee, time, client, services, id, date, currentEntry,
 }:EntryProps) => {
   const [employeeFirstName, employeeLastName] = employee.name!!.split(' ');
@@ -92,4 +91,4 @@ const Entry = ({
   );
 };
 
-export default Entry;
+export default MiniEntry;

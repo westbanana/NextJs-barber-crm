@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { CustomCellRendererProps } from 'ag-grid-react';
 import { SquarePen } from 'lucide-react';
-
-import EmployeeCard from '@/components/EmployeeCard/index';
-import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
+import EmployeeCard from '@components/Employee/EmployeeCard';
+import { EmployeeCardMode } from '@components/Employee/EmployeeCard/employee-card.type';
 
 const EditRowCell = ({ valueFormatted, value }: CustomCellRendererProps) => {
   const [isEditCard, setIsEditCard] = useState(false);

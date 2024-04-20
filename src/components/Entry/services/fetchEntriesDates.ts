@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-import { IEntries } from '@/components/Entry/entries.type';
+import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { getAllClients } from '@components/Entry/services/getClients';
+import { getAllEmployees, getEmployees } from '@components/Entry/services/getEmployees';
 
 export const fetchEntriesDates = createAsyncThunk(
   'entries/fetchEntriesDates',
   async (_, { rejectWithValue }) => {
-    console.log('start');
     try {
       const response = await fetch('http://localhost:4000/entries');
       if (!response.ok) {
@@ -16,6 +16,19 @@ export const fetchEntriesDates = createAsyncThunk(
           date,
           time,
         }) => `${date} ${time}`));
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const fetchClientsAndEmployees = createAsyncThunk(
+  'entries/fetchClientsAndEmployees',
+  async (_, { rejectWithValue }) => {
+    try {
+      const clients = await getAllClients();
+      const employees = await getAllEmployees();
+      return { clients, employees };
     } catch (error) {
       return rejectWithValue(error);
     }

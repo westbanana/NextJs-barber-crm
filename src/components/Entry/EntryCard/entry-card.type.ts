@@ -1,4 +1,5 @@
-import { IEntries } from '@/components/Entry/entries.type';
+import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+
 import { EntryInfo } from '@/components/Entry/Info/info.type';
 
 export enum EntryCardMode {

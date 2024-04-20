@@ -6,28 +6,27 @@ import React, {
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
 
-import { IEmployeeProps } from '@/components/EmployeeList/employee-list.type';
+import { IEmployeeProps } from '@/components/Employee/EmployeeList/employee-list.type';
 import Button from '@/components/ui/Button/Button';
 import { classNames } from '@/lib/classNames/classNames';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
-import { getEmployeeList } from '@/components/EmployeeList/selectors/getEmployeeList';
+import { getEmployeeList } from '@/components/Employee/EmployeeList/selectors/getEmployeeList';
 import { ColDefs, defaultColProps } from '@/constants/colDefs';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import EmployeeCard from '@/components/EmployeeCard';
-import { EmployeeCardMode } from '@/components/EmployeeCard/employee-card.type';
-import { getEmployeeCardMod } from '@/components/EmployeeCard/selectors/getEmployeeCardMod';
-import { closeCard, openCard } from '@/components/EmployeeList/slices/employeeListSlice';
-import { fetchEmployeeList } from '@/components/EmployeeList/services/fetchEmployeeList';
-import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
-import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
+import EmployeeCard from '@/components/Employee/EmployeeCard';
+import { EmployeeCardMode } from '@/components/Employee/EmployeeCard/employee-card.type';
+import { getEmployeeCardMod } from '@/components/Employee/EmployeeCard/selectors/getEmployeeCardMod';
+import { closeCard, openCard } from '@/components/Employee/EmployeeList/slices/employeeListSlice';
+import { fetchEmployeeList } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
+import { getEmployeeLoading } from '@/components/Employee/EmployeeCard/selectors/getEmployeeLoading';
+import { deleteEmployee } from '@/components/Employee/EmployeeCard/services/deleteEmployee';
+import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import Skeleton from '@/components/ui/Skeleton/Skeleton';
 
 import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import { fetchEntriesDates } from '@/components/Entry/services/fetchEntriesDates';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const employees = useAppSelector(getEmployeeList);

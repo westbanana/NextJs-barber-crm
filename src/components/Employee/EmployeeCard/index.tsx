@@ -8,27 +8,27 @@ import {
   Field, FieldInputProps, FieldProps, Formik,
 } from 'formik';
 import { Trash2, X } from 'lucide-react';
+import { SelectItem } from '@components/ui/Select/select.type';
 
-import Portal from '@/components/Portal';
-import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/EmployeeCard/employee-card.type';
 import { outsideClick } from '@/helpers/outSideClick';
 import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import Button from '@/components/ui/Button/Button';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import { createEmployee } from '@/components/EmployeeCard/services/createEmployee';
-import { updateEmployee } from '@/components/EmployeeCard/services/updateEmployee';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
-import { getEmployeeLoading } from '@/components/EmployeeCard/selectors/getEmployeeLoading';
-import { EmployeeSchema } from '@/components/EmployeeCard/validation';
 import TimeInput from '@/components/testPicker/TimeInput';
-import { deleteEmployee } from '@/components/EmployeeCard/services/deleteEmployee';
-import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import { days } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
-import DateTimePicker from '@/components/DatePicker';
 import CardBackground from '@/components/ui/CardBackground/CardBackground';
+import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
+import { deleteEmployee } from '@/components/Employee/EmployeeCard/services/deleteEmployee';
+import { EmployeeSchema } from '@/components/Employee/EmployeeCard/validation';
+import { getEmployeeLoading } from '@/components/Employee/EmployeeCard/selectors/getEmployeeLoading';
+import { updateEmployee } from '@/components/Employee/EmployeeCard/services/updateEmployee';
+import { createEmployee } from '@/components/Employee/EmployeeCard/services/createEmployee';
+import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
+import Portal from '@/components/Portal/index';
 
 import cls from './style.module.scss';
 
@@ -66,7 +66,7 @@ const EmployeeCard = ({
     dispatch(deleteEmployee(employeeData));
   };
 
-  const changeField = (newValue: string, field: FieldInputProps<any>) => {
+  const changeField = (newValue: SelectItem[], field: FieldInputProps<any>) => {
     const { name, onChange } = field;
     onChange({
       target: {
@@ -124,7 +124,7 @@ const EmployeeCard = ({
                         {(props: FieldProps) => (
                           <TimeInput
                             callback={(value) => {
-                              changeField(value, props.field);
+                              changeField([value], props.field);
                             }}
                             time={employeeData?.work_schedule?.time.from}
                           />
@@ -137,7 +137,7 @@ const EmployeeCard = ({
                         {(props: FieldProps) => (
                           <TimeInput
                             callback={(value) => {
-                              changeField(value, props.field);
+                              changeField([value], props.field);
                             }}
                             time={employeeData?.work_schedule?.time.to}
                           />
@@ -156,7 +156,7 @@ const EmployeeCard = ({
                             callback={(value) => {
                               changeField(value, props.field);
                             }}
-                            defaultValue={employeeData?.work_schedule?.days?.from}
+                            defaultValue={[employeeData?.work_schedule?.days?.from]}
                             className={cls.DataSelect}
                             label="From"
                             data={days}
@@ -168,7 +168,7 @@ const EmployeeCard = ({
                       >
                         {(props: FieldProps) => (
                           <Select
-                            defaultValue={employeeData?.work_schedule?.days?.to}
+                            defaultValue={[employeeData?.work_schedule?.days?.to]}
                             callback={(value) => {
                               changeField(value, props.field);
                             }}

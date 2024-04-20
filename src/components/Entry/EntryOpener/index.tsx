@@ -1,6 +1,8 @@
 'use client';
 
 import React, { ReactNode, useState } from 'react';
+import { getAllClients, getClients } from '@components/Entry/services/getClients';
+import { getAllEmployees } from '@components/Entry/services/getEmployees';
 
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
@@ -21,6 +23,7 @@ const EntryOpener = ({ children, currentEntry }:EntryOpenerProps) => {
   const [cardIsOpened, setCardIsOpened] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const entriesDates = useAppSelector(getEntriesDates);
+
   const openEntryCard = () => {
     if (!cardIsOpened) {
       dispatch(fetchEntriesDates());
