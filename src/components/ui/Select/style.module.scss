@@ -143,6 +143,17 @@ $transition-timing-ease-out: ease-out;
   }
 }
 
+.hiddenArrow {
+  display: none;
+}
+
+.mainContainerDisabled {
+  cursor: default;
+  .result {
+    cursor: default;
+  }
+}
+
 .isClosing {
   @include animation(close-list, $transition-duration-fast, $transition-timing-linear, forwards);
 }

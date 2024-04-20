@@ -1,9 +1,10 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
-import { IEntries } from '@/components/Entry/entries.type';
-import { ErrorResponse } from '@/components/EmployeeList/services/fetchEmployeeList';
-import { fetchEntriesDates } from '@/components/Entry/services/fetchEntriesDates';
+import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
+import { fetchClientsAndEmployees, fetchEntriesDates } from '@/components/Entry/services/fetchEntriesDates';
 import { EntryInfo } from '@/components/Entry/Info/info.type';
 
 export interface EntriesState {
@@ -13,6 +14,10 @@ export interface EntriesState {
   entriesDates: string[];
   error: string | undefined;
   mode: EntryCardMode | undefined
+  clientsAndEmployees: {
+    clients: IClient[],
+    employees: IEmployee[]
+  } | undefined
 }
 
 const initialState: EntriesState = {
@@ -22,6 +27,7 @@ const initialState: EntriesState = {
   entriesDates: [],
   error: undefined,
   mode: undefined,
+  clientsAndEmployees: undefined,
 };
 
 export const entrySlice = createSlice({
@@ -45,6 +51,19 @@ export const entrySlice = createSlice({
       state.entriesDates = action.payload;
     });
     builder.addCase(fetchEntriesDates.rejected, (state, action) => {
+      const { message } = action.payload as ErrorResponse;
+      state.loading = false;
+      state.error = message;
+    });
+    builder.addCase(fetchClientsAndEmployees.pending, (state) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(fetchClientsAndEmployees.fulfilled, (state, action) => {
+      state.loading = false;
+      state.clientsAndEmployees = action.payload;
+    });
+    builder.addCase(fetchClientsAndEmployees.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
       state.loading = false;
       state.error = message;

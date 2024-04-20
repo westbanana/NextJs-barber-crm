@@ -16,12 +16,12 @@ import cls from './style.module.scss';
 const Select = ({
   data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT,
 }:SelectProps) => {
+  const selectData = data.length ? data : defaultValue;
   const [result, setResult] = useState<SelectItem[]>(defaultValue);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const refContainer = useRef<HTMLDivElement>(null);
-
   const openSelectList = () => {
     setIsOpened(true);
     setIsClosing(false);
@@ -63,6 +63,14 @@ const Select = ({
     [cls.isClosing]: isClosing,
   };
 
+  const arrowMods: Mods = {
+    // [cls.hiddenArrow]: !data.length,
+  };
+
+  const mainContainerMods: Mods = {
+    // [cls.mainContainerDisabled]: !data.length,
+  };
+
   const handleOutsideClick = useCallback((e: MouseEvent) => {
     outsideClick(e, closeHandler, refContainer);
   }, [closeHandler]);
@@ -79,9 +87,10 @@ const Select = ({
   const resultStroke = typeof result[0] === 'string'
     ? result.join(',')
     : result.map((item) => item?.name).join(',');
+
   return (
     <div
-      className={classNames(cls.mainContainer, {}, [className])}
+      className={classNames(cls.mainContainer, mainContainerMods, [className])}
       ref={refContainer}
       onClick={openSelectList}
     >
@@ -89,11 +98,11 @@ const Select = ({
       <div className={cls.resultWrapper}>
         <div className={cls.result}>{resultStroke}</div>
         {/* <span className={cls.result}>{result}</span> */}
-        <ChevronDown className={cls.arrow} />
+        <ChevronDown className={classNames(cls.arrow, arrowMods, [])} />
       </div>
       {isOpened && (
         <div className={classNames(cls.list, listMods, [])}>
-          {data.map((item) => (
+          {selectData.map((item) => (
             <div
               key={typeof item === 'object' ? item.id : item}
               className={classNames(cls.item, { [cls.selectedItem]: result.some((el) => el.id === item.id) }, [])}
