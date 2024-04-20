@@ -2,14 +2,12 @@ import React from 'react';
 import { Plus } from 'lucide-react';
 
 import { IClient, IEntries } from '@/components/Entry/entries.type';
-import { getEntries } from '@/components/Entry/services/getEntries';
 import { getClients } from '@/components/Entry/services/getClients';
 import { getEmployees } from '@/components/Entry/services/getEmployees';
 import { IEmployee } from '@/components/EmployeeCard/employee.type';
 import Entry from '@/components/Entry';
 import Label from '@/components/Label/Label';
 import { getTodayEntries } from '@/components/Entry/services/getTodayEntries';
-import button from '@/components/ui/Button/Button';
 
 import cls from './style.module.scss';
 
