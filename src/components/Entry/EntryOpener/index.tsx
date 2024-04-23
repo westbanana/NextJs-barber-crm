@@ -4,6 +4,8 @@ import React, { ReactNode, useState } from 'react';
 import { getAllClients, getClients } from '@components/Entry/services/getClients';
 import { getAllEmployees } from '@components/Entry/services/getEmployees';
 
+import EntryCard from '../EntryCard';
+
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
@@ -11,8 +13,6 @@ import { getEntriesDates } from '@/components/Entry/selectors/getEntriesDates';
 import { fetchEntriesDates } from '@/components/Entry/services/fetchEntriesDates';
 import { EntryInfo } from '@/components/Entry/Info/info.type';
 import { changeOpenedEntry, clearOpenedEntry } from '@/components/Entry/slices/entrySlice';
-
-import EntryCard from '../EntryCard';
 
 export type EntryOpenerProps = {
   children: ReactNode,

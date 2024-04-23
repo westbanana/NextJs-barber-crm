@@ -1,6 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import { updateEmployee } from '@components/Employee/EmployeeCard/services/updateEmployee';
+import { updateEntry } from '@components/Entry/services/updateEntry';
+import { fetchEntries } from '@components/Entry/services/fetchEntries';
 
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
@@ -8,7 +11,7 @@ import { fetchClientsAndEmployees, fetchEntriesDates } from '@/components/Entry/
 import { EntryInfo } from '@/components/Entry/Info/info.type';
 
 export interface EntriesState {
-  entries: IEntries[],
+  entryList: IEntries[],
   loading: boolean,
   openedEntry: EntryInfo | undefined
   entriesDates: string[];
@@ -21,7 +24,7 @@ export interface EntriesState {
 }
 
 const initialState: EntriesState = {
-  entries: [],
+  entryList: [],
   loading: false,
   openedEntry: undefined,
   entriesDates: [],
@@ -55,6 +58,20 @@ export const entrySlice = createSlice({
       state.loading = false;
       state.error = message;
     });
+    builder.addCase(fetchEntries.pending, (state) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(fetchEntries.fulfilled, (state, action) => {
+      state.loading = false;
+      console.log(action.payload);
+      state.entryList = action.payload;
+    });
+    builder.addCase(fetchEntries.rejected, (state, action) => {
+      const { message } = action.payload as ErrorResponse;
+      state.loading = false;
+      state.error = message;
+    });
     builder.addCase(fetchClientsAndEmployees.pending, (state) => {
       state.error = undefined;
       state.loading = true;
@@ -64,6 +81,24 @@ export const entrySlice = createSlice({
       state.clientsAndEmployees = action.payload;
     });
     builder.addCase(fetchClientsAndEmployees.rejected, (state, action) => {
+      const { message } = action.payload as ErrorResponse;
+      state.loading = false;
+      state.error = message;
+    });
+    builder.addCase(updateEntry.pending, (state) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(updateEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
+      state.loading = false;
+      state.entryList = state.entryList.map((entry) => {
+        if (entry.id === action.payload.id) {
+          return action.payload;
+        }
+        return entry;
+      });
+    });
+    builder.addCase(updateEntry.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
       state.loading = false;
       state.error = message;

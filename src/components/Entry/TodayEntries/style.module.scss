@@ -12,6 +12,10 @@
   border: 1px var(--border-color) solid;
 }
 
+.emptyList {
+  display: flex;
+}
+
 .addEntryContainer {
   position: absolute;
   background-color: var(--bg-color);

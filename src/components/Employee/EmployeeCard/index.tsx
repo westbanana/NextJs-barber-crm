@@ -1,14 +1,14 @@
 'use client';
 
-import React, {
-  useCallback,
-  useEffect, useRef,
-} from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
   Field, FieldInputProps, FieldProps, Formik,
 } from 'formik';
 import { Trash2, X } from 'lucide-react';
-import { SelectItem } from '@components/ui/Select/select.type';
+import { SelectItem, SelectMode } from '@components/ui/Select/select.type';
+import { changeFormikField } from '@helpers/changeFormikField';
+
+import cls from './style.module.scss';
 
 import { outsideClick } from '@/helpers/outSideClick';
 import Input from '@/components/ui/Input/Input';
@@ -29,8 +29,6 @@ import { updateEmployee } from '@/components/Employee/EmployeeCard/services/upda
 import { createEmployee } from '@/components/Employee/EmployeeCard/services/createEmployee';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
 import Portal from '@/components/Portal/index';
-
-import cls from './style.module.scss';
 
 const EmployeeCard = ({
   employeeData = newEmployee,
@@ -64,16 +62,6 @@ const EmployeeCard = ({
 
   const deleteCurrentEmployee = () => {
     dispatch(deleteEmployee(employeeData));
-  };
-
-  const changeField = (newValue: SelectItem[], field: FieldInputProps<any>) => {
-    const { name, onChange } = field;
-    onChange({
-      target: {
-        name,
-        value: newValue,
-      },
-    });
   };
 
   return (
@@ -124,7 +112,7 @@ const EmployeeCard = ({
                         {(props: FieldProps) => (
                           <TimeInput
                             callback={(value) => {
-                              changeField([value], props.field);
+                              changeFormikField<string>([value], props.field);
                             }}
                             time={employeeData?.work_schedule?.time.from}
                           />
@@ -137,7 +125,7 @@ const EmployeeCard = ({
                         {(props: FieldProps) => (
                           <TimeInput
                             callback={(value) => {
-                              changeField([value], props.field);
+                              changeFormikField<string>([value], props.field);
                             }}
                             time={employeeData?.work_schedule?.time.to}
                           />
@@ -154,12 +142,14 @@ const EmployeeCard = ({
                         {(props: FieldProps) => (
                           <Select
                             callback={(value) => {
-                              changeField(value, props.field);
+                              console.log(value);
+                              changeFormikField<SelectItem>(value, props.field);
                             }}
                             defaultValue={[employeeData?.work_schedule?.days?.from]}
                             className={cls.DataSelect}
                             label="From"
                             data={days}
+                            selectMode={SelectMode.SINGLESELECT}
                           />
                         )}
                       </Field>
@@ -170,7 +160,8 @@ const EmployeeCard = ({
                           <Select
                             defaultValue={[employeeData?.work_schedule?.days?.to]}
                             callback={(value) => {
-                              changeField(value, props.field);
+                              console.log(value);
+                              changeFormikField<SelectItem>(value, props.field);
                             }}
                             className={cls.DataSelect}
                             label="To"

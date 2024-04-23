@@ -10,7 +10,7 @@ export enum SelectMode {
 }
 export interface SelectProps {
   data: SelectItem[];
-  callback?: (result:SelectItem[]) => void;
+  callback?: (result:SelectItem[] | SelectItem) => void;
   label:string;
   className?: string;
   defaultValue: SelectItem[];
