@@ -8,18 +8,23 @@ import { TimeView } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 import './dateTimePicker.css';
-import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
 
 import { log } from 'node:util';
 
 import cls from './style.module.scss';
 
+import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
+
 export type DateTimePickerProps = {
   dates: string[],
   defaultValue: dayjs.Dayjs | undefined | null
+  setOpened: (value: boolean) => void
+  callback: (value:dayjs.Dayjs) => void
 }
 
-const DateTimePicker = ({ dates, defaultValue }: DateTimePickerProps) => {
+const DateTimePicker = ({
+  dates, defaultValue, setOpened, callback,
+}: DateTimePickerProps) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
   const maxTime = selectedDate.set('hour', 19).set('minute', 0);
@@ -64,10 +69,22 @@ const DateTimePicker = ({ dates, defaultValue }: DateTimePickerProps) => {
     setSelectedDate(value);
   };
 
+  const onOpenHandler = () => {
+    setOpened(true);
+  };
+  // TODO: Переделать onCloseHandler.
+  const onCloseHandler = () => {
+    setTimeout(() => {
+      setOpened(false);
+    }, 10);
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={cls.dateTimePickerWrapper}>
         <MuiDateTimePicker
+          onOpen={onOpenHandler}
+          onClose={onCloseHandler}
           defaultValue={defaultValue}
           className={cls.dateTimePicker}
           ampm={false}
@@ -77,7 +94,7 @@ const DateTimePicker = ({ dates, defaultValue }: DateTimePickerProps) => {
           onChange={handleDateChange}
           minutesStep={30}
           reduceAnimations
-          onAccept={(value) => console.log(value)}
+          onAccept={(value) => callback(value!!)}
           shouldDisableDate={shouldDisableDate}
           shouldDisableTime={shouldDisableTime}
         />

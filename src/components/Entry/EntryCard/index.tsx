@@ -5,26 +5,18 @@ import React, {
   useCallback, useEffect, useRef, useState,
 } from 'react';
 import {
-  Field, FieldInputProps, FieldProps, Formik,
+  Field, FieldProps, Formik,
 } from 'formik';
 import { Trash2, X } from 'lucide-react';
 import dayjs from 'dayjs';
-import { EntryInfo } from '@components/Entry/Info/info.type';
-import { getAllEmployees, getEmployees } from '@components/Entry/services/getEmployees';
-import { getAllClients, getClients } from '@components/Entry/services/getClients';
 import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
-import { getSelectsData } from '@components/Entry/services/getSelectsData';
-import { fetchClientsAndEmployees } from '@components/Entry/services/fetchEntriesDates';
+import { fetchClientsAndEmployees } from '@components/Entry/services/fetchEntryDates';
 import { getClientsAndEmployees } from '@components/Entry/selectors/getClientsAndEmployees';
-import { days } from '@constants/days';
-import { changeFormikField } from '@helpers/changeFormikField';
-import { EmployeeCardMode } from '@components/Employee/EmployeeCard/employee-card.type';
-import { updateEmployee } from '@components/Employee/EmployeeCard/services/updateEmployee';
-import { createEmployee } from '@components/Employee/EmployeeCard/services/createEmployee';
+import { changeFormikField, changeFormikFields } from '@helpers/changeFormikField';
 import { updateEntry } from '@components/Entry/services/updateEntry';
 import { convertObjectToIds } from '@helpers/convertObjectToIds';
-import { fetchEntries } from '@components/Entry/services/fetchEntries';
-import { getEntryList } from '@components/Entry/selectors/getEntryList';
+import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
+import { createEntry } from '@components/Entry/services/createEntry';
 
 import cls from './style.module.scss';
 
@@ -57,23 +49,22 @@ const EntryCard = memo(({
 }:EntryEditCardProps) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(getEntriesLoading);
-  const entriesList = useAppSelector(getEntryList);
   const currentEntryData = useAppSelector(getOpenedEntry);
   const clientsAndEmployees = useAppSelector(getClientsAndEmployees);
   const clients = clientsAndEmployees?.clients ?? [];
   const employees = clientsAndEmployees?.employees ?? [];
   const entryDate = dayjs(`${currentEntryData?.date}${currentEntryData?.time}`);
-  const [selectsData, setSelectsData] = useState<TSelectsData>();
   const refEditCard = useRef<HTMLFormElement>(null);
-  const [entryCardLoading, setEntryCardLoading] = useState<boolean>(loading);
-
+  const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
   useEffect(() => {
     dispatch(fetchClientsAndEmployees());
   }, [dispatch]);
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, onClose, refEditCard);
-  }, [onClose]);
+    if (!datePickerOpened) {
+      outsideClick(e, onClose, refEditCard);
+    }
+  }, [onClose, datePickerOpened]);
 
   useEffect(() => {
     if (mode) {
@@ -90,21 +81,27 @@ const EntryCard = memo(({
     }
   };
 
-  const onSumbitHandler = (values:IEntries) => {
+  const onSubmitHandler = (values:IEntries) => {
+    const formattedValues = convertObjectToIds<IEntries>(values);
     if (mode === EntryCardMode.EDIT) {
-      const formattedValues = convertObjectToIds<IEntries>(values);
       dispatch(updateEntry(formattedValues));
     }
     if (mode === EntryCardMode.CREATE) {
-      console.log('create');
+      dispatch(createEntry(formattedValues));
     }
   };
-  console.log(entriesList);
+
+  const dateTimePickerCallback = (value:dayjs.Dayjs, props:FieldProps) => {
+    const time = value.format('HH:mm');
+    const date = value.format('YYYY-M-DD');
+    changeFormikFields(props, { time, date });
+  };
+
   return (
     <Portal>
       <CardBackground>
         {!loading && (
-          <Formik initialValues={currentEntryData} onSubmit={onSumbitHandler}>
+          <Formik initialValues={currentEntryData} onSubmit={onSubmitHandler}>
             {({ handleSubmit }) => (
               <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
                 <X
@@ -159,7 +156,16 @@ const EntryCard = memo(({
                       </Field>
                     </div>
                     <div className={cls.date}>
-                      <DateTimePicker dates={entryDates} defaultValue={entryDate} />
+                      <Field>
+                        {(props: FieldProps) => (
+                          <DateTimePicker
+                            callback={(value) => dateTimePickerCallback(value, props)}
+                            dates={entryDates}
+                            defaultValue={entryDate}
+                            setOpened={setDatePickerOpened}
+                          />
+                        )}
+                      </Field>
                     </div>
                   </div>
                 )}

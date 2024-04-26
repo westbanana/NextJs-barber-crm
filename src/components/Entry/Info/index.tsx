@@ -1,12 +1,10 @@
-'use client';
-
 import React from 'react';
 import { Info as InfoIcon } from 'lucide-react';
 
+import cls from './style.module.scss';
+
 import { InfoProps } from '@/components/Entry/Info/info.type';
 import Tooltip from '@/components/Tooltip/Tooltip';
-
-import cls from './style.module.scss';
 
 const Info = ({ entryInfo, entryId }:InfoProps) => {
   const {

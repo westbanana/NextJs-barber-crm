@@ -1,13 +1,5 @@
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
-
-export type IEntries = {
-  id: string,
-  employee: string,
-  client: string,
-  services: string[],
-  time: string,
-  date: string
-}
+import { IBarberServices } from '@constants/barber-services';
 
 export type IClient = {
   id: string,
@@ -17,12 +9,21 @@ export type IClient = {
   clientIcon: string
 }
 
-export type EntryProps = {
-  currentEntry: IEntries
+export type IEntries = {
   id: string,
+  employee: IEmployee | string,
+  client: IClient | string,
+  services: IBarberServices[] | string[],
+  time: string,
+  date: string
+}
+
+export type IEntriesForEntry = Omit<IEntries, 'employee' | 'client' | 'services'> & {
   employee: IEmployee,
   client: IClient,
-  date?: string,
-  time: string,
-  services: string[],
+  services: IBarberServices[]
+}
+
+export type EntryProps = {
+  currentEntry: IEntriesForEntry
 }

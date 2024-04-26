@@ -1,4 +1,4 @@
-import { IClient } from '@components/Entry/MiniEntry/entries.type';
+import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
 
 import { IBarberServices } from '@/constants/barber-services';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
@@ -13,6 +13,6 @@ export type EntryInfo = {
 }
 
 export type InfoProps = {
-  entryInfo: EntryInfo;
+  entryInfo: IEntries;
   entryId: string;
 }

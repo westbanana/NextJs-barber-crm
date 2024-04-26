@@ -1,5 +1,5 @@
 import { SelectItem } from '@components/ui/Select/select.type';
-import { FieldInputProps } from 'formik';
+import { FieldInputProps, FieldProps } from 'formik';
 
 export const changeFormikField = <T>(newValue: T, field: FieldInputProps<any>) => {
   const { name, onChange } = field;
@@ -8,5 +8,12 @@ export const changeFormikField = <T>(newValue: T, field: FieldInputProps<any>) =
       name,
       value: newValue,
     },
+  });
+};
+
+export const changeFormikFields = (props: FieldProps, objValues:any) => {
+  props.form.setValues({
+    ...props.form.values,
+    ...objValues,
   });
 };

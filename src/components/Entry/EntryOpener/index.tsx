@@ -1,49 +1,61 @@
 'use client';
 
-import React, { ReactNode, useState } from 'react';
-import { getAllClients, getClients } from '@components/Entry/services/getClients';
-import { getAllEmployees } from '@components/Entry/services/getEmployees';
+import React, { ReactNode } from 'react';
+import { getOpenedEntry } from '@components/Entry/selectors/getOpenedEntry';
+import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
+import { newEntry } from '@constants/newEntry';
 
 import EntryCard from '../EntryCard';
 
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import { getEntriesDates } from '@/components/Entry/selectors/getEntriesDates';
-import { fetchEntriesDates } from '@/components/Entry/services/fetchEntriesDates';
-import { EntryInfo } from '@/components/Entry/Info/info.type';
+import { getEntryDates } from '@/components/Entry/selectors/getEntriesDates';
 import { changeOpenedEntry, clearOpenedEntry } from '@/components/Entry/slices/entrySlice';
 
 export type EntryOpenerProps = {
   children: ReactNode,
-  currentEntry: EntryInfo
+  currentEntry?: IEntries
+  mode: EntryCardMode
 }
 
-const EntryOpener = ({ children, currentEntry }:EntryOpenerProps) => {
-  const [cardIsOpened, setCardIsOpened] = useState<boolean>(false);
+const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
   const dispatch = useAppDispatch();
-  const entriesDates = useAppSelector(getEntriesDates);
-
-  const openEntryCard = () => {
-    if (!cardIsOpened) {
-      dispatch(fetchEntriesDates());
-      dispatch(changeOpenedEntry(currentEntry));
-      setCardIsOpened(true);
+  const entriesDates = useAppSelector(getEntryDates);
+  const openedEntry = useAppSelector(getOpenedEntry);
+  const editModeCondition = (currentEntry?.id === openedEntry?.id) && mode === EntryCardMode.EDIT;
+  const createModeCondition = (mode === EntryCardMode.CREATE) && openedEntry?.id === newEntry.id;
+  const onDoubleClickHandler = () => {
+    if (mode === EntryCardMode.EDIT) {
+      if (!editModeCondition) {
+        dispatch(fetchEntryDates());
+        dispatch(changeOpenedEntry(currentEntry));
+      }
+    }
+  };
+  const onClickHandler = () => {
+    if (mode === EntryCardMode.CREATE) {
+      if (!openedEntry) {
+        dispatch(fetchEntryDates());
+        dispatch(changeOpenedEntry(newEntry));
+      }
     }
   };
   const onCloseHandler = () => {
-    setCardIsOpened(false);
     dispatch(clearOpenedEntry());
   };
+
   return (
     <div
-      onDoubleClick={openEntryCard}
+      onDoubleClick={onDoubleClickHandler}
+      onClick={onClickHandler}
     >
       {children}
-      {cardIsOpened && (
+      {(editModeCondition || createModeCondition) && (
         <EntryCard
           onClose={onCloseHandler}
-          mode={EntryCardMode.EDIT}
+          mode={mode}
           entryDates={entriesDates}
         />
       )}

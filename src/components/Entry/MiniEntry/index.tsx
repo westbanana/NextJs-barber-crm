@@ -1,42 +1,36 @@
 import React from 'react';
 import {
-  Check, ExternalLink, Menu, User, X,
+  Check, Menu, User, X,
 } from 'lucide-react';
-import dayjs from 'dayjs';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
 import Info from '@components/Entry/Info';
 import { classNames } from '@lib/classNames/classNames';
-import { EntryProps } from '@components/Entry/MiniEntry/entries.type';
-import { EntryInfo } from '@components/Entry/Info/info.type';
-import { barberServices, IBarberServices } from '@constants/barber-services';
+import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
+import { IBarberServices } from '@constants/barber-services';
 import EntryOpener from '@components/Entry/EntryOpener';
+import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
+import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 
 import cls from './style.module.scss';
 
 const MiniEntry = ({
-  employee, time, client, services, id, date, currentEntry,
+  currentEntry,
 }:EntryProps) => {
+  const {
+    employee, time, client, services, id, date,
+  } = currentEntry;
   const [employeeFirstName, employeeLastName] = employee.name!!.split(' ');
   const [clientFirstName, clientLastName] = client.name.split(' ');
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
   const clientShortName = `${clientLastName} ${clientFirstName[0]}.`;
-  const selectedServices:IBarberServices[] = barberServices.filter((serv) => services.includes(serv.id));
-  const selectedServicesNames:string[] = selectedServices.map((serv) => serv.name);
-  const totalPrice = selectedServices.reduce(
+  const selectedServicesNames:string[] = services.map((serv) => serv.name);
+  const totalPrice = services.reduce(
     (accumulator:number, currentValue:IBarberServices) => accumulator + currentValue.price,
     0,
   );
-  const entryInfo:EntryInfo = {
-    id,
-    client,
-    employee,
-    time,
-    services: selectedServices,
-    date: date!!,
-  };
   return (
-    <EntryOpener currentEntry={entryInfo}>
+    <EntryOpener currentEntry={currentEntry} mode={EntryCardMode.EDIT}>
       <div className={cls.entry}>
         <div className={cls.master}>
           <UserIcon
@@ -82,9 +76,9 @@ const MiniEntry = ({
             </span>
           </div>
           <div className={cls.entryInfo}>
-            <Info entryInfo={entryInfo} entryId={id} />
+            <Info entryInfo={currentEntry} entryId={id} />
           </div>
-          <TotalPrice services={selectedServices} totalPrice={totalPrice} entryId={id} />
+          <TotalPrice services={services} totalPrice={totalPrice} entryId={id} />
         </div>
       </div>
     </EntryOpener>
