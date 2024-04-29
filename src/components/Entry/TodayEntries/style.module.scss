@@ -2,15 +2,26 @@
   position: relative;
 }
 
-.list {
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  grid-gap: 20px 12px;
-  position: relative;
-  border-radius: var(--border-radius);
-  border: 1px var(--border-color) solid;
-}
+  .list {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 170px);
+    grid-auto-rows: 93px;
+    grid-gap: 30px 54px;
+    position: relative;
+    border-radius: var(--border-radius);
+    border: 1px var(--border-color) solid;
+    height: 135px;
+    overflow: hidden;
+    transition: 0.3s linear;
+    scrollbar-gutter: stable;
+  }
+
+  .openedList {
+    height: 628px;
+    overflow: auto;
+    scrollbar-gutter: stable;
+  }
 
 .emptyList {
   display: flex;

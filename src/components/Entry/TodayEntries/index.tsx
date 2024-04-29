@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import MiniEntry from '@components/Entry/MiniEntry';
 import { classNames, Mods } from '@lib/classNames/classNames';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
@@ -24,8 +24,11 @@ const TodayEntries = () => {
   const todayEntries = useAppSelector(getTodayEntries);
   const entryList = useAppSelector(getEntryList);
   const loading = useAppSelector(getEntriesLoading);
+  const [listOpened, setListOpened] = useState<boolean>(false);
+
   const listMods: Mods = {
     [cls.emptyList]: !todayEntries.length,
+    [cls.openedList]: listOpened,
   };
   useEffect(() => {
     dispatch(fetchEntries());
@@ -35,19 +38,21 @@ const TodayEntries = () => {
     dispatch(fetchTodayEntries());
   }, [dispatch, entryList]);
 
-  const createEntry = () => {
-
+  const toggleList = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setListOpened((prev) => !prev);
   };
-
   return (
     <div className={cls.mainContainer}>
+
       <Label label="Today entries" className={cls.todayEntriesLabel} alwaysOnBorder />
       <EntryOpener mode={EntryCardMode.CREATE}>
         <div className={cls.addEntryContainer}>
-          <Plus className={cls.addEntryButton} onClick={createEntry} />
+          <Plus className={cls.addEntryButton} />
         </div>
       </EntryOpener>
       <div
+        onClick={toggleList}
         className={classNames(cls.list, listMods, [])}
       >
         {(todayEntries.length)
