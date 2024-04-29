@@ -50,7 +50,7 @@ const TodayEntries = () => {
       <div
         className={classNames(cls.list, listMods, [])}
       >
-        {(todayEntries.length || !loading)
+        {(todayEntries.length)
           ? (todayEntries.map((entry) => (
             <MiniEntry
               currentEntry={(entry as IEntriesForEntry)}

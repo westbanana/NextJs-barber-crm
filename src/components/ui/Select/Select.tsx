@@ -87,7 +87,7 @@ const Select = ({
   }, [handleOutsideClick, isOpened]);
 
   const resultStroke = Array.isArray(result) ? result.map((item) => item?.name).join(',') : result.name;
-
+  console.log(result);
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
@@ -97,7 +97,6 @@ const Select = ({
       <Label label={label} id={label} className={cls.label} />
       <div className={cls.resultWrapper}>
         <div className={cls.result}>{resultStroke}</div>
-        {/* <span className={cls.result}>{result}</span> */}
         <ChevronDown className={classNames(cls.arrow, arrowMods, [])} />
       </div>
       {isOpened && (
@@ -105,7 +104,13 @@ const Select = ({
           {selectData.map((item) => (
             <div
               key={typeof item === 'object' ? item.id : item}
-              className={classNames(cls.item, {}, [])}
+              className={classNames(
+                cls.item,
+                {
+                  [cls.selectedItem]: Array.isArray(result) ? result.includes(item) : result.id === item.id,
+                },
+                [],
+              )}
               onClick={(e) => selectItem(item, e)}
             >
               {typeof item === 'object' ? item?.name : item}
