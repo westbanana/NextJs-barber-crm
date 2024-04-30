@@ -14,6 +14,7 @@ import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { Plus } from 'lucide-react';
 import { IEntriesForEntry } from '@components/Entry/MiniEntry/entries.type';
+import Accordion from '@components/ui/Accordion/Accordion';
 
 import cls from './style.module.scss';
 
@@ -23,7 +24,6 @@ const TodayEntries = () => {
   const dispatch = useAppDispatch();
   const todayEntries = useAppSelector(getTodayEntries);
   const entryList = useAppSelector(getEntryList);
-  const loading = useAppSelector(getEntriesLoading);
   const [listOpened, setListOpened] = useState<boolean>(false);
 
   const listMods: Mods = {
@@ -38,10 +38,10 @@ const TodayEntries = () => {
     dispatch(fetchTodayEntries());
   }, [dispatch, entryList]);
 
-  const toggleList = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+  const toggleList = () => {
     setListOpened((prev) => !prev);
   };
+
   return (
     <div className={cls.mainContainer}>
 
@@ -51,8 +51,12 @@ const TodayEntries = () => {
           <Plus className={cls.addEntryButton} />
         </div>
       </EntryOpener>
+      <Accordion
+        callback={toggleList}
+        opened={listOpened}
+        className={cls.todayEntriesAccordion}
+      />
       <div
-        onClick={toggleList}
         className={classNames(cls.list, listMods, [])}
       >
         {(todayEntries.length)

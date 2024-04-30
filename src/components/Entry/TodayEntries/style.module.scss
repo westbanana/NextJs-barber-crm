@@ -27,6 +27,16 @@
   display: flex;
 }
 
+.todayEntriesAccordion {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 100px;
+  svg {
+    height: 10px;
+    width: 10px;
+  }
+}
+
 .addEntryContainer {
   position: absolute;
   background-color: var(--bg-color);

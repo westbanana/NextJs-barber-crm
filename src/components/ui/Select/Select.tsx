@@ -87,7 +87,7 @@ const Select = ({
   }, [handleOutsideClick, isOpened]);
 
   const resultStroke = Array.isArray(result) ? result.map((item) => item?.name).join(',') : result.name;
-  console.log(result);
+
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
