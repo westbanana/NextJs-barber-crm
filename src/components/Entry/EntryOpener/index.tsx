@@ -24,10 +24,10 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
   const dispatch = useAppDispatch();
   const entriesDates = useAppSelector(getEntryDates);
   const openedEntry = useAppSelector(getOpenedEntry);
-  const editModeCondition = (currentEntry?.id === openedEntry?.id) && mode === EntryCardMode.EDIT;
+  const editModeCondition = (currentEntry?.id === openedEntry?.id) && mode === EntryCardMode.EDIT && openedEntry;
   const createModeCondition = (mode === EntryCardMode.CREATE) && openedEntry?.id === newEntry.id;
   const onDoubleClickHandler = () => {
-    if (mode === EntryCardMode.EDIT) {
+    if (mode === EntryCardMode.EDIT && !currentEntry?.completed) {
       if (!editModeCondition) {
         dispatch(fetchEntryDates());
         dispatch(changeOpenedEntry(currentEntry));
@@ -35,7 +35,7 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
     }
   };
   const onClickHandler = () => {
-    if (mode === EntryCardMode.CREATE) {
+    if (mode === EntryCardMode.CREATE && !currentEntry?.completed) {
       if (!openedEntry) {
         dispatch(fetchEntryDates());
         dispatch(changeOpenedEntry(newEntry));

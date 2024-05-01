@@ -18,13 +18,14 @@ import { convertObjectToIds } from '@helpers/convertObjectToIds';
 import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
 import { createEntry } from '@components/Entry/services/createEntry';
 import EntryRemover from '@components/Entry/EntryRemover';
+import CardBackground from '@components/ui/Card/CardBackground/CardBackground';
+import Card from '@components/ui/Card/Card';
 
 import cls from './style.module.scss';
 
 import Portal from '@/components/Portal';
 import DateTimePicker from '@/components/DatePicker';
 import Button from '@/components/ui/Button/Button';
-import CardBackground from '@/components/ui/CardBackground/CardBackground';
 import Select from '@/components/ui/Select/Select';
 import { outsideClick } from '@/helpers/outSideClick';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
@@ -100,106 +101,104 @@ const EntryCard = memo(({
   }, [handleOutsideClick, mode, onClose]);
 
   return (
-    <Portal>
-      <CardBackground>
-        {!loading && (
-          <Formik initialValues={currentEntryData} onSubmit={onSubmitHandler}>
-            {({ handleSubmit }) => (
-              <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
-                <X
-                  onClick={onClose}
-                  className={cls.xMark}
-                />
-                {currentEntryData && (
-                  <div className={cls.inputsWrapper}>
-                    <div className={cls.employee}>
-                      <Field
-                        name="employee"
-                      >
-                        {(props: FieldProps) => (
-                          <Select
-                            data={employees}
-                            label="employee"
-                            defaultValue={currentEntryData.employee}
-                            callback={(value) => {
-                              changeFormikField<SelectItem>(value, props.field);
-                            }}
-                          />
-                        )}
-                      </Field>
-                    </div>
-                    <div className={cls.client}>
-                      <Field name="client">
-                        {(props: FieldProps) => (
-                          <Select
-                            data={clients}
-                            label="client"
-                            defaultValue={currentEntryData.client}
-                            callback={(value) => {
-                              changeFormikField<SelectItem>(value, props.field);
-                            }}
-                          />
-                        )}
-                      </Field>
-                    </div>
-                    <div className={cls.services}>
-                      <Field name="services">
-                        {(props: FieldProps) => (
-                          <Select
-                            data={barberServices}
-                            label="services"
-                            defaultValue={currentEntryData.services}
-                            callback={(value) => {
-                              changeFormikField<SelectItem>(value, props.field);
-                            }}
-                            selectMode={SelectMode.MULTISELECT}
-                          />
-                        )}
-                      </Field>
-                    </div>
-                    <div className={cls.date}>
-                      <Field>
-                        {(props: FieldProps) => (
-                          <DateTimePicker
-                            callback={(value) => dateTimePickerCallback(value, props)}
-                            dates={entryDates}
-                            defaultValue={entryDate}
-                            setOpened={setDatePickerOpened}
-                          />
-                        )}
-                      </Field>
-                    </div>
+    <Card>
+      {!loading && (
+        <Formik initialValues={currentEntryData} onSubmit={onSubmitHandler}>
+          {({ handleSubmit }) => (
+            <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
+              <X
+                onClick={onClose}
+                className={cls.xMark}
+              />
+              {currentEntryData && (
+                <div className={cls.inputsWrapper}>
+                  <div className={cls.employee}>
+                    <Field
+                      name="employee"
+                    >
+                      {(props: FieldProps) => (
+                        <Select
+                          data={employees}
+                          label="employee"
+                          defaultValue={currentEntryData.employee}
+                          callback={(value) => {
+                            changeFormikField<SelectItem>(value, props.field);
+                          }}
+                        />
+                      )}
+                    </Field>
                   </div>
-                )}
-                <div className={cls.buttonsWrapper}>
-                  {mode === 'edit' && (
-                    <>
-                      <Button
-                        onClick={() => handleSubmit()}
-                      >
-                        Зберегти
-                      </Button>
-                      <EntryRemover entry={currentEntryData}>
-                        <Button withoutBorder>
-                          <Trash2 />
-                        </Button>
-                      </EntryRemover>
-                    </>
-                  )}
-                  {mode === 'create' && (
+                  <div className={cls.client}>
+                    <Field name="client">
+                      {(props: FieldProps) => (
+                        <Select
+                          data={clients}
+                          label="client"
+                          defaultValue={currentEntryData.client}
+                          callback={(value) => {
+                            changeFormikField<SelectItem>(value, props.field);
+                          }}
+                        />
+                      )}
+                    </Field>
+                  </div>
+                  <div className={cls.services}>
+                    <Field name="services">
+                      {(props: FieldProps) => (
+                        <Select
+                          data={barberServices}
+                          label="services"
+                          defaultValue={currentEntryData.services}
+                          callback={(value) => {
+                            changeFormikField<SelectItem>(value, props.field);
+                          }}
+                          selectMode={SelectMode.MULTISELECT}
+                        />
+                      )}
+                    </Field>
+                  </div>
+                  <div className={cls.date}>
+                    <Field>
+                      {(props: FieldProps) => (
+                        <DateTimePicker
+                          callback={(value) => dateTimePickerCallback(value, props)}
+                          dates={entryDates}
+                          defaultValue={entryDate}
+                          setOpened={setDatePickerOpened}
+                        />
+                      )}
+                    </Field>
+                  </div>
+                </div>
+              )}
+              <div className={cls.buttonsWrapper}>
+                {mode === 'edit' && (
+                  <>
                     <Button
                       onClick={() => handleSubmit()}
                     >
-                      Створити
+                      Зберегти
                     </Button>
-                  )}
-                </div>
-              </form>
-            )}
-          </Formik>
-        )}
-      </CardBackground>
-    </Portal>
+                    <EntryRemover entry={currentEntryData}>
+                      <Button withoutBorder>
+                        <Trash2 />
+                      </Button>
+                    </EntryRemover>
+                  </>
+                )}
+                {mode === 'create' && (
+                  <Button
+                    onClick={() => handleSubmit()}
+                  >
+                    Створити
+                  </Button>
+                )}
+              </div>
+            </form>
+          )}
+        </Formik>
+      )}
+    </Card>
   );
 });
 export default EntryCard;

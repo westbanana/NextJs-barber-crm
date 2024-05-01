@@ -8,6 +8,7 @@ import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries'
 import { fetchClientsAndEmployees, fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { createEntry } from '@components/Entry/services/createEntry';
+import { completeEntry } from '@components/Entry/services/completeEntry';
 
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
@@ -130,6 +131,7 @@ export const entrySlice = createSlice({
     builder.addCase(deleteEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
       state.loading = false;
       state.entryList = state.entryList.filter((entry) => entry.id !== action.payload.id);
+      state.todayEntries = state.todayEntries.filter((entry) => entry.id !== action.payload.id);
       state.openedEntry = undefined;
     });
     builder.addCase(deleteEntry.rejected, (state, action) => {
@@ -147,6 +149,20 @@ export const entrySlice = createSlice({
       state.openedEntry = undefined;
     });
     builder.addCase(createEntry.rejected, (state, action) => {
+      const { message } = action.payload as ErrorResponse;
+      state.loading = false;
+      state.error = message;
+    });
+    builder.addCase(completeEntry.pending, (state) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(completeEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
+      console.log(action.payload);
+      state.entryList = state.entryList.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
+      state.loading = false;
+    });
+    builder.addCase(completeEntry.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
       state.loading = false;
       state.error = message;

@@ -28,15 +28,14 @@ const TodayEntries = () => {
     [cls.emptyList]: !todayEntries.length,
     [cls.openedList]: listOpened,
   };
-
+  // TODO: переделать лишние запросы при изменении entryList
   useEffect(() => {
     dispatch(fetchTodayEntries());
-  }, [dispatch]);
+  }, [dispatch, entryList]);
 
   const toggleList = () => {
     setListOpened((prev) => !prev);
   };
-
   return (
     <div className={cls.mainContainer}>
       <Label label="Today entries" className={cls.todayEntriesLabel} alwaysOnBorder />

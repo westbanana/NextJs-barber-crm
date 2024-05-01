@@ -5,7 +5,7 @@ import {
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
 import Info from '@components/Entry/Info';
-import { classNames } from '@lib/classNames/classNames';
+import { classNames, Mods } from '@lib/classNames/classNames';
 import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
 import { IBarberServices } from '@constants/barber-services';
 import EntryOpener from '@components/Entry/EntryOpener';
@@ -30,9 +30,13 @@ const MiniEntry = ({
     (accumulator:number, currentValue:IBarberServices) => accumulator + currentValue.price,
     0,
   );
+  const entryMods:Mods = {
+    [cls.completed]: currentEntry.completed,
+  };
+
   return (
     <EntryOpener currentEntry={currentEntry} mode={EntryCardMode.EDIT}>
-      <div className={cls.entry}>
+      <div className={classNames(cls.entry, entryMods, [])}>
         <div className={cls.master}>
           <UserIcon
             userName={employee.name}
@@ -42,10 +46,12 @@ const MiniEntry = ({
           <span className={classNames(cls.name, {}, [cls.withBg])}>{employeeShortName}</span>
         </div>
         <span className={classNames(cls.time, {}, [cls.withBg])}>{time}</span>
-        <MiniEntryController
-          entry={currentEntry}
-          className={cls.controller}
-        />
+        {!currentEntry.completed && (
+          <MiniEntryController
+            entry={currentEntry}
+            className={cls.controller}
+          />
+        )}
         <div className={cls.client}>
           <div className={cls.clientInfo}>
             <div className={cls.fieldIcon}>
