@@ -17,6 +17,7 @@ import { updateEntry } from '@components/Entry/services/updateEntry';
 import { convertObjectToIds } from '@helpers/convertObjectToIds';
 import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
 import { createEntry } from '@components/Entry/services/createEntry';
+import EntryRemover from '@components/Entry/EntryRemover';
 
 import cls from './style.module.scss';
 
@@ -178,9 +179,11 @@ const EntryCard = memo(({
                       >
                         Зберегти
                       </Button>
-                      <Button withoutBorder onClick={deleteCurrentEntry}>
-                        <Trash2 />
-                      </Button>
+                      <EntryRemover entry={currentEntryData}>
+                        <Button withoutBorder>
+                          <Trash2 />
+                        </Button>
+                      </EntryRemover>
                     </>
                   )}
                   {mode === 'create' && (

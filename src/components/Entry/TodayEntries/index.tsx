@@ -7,7 +7,6 @@ import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
 import { getEntryList } from '@components/Entry/selectors/getEntryList';
 import { fetchEntries } from '@components/Entry/services/fetchEntries';
 import EntryOpener from '@components/Entry/EntryOpener';
@@ -25,18 +24,14 @@ const TodayEntries = () => {
   const todayEntries = useAppSelector(getTodayEntries);
   const entryList = useAppSelector(getEntryList);
   const [listOpened, setListOpened] = useState<boolean>(false);
-
   const listMods: Mods = {
     [cls.emptyList]: !todayEntries.length,
     [cls.openedList]: listOpened,
   };
-  useEffect(() => {
-    dispatch(fetchEntries());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchTodayEntries());
-  }, [dispatch, entryList]);
+  }, [dispatch]);
 
   const toggleList = () => {
     setListOpened((prev) => !prev);
