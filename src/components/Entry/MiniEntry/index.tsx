@@ -11,6 +11,7 @@ import { IBarberServices } from '@constants/barber-services';
 import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import MiniEntryController from '@components/Entry/MiniEntry/MiniEntryController';
 
 import cls from './style.module.scss';
 
@@ -41,14 +42,10 @@ const MiniEntry = ({
           <span className={classNames(cls.name, {}, [cls.withBg])}>{employeeShortName}</span>
         </div>
         <span className={classNames(cls.time, {}, [cls.withBg])}>{time}</span>
-        <div className={cls.buttons}>
-          <div className={cls.button}>
-            <X />
-          </div>
-          <div className={cls.button}>
-            <Check />
-          </div>
-        </div>
+        <MiniEntryController
+          entry={currentEntry}
+          className={cls.controller}
+        />
         <div className={cls.client}>
           <div className={cls.clientInfo}>
             <div className={cls.fieldIcon}>

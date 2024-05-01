@@ -6,9 +6,12 @@
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 170px);
-    grid-auto-rows: 93px;
-    grid-gap: 30px 54px;
+    //grid-auto-rows: 93px;
+    grid-gap: 23px 22px;
     position: relative;
+    grid-auto-rows: min-content;
+    grid-auto-columns: min-content;
+    //gap: 1rem;
     border-radius: var(--border-radius);
     border: 1px var(--border-color) solid;
     height: 135px;
@@ -25,6 +28,7 @@
 
 .emptyList {
   display: flex;
+  height: auto;
 }
 
 .todayEntriesAccordion {
@@ -58,15 +62,6 @@
 .addEntryButton {
   height: 10px;
   width: 10px;
-}
-
-.listSkeleton {
-  background-color: red;
-  //animation: blink 1.5s infinite;
-}
-
-.testLoading {
-  opacity: 0;
 }
 
 @keyframes blink {

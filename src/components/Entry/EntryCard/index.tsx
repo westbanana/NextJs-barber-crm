@@ -56,24 +56,12 @@ const EntryCard = memo(({
   const entryDate = dayjs(`${currentEntryData?.date}${currentEntryData?.time}`);
   const refEditCard = useRef<HTMLFormElement>(null);
   const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
-  useEffect(() => {
-    dispatch(fetchClientsAndEmployees());
-  }, [dispatch]);
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
     if (!datePickerOpened) {
       outsideClick(e, onClose, refEditCard);
     }
   }, [onClose, datePickerOpened]);
-
-  useEffect(() => {
-    if (mode) {
-      document.addEventListener('click', handleOutsideClick);
-    }
-    return () => {
-      document.removeEventListener('click', handleOutsideClick);
-    };
-  }, [handleOutsideClick, mode, onClose]);
 
   const deleteCurrentEntry = () => {
     if (currentEntryData) {
@@ -93,9 +81,22 @@ const EntryCard = memo(({
 
   const dateTimePickerCallback = (value:dayjs.Dayjs, props:FieldProps) => {
     const time = value.format('HH:mm');
-    const date = value.format('YYYY-M-DD');
+    const date = value.format('YYYY-M-D');
     changeFormikFields(props, { time, date });
   };
+
+  useEffect(() => {
+    dispatch(fetchClientsAndEmployees());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (mode) {
+      document.addEventListener('click', handleOutsideClick);
+    }
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [handleOutsideClick, mode, onClose]);
 
   return (
     <Portal>

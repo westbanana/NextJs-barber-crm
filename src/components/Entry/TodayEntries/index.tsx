@@ -44,7 +44,6 @@ const TodayEntries = () => {
 
   return (
     <div className={cls.mainContainer}>
-
       <Label label="Today entries" className={cls.todayEntriesLabel} alwaysOnBorder />
       <EntryOpener mode={EntryCardMode.CREATE}>
         <div className={cls.addEntryContainer}>

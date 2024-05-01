@@ -1,0 +1,31 @@
+.buttons {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transform: translateX(50%);
+  transition: opacity var(--transition);
+}
+
+.button {
+  height: 15px;
+  width: 15px;
+  background-color: var(--bg-color);
+  border-radius: 100%;
+  border: 1px var(--border-color) solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  svg {
+    height: 15px;
+    width: 15px;
+  }
+  &:hover {
+    background-color: var(--hover-color);
+  }
+}
