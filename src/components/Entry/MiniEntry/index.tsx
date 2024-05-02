@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   Check, Menu, User, X,
 } from 'lucide-react';
@@ -15,7 +15,7 @@ import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
 
 import cls from './style.module.scss';
 
-const MiniEntry = ({
+const MiniEntry = memo(({
   currentEntry,
 }:EntryProps) => {
   const {
@@ -88,6 +88,6 @@ const MiniEntry = ({
       </div>
     </EntryOpener>
   );
-};
+});
 
 export default MiniEntry;
