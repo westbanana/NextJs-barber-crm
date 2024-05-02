@@ -87,8 +87,13 @@ const Select = ({
     };
   }, [handleOutsideClick, isOpened]);
 
-  const resultStroke = Array.isArray(result) ? result.map((item) => item?.name).join(',') : result.name;
-
+  // TODO переделать логику если работаем с строками
+  // eslint-disable-next-line no-nested-ternary
+  const resultStroke = Array.isArray(result)
+    ? result.map((item) => item?.name).join(',')
+    : result.name
+      ? result.name
+      : result;
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
@@ -108,7 +113,13 @@ const Select = ({
               className={classNames(
                 cls.item,
                 {
-                  [cls.selectedItem]: Array.isArray(result) ? result.includes(item) : result.id === item.id,
+                  // TODO переделать логику если работаем с строками
+                  // eslint-disable-next-line no-nested-ternary
+                  [cls.selectedItem]: Array.isArray(result)
+                    ? result.includes(item)
+                    : result.id === item.id
+                      ? result === item
+                      : false,
                 },
                 [],
               )}
