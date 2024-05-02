@@ -14,7 +14,7 @@ export type IEntries = {
   completed: boolean,
   employee: IEmployee | string,
   client: IClient | string,
-  services: IBarberServices[] | string[],
+  services: IBarberServices[] & string[],
   time: string,
   date: string
 }

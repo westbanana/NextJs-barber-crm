@@ -5,7 +5,6 @@ import React, {
 } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
-import EmployeeRemover from '@components/Employee/EmployeeRemover';
 
 import cls from './style.module.scss';
 
@@ -63,16 +62,14 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   return loading ? (<Skeleton />) : (
     <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
       <div className={cls.optionsWrapper}>
-        <EmployeeRemover entry={selectedRow[0]}>
-          <Button
-            onClick={deleteRow}
-            disabled={!selectedRow?.length}
-            className={cls.trashBacket}
-            withoutBorder
-          >
-            <Trash2 />
-          </Button>
-        </EmployeeRemover>
+        <Button
+          onClick={deleteRow}
+          disabled={!selectedRow?.length}
+          className={cls.trashBacket}
+          withoutBorder
+        >
+          <Trash2 />
+        </Button>
         <Button
           withoutBorder
           onClick={openCreateCard}

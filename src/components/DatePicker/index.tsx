@@ -79,7 +79,6 @@ const DateTimePicker = ({
       setOpened(false);
     }, 10);
   };
-
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={cls.dateTimePickerWrapper}>

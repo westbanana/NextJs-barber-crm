@@ -1,19 +1,15 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef } from 'react';
-import {
-  Field, FieldInputProps, FieldProps, Formik,
-} from 'formik';
+import React from 'react';
+import { Field, FieldProps } from 'formik';
 import { Trash2, X } from 'lucide-react';
 import { SelectItem, SelectMode } from '@components/ui/Select/select.type';
 import { changeFormikField } from '@helpers/changeFormikField';
-import CardBackground from '@components/ui/Card/CardBackground/CardBackground';
 import Card from '@components/ui/Card/Card';
-import EmployeeRemover from '@components/Employee/EmployeeRemover';
+import { deleteEmployee } from '@components/Employee/EmployeeCard/services/deleteEmployee';
 
 import cls from './style.module.scss';
 
-import { outsideClick } from '@/helpers/outSideClick';
 import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import Button from '@/components/ui/Button/Button';
@@ -24,13 +20,11 @@ import { days } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
-import { deleteEmployee } from '@/components/Employee/EmployeeCard/services/deleteEmployee';
 import { EmployeeSchema } from '@/components/Employee/EmployeeCard/validation';
 import { getEmployeeLoading } from '@/components/Employee/EmployeeCard/selectors/getEmployeeLoading';
 import { updateEmployee } from '@/components/Employee/EmployeeCard/services/updateEmployee';
 import { createEmployee } from '@/components/Employee/EmployeeCard/services/createEmployee';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
-import Portal from '@/components/Portal/index';
 
 const EmployeeCard = ({
   employeeData = newEmployee,
@@ -39,7 +33,6 @@ const EmployeeCard = ({
 }:EmployeeEditCardProps) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(getEmployeeLoading);
-  const refEditCard = useRef<HTMLFormElement>(null);
   const onSubmitFormik = (values:IEmployee) => {
     if (mode === EmployeeCardMode.EDIT) {
       dispatch(updateEmployee(values));
@@ -49,155 +42,142 @@ const EmployeeCard = ({
     }
   };
 
-  const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, onClose, refEditCard);
-  }, [onClose]);
-
-  useEffect(() => {
-    if (mode) {
-      document.addEventListener('click', handleOutsideClick);
+  const deleteCurrentEmployee = () => {
+    if (employeeData) {
+      dispatch(deleteEmployee(employeeData));
     }
-    return () => {
-      document.removeEventListener('click', handleOutsideClick);
-    };
-  }, [handleOutsideClick, mode, onClose]);
+  };
 
   return (
-    <Card>
-      <Formik initialValues={employeeData} onSubmit={onSubmitFormik} validationSchema={EmployeeSchema}>
-        {({
-          handleSubmit,
-          values,
-          handleChange,
-        }) => (
-          <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
-            <X
-              onClick={onClose}
-              className={cls.xMark}
+    <Card
+      validationSchema={EmployeeSchema}
+      initialValues={employeeData}
+      onSubmit={onSubmitFormik}
+      onClose={onClose}
+    >
+      {({
+        values,
+        handleChange,
+        handleSubmit,
+      }) => (
+        <>
+          <Card.Closer />
+          <div className={cls.userIconContainer}>
+            <UserIcon
+              userName={employeeData?.name}
+              withUpload
+              id="userIcon"
+              value={values?.userIcon}
+              onChange={handleChange}
             />
-            <div className={cls.userIconContainer}>
-              <UserIcon
-                userName={employeeData?.name}
-                withUpload
-                id="userIcon"
-                value={values?.userIcon}
+          </div>
+          <div className={cls.inputsWrapper}>
+            <div className={cls.nameInputs}>
+              <Input
+                id="name"
+                label="Ім'я"
+                value={values?.name}
+                onChange={handleChange}
+              />
+              <Input
+                id="position"
+                label="Посада"
+                value={values?.position}
                 onChange={handleChange}
               />
             </div>
-            <div className={cls.inputsWrapper}>
-              <div className={cls.nameInputs}>
-                <Input
-                  id="name"
-                  label="Ім'я"
-                  value={values?.name}
-                  onChange={handleChange}
-                />
-                <Input
-                  id="position"
-                  label="Посада"
-                  value={values?.position}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className={cls.dateInputs}>
-                <div className={cls.workScheduleTime}>
-                  Час роботи
-                  <div className={cls.timeSelector}>
-                    <Field
-                      name="work_schedule.time.from"
-                    >
-                      {(props: FieldProps) => (
-                        <TimeInput
-                          callback={(value) => {
-                            changeFormikField<string>([value], props.field);
-                          }}
-                          time={employeeData?.work_schedule?.time.from}
-                        />
-
-                      )}
-                    </Field>
-                    <Field
-                      name="work_schedule.time.to"
-                    >
-                      {(props: FieldProps) => (
-                        <TimeInput
-                          callback={(value) => {
-                            changeFormikField<string>([value], props.field);
-                          }}
-                          time={employeeData?.work_schedule?.time.to}
-                        />
-                      )}
-                    </Field>
-                  </div>
-                </div>
-                <div className={cls.workScheduleTime}>
-                  Дні роботи
-                  <div className={cls.timeSelector}>
-                    <Field
-                      name="work_schedule.days.from"
-                    >
-                      {(props: FieldProps) => (
-                        <Select
-                          callback={(value) => {
-                            console.log(value);
-                            changeFormikField<SelectItem>(value, props.field);
-                          }}
-                          defaultValue={[employeeData?.work_schedule?.days?.from]}
-                          className={cls.DataSelect}
-                          label="From"
-                          data={days}
-                          selectMode={SelectMode.SINGLESELECT}
-                        />
-                      )}
-                    </Field>
-                    <Field
-                      name="work_schedule.days.to"
-                    >
-                      {(props: FieldProps) => (
-                        <Select
-                          defaultValue={[employeeData?.work_schedule?.days?.to]}
-                          callback={(value) => {
-                            console.log(value);
-                            changeFormikField<SelectItem>(value, props.field);
-                          }}
-                          className={cls.DataSelect}
-                          label="To"
-                          data={days}
-                        />
-                      )}
-                    </Field>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={cls.buttonsWrapper}>
-              {mode === 'edit' && (
-                <>
-                  <Button
-                    onClick={() => handleSubmit()}
-                    loading={loading}
+            <div className={cls.dateInputs}>
+              <div className={cls.workScheduleTime}>
+                Час роботи
+                <div className={cls.timeSelector}>
+                  <Field
+                    name="work_schedule.time.from"
                   >
-                    Зберегти
-                  </Button>
-                  <EmployeeRemover entry={employeeData}>
-                    <Button withoutBorder>
-                      <Trash2 />
-                    </Button>
-                  </EmployeeRemover>
-                </>
-              )}
-              {mode === 'create' && (
-                <Button
-                  onClick={() => handleSubmit()}
-                  loading={loading}
-                >
-                  Створити
-                </Button>
-              )}
+                    {(props: FieldProps) => (
+                      <TimeInput
+                        callback={(value) => {
+                          changeFormikField<string>([value], props.field);
+                        }}
+                        time={values?.work_schedule?.time.from}
+                      />
+
+                    )}
+                  </Field>
+                  <Field
+                    name="work_schedule.time.to"
+                  >
+                    {(props: FieldProps) => (
+                      <TimeInput
+                        callback={(value) => {
+                          changeFormikField<string>([value], props.field);
+                        }}
+                        time={values?.work_schedule?.time.to}
+                      />
+                    )}
+                  </Field>
+                </div>
+              </div>
+              <div className={cls.workScheduleTime}>
+                Дні роботи
+                <div className={cls.timeSelector}>
+                  <Field
+                    name="work_schedule.days.from"
+                  >
+                    {(props: FieldProps) => (
+                      <Select
+                        callback={(value) => {
+                          changeFormikField<SelectItem>(value, props.field);
+                        }}
+                        defaultValue={values?.work_schedule?.days?.from}
+                        className={cls.DataSelect}
+                        label="From"
+                        data={days}
+                        selectMode={SelectMode.SINGLESELECT}
+                      />
+                    )}
+                  </Field>
+                  <Field
+                    name="work_schedule.days.to"
+                  >
+                    {(props: FieldProps) => (
+                      <Select
+                        defaultValue={values?.work_schedule?.days?.to}
+                        callback={(value) => {
+                          changeFormikField<SelectItem>(value, props.field);
+                        }}
+                        className={cls.DataSelect}
+                        selectMode={SelectMode.SINGLESELECT}
+                        label="To"
+                        data={days}
+                      />
+                    )}
+                  </Field>
+                </div>
+              </div>
             </div>
-          </form>
-        )}
-      </Formik>
+          </div>
+          <div className={cls.buttonsWrapper}>
+            {mode === 'edit' && (
+              <>
+                <Card.Button onClick={handleSubmit} loading={loading}>
+                  Зберегти
+                </Card.Button>
+                <Card.Button onClick={deleteCurrentEmployee}>
+                  <Trash2 />
+                </Card.Button>
+              </>
+            )}
+            {mode === 'create' && (
+              <Card.Button
+                onClick={handleSubmit}
+                loading={loading}
+              >
+                Створити
+              </Card.Button>
+            )}
+          </div>
+        </>
+      )}
     </Card>
   );
 };

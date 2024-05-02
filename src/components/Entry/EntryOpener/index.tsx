@@ -29,7 +29,9 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
   const onDoubleClickHandler = () => {
     if (!editModeCondition) {
       dispatch(fetchEntryDates());
-      dispatch(changeOpenedEntry(currentEntry));
+      if (currentEntry) {
+        dispatch(changeOpenedEntry(currentEntry));
+      }
     }
   };
   const onClickHandler = () => {
