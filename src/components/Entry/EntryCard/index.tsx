@@ -45,18 +45,19 @@ export type TSelectsData = {
 }
 
 const EntryCard = memo(({
-  onClose,
-  mode,
   entryDates,
+  mode,
+  onClose,
 }:EntryEditCardProps) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(getEntriesLoading);
+  const refEditCard = useRef<HTMLFormElement>(null);
+
   const currentEntryData = useAppSelector(getOpenedEntry);
   const clientsAndEmployees = useAppSelector(getClientsAndEmployees);
   const clients = clientsAndEmployees?.clients ?? [];
   const employees = clientsAndEmployees?.employees ?? [];
   const entryDate = dayjs(`${currentEntryData?.date}${currentEntryData?.time}`);
-  const refEditCard = useRef<HTMLFormElement>(null);
   const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
@@ -64,12 +65,6 @@ const EntryCard = memo(({
       outsideClick(e, onClose, refEditCard);
     }
   }, [onClose, datePickerOpened]);
-
-  const deleteCurrentEntry = () => {
-    if (currentEntryData) {
-      dispatch(deleteEntry(currentEntryData));
-    }
-  };
 
   const onSubmitHandler = (values:IEntries) => {
     const formattedValues = convertObjectToIds<IEntries>(values);

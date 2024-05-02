@@ -9,6 +9,7 @@ import { SelectItem, SelectMode } from '@components/ui/Select/select.type';
 import { changeFormikField } from '@helpers/changeFormikField';
 import CardBackground from '@components/ui/Card/CardBackground/CardBackground';
 import Card from '@components/ui/Card/Card';
+import EmployeeRemover from '@components/Employee/EmployeeRemover';
 
 import cls from './style.module.scss';
 
@@ -33,8 +34,8 @@ import Portal from '@/components/Portal/index';
 
 const EmployeeCard = ({
   employeeData = newEmployee,
-  onClose,
   mode,
+  onClose,
 }:EmployeeEditCardProps) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(getEmployeeLoading);
@@ -60,10 +61,6 @@ const EmployeeCard = ({
       document.removeEventListener('click', handleOutsideClick);
     };
   }, [handleOutsideClick, mode, onClose]);
-
-  const deleteCurrentEmployee = () => {
-    dispatch(deleteEmployee(employeeData));
-  };
 
   return (
     <Card>
@@ -182,9 +179,11 @@ const EmployeeCard = ({
                   >
                     Зберегти
                   </Button>
-                  <Button withoutBorder onClick={deleteCurrentEmployee}>
-                    <Trash2 />
-                  </Button>
+                  <EmployeeRemover entry={employeeData}>
+                    <Button withoutBorder>
+                      <Trash2 />
+                    </Button>
+                  </EmployeeRemover>
                 </>
               )}
               {mode === 'create' && (

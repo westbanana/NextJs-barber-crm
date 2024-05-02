@@ -16,10 +16,10 @@ const Info = ({ entryInfo, entryId }:InfoProps) => {
       <Tooltip id={`entry-info-${entryId}`}>
         <ul className={cls.infoList}>
           <li>
-            {`Майстер: ${employee.name}`}
+            {`Майстер: ${employee?.name}`}
           </li>
           <li>
-            {`Клієнт: ${client.name}`}
+            {`Клієнт: ${client?.name}`}
           </li>
           <li>
             {`Дата: ${time}/${date}`}

@@ -11,9 +11,12 @@ export const fetchTodayEntries = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const todayEntries = await getTodayEntries();
-      const employeeIds = todayEntries.map((entry) => (entry.employee));
+      const employeeIds = new Set(todayEntries.map((entry) => entry.employee));
+      const employeeIdsArray = Array.from(employeeIds);
       const clientIds = todayEntries.map((entry) => entry.client);
-      const employees = await getEmployees(employeeIds as string[]);
+      console.log({ employeeIdsArray });
+      const employees = await getEmployees(employeeIdsArray as string[]);
+      console.log({ employees });
       const clients = await getClients(clientIds as string[]);
       return todayEntries.map((entry) => {
         const {

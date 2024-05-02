@@ -21,7 +21,9 @@ const MiniEntry = ({
   const {
     employee, time, client, services, id, date,
   } = currentEntry;
-  const [employeeFirstName, employeeLastName] = employee.name!!.split(' ');
+  const [employeeFirstName, employeeLastName] = employee && employee.name
+    ? employee.name.split(' ')
+    : ['?', '?'];
   const [clientFirstName, clientLastName] = client.name.split(' ');
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
   const clientShortName = `${clientLastName} ${clientFirstName[0]}.`;
@@ -39,8 +41,8 @@ const MiniEntry = ({
       <div className={classNames(cls.entry, entryMods, [])}>
         <div className={cls.master}>
           <UserIcon
-            userName={employee.name}
-            value={employee.userIcon}
+            userName={employee?.name}
+            value={employee?.userIcon}
             className={cls.iconSize}
           />
           <span className={classNames(cls.name, {}, [cls.withBg])}>{employeeShortName}</span>
