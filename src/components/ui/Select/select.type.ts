@@ -1,3 +1,4 @@
+import { ComponentPropsWithoutRef } from 'react';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
@@ -8,7 +9,7 @@ export enum SelectMode {
   MULTISELECT = 'multiselect',
   SINGLESELECT = 'singleselect'
 }
-export interface SelectProps {
+export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'defaultValue'>{
   data: SelectItem[];
   callback?: (result:SelectItem[] | SelectItem) => void;
   label:string;

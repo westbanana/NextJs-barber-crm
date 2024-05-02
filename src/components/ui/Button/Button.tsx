@@ -1,14 +1,13 @@
 import React, { memo } from 'react';
 import { Loader } from 'lucide-react';
 
+import cls from './style.module.scss';
+
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { AlignVerticalText, ButtonProps } from '@/components/ui/Button/button.type';
 
-import cls from './style.module.scss';
-
 const Button = memo(({
   children,
-  disabled,
   className,
   loading = false,
   alignVerticalText = AlignVerticalText.CENTER,
@@ -16,14 +15,13 @@ const Button = memo(({
   ...otherProps
 }:ButtonProps) => {
   const mods: Mods = {
-    [cls.disabled]: disabled,
+    [cls.disabled]: otherProps.disabled,
     [cls[alignVerticalText]]: true,
     [cls.withoutBorder]: withoutBorder,
   };
   return (
     <button
       type="button"
-      disabled={disabled}
       className={classNames(cls.Button, mods, [className])}
       {...otherProps}
     >

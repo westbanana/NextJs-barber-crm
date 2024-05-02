@@ -20,10 +20,11 @@ export type DateTimePickerProps = {
   defaultValue: dayjs.Dayjs | undefined | null
   setOpened: (value: boolean) => void
   callback: (value:dayjs.Dayjs) => void
+  disabled?: boolean
 }
 
 const DateTimePicker = ({
-  dates, defaultValue, setOpened, callback,
+  dates, defaultValue, setOpened, callback, disabled = false,
 }: DateTimePickerProps) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
@@ -97,6 +98,7 @@ const DateTimePicker = ({
           onAccept={(value) => callback(value!!)}
           shouldDisableDate={shouldDisableDate}
           shouldDisableTime={shouldDisableTime}
+          disabled={disabled}
         />
       </div>
     </LocalizationProvider>

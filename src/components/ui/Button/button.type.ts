@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 
 export enum AlignVerticalText {
   TOP = 'textVerticalTop',
@@ -6,9 +6,8 @@ export enum AlignVerticalText {
   BOTTOM = 'textVerticalBottom',
 }
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
+export interface ButtonProps extends ComponentPropsWithoutRef<'button'>{
   children: React.ReactNode;
-  disabled?: boolean;
   className?: string;
   alignVerticalText?: AlignVerticalText;
   loading?: boolean;

@@ -14,7 +14,7 @@ import { outsideClick } from '@/helpers/outSideClick';
 import Label from '@/components/Label/Label';
 
 const Select = ({
-  data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT,
+  data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT, disabled,
 }:SelectProps) => {
   const selectData = data.length ? data : defaultValue;
   const [result, setResult] = useState<SelectItem[] | SelectItem>(defaultValue);
@@ -23,6 +23,7 @@ const Select = ({
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const refContainer = useRef<HTMLDivElement>(null);
   const openSelectList = () => {
+    if (disabled) return;
     setIsOpened(true);
     setIsClosing(false);
     clearTimeout(timerRef.current);
@@ -31,7 +32,7 @@ const Select = ({
   const closeHandler = useCallback(() => {
     if (isOpened) {
       if (selectMode === SelectMode.MULTISELECT) {
-        const ids = result.map((el:Sele) => el.id);
+        const ids = result.map((el:SelectItem) => el.id);
         callback?.(ids);
       }
       setIsClosing(true);
@@ -60,7 +61,6 @@ const Select = ({
       callback?.(el);
     }
   };
-
   const listMods: Mods = {
     [cls.isClosing]: isClosing,
   };
@@ -70,6 +70,7 @@ const Select = ({
   };
 
   const mainContainerMods: Mods = {
+    [cls.disabled]: disabled,
     // [cls.mainContainerDisabled]: !data.length,
   };
 

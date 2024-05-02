@@ -35,9 +35,9 @@ const MiniEntry = ({
   const entryMods:Mods = {
     [cls.completed]: currentEntry.completed,
   };
-
+  const entryOpenerMode:EntryCardMode = currentEntry.completed ? EntryCardMode.READ_ONLY : EntryCardMode.EDIT;
   return (
-    <EntryOpener currentEntry={currentEntry} mode={EntryCardMode.EDIT}>
+    <EntryOpener currentEntry={currentEntry} mode={entryOpenerMode}>
       <div className={classNames(cls.entry, entryMods, [])}>
         <div className={cls.master}>
           <UserIcon

@@ -115,6 +115,7 @@ const EntryCard = memo(({
                         <Select
                           data={employees}
                           label="employee"
+                          disabled={mode === EntryCardMode.READ_ONLY}
                           defaultValue={currentEntryData.employee}
                           callback={(value) => {
                             changeFormikField<SelectItem>(value, props.field);
@@ -130,6 +131,7 @@ const EntryCard = memo(({
                           data={clients}
                           label="client"
                           defaultValue={currentEntryData.client}
+                          disabled={mode === EntryCardMode.READ_ONLY}
                           callback={(value) => {
                             changeFormikField<SelectItem>(value, props.field);
                           }}
@@ -143,6 +145,7 @@ const EntryCard = memo(({
                         <Select
                           data={barberServices}
                           label="services"
+                          disabled={mode === EntryCardMode.READ_ONLY}
                           defaultValue={currentEntryData.services}
                           callback={(value) => {
                             changeFormikField<SelectItem>(value, props.field);
@@ -160,6 +163,7 @@ const EntryCard = memo(({
                           dates={entryDates}
                           defaultValue={entryDate}
                           setOpened={setDatePickerOpened}
+                          disabled={mode === EntryCardMode.READ_ONLY}
                         />
                       )}
                     </Field>

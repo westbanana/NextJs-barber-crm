@@ -4,6 +4,7 @@ import { EntryInfo } from '@components/Entry/MiniEntry/Info/info.type';
 export enum EntryCardMode {
   CREATE = 'create',
   EDIT = 'edit',
+  READ_ONLY = 'read-only',
 }
 
 export interface EntryEditCardProps {
