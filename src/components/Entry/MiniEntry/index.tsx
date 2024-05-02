@@ -4,7 +4,6 @@ import {
 } from 'lucide-react';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
-import Info from '@components/Entry/Info';
 import { classNames, Mods } from '@lib/classNames/classNames';
 import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
 import { IBarberServices } from '@constants/barber-services';
@@ -12,6 +11,7 @@ import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import MiniEntryController from '@components/Entry/MiniEntry/MiniEntryController';
+import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
 
 import cls from './style.module.scss';
 
@@ -81,7 +81,7 @@ const MiniEntry = ({
             </span>
           </div>
           <div className={cls.entryInfo}>
-            <Info entryInfo={currentEntry} entryId={id} />
+            <MiniEntryInfo entryInfo={currentEntry} entryId={id} />
           </div>
           <TotalPrice services={services} totalPrice={totalPrice} entryId={id} />
         </div>

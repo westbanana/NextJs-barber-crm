@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { EntryInfo } from '@components/Entry/MiniEntry/Info/info.type';
 
 import { deleteEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
-import { EntryInfo } from '@/components/Entry/Info/info.type';
 
 export const deleteEntry = createAsyncThunk(
   'employee/deleteEmployee',

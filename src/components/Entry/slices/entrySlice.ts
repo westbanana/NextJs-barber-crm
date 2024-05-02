@@ -9,10 +9,10 @@ import { fetchClientsAndEmployees, fetchEntryDates } from '@components/Entry/ser
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { createEntry } from '@components/Entry/services/createEntry';
 import { completeEntry } from '@components/Entry/services/completeEntry';
+import { EntryInfo } from '@components/Entry/MiniEntry/Info/info.type';
 
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
-import { EntryInfo } from '@/components/Entry/Info/info.type';
 
 export interface EntriesState {
   entryList: IEntries[],
