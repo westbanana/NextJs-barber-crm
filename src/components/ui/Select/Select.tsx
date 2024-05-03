@@ -22,6 +22,7 @@ const Select = ({
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const refContainer = useRef<HTMLDivElement>(null);
+  const resultTypeObject = typeof result === 'object';
   const openSelectList = () => {
     if (disabled) return;
     setIsOpened(true);
@@ -31,9 +32,9 @@ const Select = ({
 
   const closeHandler = useCallback(() => {
     if (isOpened) {
-      if (selectMode === SelectMode.MULTISELECT) {
-        const ids = result.map((el:SelectItem) => el.id);
-        callback?.(ids);
+      if (selectMode === SelectMode.MULTISELECT && Array.isArray(result)) {
+        const ids = result.map((el:SelectItem) => typeof el !== 'string' && el.id);
+        callback?.(ids as string[]);
       }
       setIsClosing(true);
       timerRef.current = setTimeout(() => {
@@ -44,14 +45,15 @@ const Select = ({
 
   const selectItem = (el: SelectItem, e: React.MouseEvent) => {
     e.stopPropagation();
-    const element = el.id || el;
+    const elTypeObject = typeof el === 'object';
+    const element = elTypeObject ? el.id : el;
     if (selectMode === SelectMode.MULTISELECT) {
       setResult((prev) => {
-        const contained = typeof el === 'object'
-          ? (prev as SelectItem[]).some((item) => item.id === element)
+        const contained = elTypeObject
+          ? (prev as SelectItem[]).some((item) => typeof item !== 'string' && item.id !== element)
           : (prev as SelectItem[]).some((item) => item === element);
         if (contained) {
-          return (prev as SelectItem[]).filter((item) => item.id !== element);
+          return (prev as SelectItem[]).filter((item) => typeof item !== 'string' && item.id !== element);
         }
         return [el, ...(prev as SelectItem[])];
       });
@@ -88,12 +90,12 @@ const Select = ({
   }, [handleOutsideClick, isOpened]);
 
   // TODO переделать логику если работаем с строками
-  // eslint-disable-next-line no-nested-ternary
-  const resultStroke = Array.isArray(result)
-    ? result.map((item) => item?.name).join(',')
-    : result.name
+  const resultStroke = Array.isArray(result) && true
+    ? result.map((item) => typeof item !== 'string' && item?.name).join(',')
+    : resultTypeObject && result.name
       ? result.name
       : result;
+
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
@@ -102,32 +104,34 @@ const Select = ({
     >
       <Label label={label} id={label} className={cls.label} />
       <div className={cls.resultWrapper}>
-        <div className={cls.result}>{resultStroke}</div>
+        <div className={cls.result}>{resultStroke as string}</div>
         <ChevronDown className={classNames(cls.arrow, arrowMods, [])} />
       </div>
       {isOpened && (
         <div className={classNames(cls.list, listMods, [])}>
-          {selectData.map((item) => (
-            <div
-              key={typeof item === 'object' ? item.id : item}
-              className={classNames(
-                cls.item,
-                {
-                  // TODO переделать логику если работаем с строками
-                  // eslint-disable-next-line no-nested-ternary
-                  [cls.selectedItem]: Array.isArray(result)
-                    ? result.includes(item)
-                    : result.id === item.id
-                      ? result === item
-                      : false,
-                },
-                [],
-              )}
-              onClick={(e) => selectItem(item, e)}
-            >
-              {typeof item === 'object' ? item?.name : item}
-            </div>
-          ))}
+          {selectData.map((item) => {
+            const itemTypeObject = typeof item === 'object';
+            return (
+              <div
+                key={itemTypeObject ? item.id : item}
+                className={classNames(
+                  cls.item,
+                  {
+                    // TODO переделать логику если работаем с строками
+                    [cls.selectedItem]: Array.isArray(result)
+                      ? result.includes(item)
+                      : (itemTypeObject && resultTypeObject) && result.id === item.id
+                        ? result === item
+                        : false,
+                  },
+                  [],
+                )}
+                onClick={(e) => selectItem(item, e)}
+              >
+                {itemTypeObject ? item?.name : item}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

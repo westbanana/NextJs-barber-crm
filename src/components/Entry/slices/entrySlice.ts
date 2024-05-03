@@ -85,7 +85,7 @@ export const entrySlice = createSlice({
     });
     builder.addCase(fetchTodayEntries.fulfilled, (state, action) => {
       state.loading = false;
-      state.todayEntries = action.payload;
+      state.todayEntries = action.payload as IEntries[];
     });
     builder.addCase(fetchTodayEntries.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;

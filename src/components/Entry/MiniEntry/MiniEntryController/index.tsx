@@ -13,23 +13,24 @@ export type MiniEntryControllerProps = {entry: IEntries, className?: string}
 
 const MiniEntryController = ({ entry, className }: MiniEntryControllerProps) => {
   const dispatch = useAppDispatch();
-  // add entry to employee completeEntryList
-  // add entry to
-  // delete from entryList
+
   const completeCurrentEntry = () => {
     const convertedEntry = convertObjectToIds(entry); // reconvertObjectToIds(entry)
     dispatch(completeEntry(convertedEntry));
   };
-
+  const deleteCurrentEntry = () => {
+    if (entry) {
+      dispatch(deleteEntry(entry));
+    }
+  };
   return (
     <div className={classNames(cls.buttons, {}, [className])}>
-      <EntryRemover entry={entry}>
-        <div
-          className={cls.button}
-        >
-          <X />
-        </div>
-      </EntryRemover>
+      <div
+        className={cls.button}
+        onClick={deleteCurrentEntry}
+      >
+        <X />
+      </div>
       <div className={cls.button} onClick={completeCurrentEntry}>
         <Check />
       </div>
