@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { Check, X } from 'lucide-react';
 import { IEntries } from '@components/Entry/MiniEntry/entries.type';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
@@ -13,10 +14,11 @@ export type MiniEntryControllerProps = {entry: IEntries, className?: string}
 
 const MiniEntryController = ({ entry, className }: MiniEntryControllerProps) => {
   const dispatch = useAppDispatch();
-
+  const { refresh } = useRouter();
   const completeCurrentEntry = () => {
     const convertedEntry = convertObjectToIds(entry); // reconvertObjectToIds(entry)
     dispatch(completeEntry(convertedEntry));
+    refresh();
   };
   const deleteCurrentEntry = () => {
     if (entry) {

@@ -24,8 +24,8 @@ const MiniEntry = memo(({
   const [employeeFirstName, employeeLastName] = employee && employee.name
     ? employee.name.split(' ')
     : ['?', '?'];
-  const [clientFirstName, clientLastName] = client.name.split(' ');
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
+  const [clientFirstName, clientLastName] = client.name.split(' ');
   const clientShortName = `${clientLastName} ${clientFirstName[0]}.`;
   const selectedServicesNames:string[] = services.map((serv) => serv.name);
   const totalPrice = services.reduce(

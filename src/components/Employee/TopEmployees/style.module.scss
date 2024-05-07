@@ -1,0 +1,16 @@
+.mainContainer {
+  padding: 20px;
+  position: relative;
+  border-radius: var(--border-radius);
+  border: 1px var(--border-color) solid;
+  height: 135px;
+  transition: 0.3s linear;
+  max-width: 594px;
+  scrollbar-gutter: stable;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 22px;
+}

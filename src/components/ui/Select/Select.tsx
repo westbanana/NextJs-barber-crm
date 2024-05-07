@@ -50,7 +50,7 @@ const Select = ({
     if (selectMode === SelectMode.MULTISELECT) {
       setResult((prev) => {
         const contained = elTypeObject
-          ? (prev as SelectItem[]).some((item) => typeof item !== 'string' && item.id !== element)
+          ? (prev as SelectItem[]).some((item) => typeof item !== 'string' && item.id === element)
           : (prev as SelectItem[]).some((item) => item === element);
         if (contained) {
           return (prev as SelectItem[]).filter((item) => typeof item !== 'string' && item.id !== element);
@@ -63,6 +63,7 @@ const Select = ({
       callback?.(el);
     }
   };
+  console.log(result);
   const listMods: Mods = {
     [cls.isClosing]: isClosing,
   };
