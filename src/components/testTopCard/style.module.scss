@@ -19,7 +19,8 @@
     transform: rotateY(0deg);
     .master,
     .totalCompletedEntries {
-      animation: showContent 0.3s forwards ease-in-out 0.125s;
+      opacity: 1;
+      //animation: showContent 0.3s forwards ease-in-out 0.125s;
     }
   }
 }
@@ -37,6 +38,8 @@
 .master,
 .totalCompletedEntries {
   opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  transition-delay: 0.125s;
 }
 
 .iconSize {
