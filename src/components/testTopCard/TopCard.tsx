@@ -15,9 +15,6 @@ const TopCard = ({ employee, place }: TopCardProps) => {
     : ['?', '?'];
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
   const cardMods: Mods = {
-    [cls.gold]: place === 1,
-    [cls.silver]: place === 2,
-    [cls.bronze]: place === 3,
   };
   return (
     <div className={classNames(cls.card, cardMods, [])}>

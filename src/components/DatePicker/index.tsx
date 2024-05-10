@@ -30,7 +30,6 @@ const DateTimePicker = ({
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
   const maxTime = selectedDate.set('hour', 19).set('minute', 0);
   const formattedDates = dates.map((date) => dayjs(date));
-
   const shouldDisableDate = (day: dayjs.Dayjs) => {
     const currentDate = day.format('YYYY-MM-DD');
     const matchingTimes = formattedDates
@@ -73,11 +72,10 @@ const DateTimePicker = ({
   const onOpenHandler = () => {
     setOpened(true);
   };
-  // TODO: Переделать onCloseHandler.
   const onCloseHandler = () => {
     setTimeout(() => {
       setOpened(false);
-    }, 10);
+    }, 0);
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -94,7 +92,9 @@ const DateTimePicker = ({
           onChange={handleDateChange}
           minutesStep={30}
           reduceAnimations
-          onAccept={(value) => callback(value!!)}
+          onAccept={(value) => {
+            callback(value!!);
+          }}
           shouldDisableDate={shouldDisableDate}
           shouldDisableTime={shouldDisableTime}
           disabled={disabled}

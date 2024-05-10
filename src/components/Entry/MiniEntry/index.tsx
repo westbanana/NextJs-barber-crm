@@ -36,6 +36,7 @@ const MiniEntry = memo(({
     [cls.completed]: currentEntry.completed,
   };
   const entryOpenerMode:EntryCardMode = currentEntry.completed ? EntryCardMode.READ_ONLY : EntryCardMode.EDIT;
+
   return (
     <EntryOpener currentEntry={currentEntry} mode={entryOpenerMode}>
       <div className={classNames(cls.entry, entryMods, [])}>

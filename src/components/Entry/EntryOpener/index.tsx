@@ -26,14 +26,19 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
   const openedEntry = useAppSelector(getOpenedEntry);
   const editModeCondition = (currentEntry?.id === openedEntry?.id) && openedEntry;
   const createModeCondition = (mode === EntryCardMode.CREATE) && openedEntry?.id === newEntry.id;
-  const onDoubleClickHandler = () => {
+  const onDoubleClickHandler = (e: React.MouseEvent) => {
+    // Переделать
+    if (openedEntry) return;
     if (!editModeCondition) {
-      dispatch(fetchEntryDates());
+      if (mode !== EntryCardMode.READ_ONLY) {
+        dispatch(fetchEntryDates());
+      }
       if (currentEntry) {
         dispatch(changeOpenedEntry(currentEntry));
       }
     }
   };
+  // console.log(mode);
   const onClickHandler = () => {
     if (mode === EntryCardMode.CREATE && !currentEntry?.completed) {
       if (!openedEntry) {
@@ -45,13 +50,14 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
   const onCloseHandler = () => {
     dispatch(clearOpenedEntry());
   };
-
   return (
-    <div
-      onDoubleClick={onDoubleClickHandler}
-      onClick={onClickHandler}
-    >
-      {children}
+    <>
+      <div
+        onDoubleClick={onDoubleClickHandler}
+        onClick={onClickHandler}
+      >
+        {children}
+      </div>
       {(editModeCondition || createModeCondition) && (
         <EntryCard
           onClose={onCloseHandler}
@@ -59,7 +65,7 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
           entryDates={entriesDates}
         />
       )}
-    </div>
+    </>
   );
 };
 

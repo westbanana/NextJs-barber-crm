@@ -29,7 +29,7 @@ const CardComponent = ({
   initialValues,
   onSubmit,
   validationSchema,
-  loading = false,
+  loading = true,
   outsideClickCondition = true,
   onClose,
 }: CardProps) => {

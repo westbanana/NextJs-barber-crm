@@ -12,6 +12,7 @@ const CardCloser = ({ onClick, ...props }:CardCloserProps) => {
   const onClickHandler = () => {
     onClick?.();
     onClose();
+    console.log('close card');
   };
   return (
     <div

@@ -105,3 +105,16 @@ select {
 *::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+
+.afterLoading {
+  animation: afterLoading var(--transition) forwards;
+}
+
+@keyframes afterLoading {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

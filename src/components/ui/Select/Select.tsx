@@ -23,12 +23,6 @@ const Select = ({
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const refContainer = useRef<HTMLDivElement>(null);
   const resultTypeObject = typeof result === 'object';
-  const openSelectList = () => {
-    if (disabled) return;
-    setIsOpened(true);
-    setIsClosing(false);
-    clearTimeout(timerRef.current);
-  };
 
   const closeHandler = useCallback(() => {
     if (isOpened) {
@@ -42,7 +36,16 @@ const Select = ({
       }, closeSelectTimeout);
     }
   }, [callback, isOpened, result, selectMode]);
-
+  const selectListToggle = () => {
+    if (!isOpened) {
+      if (disabled) return;
+      setIsOpened(true);
+      setIsClosing(false);
+      clearTimeout(timerRef.current);
+    } else {
+      closeHandler();
+    }
+  };
   const selectItem = (el: SelectItem, e: React.MouseEvent) => {
     e.stopPropagation();
     const elTypeObject = typeof el === 'object';
@@ -63,7 +66,6 @@ const Select = ({
       callback?.(el);
     }
   };
-  console.log(result);
   const listMods: Mods = {
     [cls.isClosing]: isClosing,
   };
@@ -101,7 +103,7 @@ const Select = ({
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
       ref={refContainer}
-      onClick={openSelectList}
+      onClick={selectListToggle}
     >
       <Label label={label} id={label} className={cls.label} />
       <div className={cls.resultWrapper}>

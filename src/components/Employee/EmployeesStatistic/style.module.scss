@@ -1,0 +1,10 @@
+.statisticsWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}

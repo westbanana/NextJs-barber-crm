@@ -31,7 +31,7 @@ export interface EntriesState {
 const initialState: EntriesState = {
   entryList: [],
   todayEntries: [],
-  loading: false,
+  loading: true,
   openedEntry: undefined,
   entriesDates: [],
   error: undefined,
@@ -85,7 +85,11 @@ export const entrySlice = createSlice({
     });
     builder.addCase(fetchTodayEntries.fulfilled, (state, action) => {
       state.loading = false;
-      state.todayEntries = action.payload as IEntries[];
+      state.todayEntries = action.payload.neededEntries as IEntries[];
+      state.clientsAndEmployees = {
+        clients: action.payload.allClients as IClient[],
+        employees: action.payload.allEmployees as IEmployee[],
+      };
     });
     builder.addCase(fetchTodayEntries.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;

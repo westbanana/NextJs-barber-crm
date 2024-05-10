@@ -1,8 +1,8 @@
 'use client';
 
 import React, {
-  memo,
-  useEffect, useState,
+  memo, useCallback,
+  useEffect, useRef, useState,
 } from 'react';
 import {
   Field, FieldProps,
@@ -51,7 +51,7 @@ const EntryCard = memo(({
   const employees = clientsAndEmployees?.employees ?? [];
   const entryDate = dayjs(`${currentEntryData?.date} ${currentEntryData?.time}`);
   const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
-
+  const datePickerOpenedRef = useRef<boolean>(false);
   const onSubmitHandler = (values:IEntries) => {
     const formattedValues = convertObjectToIds<IEntries>(values);
     if (mode === EntryCardMode.EDIT) {
@@ -61,7 +61,6 @@ const EntryCard = memo(({
       dispatch(createEntry(formattedValues));
     }
   };
-
   const dateTimePickerCallback = (value:dayjs.Dayjs, props:FieldProps) => {
     const time = value.format('HH:mm');
     const date = value.format('YYYY-M-D');
@@ -73,16 +72,11 @@ const EntryCard = memo(({
       dispatch(deleteEntry(currentEntryData));
     }
   };
-
-  useEffect(() => {
-    dispatch(fetchClientsAndEmployees());
-  }, [dispatch]);
-
   return (
     <Card
       onSubmit={onSubmitHandler}
       initialValues={currentEntryData}
-      loading={loading}
+      loading={false}
       onClose={onClose}
       outsideClickCondition={!datePickerOpened}
     >

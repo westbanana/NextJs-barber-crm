@@ -1,0 +1,26 @@
+.typesSelect {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  transform: translateY(-120%);
+  animation: show 0.3s linear;
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.selectToggle {
+  position: absolute;
+  z-index: 9;
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+}
