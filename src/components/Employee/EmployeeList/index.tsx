@@ -59,6 +59,7 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
   const closeEmployeeCard = () => {
     dispatch(closeCard());
   };
+
   return loading ? (<Skeleton />) : (
     <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
       <div className={cls.optionsWrapper}>

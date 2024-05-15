@@ -33,7 +33,6 @@ const EditRowCell = ({ valueFormatted, value }: CustomCellRendererProps) => {
         <EmployeeCard
           mode={EmployeeCardMode.EDIT}
           employeeData={cellValue}
-          // isOpened={isEditCard}
           onClose={onCloseEditCard}
         />
       )}

@@ -162,7 +162,6 @@ export const entrySlice = createSlice({
       state.loading = true;
     });
     builder.addCase(completeEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
-      console.log(action.payload);
       state.entryList = state.entryList.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
       state.loading = false;
     });

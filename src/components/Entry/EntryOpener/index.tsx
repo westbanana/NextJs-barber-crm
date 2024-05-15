@@ -38,7 +38,6 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
       }
     }
   };
-  // console.log(mode);
   const onClickHandler = () => {
     if (mode === EntryCardMode.CREATE && !currentEntry?.completed) {
       if (!openedEntry) {

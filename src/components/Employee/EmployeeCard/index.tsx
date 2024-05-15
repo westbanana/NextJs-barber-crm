@@ -47,7 +47,6 @@ const EmployeeCard = ({
       dispatch(deleteEmployee(employeeData));
     }
   };
-
   return (
     <Card
       validationSchema={EmployeeSchema}

@@ -14,8 +14,6 @@ export const fetchTodayEntries = createAsyncThunk(
       const employeeIds = new Set(todayEntries.map((entry) => entry.employee));
       const employeeIdsArray = Array.from(employeeIds);
       const clientIds = todayEntries.map((entry) => entry.client);
-      // const employees = await getEmployees(employeeIdsArray as string[]);
-      // const clients = await getClients(clientIds as string[]);
       const allEmployees = await getAllEmployees();
       const allClients = await getAllClients();
       const todayEmployees = allEmployees.filter((employee:IEmployee) => employeeIdsArray.includes(employee.id!!));

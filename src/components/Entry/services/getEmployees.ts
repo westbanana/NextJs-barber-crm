@@ -10,7 +10,7 @@ export const getEmployees = (arr:string[]) => fetch('http://localhost:4000/emplo
 export const getAllEmployees = () => fetch(
   'http://localhost:4000/employees',
   {
-    cache: 'no-store',
+    cache: 'no-cache',
     next: { revalidate: 0 },
   },
 )
