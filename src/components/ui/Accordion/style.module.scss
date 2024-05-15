@@ -1,6 +1,6 @@
 .accordion {
   position: absolute;
-  right: 15px;
+  right: 20px;
   top: 0;
   transform: translateY(-46%) translateX(46%);
   display: flex;
@@ -8,5 +8,8 @@
   justify-items: center;
   z-index: 10;
   cursor: pointer;
-
+  transition: background-color var(--transition);
+  &:hover {
+    background-color: var(--hover-color);
+  }
 }

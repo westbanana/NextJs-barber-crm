@@ -30,8 +30,8 @@ const Statistic = ({ employees }: {employees: IEmployee[]}) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
-          <Tooltip content={<StatisticTooltip />} />
-          <Bar dataKey="completed" fill="rgba(0, 0, 0, 0.6)  " />
+          <Tooltip content={<StatisticTooltip />} cursor={{ fill: 'var(--chart-inverted)' }} />
+          <Bar dataKey="completed" fill="var(--chart)" activeBar={{ }} />
         </BarChart>
       </ResponsiveContainer>
     </>

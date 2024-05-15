@@ -9,17 +9,29 @@ export const getEmployees = (arr:string[]) => fetch('http://localhost:4000/emplo
 
 export const getAllEmployees = () => fetch(
   'http://localhost:4000/employees',
-  {
-    cache: 'no-cache',
-    next: { revalidate: 0 },
-  },
 )
   .then((response) => response.json())
   .catch((e) => {
     throw new Error(e);
   });
 
-export const getTopEmployees = async () => {
-  const employees = await getAllEmployees();
-  return employees.sort((a:IEmployee, b:IEmployee) => b.completedEntries.length - a.completedEntries.length);
-};
+export const getTopEmployees = async () => fetch('http://localhost:4000/employees', { next: { revalidate: 0 } })
+  .then((response) => response.json())
+  .then((employees) => {
+    const sortedEmployees = employees.sort((a: IEmployee, b: IEmployee) => (
+      b.completedEntries.length - a.completedEntries.length
+    ));
+    return sortedEmployees.slice(0, 3);
+  })
+  .catch((e) => {
+    throw new Error(e);
+  });
+
+export const getTest = () => fetch('http://localhost:4000/employees', { next: { revalidate: 0 } })
+  .then((response) => response.json())
+  .then((response) => response.sort((a: IEmployee, b: IEmployee) => (
+    b.completedEntries.length - a.completedEntries.length
+  )))
+  .catch((e) => {
+    throw new Error(e);
+  });

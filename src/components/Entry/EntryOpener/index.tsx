@@ -27,7 +27,6 @@ const EntryOpener = ({ children, currentEntry, mode }:EntryOpenerProps) => {
   const editModeCondition = (currentEntry?.id === openedEntry?.id) && openedEntry;
   const createModeCondition = (mode === EntryCardMode.CREATE) && openedEntry?.id === newEntry.id;
   const onDoubleClickHandler = (e: React.MouseEvent) => {
-    // Переделать
     if (openedEntry) return;
     if (!editModeCondition) {
       if (mode !== EntryCardMode.READ_ONLY) {

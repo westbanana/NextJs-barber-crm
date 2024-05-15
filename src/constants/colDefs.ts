@@ -5,6 +5,7 @@ import EditRowCell from '@/components/Employee/EmployeeList/EditRowCell';
 export const defaultColProps: ColDef = {
   resizable: false,
   flex: 1,
+  lockPosition: true,
   cellClass: 'no-border',
   tooltipValueGetter: (params: ITooltipParams) => params.value,
 };

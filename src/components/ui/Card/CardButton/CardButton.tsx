@@ -15,6 +15,9 @@ const CardButton = ({ onClick, loading, children }:CardButtonProps) => {
     <Button
       onClick={onClickHandler}
       loading={loading}
+      style={{
+        color: 'var(--text-color)',
+      }}
     >
       {children}
     </Button>

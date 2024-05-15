@@ -36,8 +36,8 @@
   border: 1px solid var(--border-color);
   border-radius: 100px;
   svg {
-    height: 10px;
-    width: 10px;
+    height: 15px;
+    width: 15px;
   }
 }
 
@@ -54,14 +54,15 @@
   justify-items: center;
   z-index: 10;
   cursor: pointer;
+  transition: background-color var(--transition);
   &:hover {
     background-color: var(--hover-color);
   }
 }
 
 .addEntryButton {
-  height: 10px;
-  width: 10px;
+  height: 15px;
+  width: 15px;
 }
 
 @keyframes blink {

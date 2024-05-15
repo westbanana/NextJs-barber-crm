@@ -21,6 +21,7 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
+  transition: background-color var(--transition);
   svg {
     height: 15px;
     width: 15px;

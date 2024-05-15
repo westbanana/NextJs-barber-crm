@@ -44,7 +44,6 @@ const EntryCard = memo(({
   onClose,
 }:EntryEditCardProps) => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(getEntriesLoading);
   const currentEntryData = useAppSelector(getOpenedEntry);
   const clientsAndEmployees = useAppSelector(getClientsAndEmployees);
   const clients = clientsAndEmployees?.clients ?? [];

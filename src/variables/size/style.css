@@ -7,3 +7,9 @@
     --border-radius: 5px;
     --border-radius-label: 10px;
 }
+
+.Toastify__toast-theme--light {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color)
+}

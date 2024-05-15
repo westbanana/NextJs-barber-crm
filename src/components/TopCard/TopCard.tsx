@@ -18,7 +18,7 @@ const TopCard = ({ employee, place }: TopCardProps) => {
   };
   return (
     <div className={classNames(cls.card, cardMods, [])}>
-      <div className={cls.master}>
+      <div className={cls.employee}>
         <UserIcon
           userName={employee?.name}
           value={employee?.userIcon}

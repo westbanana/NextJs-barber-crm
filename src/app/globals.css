@@ -3,7 +3,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  transition: background-color var(--transition), color var(--transition), transform var(--transition);
 }
 
 ul[class],

@@ -5,11 +5,9 @@
   width: 100%;
   transition: all var(--transition);
   padding: 12px 0 12px 17px;
-
-  .title {
-    animation: item_text_showed 0.3s ease-in-out;
+  & svg {
+    transition: all 0.3s linear;
   }
-
   &:not(.active):hover {
     background-color: var(--hover-color);
     padding-left: 25px;
@@ -30,6 +28,10 @@
       transform: scale(0.7);
     }
   }
+}
+
+.title {
+  animation: item_text_showed 0.3s ease-in-out;
 }
 
 .active {

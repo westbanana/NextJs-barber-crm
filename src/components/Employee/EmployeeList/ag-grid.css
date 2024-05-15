@@ -1,3 +1,28 @@
+
+body .ag-root-wrapper{
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+body .ag-root-wrapper .ag-header-row{
+    background-color: var(--border-color);
+    color: var(--text-color);
+}
+
+body .ag-root-wrapper .ag-header{
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+body .ag-root-wrapper .ag-row {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+body .ag-root-wrapper .ag-row-hover::before{
+    background-color: var(--hover-color) !important;
+}
+
 .no-border.ag-cell {
     border: none !important;
     outline: none;

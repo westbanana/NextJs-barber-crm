@@ -4,7 +4,6 @@ import { IEntries } from '@components/Entry/MiniEntry/entries.type';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { classNames } from '@lib/classNames/classNames';
-import EntryRemover from '@components/Entry/EntryRemover';
 import { convertObjectToIds } from '@helpers/convertObjectToIds';
 import { completeEntry } from '@components/Entry/services/completeEntry';
 

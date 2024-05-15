@@ -8,14 +8,14 @@ import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 import { getEntryList } from '@components/Entry/selectors/getEntryList';
-import { fetchEntries } from '@components/Entry/services/fetchEntries';
 import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { Plus } from 'lucide-react';
 import { IEntriesForEntry } from '@components/Entry/MiniEntry/entries.type';
 import Accordion from '@components/ui/Accordion/Accordion';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
-import { Skeleton } from '@mui/material';
+import Skeleton from '@components/ui/Skeleton/Skeleton';
+import { fetchEntries } from '@components/Entry/services/fetchEntries';
 
 import cls from './style.module.scss';
 
@@ -40,7 +40,7 @@ const TodayEntries = () => {
     setListOpened((prev) => !prev);
   };
   return loading
-    ? (<Skeleton variant="rounded" width="100%" height={135} />)
+    ? (<Skeleton rounded height="135px" />)
     : (
       <div className={classNames(cls.mainContainer, {}, ['afterLoading'])}>
         <Label label="Today entries" className={cls.todayEntriesLabel} alwaysOnBorder />

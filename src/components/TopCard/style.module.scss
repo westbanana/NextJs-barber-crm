@@ -13,8 +13,9 @@
   max-height: 93px;
   user-select: none;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.10);
 }
-.master {
+.employee {
   position: absolute;
   left: 7px;
   display: flex;
@@ -22,6 +23,7 @@
   align-items: center;
   gap: 2px;
   top: 0;
+  transform: translateY(-50%);
 }
 
 .iconSize {
@@ -51,7 +53,7 @@
 
 .totalCompletedEntries {
   background-color: transparent;
-  color: #00000059;
+  color: var(--text-color);
   font-size: 25px;
   font-style: normal;
   font-weight: 700;

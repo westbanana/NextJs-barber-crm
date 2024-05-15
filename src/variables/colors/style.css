@@ -1,21 +1,25 @@
 body[data-theme = "lightTheme"] {
-    --bg-color: white;
-    --bg-color-inverted: black;
+    --bg-color: hsl(0 0% 100%);
+    --bg-color-inverted: hsl(240 5.88% 10%);
+    --chart: rgba(35, 35, 35, 0.78);
+    --chart-inverted:rgba(229, 229, 229, 0.78);
     --primary-color: black;
     --primary-color-inverted: white;
-    --text-color: black;
-    --text-color-inverted: white;
+    --text-color: hsl(201.81999999999994 24.44% 8.82%);
+    --text-color-inverted: hsl(210 5.56% 92.94%);
     --border-color: rgba(0, 0, 0, 0.14);
-    --hover-color: rgba(0, 0, 0, 0.14)
+    --hover-color: rgba(0, 0, 0, 0.24)
 }
 
 body[data-theme = "darkTheme"] {
-    --bg-color: black;
-    --bg-color-inverted: white;
-    --text-color: white;
-    --text-color-inverted: black;
+    --bg-color: hsl(240 5.88% 10%);
+    --bg-color-inverted: hsl(0 0% 100%);
+    --chart: rgba(229, 229, 229, 0.78);
+    --chart-inverted: rgba(35, 35, 35, 0.78);
+    --text-color: hsl(210 5.56% 92.94%);
+    --text-color-inverted: hsl(0 0% 100%);
     --primary-color: white;
     --primary-color-inverted: black;
     --border-color: rgba(255, 255, 255, 0.14);
-    --hover-color: rgba(255, 255, 255, 0.14);
+    --hover-color: rgba(255, 255, 255, 0.24);
 }

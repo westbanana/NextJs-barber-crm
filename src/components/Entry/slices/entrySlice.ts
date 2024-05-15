@@ -55,15 +55,12 @@ export const entrySlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchEntryDates.pending, (state) => {
       state.error = undefined;
-      state.loading = true;
     });
     builder.addCase(fetchEntryDates.fulfilled, (state, action) => {
-      state.loading = false;
       state.entriesDates = action.payload;
     });
     builder.addCase(fetchEntryDates.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
-      state.loading = false;
       state.error = message;
     });
     builder.addCase(fetchEntries.pending, (state) => {
