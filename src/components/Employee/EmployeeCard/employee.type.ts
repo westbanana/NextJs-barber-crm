@@ -1,4 +1,4 @@
-import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 
 export type fromToFormat = {
   from: string
@@ -11,7 +11,7 @@ export type workScheduleType = {
 }
 
 export interface IEmployee {
-  completedEntries: IEntries[]
+  completedEntries: IEntry[]
   id: string | undefined,
   name: string | undefined,
   position: string | undefined,

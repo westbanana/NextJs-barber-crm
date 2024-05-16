@@ -1,7 +1,7 @@
-import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { convertObjectToIds } from '@helpers/convertObjectToIds';
 
-export const newEntry:IEntries = {
+export const newEntry:IEntry = {
   time: '',
   completed: false,
   client: '',

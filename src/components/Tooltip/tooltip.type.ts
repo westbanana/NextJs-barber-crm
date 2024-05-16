@@ -6,4 +6,5 @@ export type TooltipProps = {
   place?: PlacesType,
   id: string,
   className?: string,
+  disabled?: boolean
 }

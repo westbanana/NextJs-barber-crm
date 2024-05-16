@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import { getOpenedEntry } from '@components/Entry/selectors/getOpenedEntry';
-import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
 import { newEntry } from '@constants/newEntry';
 
@@ -16,7 +16,7 @@ import { changeOpenedEntry, clearOpenedEntry } from '@/components/Entry/slices/e
 
 export type EntryOpenerProps = {
   children: ReactNode,
-  currentEntry?: IEntries
+  currentEntry?: IEntry
   mode: EntryCardMode
 }
 

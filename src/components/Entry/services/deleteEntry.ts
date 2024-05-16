@@ -1,13 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { EntryInfo } from '@components/Entry/MiniEntry/Info/info.type';
 
 import { deleteEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
 
 export const deleteEntry = createAsyncThunk(
   'employee/deleteEmployee',
-  async (entry:IEntries, { rejectWithValue }) => {
+  async (entry:IEntry, { rejectWithValue }) => {
     const { id } = entry;
     try {
       const response = await toast.promise(

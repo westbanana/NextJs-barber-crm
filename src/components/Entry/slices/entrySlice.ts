@@ -1,31 +1,24 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
-import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { updateEntry } from '@components/Entry/services/updateEntry';
 import { fetchEntries } from '@components/Entry/services/fetchEntries';
-import dayjs from 'dayjs';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import { fetchClientsAndEmployees, fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
+import { fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { createEntry } from '@components/Entry/services/createEntry';
 import { completeEntry } from '@components/Entry/services/completeEntry';
-import { EntryInfo } from '@components/Entry/MiniEntry/Info/info.type';
 
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
 
 export interface EntriesState {
-  entryList: IEntries[],
-  todayEntries: IEntries[],
+  entryList: IEntry[],
+  todayEntries: IEntry[],
   loading: boolean,
-  openedEntry: IEntries | undefined
+  openedEntry: IEntry | undefined
   entriesDates: string[];
   error: string | undefined;
   mode: EntryCardMode | undefined
-  clientsAndEmployees: {
-    clients: IClient[],
-    employees: IEmployee[]
-  }
 }
 
 const initialState: EntriesState = {
@@ -36,16 +29,12 @@ const initialState: EntriesState = {
   entriesDates: [],
   error: undefined,
   mode: undefined,
-  clientsAndEmployees: {
-    clients: [],
-    employees: [],
-  },
 };
 export const entrySlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {
-    changeOpenedEntry: (state, action:PayloadAction<IEntries>) => {
+    changeOpenedEntry: (state, action:PayloadAction<IEntry>) => {
       state.openedEntry = action.payload;
     },
     clearOpenedEntry: (state) => {
@@ -82,26 +71,9 @@ export const entrySlice = createSlice({
     });
     builder.addCase(fetchTodayEntries.fulfilled, (state, action) => {
       state.loading = false;
-      state.todayEntries = action.payload.neededEntries as IEntries[];
-      state.clientsAndEmployees = {
-        clients: action.payload.allClients as IClient[],
-        employees: action.payload.allEmployees as IEmployee[],
-      };
+      state.todayEntries = action.payload.todayEntries as IEntry[];
     });
     builder.addCase(fetchTodayEntries.rejected, (state, action) => {
-      const { message } = action.payload as ErrorResponse;
-      state.loading = false;
-      state.error = message;
-    });
-    builder.addCase(fetchClientsAndEmployees.pending, (state) => {
-      state.error = undefined;
-      state.loading = true;
-    });
-    builder.addCase(fetchClientsAndEmployees.fulfilled, (state, action) => {
-      state.loading = false;
-      state.clientsAndEmployees = action.payload;
-    });
-    builder.addCase(fetchClientsAndEmployees.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
       state.loading = false;
       state.error = message;
@@ -110,7 +82,7 @@ export const entrySlice = createSlice({
       state.error = undefined;
       state.loading = true;
     });
-    builder.addCase(updateEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
+    builder.addCase(updateEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.loading = false;
       state.entryList = state.entryList.map((entry) => {
         if (entry.id === action.payload.id) {
@@ -129,7 +101,7 @@ export const entrySlice = createSlice({
       state.error = undefined;
       state.loading = true;
     });
-    builder.addCase(deleteEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
+    builder.addCase(deleteEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.loading = false;
       state.entryList = state.entryList.filter((entry) => entry.id !== action.payload.id);
       state.todayEntries = state.todayEntries.filter((entry) => entry.id !== action.payload.id);
@@ -144,7 +116,7 @@ export const entrySlice = createSlice({
       state.error = undefined;
       state.loading = true;
     });
-    builder.addCase(createEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
+    builder.addCase(createEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.loading = false;
       state.entryList = [...state.entryList, action.payload];
       state.openedEntry = undefined;
@@ -158,7 +130,7 @@ export const entrySlice = createSlice({
       state.error = undefined;
       state.loading = true;
     });
-    builder.addCase(completeEntry.fulfilled, (state, action:PayloadAction<IEntries>) => {
+    builder.addCase(completeEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.entryList = state.entryList.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
       state.loading = false;
     });

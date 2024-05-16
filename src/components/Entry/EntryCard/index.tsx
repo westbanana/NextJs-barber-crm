@@ -9,22 +9,21 @@ import {
 } from 'formik';
 import { Trash2, X } from 'lucide-react';
 import dayjs from 'dayjs';
-import { IClient, IEntries } from '@components/Entry/MiniEntry/entries.type';
-import { fetchClientsAndEmployees } from '@components/Entry/services/fetchEntryDates';
-import { getClientsAndEmployees } from '@components/Entry/selectors/getClientsAndEmployees';
+import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { changeFormikField, changeFormikFields } from '@helpers/changeFormikField';
 import { updateEntry } from '@components/Entry/services/updateEntry';
 import { convertObjectToIds } from '@helpers/convertObjectToIds';
 import { createEntry } from '@components/Entry/services/createEntry';
 import Card from '@components/ui/Card/Card';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
+import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getClientList } from '@components/Client/selectors/getClientList';
 
 import cls from './style.module.scss';
 
 import DateTimePicker from '@/components/DatePicker';
 import Select from '@/components/ui/Select/Select';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
-import { getEntriesLoading } from '@/components/Entry/selectors/getEntriesLoading';
 import { getOpenedEntry } from '@/components/Entry/selectors/getOpenedEntry';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { barberServices, IBarberServices } from '@/constants/barber-services';
@@ -45,14 +44,13 @@ const EntryCard = memo(({
 }:EntryEditCardProps) => {
   const dispatch = useAppDispatch();
   const currentEntryData = useAppSelector(getOpenedEntry);
-  const clientsAndEmployees = useAppSelector(getClientsAndEmployees);
-  const clients = clientsAndEmployees?.clients ?? [];
-  const employees = clientsAndEmployees?.employees ?? [];
+  const employees = useAppSelector(getEmployeeList);
+  const clients = useAppSelector(getClientList);
   const entryDate = dayjs(`${currentEntryData?.date} ${currentEntryData?.time}`);
   const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
   const datePickerOpenedRef = useRef<boolean>(false);
-  const onSubmitHandler = (values:IEntries) => {
-    const formattedValues = convertObjectToIds<IEntries>(values);
+  const onSubmitHandler = (values:IEntry) => {
+    const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {
       dispatch(updateEntry(formattedValues));
     }

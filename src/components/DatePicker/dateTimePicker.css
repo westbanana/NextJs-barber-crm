@@ -1,3 +1,20 @@
+body .mui-z17wx0-MuiPaper-root-MuiPickersPopper-paper {
+    background-color: var(--bg-color);
+    border: 1px solid var(--bg-color);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+}
+
+body .mui-z17wx0-MuiPaper-root-MuiPickersPopper-paper span,
+body .mui-z17wx0-MuiPaper-root-MuiPickersPopper-paper button,
+body .mui-z17wx0-MuiPaper-root-MuiPickersPopper-paper div{
+    color: var(--text-color);
+}
+
+body .mui-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+    color: var(--text-color);
+}
+
 /*change text-color for OK button*/
 body .mui-1e6y48t-MuiButtonBase-root-MuiButton-root {
     color: var(--text-color);
@@ -98,6 +115,10 @@ body .mui-1vs7z2v-MuiYearCalendar-root::-webkit-scrollbar-corner {
     background-color: transparent;
 }
 
+body .mui-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root.Mui-disabled:not(.Mui-selected) {
+    color: var(--disabled-text);
+}
+
 /*year button hover*/
 body .mui-1ep1a8e-MuiPickersYear-root .mui-innj4t-MuiPickersYear-yearButton:hover {
     background-color: var(--hover-color);
@@ -116,7 +137,7 @@ body .mui-14iq4xa-MuiDayCalendar-root .mui-1wy8uaa-MuiButtonBase-root-MuiPickers
 body .mui-14iq4xa-MuiDayCalendar-root .mui-23p0if-MuiButtonBase-root-MuiPickersDay-root.Mui-selected,
 body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:focus-visible,
 body .mui-1anqmj6-MuiPopper-root-MuiPickersPopper-root ul .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item.Mui-selected:hover {
-    background-color: var(--bg-color-inverted);
+    background-color: var(--hover-color);
 }
 
 body .mui-z3c6am-MuiFormControl-root-MuiTextField-root:hover .mui-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,

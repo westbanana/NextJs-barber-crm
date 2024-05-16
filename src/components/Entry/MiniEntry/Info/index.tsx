@@ -15,11 +15,10 @@ const MiniEntryInfo = ({ entryInfo, entryId }:InfoProps) => {
   const {
     time, date,
   } = entryInfo;
-
   return (
     <>
       <InfoIcon data-tooltip-id={`entry-info-${entryId}`} />
-      <Tooltip id={`entry-info-${entryId}`}>
+      <Tooltip id={`entry-info-${entryId}`} disabled={entryInfo.completed}>
         <ul className={cls.infoList}>
           <li>
             {`Майстер: ${employeeName}`}

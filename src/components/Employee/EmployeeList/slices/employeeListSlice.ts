@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 
 import { EmployeeCardMode } from '@/components/Employee/EmployeeCard/employee-card.type';
 import { ErrorResponse, fetchEmployeeList } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
@@ -87,6 +88,18 @@ export const employeeListSlice = createSlice({
       state.data = state.data.filter((employee) => employee.id !== action.payload.id);
     });
     builder.addCase(deleteEmployee.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(fetchTodayEntries.pending, (state) => {
+      state.error = undefined;
+      state.loading = true;
+    });
+    builder.addCase(fetchTodayEntries.fulfilled, (state, action) => {
+      state.loading = false;
+      state.data = action.payload.allEmployees;
+    });
+    builder.addCase(fetchTodayEntries.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message;
     });

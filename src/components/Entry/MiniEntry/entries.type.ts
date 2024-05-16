@@ -9,7 +9,7 @@ export type IClient = {
   clientIcon: string
 }
 
-export type IEntries = {
+export type IEntry = {
   id: string,
   completed: boolean,
   employee: IEmployee | string,
@@ -19,12 +19,6 @@ export type IEntries = {
   date: string
 }
 
-export type IEntriesForEntry = Omit<IEntries, 'employee' | 'client' | 'services'> & {
-  employee: IEmployee,
-  client: IClient,
-  services: IBarberServices[]
-}
-
 export type EntryProps = {
-  currentEntry: IEntriesForEntry
+  currentEntry: IEntry
 }

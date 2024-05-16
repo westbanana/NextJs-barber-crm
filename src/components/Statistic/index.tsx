@@ -31,7 +31,7 @@ const Statistic = ({ employees }: {employees: IEmployee[]}) => {
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip content={<StatisticTooltip />} cursor={{ fill: 'var(--chart-inverted)' }} />
-          <Bar dataKey="completed" fill="var(--chart)" activeBar={{ }} />
+          <Bar dataKey="completed" fill="var(--chart)" />
         </BarChart>
       </ResponsiveContainer>
     </>

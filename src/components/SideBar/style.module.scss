@@ -4,16 +4,12 @@
   position: relative;
   padding-top: 20px;
   background: var(--bg-color);
-  transition:
-    width var(--transition),
-    background-color var(--transition);
+  transition: width var(--transition);
   display: flex;
   flex-direction: column;
   &:not(.collapsed) {
     .toggle {
-      svg {
         transform: rotate(180deg);
-      }
     }
   }
 }

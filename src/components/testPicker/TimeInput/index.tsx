@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 
 import cls from './style.module.scss';
 
@@ -9,7 +9,7 @@ export enum timeFieldType {
   MINUTE = 'minute',
 }
 
-const TimeInput = ({ time = '00:00', callback }: {time: string, callback: (value: string) => void}) => {
+const TimeInput = ({ time, callback }: {time: string, callback: (value: string) => void}) => {
   const [hour, minute] = time.split(':');
   const [hourValue, setHoursValue] = useState(hour);
   const [minuteValue, setMinuteValue] = useState(minute);
@@ -87,7 +87,6 @@ const TimeInput = ({ time = '00:00', callback }: {time: string, callback: (value
         value={minuteValue}
         onChange={(e) => handleTimeChange(e, setMinuteValue, timeFieldType.MINUTE)}
         onBlur={() => callback(`${hourValue}:${minuteValue}`)}
-        // onBlur={onMinuteBlur}
       />
     </div>
   );

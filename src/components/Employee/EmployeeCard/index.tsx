@@ -95,7 +95,7 @@ const EmployeeCard = ({
                     {(props: FieldProps) => (
                       <TimeInput
                         callback={(value) => {
-                          changeFormikField<string>([value], props.field);
+                          changeFormikField<string>(value, props.field);
                         }}
                         time={values?.work_schedule?.time.from}
                       />
@@ -108,7 +108,7 @@ const EmployeeCard = ({
                     {(props: FieldProps) => (
                       <TimeInput
                         callback={(value) => {
-                          changeFormikField<string>([value], props.field);
+                          changeFormikField<string>(value, props.field);
                         }}
                         time={values?.work_schedule?.time.to}
                       />
@@ -176,6 +176,7 @@ const EmployeeCard = ({
             )}
           </div>
         </>
+
       )}
     </Card>
   );

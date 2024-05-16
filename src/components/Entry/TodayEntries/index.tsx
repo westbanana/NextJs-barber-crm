@@ -11,11 +11,9 @@ import { getEntryList } from '@components/Entry/selectors/getEntryList';
 import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { Plus } from 'lucide-react';
-import { IEntriesForEntry } from '@components/Entry/MiniEntry/entries.type';
 import Accordion from '@components/ui/Accordion/Accordion';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
 import Skeleton from '@components/ui/Skeleton/Skeleton';
-import { fetchEntries } from '@components/Entry/services/fetchEntries';
 
 import cls from './style.module.scss';
 
@@ -31,7 +29,7 @@ const TodayEntries = () => {
     [cls.emptyList]: !todayEntries.length,
     [cls.openedList]: listOpened,
   };
-  // TODO: переделать лишние запросы при изменении entryList
+
   useEffect(() => {
     dispatch(fetchTodayEntries());
   }, [dispatch, entryList]);
@@ -60,7 +58,7 @@ const TodayEntries = () => {
           {(todayEntries.length)
             ? (todayEntries.map((entry) => (
               <MiniEntry
-                currentEntry={(entry as IEntriesForEntry)}
+                currentEntry={entry}
                 key={entry.id}
               />
             )))

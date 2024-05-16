@@ -35,7 +35,7 @@ export const fetchTodayEntries = createAsyncThunk(
         });
       });
       return {
-        neededEntries,
+        todayEntries: neededEntries,
         allClients,
         allEmployees,
       };

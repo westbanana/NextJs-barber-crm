@@ -7,7 +7,7 @@ import EmployeeList from '@/components/Employee/EmployeeList';
 
 const EmployeesPage = () => (
   <Page className={cls.EmployeesPage}>
-    <h1 className={cls.pageTitle}>Робітники</h1>
+    <h1 className={cls.pageTitle}>Employees</h1>
     <EmployeeList />
   </Page>
 );

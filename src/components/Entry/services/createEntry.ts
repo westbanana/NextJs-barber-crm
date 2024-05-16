@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 
 export const createEntry = createAsyncThunk(
   'entries/createEntry',
-  async (entry:IEntries, { rejectWithValue }) => {
+  async (entry:IEntry, { rejectWithValue }) => {
     try {
       const response = await fetch('http://localhost:4000/entries', {
         method: 'POST',

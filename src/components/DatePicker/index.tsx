@@ -9,8 +9,6 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import './dateTimePicker.css';
 
-import { log } from 'node:util';
-
 import cls from './style.module.scss';
 
 import { entriesPossibleTime } from '@/constants/entriesPossibleTime';

@@ -5,13 +5,14 @@ import {
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
 import { classNames, Mods } from '@lib/classNames/classNames';
-import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
+import { EntryProps, IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { IBarberServices } from '@constants/barber-services';
 import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import MiniEntryController from '@components/Entry/MiniEntry/MiniEntryController';
 import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
+import Tooltip from '@components/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
 
@@ -19,24 +20,21 @@ const MiniEntry = memo(({
   currentEntry,
 }:EntryProps) => {
   const {
-    employee, time, client, services, id, date,
+    time, services, id, date, completed,
   } = currentEntry;
-  const [employeeFirstName, employeeLastName] = employee && employee.name
+  const employee = currentEntry.employee as IEmployee;
+  const client = currentEntry.client as IClient;
+  const [employeeFirstName, employeeLastName] = employee?.name
     ? employee.name.split(' ')
     : ['?', '?'];
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
   const [clientFirstName, clientLastName] = client.name.split(' ');
   const clientShortName = `${clientLastName} ${clientFirstName[0]}.`;
   const selectedServicesNames:string[] = services.map((serv) => serv.name);
-  const totalPrice = services.reduce(
-    (accumulator:number, currentValue:IBarberServices) => accumulator + currentValue.price,
-    0,
-  );
   const entryMods:Mods = {
     [cls.completed]: currentEntry.completed,
   };
   const entryOpenerMode:EntryCardMode = currentEntry.completed ? EntryCardMode.READ_ONLY : EntryCardMode.EDIT;
-
   return (
     <EntryOpener currentEntry={currentEntry} mode={entryOpenerMode}>
       <div className={classNames(cls.entry, entryMods, [])}>
@@ -46,11 +44,17 @@ const MiniEntry = memo(({
             value={employee?.userIcon}
             className={cls.iconSize}
           />
-          <span className={classNames(cls.name, {}, [cls.withBg])}>{employeeShortName}</span>
+          <span
+            className={classNames(cls.name, {}, [cls.withBg])}
+            data-tooltip-id={`employee-name-${id}`}
+          >
+            {employeeShortName}
+          </span>
         </div>
         <span className={classNames(cls.time, {}, [cls.withBg])}>{time}</span>
         {!currentEntry.completed && (
           <MiniEntryController
+            id={currentEntry.id}
             entry={currentEntry}
             className={cls.controller}
           />
@@ -84,9 +88,20 @@ const MiniEntry = memo(({
           <div className={cls.entryInfo}>
             <MiniEntryInfo entryInfo={currentEntry} entryId={id} />
           </div>
-          <TotalPrice services={services} totalPrice={totalPrice} entryId={id} />
+          <TotalPrice entry={currentEntry} />
         </div>
       </div>
+      <>
+        <Tooltip id={`employee-name-${id}`} disabled={completed}>
+          <span>{employee.name}</span>
+        </Tooltip>
+        <Tooltip id={`delete-entry-${id}`} disabled={completed}>
+          Complete entry
+        </Tooltip>
+        <Tooltip id={`complete-entry-${id}`} disabled={completed}>
+          Delete Entry
+        </Tooltip>
+      </>
     </EntryOpener>
   );
 });

@@ -12,8 +12,10 @@ export interface TopCardProps {
 const TopCard = ({ employee, place }: TopCardProps) => {
   const [employeeFirstName, employeeLastName] = employee && employee.name
     ? employee.name.split(' ')
-    : ['?', '?'];
-  const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
+    : ['Unknown', 'User'];
+  const employeeShortName = !employeeLastName || !employeeFirstName
+    ? `${employeeLastName || ''} ${employeeFirstName}`
+    : `${employeeLastName || ''} ${employeeFirstName[0]}.`;
   const cardMods: Mods = {
   };
   return (

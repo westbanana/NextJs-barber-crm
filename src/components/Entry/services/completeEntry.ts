@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IEntries } from '@components/Entry/MiniEntry/entries.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 
 export const completeEntry = createAsyncThunk(
   'entries/completeEntry',
-  async (entry:IEntries, { rejectWithValue }) => {
+  async (entry:IEntry, { rejectWithValue }) => {
     try {
       const { employee, id } = entry;
       const employeeCompletedEntries = await fetch(`http://localhost:4000/employees/${employee}`)
