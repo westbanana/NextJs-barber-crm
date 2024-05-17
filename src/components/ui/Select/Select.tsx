@@ -5,13 +5,13 @@ import React, {
 } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-import { closeSelectTimeout } from './constants/close-select-timeout';
-import cls from './style.module.scss';
-
 import { SelectItem, SelectMode, SelectProps } from '@/components/ui/Select/select.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { outsideClick } from '@/helpers/outSideClick';
 import Label from '@/components/Label/Label';
+
+import cls from './style.module.scss';
+import { closeSelectTimeout } from './constants/close-select-timeout';
 
 const Select = ({
   data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT, disabled,
@@ -93,6 +93,7 @@ const Select = ({
   }, [handleOutsideClick, isOpened]);
 
   // TODO переделать логику если работаем с строками
+  // eslint-disable-next-line no-nested-ternary
   const resultStroke = Array.isArray(result) && true
     ? result.map((item) => typeof item !== 'string' && item?.name).join(',')
     : resultTypeObject && result.name
@@ -121,6 +122,7 @@ const Select = ({
                   cls.item,
                   {
                     // TODO переделать логику если работаем с строками
+                    // eslint-disable-next-line no-nested-ternary
                     [cls.selectedItem]: Array.isArray(result)
                       ? result.includes(item)
                       : (itemTypeObject && resultTypeObject) && result.id === item.id

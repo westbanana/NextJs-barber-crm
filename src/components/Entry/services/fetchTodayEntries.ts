@@ -1,23 +1,44 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IClient } from '@components/Entry/MiniEntry/entries.type';
-import { getTodayEntries } from '@components/Entry/services/getTodayEntries';
-import { getAllEmployees, getEmployees } from '@components/Entry/services/getEmployees';
-import { getAllClients, getClients } from '@components/Entry/services/getClients';
+import dayjs from 'dayjs';
+
+import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
+import { getAllEntries } from '@components/Entry/services/getTodayEntries';
+import { getAllEmployees } from '@components/Entry/services/getEmployees';
+import { getAllClients } from '@components/Entry/services/getClients';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { barberServices, IBarberServices } from '@constants/barber-services';
 
+// fetchMainPageInfo
 export const fetchTodayEntries = createAsyncThunk(
   'entries/fetchTodayEntries',
   async (_, { rejectWithValue }) => {
     try {
-      const todayEntries = await getTodayEntries();
-      const employeeIds = new Set(todayEntries.map((entry) => entry.employee));
-      const employeeIdsArray = Array.from(employeeIds);
-      const clientIds = todayEntries.map((entry) => entry.client);
+      // Все записи
+      const allEntries = await getAllEntries();
+      // Все работники
       const allEmployees = await getAllEmployees();
+      // Все клиенты
       const allClients = await getAllClients();
-      const todayEmployees = allEmployees.filter((employee:IEmployee) => employeeIdsArray.includes(employee.id!!));
+
+      // Дата (сегодня)
+      const currentDate = dayjs().format('YYYY-M-D');
+      // Записи у которых дата равна сегодняшней дате + сортировка по возрастанию
+      const todayEntries:IEntry[] = allEntries
+        .filter((entry: IEntry) => entry.date === currentDate)
+        .sort((a:IEntry, b:IEntry) => a.time.localeCompare(b.time));
+
+      // Id работников без дубликатов
+      const employeeIds = Array.from(new Set(todayEntries.map((entry) => entry.employee)));
+
+      // Id клиентов (дубликатов быть не может, так как клиент всегда один)
+      const clientIds = todayEntries.map((entry) => entry.client);
+
+      // Получаем сущности с информацией работников
+      const todayEmployees = allEmployees.filter((employee:IEmployee) => employeeIds.includes(employee.id!!));
+      // Получаем сущности с информацией клиентов
       const todayClients = allClients.filter((client:IClient) => clientIds.includes(client.id!!));
+
+      // Меняем id сущностей на их данные в самой записи
       const neededEntries = todayEntries.map((entry) => {
         const {
           employee,
@@ -34,7 +55,9 @@ export const fetchTodayEntries = createAsyncThunk(
           services: selectedServices,
         });
       });
+
       return {
+        allEntries,
         todayEntries: neededEntries,
         allClients,
         allEmployees,

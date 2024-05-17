@@ -2,11 +2,11 @@
 
 import React from 'react';
 
-import cls from './style.module.scss';
-
 import { TotalPriceProps } from '@/components/Entry/TotalPrice/total-price.type';
 import { IBarberServices } from '@/constants/barber-services';
 import Tooltip from '@/components/Tooltip/Tooltip';
+
+import cls from './style.module.scss';
 
 const TotalPrice = ({ entry }:TotalPriceProps) => {
   const totalPrice = entry.services.reduce(

@@ -1,4 +1,5 @@
-import React, { ComponentPropsWithoutRef, FC, ReactNode } from 'react';
+import React, { ComponentPropsWithoutRef, FC } from 'react';
+
 import { classNames } from '@lib/classNames/classNames';
 
 import cls from './style.module.scss';

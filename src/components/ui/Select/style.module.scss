@@ -102,7 +102,7 @@ $transition-timing-ease-out: ease-out;
     right: 0;
     bottom: 0;
     left: 0;
-    background: linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%);
+    background: var(--selectItemHover);
     opacity: 0;
     transition: opacity $transition-duration-slow $transition-timing-linear;
   }

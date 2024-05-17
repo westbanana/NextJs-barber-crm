@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimeView } from '@mui/x-date-pickers';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 import './dateTimePicker.css';
 
-import cls from './style.module.scss';
-
 import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
+
+import cls from './style.module.scss';
 
 export type DateTimePickerProps = {
   dates: string[],

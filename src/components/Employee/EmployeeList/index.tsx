@@ -6,8 +6,6 @@ import React, {
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
 
-import cls from './style.module.scss';
-
 import { IEmployeeProps } from '@/components/Employee/EmployeeList/employee-list.type';
 import Button from '@/components/ui/Button/Button';
 import { classNames } from '@/lib/classNames/classNames';
@@ -24,6 +22,8 @@ import { getEmployeeLoading } from '@/components/Employee/EmployeeCard/selectors
 import { deleteEmployee } from '@/components/Employee/EmployeeCard/services/deleteEmployee';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import Skeleton from '@/components/ui/Skeleton/Skeleton';
+
+import cls from './style.module.scss';
 
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
@@ -60,41 +60,43 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     dispatch(closeCard());
   };
 
-  return loading ? (<Skeleton />) : (
-    <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
-      <div className={cls.optionsWrapper}>
-        <Button
-          onClick={deleteRow}
-          disabled={!selectedRow?.length}
-          className={cls.trashBacket}
-          withoutBorder
-        >
-          <Trash2 />
-        </Button>
-        <Button
-          withoutBorder
-          onClick={openCreateCard}
-        >
-          <PlusSquare />
-        </Button>
-      </div>
-      <AgGridReact
-        ref={gridRef}
-        overlayNoRowsTemplate="Робітники відсутні🤷‍♂️"
-        rowData={employees}
-        columnDefs={ColDefs}
-        rowSelection="single"
-        defaultColDef={defaultColProps}
-        onSelectionChanged={onSelectionChanged}
-      />
-      {cardMod && (
-        <EmployeeCard
-          mode={cardMod}
-          onClose={closeEmployeeCard}
+  return loading
+    ? (<Skeleton rounded height="771px" width="100%" />)
+    : (
+      <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
+        <div className={cls.optionsWrapper}>
+          <Button
+            onClick={deleteRow}
+            disabled={!selectedRow?.length}
+            className={cls.trashBacket}
+            withoutBorder
+          >
+            <Trash2 />
+          </Button>
+          <Button
+            withoutBorder
+            onClick={openCreateCard}
+          >
+            <PlusSquare />
+          </Button>
+        </div>
+        <AgGridReact
+          ref={gridRef}
+          overlayNoRowsTemplate="Робітники відсутні🤷‍♂️"
+          rowData={employees}
+          columnDefs={ColDefs}
+          rowSelection="single"
+          defaultColDef={defaultColProps}
+          onSelectionChanged={onSelectionChanged}
         />
-      )}
-    </div>
-  );
+        {cardMod && (
+          <EmployeeCard
+            mode={cardMod}
+            onClose={closeEmployeeCard}
+          />
+        )}
+      </div>
+    );
 };
 
 export default EmployeeList;

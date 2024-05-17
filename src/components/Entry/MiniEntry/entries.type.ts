@@ -1,3 +1,5 @@
+import { ComponentPropsWithoutRef } from 'react';
+
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IBarberServices } from '@constants/barber-services';
 
@@ -19,6 +21,6 @@ export type IEntry = {
   date: string
 }
 
-export type EntryProps = {
+export interface EntryProps extends ComponentPropsWithoutRef<'div'>{
   currentEntry: IEntry
 }

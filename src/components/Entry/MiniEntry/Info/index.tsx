@@ -1,5 +1,6 @@
 import React from 'react';
 import { Info as InfoIcon } from 'lucide-react';
+
 import { InfoProps } from '@components/Entry/MiniEntry/Info/info.type';
 import Tooltip from '@components/Tooltip/Tooltip';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';

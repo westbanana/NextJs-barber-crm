@@ -1,4 +1,4 @@
-body[data-theme = "lightTheme"] {
+body.lightTheme {
     --bg-color: hsl(233 25% 90%);
     --bg-color-inverted: hsl(240 5.88% 10%);
     --chart: rgba(35, 35, 35, 0.78);
@@ -6,19 +6,22 @@ body[data-theme = "lightTheme"] {
     --primary-color: black;
     --primary-color-inverted: white;
     --text-color: hsl(201.81999999999994 24.44% 8.82%);
+    --svg-colors: hsl(201.81999999999994 24.44% 8.82%);
     --text-color-inverted: hsl(210 5.56% 92.94%);
     --border-color: rgba(0, 0, 0, 0.14);
     --hover-color: rgba(0, 0, 0, 0.24);
     --shadow: rgba(72, 73, 73, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14)  0px 0px 0px 1px;
     --disabled-text: hsla(0, 0%, 17%, 0.32);
+    --selectItemHover:linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%)
 }
 
-body[data-theme = "darkTheme"] {
+body.darkTheme {
     --bg-color: hsl(240 5.88% 10%);
     --bg-color-inverted: hsl(233 25% 90%);
     --chart: rgba(229, 229, 229, 0.78);
     --chart-inverted: rgba(35, 35, 35, 0.78);
     --text-color: hsl(210 5.56% 92.94%);
+    --svg-colors: hsl(210 5.56% 92.94%);
     --text-color-inverted: hsl(201.81999999999994 24.44% 8.82%);
     --primary-color: white;
     --primary-color-inverted: black;
@@ -26,4 +29,22 @@ body[data-theme = "darkTheme"] {
     --hover-color: rgba(255, 255, 255, 0.24);
     --shadow: rgb(0 0 0 / 25%) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
     --disabled-text: hsla(0, 0%, 100%, 0.09);
+    --selectItemHover:linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%)
+}
+
+body.greenTheme {
+    --bg-color: hsl(122, 27%, 79%);
+    --bg-color-inverted: hsl(120,32%,58%);
+    --text-color: hsl(120,32%,58%);
+    --svg-colors: hsl(120,32%,58%);
+    --text-color-inverted:hsl(122,33%,83%);
+    --chart: hsl(120,32%,58%);
+    --chart-inverted: hsl(125,34%,74%);
+    --primary-color: white;
+    --primary-color-inverted: black;
+    --border-color: rgba(0, 0, 0, 0.07);
+    --hover-color: hsl(125,34%,74%);
+    --shadow: rgb(0 0 0 / 25%) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
+    --disabled-text: hsla(120, 32%, 58%, 0.55);
+    --selectItemHover:linear-gradient(90.43202015117753deg, hsla(120, 32%, 58%, 0.3), hsla(122, 27%, 79%, 0.0) 100%)
 }

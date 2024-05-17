@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import Label from '@components/Label/Label';
 import Statistic from '@components/Statistic';
 import { classNames } from '@lib/classNames/classNames';

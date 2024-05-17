@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 
+import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 import { EmployeeCardMode } from '@/components/Employee/EmployeeCard/employee-card.type';
 import { ErrorResponse, fetchEmployeeList } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
 import { updateEmployee } from '@/components/Employee/EmployeeCard/services/updateEmployee';

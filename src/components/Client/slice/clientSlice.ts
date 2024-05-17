@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-
 import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
 
 export interface ClientsState {

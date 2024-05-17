@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import { Loader } from 'lucide-react';
 
-import cls from './style.module.scss';
-
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { AlignVerticalText, ButtonProps } from '@/components/ui/Button/button.type';
+
+import cls from './style.module.scss';
 
 const Button = memo(({
   children,

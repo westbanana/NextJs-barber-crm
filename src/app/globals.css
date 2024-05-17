@@ -40,10 +40,21 @@ body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   color: var(--text-color);
-  svg {
-    color: var(--primary-color)
-  }
 }
+
+html.darkTheme {
+  background-color: red;
+}
+
+
+html.lightTheme {
+  background-color: blue;
+}
+
+body svg {
+    color: var(--svg-colors)
+}
+
 
 ul[class],
 ol[class] {

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 
 export const createEntry = createAsyncThunk(

@@ -2,17 +2,14 @@
 
 import React from 'react';
 import { Field, FieldProps } from 'formik';
-import { Trash2, X } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
+
 import { SelectItem, SelectMode } from '@components/ui/Select/select.type';
 import { changeFormikField } from '@helpers/changeFormikField';
 import Card from '@components/ui/Card/Card';
 import { deleteEmployee } from '@components/Employee/EmployeeCard/services/deleteEmployee';
-
-import cls from './style.module.scss';
-
 import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
-import Button from '@/components/ui/Button/Button';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import TimeInput from '@/components/testPicker/TimeInput';
@@ -25,6 +22,8 @@ import { getEmployeeLoading } from '@/components/Employee/EmployeeCard/selectors
 import { updateEmployee } from '@/components/Employee/EmployeeCard/services/updateEmployee';
 import { createEmployee } from '@/components/Employee/EmployeeCard/services/createEmployee';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
+
+import cls from './style.module.scss';
 
 const EmployeeCard = ({
   employeeData = newEmployee,

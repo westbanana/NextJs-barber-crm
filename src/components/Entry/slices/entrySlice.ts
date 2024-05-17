@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { updateEntry } from '@components/Entry/services/updateEntry';
 import { fetchEntries } from '@components/Entry/services/fetchEntries';
@@ -7,7 +8,6 @@ import { fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { createEntry } from '@components/Entry/services/createEntry';
 import { completeEntry } from '@components/Entry/services/completeEntry';
-
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
 import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
 
@@ -56,7 +56,7 @@ export const entrySlice = createSlice({
       state.error = undefined;
       state.loading = true;
     });
-    builder.addCase(fetchEntries.fulfilled, (state, action) => {
+    builder.addCase(fetchEntries.fulfilled, (state, action: PayloadAction<IEntry[]>) => {
       state.entryList = action.payload;
       state.loading = false;
     });
@@ -72,6 +72,7 @@ export const entrySlice = createSlice({
     builder.addCase(fetchTodayEntries.fulfilled, (state, action) => {
       state.loading = false;
       state.todayEntries = action.payload.todayEntries as IEntry[];
+      state.entryList = action.payload.allEntries as IEntry[];
     });
     builder.addCase(fetchTodayEntries.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
@@ -132,6 +133,7 @@ export const entrySlice = createSlice({
     });
     builder.addCase(completeEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.entryList = state.entryList.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
+      state.todayEntries = state.todayEntries.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
       state.loading = false;
     });
     builder.addCase(completeEntry.rejected, (state, action) => {

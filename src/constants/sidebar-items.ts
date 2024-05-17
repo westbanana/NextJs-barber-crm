@@ -1,4 +1,5 @@
 import { Home, Scissors, Settings } from 'lucide-react';
+
 import { PAGES_LINKS_INSTANCE } from '@/config/links';
 import type { ISidebarItem } from '@/components/SideBar/types/sidebar-items.type';
 

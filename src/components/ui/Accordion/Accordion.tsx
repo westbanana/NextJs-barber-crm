@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronsDownUp, ChevronsUpDown } from 'lucide-react';
+
 import { classNames } from '@lib/classNames/classNames';
 
 import cls from './style.module.scss';

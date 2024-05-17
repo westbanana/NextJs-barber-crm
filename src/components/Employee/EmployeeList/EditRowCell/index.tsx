@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CustomCellRendererProps } from 'ag-grid-react';
 import { SquarePen } from 'lucide-react';
+
 import EmployeeCard from '@components/Employee/EmployeeCard';
 import { EmployeeCardMode } from '@components/Employee/EmployeeCard/employee-card.type';
 

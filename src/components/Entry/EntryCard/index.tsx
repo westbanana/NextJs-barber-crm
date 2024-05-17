@@ -1,14 +1,14 @@
 'use client';
 
 import React, {
-  memo, useCallback,
-  useEffect, useRef, useState,
+  memo, useState,
 } from 'react';
 import {
   Field, FieldProps,
 } from 'formik';
-import { Trash2, X } from 'lucide-react';
+import { Trash2 } from 'lucide-react';
 import dayjs from 'dayjs';
+
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { changeFormikField, changeFormikFields } from '@helpers/changeFormikField';
 import { updateEntry } from '@components/Entry/services/updateEntry';
@@ -18,9 +18,6 @@ import Card from '@components/ui/Card/Card';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
 import { getClientList } from '@components/Client/selectors/getClientList';
-
-import cls from './style.module.scss';
-
 import DateTimePicker from '@/components/DatePicker';
 import Select from '@/components/ui/Select/Select';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
@@ -30,6 +27,8 @@ import { barberServices, IBarberServices } from '@/constants/barber-services';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import { EntryCardMode, EntryEditCardProps } from '@/components/Entry/EntryCard/entry-card.type';
 import { SelectItem, SelectMode } from '@/components/ui/Select/select.type';
+
+import cls from './style.module.scss';
 
 export type TSelectsData = {
   clients: IClient[];
@@ -48,7 +47,6 @@ const EntryCard = memo(({
   const clients = useAppSelector(getClientList);
   const entryDate = dayjs(`${currentEntryData?.date} ${currentEntryData?.time}`);
   const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
-  const datePickerOpenedRef = useRef<boolean>(false);
   const onSubmitHandler = (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {

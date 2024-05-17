@@ -1,6 +1,6 @@
 import React, { ComponentPropsWithoutRef } from 'react';
+
 import Button from '@components/ui/Button/Button';
-import { useCardContext } from '@components/ui/Card/provider';
 
 interface CardButtonProps extends ComponentPropsWithoutRef<'button'> {
     onClick: () => void;

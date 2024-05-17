@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import { classNames, Mods } from '@lib/classNames/classNames';
@@ -7,9 +8,8 @@ import cls from './style.module.scss';
 
 export interface TopCardProps {
     employee: IEmployee;
-    place: number;
 }
-const TopCard = ({ employee, place }: TopCardProps) => {
+const TopCard = ({ employee }: TopCardProps) => {
   const [employeeFirstName, employeeLastName] = employee && employee.name
     ? employee.name.split(' ')
     : ['Unknown', 'User'];

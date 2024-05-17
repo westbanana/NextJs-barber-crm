@@ -26,7 +26,7 @@
       "node": {
         "paths": ["src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "baseUrl": "./src"
+        "baseUrl": "./src/"
       },
       "typescript": {}
     }
@@ -82,7 +82,7 @@
     "jsx-a11y/control-has-associated-label": "off",
     "react/require-default-props": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-props-no-spreading": "warn",
+    "react/jsx-props-no-spreading": "off",
     "react/function-component-definition": "off",
     "no-shadow": "off",
     "import/extensions": "off",

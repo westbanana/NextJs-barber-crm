@@ -1,6 +1,6 @@
 import { ComponentPropsWithoutRef } from 'react';
-import { IClient } from '@components/Entry/MiniEntry/entries.type';
 
+import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import { IBarberServices } from '@/constants/barber-services';
 

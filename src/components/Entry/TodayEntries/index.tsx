@@ -1,39 +1,35 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { Plus } from 'lucide-react';
+
 import MiniEntry from '@components/Entry/MiniEntry';
 import { classNames, Mods } from '@lib/classNames/classNames';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import { getEntryList } from '@components/Entry/selectors/getEntryList';
 import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
-import { Plus } from 'lucide-react';
 import Accordion from '@components/ui/Accordion/Accordion';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
 import Skeleton from '@components/ui/Skeleton/Skeleton';
+import Label from '@/components/Label/Label';
 
 import cls from './style.module.scss';
-
-import Label from '@/components/Label/Label';
 
 const TodayEntries = () => {
   const dispatch = useAppDispatch();
   const todayEntries = useAppSelector(getTodayEntries);
   const loading = useAppSelector(getEntriesLoading);
-  const entryList = useAppSelector(getEntryList);
   const [listOpened, setListOpened] = useState<boolean>(false);
   const listMods: Mods = {
     [cls.emptyList]: !todayEntries.length,
     [cls.openedList]: listOpened,
   };
-
   useEffect(() => {
     dispatch(fetchTodayEntries());
-  }, [dispatch, entryList]);
-
+  }, [dispatch]);
   const toggleList = () => {
     setListOpened((prev) => !prev);
   };

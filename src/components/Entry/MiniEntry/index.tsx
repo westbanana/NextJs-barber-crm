@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import {
-  Check, Menu, User, X,
+  Menu, User,
 } from 'lucide-react';
+
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
 import { classNames, Mods } from '@lib/classNames/classNames';
-import { EntryProps, IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { IBarberServices } from '@constants/barber-services';
+import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
 import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
@@ -20,7 +20,7 @@ const MiniEntry = memo(({
   currentEntry,
 }:EntryProps) => {
   const {
-    time, services, id, date, completed,
+    time, services, id, completed,
   } = currentEntry;
   const employee = currentEntry.employee as IEmployee;
   const client = currentEntry.client as IClient;
@@ -96,10 +96,10 @@ const MiniEntry = memo(({
           <span>{employee.name}</span>
         </Tooltip>
         <Tooltip id={`delete-entry-${id}`} disabled={completed}>
-          Complete entry
+          Delete Entry
         </Tooltip>
         <Tooltip id={`complete-entry-${id}`} disabled={completed}>
-          Delete Entry
+          Complete entry
         </Tooltip>
       </>
     </EntryOpener>

@@ -1,9 +1,10 @@
 import React, {
-  useCallback, useEffect, useMemo, useRef, useState,
+  useCallback, useEffect, useMemo, useRef,
 } from 'react';
-import CardBackground from '@components/ui/Card/CardBackground/CardBackground';
 import { Portal } from '@mui/base';
 import { Formik, FormikHandlers, FormikValues } from 'formik';
+
+import CardBackground from '@components/ui/Card/CardBackground/CardBackground';
 import { outsideClick } from '@helpers/outSideClick';
 import CardCloser from '@components/ui/Card/CardCloser/CardCloser';
 import { CardContext } from '@components/ui/Card/provider';

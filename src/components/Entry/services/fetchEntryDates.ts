@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { getAllClients } from '@components/Entry/services/getClients';
-import { getAllEmployees, getEmployees } from '@components/Entry/services/getEmployees';
 
 export const fetchEntryDates = createAsyncThunk(
   'entries/fetchEntriesDates',

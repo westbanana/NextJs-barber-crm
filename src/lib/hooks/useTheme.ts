@@ -7,6 +7,7 @@ import { LOCAL_STORAGE_THEME_KEY } from '@/constants/local-storage-keys';
 export enum Theme {
   DARK ='darkTheme',
   LIGHT = 'lightTheme',
+  GREEN = 'greenTheme'
 }
 
 const defaultTheme = typeof window !== 'undefined'
@@ -15,9 +16,10 @@ const defaultTheme = typeof window !== 'undefined'
 
 const useTheme = () => {
   const [theme, setTheme] = useState(defaultTheme);
-
   useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
+    const removeClass = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
+    document.body.classList.remove(removeClass);
+    document.body.classList.add(theme);
     localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
   }, [theme]);
 

@@ -3,7 +3,6 @@ import { getAllEmployees } from '@components/Entry/services/getEmployees';
 import { barberServices } from '@constants/barber-services';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
-import { TSelectsData } from '@components/Entry/EntryCard';
 
 export const getSelectsData = async () => {
   try {
@@ -16,7 +15,6 @@ export const getSelectsData = async () => {
       services,
     });
   } catch (e) {
-    console.error(e);
+    throw new Error('Server error');
   }
-  return null;
 };

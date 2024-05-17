@@ -1,6 +1,6 @@
 .mainContainer {
   display: flex;
-  background: rgba(0, 0, 0, 0.19);
+  background: var(--border-color);
   animation: blink 1.5s ease-in-out infinite;
 }
 
