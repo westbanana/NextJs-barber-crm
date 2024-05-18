@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  memo, useState,
+  memo,
 } from 'react';
 import {
   Field, FieldProps,
@@ -46,7 +46,6 @@ const EntryCard = memo(({
   const employees = useAppSelector(getEmployeeList);
   const clients = useAppSelector(getClientList);
   const entryDate = dayjs(`${currentEntryData?.date} ${currentEntryData?.time}`);
-  const [datePickerOpened, setDatePickerOpened] = useState<boolean>(false);
   const onSubmitHandler = (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {
@@ -73,7 +72,6 @@ const EntryCard = memo(({
       initialValues={currentEntryData}
       loading={false}
       onClose={onClose}
-      outsideClickCondition={!datePickerOpened}
     >
       {({
         values,
@@ -138,7 +136,6 @@ const EntryCard = memo(({
                       callback={(value) => dateTimePickerCallback(value, props)}
                       dates={entryDates}
                       defaultValue={entryDate}
-                      setOpened={setDatePickerOpened}
                       disabled={mode === EntryCardMode.READ_ONLY}
                     />
                   )}

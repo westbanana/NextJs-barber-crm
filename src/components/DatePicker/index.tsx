@@ -16,13 +16,12 @@ import cls from './style.module.scss';
 export type DateTimePickerProps = {
   dates: string[],
   defaultValue: dayjs.Dayjs | undefined | null
-  setOpened: (value: boolean) => void
   callback: (value:dayjs.Dayjs) => void
   disabled?: boolean
 }
 
 const DateTimePicker = ({
-  dates, defaultValue, setOpened, callback, disabled = false,
+  dates, defaultValue, callback, disabled = false,
 }: DateTimePickerProps) => {
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
@@ -67,20 +66,10 @@ const DateTimePicker = ({
     setSelectedDate(value);
   };
 
-  const onOpenHandler = () => {
-    setOpened(true);
-  };
-  const onCloseHandler = () => {
-    setTimeout(() => {
-      setOpened(false);
-    }, 0);
-  };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className={cls.dateTimePickerWrapper}>
         <MuiDateTimePicker
-          onOpen={onOpenHandler}
-          onClose={onCloseHandler}
           defaultValue={defaultValue}
           className={cls.dateTimePicker}
           ampm={false}
