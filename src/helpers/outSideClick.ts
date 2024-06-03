@@ -3,7 +3,7 @@ import { RefObject } from 'react';
 export const outsideClick = (
   e: MouseEvent,
   callback: () => void,
-  ref: RefObject<HTMLDivElement | HTMLFormElement>,
+  ref: RefObject<HTMLDivElement | HTMLFormElement | HTMLElement>,
   disableContainerSelector: string = '.base-Popper-root',
 ) => {
   // console.log(e.composedPath());

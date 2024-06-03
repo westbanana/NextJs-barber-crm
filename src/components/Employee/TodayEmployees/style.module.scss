@@ -1,0 +1,33 @@
+.mainContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.list {
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 170px);
+  grid-gap: 32px 22px;
+  position: relative;
+  grid-auto-rows: min-content;
+  grid-auto-columns: min-content;
+  border-radius: var(--border-radius);
+  border: 1px var(--border-color) solid;
+  height: 135px;
+  overflow: hidden;
+  transition: 0.3s linear;
+  scrollbar-gutter: stable;
+}
+
+.openedList {
+  height: 628px;
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+.emptyList {
+  display: flex;
+  height: auto;
+}

@@ -99,7 +99,6 @@ const Select = ({
     : resultTypeObject && result.name
       ? result.name
       : result;
-
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}

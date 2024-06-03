@@ -20,11 +20,14 @@ export const getTopEmployees = async () => fetch('http://localhost:4000/employee
     throw new Error(e);
   });
 
-export const getTest = () => fetch('http://localhost:4000/employees', { next: { revalidate: 0 } })
+export const getTodayEmployees = async () => fetch('http://localhost:4000/employees', { next: { revalidate: 0 } })
   .then((response) => response.json())
-  .then((response) => response.sort((a: IEmployee, b: IEmployee) => (
-    b.completedEntries.length - a.completedEntries.length
-  )))
+  .then((employees) => {
+    const sortedEmployees = employees.sort((a: IEmployee, b: IEmployee) => (
+      b.completedEntries.length - a.completedEntries.length
+    ));
+    return sortedEmployees.slice(0, 3);
+  })
   .catch((e) => {
     throw new Error(e);
   });

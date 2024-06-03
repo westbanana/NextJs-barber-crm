@@ -1,4 +1,6 @@
-export type Mods = Record<string, boolean | string | undefined>;
+import { ReactNode } from 'react';
+
+export type Mods = Record<string, ReactNode | boolean | string | undefined>;
 
 export function classNames(
   cls: string,

@@ -1,8 +1,11 @@
 .mainContainer {
   position: relative;
+  display: flex;
+  width: 100%;
 }
 
 .list {
+  width: 100%;
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fill, 170px);
@@ -16,7 +19,6 @@
   overflow: hidden;
   transition: 0.3s linear;
   scrollbar-gutter: stable;
-  justify-content: stretch;
 }
 
 .openedList {
@@ -39,40 +41,3 @@
     width: 15px;
   }
 }
-
-.addEntryContainer {
-  position: absolute;
-  background-color: var(--bg-color);
-  border-radius: 100%;
-  border: 1px var(--border-color) solid;
-  right: 0;
-  top: 0;
-  transform: translateY(-46%) translateX(46%);
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  z-index: 10;
-  cursor: pointer;
-  transition: background-color var(--transition);
-  &:hover {
-    background-color: var(--hover-color);
-  }
-}
-
-.addEntryButton {
-  height: 15px;
-  width: 15px;
-}
-
-@keyframes blink {
-  0% {
-    background-color: white;
-  }
-  50% {
-    background-color: rgba(0, 0, 0, 0.19);
-  }
-  100% {
-    background-color: white;
-  }
-}
-//Z_INDEX

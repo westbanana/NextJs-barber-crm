@@ -1,27 +1,19 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import Label from '@components/Label/Label';
 import { getTopEmployees } from '@components/Entry/services/getEmployees';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import TopCard from '@components/TopCard/TopCard';
-import { classNames } from '@lib/classNames/classNames';
-
-import cls from './style.module.scss';
+import ExpandableContainer from '@components/ExpandableContainer';
 
 const TopEmployees = async () => {
-  const employees:IEmployee[] = await getTopEmployees();
-  const topTreeEmployees = employees.slice(0, 3);
+  const topTreeEmployees:IEmployee[] = await getTopEmployees();
   return (
-    <Suspense fallback={<h1>LOADING.........................</h1>}>
-      <div className={classNames(cls.mainContainer, {}, ['afterLoading'])}>
-        <Label label="MORE COMPLETED ENTRIES" alwaysOnBorder />
-        <div className={cls.list}>
-          {topTreeEmployees.map((employee: IEmployee) => (
-            <TopCard key={employee.id} employee={employee} />
-          ))}
-        </div>
-      </div>
-    </Suspense>
+    <ExpandableContainer label="Top Employees">
+      {topTreeEmployees.map((employee: IEmployee) => (
+        <TopCard key={employee.id} employee={employee} />
+      ))}
+    </ExpandableContainer>
+
   );
 };
 
