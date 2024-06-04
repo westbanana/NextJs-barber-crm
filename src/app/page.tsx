@@ -16,8 +16,8 @@ const Home = () => (
       gap: '20px',
     }}
     >
-      <TopEmployees />
-      <TodayEmployees />
+      {/* <TopEmployees /> */}
+      {/* <TodayEmployees /> */}
     </div>
     <EmployeeStatistics />
   </Page>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  ComponentPropsWithoutRef, ReactNode, useEffect, useRef, useState,
+  ComponentPropsWithoutRef, ReactNode, useCallback, useEffect, useRef, useState,
 } from 'react';
 
 import { classNames, Mods } from '@lib/classNames/classNames';
@@ -39,16 +39,17 @@ const ExpandableContainer = ({
     }
   }, [listOpened, focused]);
 
-  useEffect(() => {
-    const resizeHandler = () => {
-      if (focusedRef.current && listRef.current) {
-        if (listRef.current.scrollHeight <= focusedRef.current.clientHeight && showAccordion) {
-          setShowAccordion(false);
-        } else {
-          setShowAccordion(true);
-        }
+  const resizeHandler = () => {
+    if (focusedRef.current && listRef.current) {
+      if (listRef.current.scrollHeight <= focusedRef.current.clientHeight) {
+        setShowAccordion(false);
+      } else {
+        setShowAccordion(true);
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     resizeHandler();
     window.addEventListener('resize', resizeHandler);
     return () => {

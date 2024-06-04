@@ -23,7 +23,7 @@ const TodayEmployees = () => {
 
   return (
     <ExpandableContainer label="Today Employees" loading={loading}>
-      {todayEmployees.map((employee) => <TodayEmployeeCard key={employee.id} employee={employee} />)}
+      {employees.map((employee) => <TodayEmployeeCard key={employee.id} employee={employee} />)}
     </ExpandableContainer>
   );
 };
