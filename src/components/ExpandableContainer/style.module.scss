@@ -19,13 +19,16 @@
   overflow: hidden;
   transition: 0.3s linear;
   scrollbar-gutter: stable;
+
 }
 
 .openedList {
   height: 628px;
+  max-height: 628px;
   overflow: auto;
   scrollbar-gutter: stable;
 }
+
 
 .emptyList {
   display: flex;

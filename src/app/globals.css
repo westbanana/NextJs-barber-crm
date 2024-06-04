@@ -35,20 +35,12 @@ button {
 }
 
 body {
+  background-color: var(--bg-color);
   min-height: 100vh;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   color: var(--text-color);
-}
-
-html.darkTheme {
-  background-color: red;
-}
-
-
-html.lightTheme {
-  background-color: blue;
 }
 
 body svg {
@@ -93,6 +85,10 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+html {
+  background-color: var(--bg-color);
 }
 
 *::-webkit-scrollbar {

@@ -13,6 +13,7 @@ import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import MiniEntryController from '@components/Entry/MiniEntry/MiniEntryController';
 import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
 import Tooltip from '@components/Tooltip/Tooltip';
+import MiniCard from '@components/MiniCard';
 
 import cls from './style.module.scss';
 
@@ -37,7 +38,7 @@ const MiniEntry = memo(({
   const entryOpenerMode:EntryCardMode = currentEntry.completed ? EntryCardMode.READ_ONLY : EntryCardMode.EDIT;
   return (
     <EntryOpener currentEntry={currentEntry} mode={entryOpenerMode}>
-      <div className={classNames(cls.entry, entryMods, [])}>
+      <MiniCard className={classNames(cls.entry, entryMods, [])}>
         <div className={cls.master}>
           <UserIcon
             userName={employee?.name}
@@ -90,7 +91,7 @@ const MiniEntry = memo(({
           </div>
           <TotalPrice entry={currentEntry} />
         </div>
-      </div>
+      </MiniCard>
       <>
         <Tooltip id={`employee-name-${id}`} disabled={completed}>
           <span>{employee.name}</span>

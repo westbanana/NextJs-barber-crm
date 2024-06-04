@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
-import { classNames, Mods } from '@lib/classNames/classNames';
+import MiniCard from '@components/MiniCard';
 
 import cls from './style.module.scss';
 
@@ -16,10 +16,9 @@ const TopCard = ({ employee }: TopCardProps) => {
   const employeeShortName = !employeeLastName || !employeeFirstName
     ? `${employeeLastName || ''} ${employeeFirstName}`
     : `${employeeLastName || ''} ${employeeFirstName[0]}.`;
-  const cardMods: Mods = {
-  };
+
   return (
-    <div className={classNames(cls.card, cardMods, [])}>
+    <MiniCard className={cls.topCard}>
       <div className={cls.employee}>
         <UserIcon
           userName={employee?.name}
@@ -29,7 +28,8 @@ const TopCard = ({ employee }: TopCardProps) => {
         <span className={cls.name}>{employeeShortName}</span>
       </div>
       <h1 className={cls.totalCompletedEntries}>{employee.completedEntries.length}</h1>
-    </div>
+
+    </MiniCard>
   );
 };
 

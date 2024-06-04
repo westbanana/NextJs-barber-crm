@@ -30,6 +30,7 @@ const TodayEntries = () => {
     : (
       <ExpandableContainer
         label="Today Entries"
+        adaptiveListHeight
         controlPanel={(
           <EntryOpener mode={EntryCardMode.CREATE}>
             <div className={cls.addEntryContainer}>

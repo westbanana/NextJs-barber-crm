@@ -9,6 +9,7 @@ export interface UseInFocusReturn {
   focusedRef: React.RefObject<HTMLDivElement>;
   focused: boolean;
 }
+
 const useInFocus = (): UseInFocusReturn => {
   const [focused, setFocused] = useState<boolean>(false);
   const focusedRef = useRef<HTMLDivElement>(null);

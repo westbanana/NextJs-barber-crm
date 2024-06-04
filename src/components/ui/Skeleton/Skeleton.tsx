@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, FC } from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 
 import { classNames } from '@lib/classNames/classNames';
 
@@ -11,9 +11,9 @@ interface SkeletonProps extends ComponentPropsWithoutRef<'div'>{
   rounded?: boolean
 }
 
-const Skeleton: FC<SkeletonProps> = ({
+const Skeleton = ({
   className, width = '100%', height = '100%', rounded = false,
-}) => (
+}: SkeletonProps) => (
   <div
     className={classNames(cls.mainContainer, {}, [className])}
     style={{

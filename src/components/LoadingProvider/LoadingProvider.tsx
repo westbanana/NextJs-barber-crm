@@ -1,7 +1,6 @@
 import React from 'react';
-import { Loader } from 'lucide-react';
 
-import cls from './style.module.scss';
+import Loader from '@components/LoadingProvider/Loader';
 
 export interface LoadingProviderProps {
   children: React.ReactNode,
@@ -13,10 +12,7 @@ const LoadingProvider = ({ children, isLoading, toastMode = false }:LoadingProvi
   <>
     {isLoading
       ? (!toastMode && (
-        <div className={cls.loaderBlock}>
-          <Loader className={cls.loader} />
-          Loading...
-        </div>
+        <Loader />
       )
       )
       : children}
