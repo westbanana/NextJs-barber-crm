@@ -39,17 +39,16 @@ const ExpandableContainer = ({
     }
   }, [listOpened, focused]);
 
-  const resizeHandler = () => {
-    if (focusedRef.current && listRef.current) {
-      if (listRef.current.scrollHeight <= focusedRef.current.clientHeight) {
-        setShowAccordion(false);
-      } else {
-        setShowAccordion(true);
-      }
-    }
-  };
-
   useEffect(() => {
+    const resizeHandler = () => {
+      if (focusedRef.current && listRef.current) {
+        if (listRef.current.scrollHeight <= focusedRef.current.clientHeight) {
+          setShowAccordion(false);
+        } else {
+          setShowAccordion(true);
+        }
+      }
+    };
     resizeHandler();
     window.addEventListener('resize', resizeHandler);
     return () => {
