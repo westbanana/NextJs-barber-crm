@@ -1,0 +1,32 @@
+body.lightTheme {
+    --calendar-event-bg: rgba(82, 82, 255, 0.74);
+    --calendar-event-bg-hover: rgba(82, 82, 255, 1);
+    --calendar-selected-event-bg: rgb(140, 140, 250);
+    --calendar-more: rgba(0, 0, 0, 0.47);
+    --calendar-more-hover: rgba(0, 0, 0, 0.55);
+    --calendar-day-out-of-range: rgba(227, 227, 227, 1);
+    --calendar-day-out-of-range-text: rgba(199, 203, 218, 1);
+    --calendar-today: rgba(0, 0, 0, 0.14);
+}
+
+body.darkTheme {
+    --calendar-event-bg: rgba(82, 82, 255, 0.74);
+    --calendar-event-bg-hover: rgba(82, 82, 255, 1);
+    --calendar-selected-event-bg: rgb(140, 140, 250);;
+    --calendar-more: rgba(255, 255, 255, 0.54);
+    --calendar-more-hover: rgb(255, 255, 255);
+    --calendar-day-out-of-range: rgba(35, 35, 35, 0.14);
+    --calendar-day-out-of-range-text: wg;
+    --calendar-today: rgba(54, 54, 54, 0.37);
+}
+
+body.greenTheme {
+    --calendar-event-bg: rgba(82, 82, 255, 0.74);
+    --calendar-event-bg-hover: rgba(82, 82, 255, 1);
+    --calendar-selected-event-bg: rgb(140, 140, 250);;
+    --calendar-more: rgba(170, 221, 170, 1);
+    --calendar-more-hover: rgba(213, 255, 213, 1);
+    --calendar-day-out-of-range: rgba(204, 229, 204, 1);
+    --calendar-day-out-of-range-text: rgba(194, 219, 194, 1);
+    --calendar-today: rgba(0, 0, 0, 0.07);
+}

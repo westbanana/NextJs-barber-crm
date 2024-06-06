@@ -1,0 +1,84 @@
+#calendar-wrapper .rbc-toolbar button {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition);
+}
+
+#calendar-wrapper .rbc-toolbar button:hover {
+    background-color: var(--hover-color);
+    border-color: var(--border-color);
+    color: var(--text-color-inverted);
+}
+
+#calendar-wrapper .rbc-toolbar button.rbc-active {
+    background-color: var(--bg-color-inverted);
+    color: var(--text-color-inverted);
+}
+
+#calendar-wrapper .rbc-today {
+    background-color: var(--calendar-today);
+}
+
+#calendar-wrapper .rbc-event {
+    background-color: var(--calendar-event-bg);
+}
+
+#calendar-wrapper .rbc-event:hover {
+    transition: all var(--transition);
+    background-color: var(--calendar-event-bg-hover);
+}
+
+#calendar-wrapper .rbc-show-more {
+    background-color: transparent;
+    color: var(--calendar-more);
+}
+
+#calendar-wrapper .rbc-show-more:hover {
+    transition: all var(--transition);
+    color: var(--calendar-more-hover);
+}
+
+
+#calendar-wrapper .rbc-calendar .rbc-off-range-bg {
+    background-color: var(--calendar-day-out-of-range);
+}
+
+#calendar-wrapper .rbc-month-row .rbc-row-content .rbc-row .rbc-off-range button {
+    color: var(--calendar-day-out-of-range-text);
+}
+
+
+#calendar-wrapper .rbc-timeslot-group,
+#calendar-wrapper .rbc-time-slot,
+#calendar-wrapper .rbc-time-content > * + * > *,
+#calendar-wrapper .rbc-day-slot .rbc-time-slot,
+#calendar-wrapper .rbc-time-view,
+#calendar-wrapper .rbc-time-content,
+#calendar-wrapper .rbc-time-header-content,
+#calendar-wrapper .rbc-calendar .rbc-month-view,
+#calendar-wrapper .rbc-month-row + .rbc-month-row,
+#calendar-wrapper .rbc-day-bg + .rbc-day-bg,
+#calendar-wrapper .rbc-header,
+#calendar-wrapper .rbc-header + .rbc-header{
+    border-color: var(--border-color);
+}
+
+#calendar-wrapper .rbc-event.rbc-selected {
+    background-color: var(--calendar-selected-event-bg);
+}
+#calendar-wrapper .rbc-event:focus {
+    border: 1px solid var(--bg-color-inverted);
+    outline: none;
+}
+
+#calendar-wrapper .rbc-agenda-view > * ,
+#calendar-wrapper .rbc-agenda-view > * > *  *,
+#calendar-wrapper .rbc-agenda-view > * > * {
+    border-color: var(--border-color) ;
+}
+
+#calendar-wrapper .rbc-calendar {
+    min-height: 600px ;
+}

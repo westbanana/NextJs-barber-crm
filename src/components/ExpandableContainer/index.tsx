@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  ComponentPropsWithoutRef, ReactNode, useCallback, useEffect, useRef, useState,
+  ComponentPropsWithoutRef, ReactNode, useEffect, useRef, useState,
 } from 'react';
 
 import { classNames, Mods } from '@lib/classNames/classNames';

@@ -1,50 +1,51 @@
 body.lightTheme {
-    --bg-color: hsl(233 25% 90%);
-    --bg-color-inverted: hsl(240 5.88% 10%);
+    --bg-color: rgba(227, 227, 227, 1);
+    --bg-color-inverted: rgba(26, 26, 26, 1);
     --chart: rgba(35, 35, 35, 0.78);
-    --chart-inverted:rgba(0, 0, 0, 0.24);
+    --chart-inverted: rgba(0, 0, 0, 0.24);
     --primary-color: black;
     --primary-color-inverted: white;
-    --text-color: hsl(201.81999999999994 24.44% 8.82%);
-    --svg-colors: hsl(201.81999999999994 24.44% 8.82%);
-    --text-color-inverted: hsl(210 5.56% 92.94%);
+    --text-color: rgba(41, 43, 44, 1);
+    --svg-colors: rgba(41, 43, 44, 1);
+    --text-color-inverted: rgba(221, 222, 223, 1);
     --border-color: rgba(0, 0, 0, 0.14);
     --hover-color: rgba(0, 0, 0, 0.24);
-    --shadow: rgba(72, 73, 73, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14)  0px 0px 0px 1px;
-    --disabled-text: hsla(0, 0%, 17%, 0.32);
-    --selectItemHover:linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%)
+    --shadow: rgba(72, 73, 73, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
+    --disabled-text: rgba(41, 43, 44, 0.32);
+    --selectItemHover: linear-gradient(90.43202015117753deg, rgba(0, 0, 0, 0.1) 0.01%, rgba(255, 255, 255, 0) 100%);
 }
 
 body.darkTheme {
-    --bg-color: hsl(240 5.88% 10%);
-    --bg-color-inverted: hsl(233 25% 90%);
-    --chart: rgba(229, 229, 229, 0.78);
-    --chart-inverted: rgba(35, 35, 35, 0.78);
-    --text-color: hsl(210 5.56% 92.94%);
-    --svg-colors: hsl(210 5.56% 92.94%);
-    --text-color-inverted: hsl(201.81999999999994 24.44% 8.82%);
+    --bg-color: rgba(14, 14, 14, 1);
+    --bg-color-inverted: rgba(248, 248, 248, 1);
+    --chart: rgba(51, 51, 51, 1);
+    --chart-inverted: rgba(240, 240, 240, 1);
+    --text-color: rgba(216, 216, 216, 1);
+    --svg-colors: rgba(216, 216, 216, 1);
+    --text-color-inverted: rgba(39, 39, 39, 1);
     --primary-color: white;
     --primary-color-inverted: black;
     --border-color: rgba(255, 255, 255, 0.02);
     --hover-color: rgba(255, 255, 255, 0.24);
-    --shadow: rgb(0 0 0 / 25%) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
-    --disabled-text: hsla(0, 0%, 100%, 0.09);
-    --selectItemHover:linear-gradient(90.43202015117753deg, rgba(0,0,0,0.1) 0.01%,rgba(255,255,255,0) 100%)
+    --shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
+    --disabled-text: rgba(221, 222, 223, 0.09);
+    --selectItemHover: linear-gradient(90.43202015117753deg, rgba(0, 0, 0, 0.1) 0.01%, rgba(255, 255, 255, 0) 100%);
 }
 
+
 body.greenTheme {
-    --bg-color: hsl(122, 27%, 79%);
-    --bg-color-inverted: hsl(120,32%,58%);
-    --text-color: hsl(120,32%,58%);
-    --svg-colors: hsl(120,32%,58%);
-    --text-color-inverted:hsl(122,33%,83%);
-    --chart: hsl(120,32%,58%);
-    --chart-inverted: hsl(125,34%,74%);
+    --bg-color: rgba(204, 229, 204, 1);
+    --bg-color-inverted: rgba(115, 204, 115, 1);
+    --text-color: rgba(115, 204, 115, 1);
+    --svg-colors: rgba(115, 204, 115, 1);
+    --text-color-inverted: rgba(194, 219, 194, 1);
+    --chart: rgba(115, 204, 115, 1);
+    --chart-inverted: rgba(170, 221, 170, 1);
     --primary-color: white;
     --primary-color-inverted: black;
     --border-color: rgba(0, 0, 0, 0.07);
-    --hover-color: hsl(125,34%,74%);
+    --hover-color: rgba(170, 221, 170, 1);
     --shadow: rgb(0 0 0 / 25%) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
-    --disabled-text: hsla(120, 32%, 58%, 0.55);
-    --selectItemHover:linear-gradient(90.43202015117753deg, hsla(120, 32%, 58%, 0.3), hsla(122, 27%, 79%, 0.0) 100%)
+    --disabled-text: rgba(115, 204, 115, 0.55);
+    --selectItemHover: linear-gradient(90.43202015117753deg, rgba(115, 204, 115, 0.3), rgba(204, 229, 204, 0) 100%);
 }

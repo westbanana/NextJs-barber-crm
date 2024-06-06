@@ -90,7 +90,7 @@ body .mui-1e3wlyl-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalCloc
     background-color: var(--bg-color-inverted);
 }
 
-/*calendar scrollbar*/
+/*calendar.css scrollbar*/
 body .mui-1vs7z2v-MuiYearCalendar-root::-webkit-scrollbar {
     width: 14px;
     height: 18px;

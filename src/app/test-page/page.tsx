@@ -1,15 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { Skeleton } from '@mui/material';
-import OpenAI from 'openai';
+import React from 'react';
 
-import cls from './style.module.scss';
-
-import EntryCard from '../../components/Entry/EntryCard';
+import './style.css';
 
 const TestPage = () => (
-  <div className={cls.test} />
+  <div style={{ display: 'flex', width: '100%', padding: '20px' }} />
 );
-
 export default TestPage;
