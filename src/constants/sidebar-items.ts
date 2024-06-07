@@ -1,4 +1,6 @@
-import { Home, Scissors, Settings } from 'lucide-react';
+import {
+  Home, Scissors, Settings, CalendarDays, AreaChart,
+} from 'lucide-react';
 
 import { PAGES_LINKS_INSTANCE } from '@/config/links';
 import type { ISidebarItem } from '@/components/SideBar/types/sidebar-items.type';
@@ -13,6 +15,16 @@ export const sidebarItems: ISidebarItem[] = [
     title: 'Employees',
     href: PAGES_LINKS_INSTANCE.EMPLOYEES,
     Icon: Scissors,
+  },
+  {
+    title: 'Calendar',
+    href: PAGES_LINKS_INSTANCE.CALENDAR,
+    Icon: CalendarDays,
+  },
+  {
+    title: 'Statistic',
+    href: PAGES_LINKS_INSTANCE.STATISTIC,
+    Icon: AreaChart,
   },
   {
     title: 'Settings',

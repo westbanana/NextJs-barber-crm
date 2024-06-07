@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  ComponentPropsWithoutRef, ReactNode,
+  ComponentPropsWithoutRef, memo, ReactNode,
 } from 'react';
 
 import { getOpenedEntry } from '@components/Entry/selectors/getOpenedEntry';
@@ -34,9 +34,6 @@ const EntryOpener = ({
   const onDoubleClickHandler = () => {
     if (openedEntry) return;
     if (!editModeCondition) {
-      if (mode !== EntryCardMode.READ_ONLY) {
-        dispatch(fetchEntryDates());
-      }
       if (currentEntry) {
         dispatch(changeOpenedEntry(currentEntry));
       }
@@ -46,7 +43,6 @@ const EntryOpener = ({
   const onClickHandler = () => {
     if (mode === EntryCardMode.CREATE && !currentEntry?.completed) {
       if (!openedEntry) {
-        dispatch(fetchEntryDates());
         dispatch(changeOpenedEntry(newEntry));
       }
     }

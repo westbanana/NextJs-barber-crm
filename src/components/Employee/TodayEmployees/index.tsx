@@ -9,10 +9,11 @@ import { days } from '@constants/days';
 import ExpandableContainer from '@components/ExpandableContainer';
 import { getEmployeeLoading } from '@components/Employee/EmployeeCard/selectors/getEmployeeLoading';
 import TodayEmployeeCard from '@components/Employee/TodayEmployees/TodayEmployeeCard';
+import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
 
 const TodayEmployees = () => {
   const employees = useAppSelector(getEmployeeList);
-  const loading = useAppSelector(getEmployeeLoading);
+  const loading = useAppSelector(getEntriesLoading);
   const today = +dayjs().format('d');
 
   const todayEmployees = employees.filter((employe) => {

@@ -14,11 +14,16 @@ export const fetchTodayEntries = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       // Все записи
-      const allEntries = await getAllEntries();
+      const allEntries:IEntry[] = await getAllEntries();
       // Все работники
       const allEmployees = await getAllEmployees();
       // Все клиенты
       const allClients = await getAllClients();
+
+      const entriesDates = allEntries.map(({
+        date,
+        time,
+      }) => `${date} ${time}`);
 
       // Дата (сегодня)
       const currentDate = dayjs().format('YYYY-M-D');
@@ -58,6 +63,7 @@ export const fetchTodayEntries = createAsyncThunk(
 
       return {
         allEntries,
+        entriesDates,
         todayEntries: neededEntries,
         allClients,
         allEmployees,

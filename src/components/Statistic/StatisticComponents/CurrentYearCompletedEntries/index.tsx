@@ -8,6 +8,7 @@ import cls from '@components/Statistic/StatisticComponents/style.module.scss';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEntryList } from '@components/Entry/selectors/getEntryList';
 import { getCurrentYearCompletedEntries } from '@helpers/getCurrentYearCompletedEntries';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 
 const CurrentYearCompletedEntriesTooltip = ({
   payload, active, label,
@@ -24,8 +25,11 @@ const CurrentYearCompletedEntriesTooltip = ({
   return null;
 };
 
-const CurrentYearCompletedEntries = () => {
-  const entries = useAppSelector(getEntryList);
+interface CurrentYearCompletedEntriesProps {
+  entries: IEntry[]
+}
+
+const CurrentYearCompletedEntries = ({ entries }:CurrentYearCompletedEntriesProps) => {
   const [data, setData] = useState<StatisticTooltipProps[]>([]);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const CurrentYearCompletedEntries = () => {
   }, [entries]);
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" className="afterLoading">
       <LineChart
         data={data}
       >

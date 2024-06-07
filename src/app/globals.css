@@ -112,7 +112,7 @@ html {
 }
 
 .afterLoading {
-  animation: afterLoading var(--transition) forwards;
+  animation: afterLoading 0.5s forwards;
 }
 
 @keyframes afterLoading {

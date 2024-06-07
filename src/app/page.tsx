@@ -21,7 +21,7 @@ const Home = () => (
       <TodayEmployees />
     </div>
     <EmployeeStatistics />
-    <Calendar />
+    {/* <Calendar /> */}
   </Page>
 );
 export default Home;

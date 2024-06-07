@@ -13,6 +13,7 @@ import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
 import Skeleton from '@components/ui/Skeleton/Skeleton';
 import ExpandableContainer from '@components/ExpandableContainer';
+import { getEntryList } from '@components/Entry/selectors/getEntryList';
 
 import cls from './style.module.scss';
 
@@ -20,36 +21,35 @@ const TodayEntries = () => {
   const dispatch = useAppDispatch();
   const todayEntries = useAppSelector(getTodayEntries);
   const loading = useAppSelector(getEntriesLoading);
-
+  const testLoading = true;
   useEffect(() => {
     dispatch(fetchTodayEntries());
   }, [dispatch]);
 
-  return loading
-    ? (<Skeleton rounded height="135px" />)
-    : (
-      <ExpandableContainer
-        label="Today Entries"
-        controlPanel={(
-          <EntryOpener mode={EntryCardMode.CREATE}>
-            <div className={cls.addEntryContainer}>
-              <Plus className={cls.addEntryButton} />
-            </div>
-          </EntryOpener>
+  return (
+    <ExpandableContainer
+      label="Today Entries"
+      loading={loading}
+      controlPanel={(
+        <EntryOpener mode={EntryCardMode.CREATE}>
+          <div className={cls.addEntryContainer}>
+            <Plus className={cls.addEntryButton} />
+          </div>
+        </EntryOpener>
+      )}
+    >
+      {(todayEntries.length)
+        ? (todayEntries.map((entry) => (
+          <MiniEntry
+            currentEntry={entry}
+            key={entry.id}
+          />
+        )))
+        : (
+          'No recordings today💇‍♂️.️'
         )}
-      >
-        {(todayEntries.length)
-          ? (todayEntries.map((entry) => (
-            <MiniEntry
-              currentEntry={entry}
-              key={entry.id}
-            />
-          )))
-          : (
-            'No recordings today💇‍♂️.️'
-          )}
-      </ExpandableContainer>
-    );
+    </ExpandableContainer>
+  );
 };
 
 export default TodayEntries;

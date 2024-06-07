@@ -6,6 +6,9 @@ import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
 import EmployeeCompletedEntries from '@components/Statistic/StatisticComponents/EmployeeCompletedEntries';
 import CurrentYearCompletedEntries from '@components/Statistic/StatisticComponents/CurrentYearCompletedEntries';
+import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getAllEntries } from '@components/Entry/services/getTodayEntries';
+import { getEntryList } from '@components/Entry/selectors/getEntryList';
 
 import cls from './style.module.scss';
 
@@ -17,12 +20,14 @@ export type StatisticCompletedEntries = {
 
 const Statistic = () => {
   const loading = useAppSelector(getEntriesLoading);
+  const employees = useAppSelector(getEmployeeList);
+  const entries = useAppSelector(getEntryList);
   const [showSelect, setShowSelect] = useState<boolean>(false);
   const [def, setDef] = useState<string>('1');
 
   const statisticArray = [
-    <EmployeeCompletedEntries />,
-    <CurrentYearCompletedEntries />];
+    <EmployeeCompletedEntries employees={employees} />,
+    <CurrentYearCompletedEntries entries={entries} />];
   const showSelectHandler = () => setShowSelect(!showSelect);
   return (!loading && (
     <>

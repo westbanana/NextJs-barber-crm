@@ -3,6 +3,7 @@
 import React, {
   memo,
 } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Field, FieldProps,
 } from 'formik';
@@ -27,6 +28,7 @@ import { barberServices, IBarberServices } from '@/constants/barber-services';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import { EntryCardMode, EntryEditCardProps } from '@/components/Entry/EntryCard/entry-card.type';
 import { SelectItem, SelectMode } from '@/components/ui/Select/select.type';
+import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 
 import cls from './style.module.scss';
 
@@ -41,18 +43,22 @@ const EntryCard = memo(({
   mode,
   onClose,
 }:EntryEditCardProps) => {
+  const { refresh } = useRouter();
   const dispatch = useAppDispatch();
   const currentEntryData = useAppSelector(getOpenedEntry);
   const employees = useAppSelector(getEmployeeList);
   const clients = useAppSelector(getClientList);
   const entryDate = dayjs(`${currentEntryData?.date} ${currentEntryData?.time}`);
-  const onSubmitHandler = (values:IEntry) => {
+  const onSubmitHandler = async (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {
-      dispatch(updateEntry(formattedValues));
+      await dispatch(updateEntry(formattedValues));
+      await dispatch(fetchTodayEntries());
+      return;
     }
     if (mode === EntryCardMode.CREATE) {
-      dispatch(createEntry(formattedValues));
+      await dispatch(createEntry(formattedValues));
+      await dispatch(fetchTodayEntries());
     }
   };
   const dateTimePickerCallback = (value:dayjs.Dayjs, props:FieldProps) => {

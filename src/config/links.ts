@@ -19,6 +19,14 @@ class PAGES_LINKS {
   public get SETTINGS(): UrlObject {
     return { ...this.BASE, pathname: '/settings' };
   }
+
+  public get CALENDAR(): UrlObject {
+    return { ...this.BASE, pathname: '/calendar' };
+  }
+
+  public get STATISTIC(): UrlObject {
+    return { ...this.BASE, pathname: '/statistic' };
+  }
 }
 
 export const PAGES_LINKS_INSTANCE = new PAGES_LINKS();

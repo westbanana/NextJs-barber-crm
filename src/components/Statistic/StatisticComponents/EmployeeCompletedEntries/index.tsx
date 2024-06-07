@@ -24,15 +24,18 @@ const EmployeeCompletedEntriesTooltip = ({
   return null;
 };
 
-const EmployeeCompletedEntries = () => {
-  const employees = useAppSelector(getEmployeeList);
+interface EmployeeCompletedEntriesProps {
+  employees: IEmployee[]
+}
+
+const EmployeeCompletedEntries = ({ employees }: EmployeeCompletedEntriesProps) => {
   const data = employees.map((employee: IEmployee) => ({
     name: employee.name,
     completed: employee.completedEntries.length,
   }));
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" className="afterLoading">
       <BarChart
         data={data}
       >

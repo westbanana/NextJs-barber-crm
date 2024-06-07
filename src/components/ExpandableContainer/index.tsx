@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  ComponentPropsWithoutRef, ReactNode, useEffect, useRef, useState,
+  ComponentPropsWithoutRef, memo, ReactNode, useEffect, useRef, useState,
 } from 'react';
 
 import { classNames, Mods } from '@lib/classNames/classNames';
@@ -77,7 +77,7 @@ const ExpandableContainer = ({
   }, [listOpened, adaptiveListHeight, focusedRef, children]);
 
   return (loading
-    ? <Skeleton rounded height={135} />
+    ? <Skeleton rounded height="135px" width="100%" />
     : (
       <div
         ref={focusedRef}

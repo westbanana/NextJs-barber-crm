@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
 
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { updateEntry } from '@components/Entry/services/updateEntry';
@@ -73,6 +74,7 @@ export const entrySlice = createSlice({
       state.loading = false;
       state.todayEntries = action.payload.todayEntries as IEntry[];
       state.entryList = action.payload.allEntries as IEntry[];
+      state.entriesDates = action.payload.entriesDates;
     });
     builder.addCase(fetchTodayEntries.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
@@ -85,12 +87,12 @@ export const entrySlice = createSlice({
     });
     builder.addCase(updateEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.loading = false;
-      state.entryList = state.entryList.map((entry) => {
-        if (entry.id === action.payload.id) {
-          return action.payload;
-        }
-        return entry;
-      });
+      // state.entryList = state.entryList.map((entry) => {
+      //   if (entry.id === action.payload.id) {
+      //     return action.payload;
+      //   }
+      //   return entry;
+      // });
       state.openedEntry = undefined;
     });
     builder.addCase(updateEntry.rejected, (state, action) => {
@@ -104,8 +106,8 @@ export const entrySlice = createSlice({
     });
     builder.addCase(deleteEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.loading = false;
-      state.entryList = state.entryList.filter((entry) => entry.id !== action.payload.id);
-      state.todayEntries = state.todayEntries.filter((entry) => entry.id !== action.payload.id);
+      // state.entryList = state.entryList.filter((entry) => entry.id !== action.payload.id);
+      // state.todayEntries = state.todayEntries.filter((entry) => entry.id !== action.payload.id);
       state.openedEntry = undefined;
     });
     builder.addCase(deleteEntry.rejected, (state, action) => {
@@ -132,8 +134,8 @@ export const entrySlice = createSlice({
       state.loading = true;
     });
     builder.addCase(completeEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
-      state.entryList = state.entryList.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
-      state.todayEntries = state.todayEntries.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
+      // state.entryList = state.entryList.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
+      // state.todayEntries = state.todayEntries.map((entry) => (entry.id === action.payload.id ? action.payload : entry));
       state.loading = false;
     });
     builder.addCase(completeEntry.rejected, (state, action) => {

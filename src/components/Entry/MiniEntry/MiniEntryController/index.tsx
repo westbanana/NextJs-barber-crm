@@ -6,6 +6,7 @@ import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { classNames } from '@lib/classNames/classNames';
 import { completeEntry } from '@components/Entry/services/completeEntry';
+import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 
 import cls from './style.module.scss';
 
@@ -14,13 +15,18 @@ export type MiniEntryControllerProps = {entry: IEntry, className?: string, id: s
 const MiniEntryController = ({ entry, className, id }: MiniEntryControllerProps) => {
   const dispatch = useAppDispatch();
   const { refresh } = useRouter();
-  const completeCurrentEntry = () => {
-    dispatch(completeEntry(entry));
+  const completeCurrentEntry = async () => {
+    await dispatch(completeEntry(entry));
+    // mb
+    await dispatch(fetchTodayEntries());
     refresh();
   };
-  const deleteCurrentEntry = () => {
+  const deleteCurrentEntry = async () => {
     if (entry) {
-      dispatch(deleteEntry(entry));
+      await dispatch(deleteEntry(entry));
+      // mb
+      await dispatch(fetchTodayEntries());
+      refresh();
     }
   };
   return (
