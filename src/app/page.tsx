@@ -16,7 +16,7 @@ export const revalidate = 0;
 const Home = async () => {
   const { entries } = await fetchCalendarInfo();
   return (
-    <Page className={cls.homePage}>
+    <Page className={cls.homePage} id="home-page">
       <TodayEntries />
       <div style={{
         display: 'flex',

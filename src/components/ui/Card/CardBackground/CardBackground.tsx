@@ -7,7 +7,7 @@ export type CardBackgroundProps = {
 }
 
 const CardBackground = ({ children }: CardBackgroundProps) => (
-  <div className={cls.CardBackground}>
+  <div className={cls.CardBackground} data-ignore-outside-clicks="true">
     {children}
   </div>
 );

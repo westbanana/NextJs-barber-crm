@@ -30,7 +30,7 @@ const CalendarWrapper = ({ entries, clients, employees }: CalendarWrapperProps) 
   return (
     <>
       <Calendar entries={entries} />
-      {(openedEntry.mode) && (
+      {(openedEntry.mode && openedEntry.entry) && (
         <EntryCard
           onClose={onCloseCardHandler}
           mode={openedEntry.mode}

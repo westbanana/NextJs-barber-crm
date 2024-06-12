@@ -1,4 +1,6 @@
-import React, { ComponentPropsWithoutRef, useCallback, useEffect } from 'react';
+import React, {
+  ComponentPropsWithoutRef, MouseEventHandler, useCallback, useEffect,
+} from 'react';
 import { X } from 'lucide-react';
 
 import { useCardContext } from '@components/ui/Card/provider';
@@ -23,7 +25,8 @@ const CardCloser = ({ onClick, ...props }:CardCloserProps) => {
       document.removeEventListener('keydown', onEscapePress);
     };
   }, [onEscapePress]);
-  const onClickHandler = () => {
+  const onClickHandler = (e: React.MouseEvent) => {
+    e.stopPropagation();
     onClick?.();
     onClose();
   };

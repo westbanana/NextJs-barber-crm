@@ -46,6 +46,12 @@ body svg {
     color: var(--svg-colors)
 }
 
+body:has(.rbc-overlay) {
+  #home-page {
+    overflow: hidden;
+  }
+}
+
 
 ul[class],
 ol[class] {

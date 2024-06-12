@@ -23,11 +23,47 @@
 
 #calendar-wrapper .rbc-event {
     background-color: var(--calendar-event-bg);
+    color: white;
 }
 
 #calendar-wrapper .rbc-event:hover {
     transition: all var(--transition);
     background-color: var(--calendar-event-bg-hover);
+    z-index: 999;
+}
+
+body .rbc-overlay{
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--calendar-more-popup-bg);
+    padding: 20px;
+    max-height: 327px;
+    overflow: auto;
+}
+
+body .rbc-overlay .rbc-overlay-header{
+    background-color: var(--calendar-event-bg);
+    text-align: center;
+    /*font-size: 12px;*/
+    color: white;
+
+    border-radius: var(--border-radius);
+    border-bottom: 2px solid var(--border-color);
+}
+
+body .rbc-overlay div[type = "popup"]{
+    background-color: var(--calendar-event-bg);
+    border-radius: var(--border-radius);
+    margin-bottom: 5px;
+}
+
+body .rbc-overlay div[type = "popup"]:hover {
+    transition: all var(--transition) 0.1s;
+    background-color: var(--calendar-event-bg-hover);
+}
+
+body .rbc-overlay div[type = "popup"]:last-of-type{
+    margin-bottom: 0;
 }
 
 #calendar-wrapper .rbc-show-more {
@@ -66,8 +102,30 @@
 }
 
 #calendar-wrapper .rbc-event.rbc-selected {
-    background-color: var(--calendar-selected-event-bg);
+    position: relative;
 }
+
+#calendar-wrapper .rbc-event.rbc-selected::after {
+    content: '';
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    background-color: var(--bg-color);
+    border-radius: 100%;
+    top: 50%;
+    right: 2px;
+    animation: showAnimation 0.1s linear forwards;
+}
+
+@keyframes showAnimation {
+    from {
+        transform: scale(0) translateY(-50%);
+    }
+    to {
+        transform: scale(1) translateY(-50%);
+    }
+}
+
 #calendar-wrapper .rbc-event:focus {
     border: 1px solid var(--bg-color-inverted);
     outline: none;
