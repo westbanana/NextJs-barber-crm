@@ -1,54 +1,68 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { Plus } from 'lucide-react';
 
 import MiniEntry from '@components/Entry/MiniEntry';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getTodayEntries } from '@components/Entry/selectors/getTodayEntries';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import EntryOpener from '@components/Entry/EntryOpener';
-import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
-import Skeleton from '@components/ui/Skeleton/Skeleton';
 import ExpandableContainer from '@components/ExpandableContainer';
-import { getEntryList } from '@components/Entry/selectors/getEntryList';
-
-import cls from './style.module.scss';
+import { getOpenedEntry } from '@components/Entry/selectors/getOpenedEntry';
+import EntryCard from '@components/Entry/EntryCard';
+import { getEntryDates } from '@components/Entry/selectors/getEntriesDates';
+import { clearOpenedEntry } from '@components/Entry/slices/entrySlice';
+import EntryCreator from '@components/Entry/EntryCreator';
+import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getClientList } from '@components/Client/selectors/getClientList';
 
 const TodayEntries = () => {
   const dispatch = useAppDispatch();
   const todayEntries = useAppSelector(getTodayEntries);
+  const openedEntry = useAppSelector(getOpenedEntry);
+  const entryDates = useAppSelector(getEntryDates);
   const loading = useAppSelector(getEntriesLoading);
-  const testLoading = true;
+  const employees = useAppSelector(getEmployeeList);
+  const clients = useAppSelector(getClientList);
   useEffect(() => {
     dispatch(fetchTodayEntries());
   }, [dispatch]);
 
+  const onCloseHandler = () => {
+    dispatch(clearOpenedEntry());
+  };
+
   return (
-    <ExpandableContainer
-      label="Today Entries"
-      loading={loading}
-      controlPanel={(
-        <EntryOpener mode={EntryCardMode.CREATE}>
-          <div className={cls.addEntryContainer}>
-            <Plus className={cls.addEntryButton} />
-          </div>
-        </EntryOpener>
+    <>
+      <ExpandableContainer
+        label="Today Entries"
+        loading={loading}
+        controlPanel={<EntryCreator />}
+      >
+        {(todayEntries.length)
+          ? (todayEntries.map((entry) => (
+            <MiniEntry
+              currentEntry={entry}
+              key={entry.id}
+            />
+          )))
+          : (
+            'No recordings today💇‍♂️.️'
+          )}
+      </ExpandableContainer>
+      {(openedEntry.entry && openedEntry.mode) && (
+        <EntryCard
+          onClose={onCloseHandler}
+          mode={openedEntry.mode}
+          entryDates={entryDates}
+          data={{
+            clients,
+            employees,
+          }}
+        />
       )}
-    >
-      {(todayEntries.length)
-        ? (todayEntries.map((entry) => (
-          <MiniEntry
-            currentEntry={entry}
-            key={entry.id}
-          />
-        )))
-        : (
-          'No recordings today💇‍♂️.️'
-        )}
-    </ExpandableContainer>
+    </>
   );
 };
 

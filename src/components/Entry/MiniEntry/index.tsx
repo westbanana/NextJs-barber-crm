@@ -1,19 +1,18 @@
 import React, { memo } from 'react';
-import {
-  Menu, User,
-} from 'lucide-react';
+import { Menu, User } from 'lucide-react';
 
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
 import { classNames, Mods } from '@lib/classNames/classNames';
 import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
-import EntryOpener from '@components/Entry/EntryOpener';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import MiniEntryController from '@components/Entry/MiniEntry/MiniEntryController';
 import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
 import Tooltip from '@components/Tooltip/Tooltip';
 import MiniCard from '@components/MiniCard';
+import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
+import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 
 import cls from './style.module.scss';
 
@@ -23,6 +22,7 @@ const MiniEntry = memo(({
   const {
     time, services, id, completed,
   } = currentEntry;
+  const dispatch = useAppDispatch();
   const employee = currentEntry.employee as IEmployee;
   const client = currentEntry.client as IClient;
   const [employeeFirstName, employeeLastName] = employee?.name
@@ -35,10 +35,22 @@ const MiniEntry = memo(({
   const entryMods:Mods = {
     [cls.completed]: currentEntry.completed,
   };
-  const entryOpenerMode:EntryCardMode = currentEntry.completed ? EntryCardMode.READ_ONLY : EntryCardMode.EDIT;
+
+  const onDoubleClickHandler = () => {
+    const entryOpenerMode:EntryCardMode = currentEntry.completed
+      ? EntryCardMode.READ_ONLY
+      : EntryCardMode.EDIT;
+    dispatch(changeOpenedEntry({
+      entry: currentEntry,
+      mode: entryOpenerMode,
+    }));
+  };
   return (
-    <EntryOpener currentEntry={currentEntry} mode={entryOpenerMode}>
-      <MiniCard className={classNames(cls.entry, entryMods, [])}>
+    <>
+      <MiniCard
+        className={classNames(cls.entry, entryMods, [])}
+        onDoubleClick={onDoubleClickHandler}
+      >
         <div className={cls.master}>
           <UserIcon
             userName={employee?.name}
@@ -103,7 +115,7 @@ const MiniEntry = memo(({
           Complete entry
         </Tooltip>
       </>
-    </EntryOpener>
+    </>
   );
 });
 

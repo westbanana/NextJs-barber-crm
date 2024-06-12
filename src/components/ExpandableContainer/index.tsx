@@ -3,6 +3,7 @@
 import React, {
   ComponentPropsWithoutRef, memo, ReactNode, useEffect, useRef, useState,
 } from 'react';
+import { ReactComponent } from 'ag-grid-react/lib/shared/reactComponent';
 
 import { classNames, Mods } from '@lib/classNames/classNames';
 import Accordion from '@components/ui/Accordion/Accordion';

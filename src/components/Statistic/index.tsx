@@ -21,27 +21,10 @@ export type StatisticCompletedEntries = {
 const Statistic = () => {
   const loading = useAppSelector(getEntriesLoading);
   const employees = useAppSelector(getEmployeeList);
-  const entries = useAppSelector(getEntryList);
-  const [showSelect, setShowSelect] = useState<boolean>(false);
-  const [def, setDef] = useState<string>('1');
 
-  const statisticArray = [
-    <EmployeeCompletedEntries employees={employees} />,
-    <CurrentYearCompletedEntries entries={entries} />];
-  const showSelectHandler = () => setShowSelect(!showSelect);
   return (!loading && (
     <>
-      {showSelect && (
-        <Select
-          data={['1', '2']}
-          label="Types"
-          defaultValue={['1']}
-          className={cls.typesSelect}
-          callback={(value) => setDef(value as string)}
-        />
-      )}
-      <AlignLeft className={cls.selectToggle} onClick={showSelectHandler} />
-      {statisticArray[+def - 1]}
+      <EmployeeCompletedEntries employees={employees} />
     </>
   )
   );

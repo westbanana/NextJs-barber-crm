@@ -16,7 +16,10 @@ export interface EntriesState {
   entryList: IEntry[],
   todayEntries: IEntry[],
   loading: boolean,
-  openedEntry: IEntry | undefined
+  openedEntry: {
+    entry: IEntry | undefined
+    mode: EntryCardMode | undefined
+  }
   entriesDates: string[];
   error: string | undefined;
   mode: EntryCardMode | undefined
@@ -26,7 +29,10 @@ const initialState: EntriesState = {
   entryList: [],
   todayEntries: [],
   loading: true,
-  openedEntry: undefined,
+  openedEntry: {
+    entry: undefined,
+    mode: undefined,
+  },
   entriesDates: [],
   error: undefined,
   mode: undefined,
@@ -35,11 +41,11 @@ export const entrySlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {
-    changeOpenedEntry: (state, action:PayloadAction<IEntry>) => {
+    changeOpenedEntry: (state, action:PayloadAction<{ entry: IEntry | undefined, mode: EntryCardMode | undefined }>) => {
       state.openedEntry = action.payload;
     },
     clearOpenedEntry: (state) => {
-      state.openedEntry = undefined;
+      state.openedEntry = { entry: undefined, mode: undefined };
     },
   },
   extraReducers: (builder) => {
@@ -93,7 +99,7 @@ export const entrySlice = createSlice({
       //   }
       //   return entry;
       // });
-      state.openedEntry = undefined;
+      state.openedEntry = { entry: undefined, mode: undefined };
     });
     builder.addCase(updateEntry.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
@@ -108,7 +114,7 @@ export const entrySlice = createSlice({
       state.loading = false;
       // state.entryList = state.entryList.filter((entry) => entry.id !== action.payload.id);
       // state.todayEntries = state.todayEntries.filter((entry) => entry.id !== action.payload.id);
-      state.openedEntry = undefined;
+      state.openedEntry = { entry: undefined, mode: undefined };
     });
     builder.addCase(deleteEntry.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;
@@ -122,7 +128,7 @@ export const entrySlice = createSlice({
     builder.addCase(createEntry.fulfilled, (state, action:PayloadAction<IEntry>) => {
       state.loading = false;
       state.entryList = [...state.entryList, action.payload];
-      state.openedEntry = undefined;
+      state.openedEntry = { entry: undefined, mode: undefined };
     });
     builder.addCase(createEntry.rejected, (state, action) => {
       const { message } = action.payload as ErrorResponse;

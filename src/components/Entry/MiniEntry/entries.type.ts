@@ -14,9 +14,9 @@ export type IClient = {
 export type IEntry = {
   id: string,
   completed: boolean,
-  employee: IEmployee | string,
-  client: IClient | string,
-  services: IBarberServices[] & string[],
+  employee: IEmployee | string | undefined,
+  client: IClient | string | undefined,
+  services: IBarberServices[] | string[],
   time: string,
   date: string
 }

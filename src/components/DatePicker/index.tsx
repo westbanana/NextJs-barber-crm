@@ -85,6 +85,7 @@ const DateTimePicker = ({
           shouldDisableDate={shouldDisableDate}
           shouldDisableTime={shouldDisableTime}
           disabled={disabled}
+          format="DD.MM.YYYY  HH:mm"
         />
       </div>
     </LocalizationProvider>

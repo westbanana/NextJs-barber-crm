@@ -42,23 +42,27 @@ const EntryCard = memo(({
   entryDates,
   mode,
   onClose,
+  data,
 }:EntryEditCardProps) => {
   const { refresh } = useRouter();
   const dispatch = useAppDispatch();
-  const currentEntryData = useAppSelector(getOpenedEntry);
-  const employees = useAppSelector(getEmployeeList);
-  const clients = useAppSelector(getClientList);
-  const entryDate = dayjs(`${currentEntryData?.date} ${currentEntryData?.time}`);
+  const { employees, clients } = data;
+  const { entry } = useAppSelector(getOpenedEntry);
+  // const employees = useAppSelector(getEmployeeList);
+  // const clients = useAppSelector(getClientList);
+  const entryDate = dayjs(`${entry?.date} ${entry?.time}`);
   const onSubmitHandler = async (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {
       await dispatch(updateEntry(formattedValues));
       await dispatch(fetchTodayEntries());
+      refresh();
       return;
     }
     if (mode === EntryCardMode.CREATE) {
       await dispatch(createEntry(formattedValues));
       await dispatch(fetchTodayEntries());
+      refresh();
     }
   };
   const dateTimePickerCallback = (value:dayjs.Dayjs, props:FieldProps) => {
@@ -68,14 +72,14 @@ const EntryCard = memo(({
   };
 
   const deleteCurrentEntry = () => {
-    if (currentEntryData) {
-      dispatch(deleteEntry(currentEntryData));
+    if (entry) {
+      dispatch(deleteEntry(entry));
     }
   };
   return (
     <Card
       onSubmit={onSubmitHandler}
-      initialValues={currentEntryData}
+      initialValues={entry}
       loading={false}
       onClose={onClose}
     >
@@ -85,7 +89,7 @@ const EntryCard = memo(({
       }) => (
         <>
           <Card.Closer onClick={onClose} />
-          {currentEntryData && (
+          {entry && (
             <div className={cls.inputsWrapper}>
               <div className={cls.employee}>
                 <Field
