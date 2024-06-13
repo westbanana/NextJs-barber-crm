@@ -7,8 +7,7 @@ import TodayEntries from '@components/Entry/TodayEntries';
 import TopEmployees from '@components/Employee/TopEmployees';
 import Calendar from '@components/Calendar/Calendar';
 import { fetchCalendarInfo } from '@components/Calendar/services/fetchCalendarInfo';
-import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 
 import cls from './style.module.scss';
 

@@ -6,7 +6,7 @@ import { getAllEntries } from '@components/Entry/services/getTodayEntries';
 import { getAllEmployees } from '@components/Entry/services/getEmployees';
 import { getAllClients } from '@components/Entry/services/getClients';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
-import { barberServices, IBarberServices } from '@constants/barber-services';
+import { barberServices } from '@constants/barber-services';
 
 // fetchMainPageInfo
 export const fetchTodayEntries = createAsyncThunk(
@@ -52,7 +52,7 @@ export const fetchTodayEntries = createAsyncThunk(
         } = entry;
         const currentEmployee = todayEmployees?.find((empl: IEmployee) => empl.id === employee);
         const currentClient = todayClients?.find((cl: IClient) => cl.id === client);
-        const selectedServices: IBarberServices[] = barberServices.filter((serv) => services.includes(serv.id));
+        const selectedServices = barberServices.filter((serv) => (services as string[]).includes(serv.id));
         return ({
           ...entry,
           client: currentClient,

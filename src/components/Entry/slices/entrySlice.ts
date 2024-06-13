@@ -41,7 +41,13 @@ export const entrySlice = createSlice({
   name: 'entries',
   initialState,
   reducers: {
-    changeOpenedEntry: (state, action:PayloadAction<{ entry: IEntry | undefined, mode: EntryCardMode | undefined }>) => {
+    changeOpenedEntry: (
+      state,
+      action:PayloadAction<{
+        entry: IEntry | undefined,
+        mode: EntryCardMode | undefined
+      }>,
+    ) => {
       state.openedEntry = action.payload;
     },
     clearOpenedEntry: (state) => {

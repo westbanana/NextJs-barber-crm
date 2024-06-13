@@ -11,7 +11,6 @@ interface EntriesEventsReturn extends Event {
 const DayColumnWrapper = ({ value, children }: DateCellWrapperProps) => {
   const isWeekend = dayjs(value).day() === 0 || dayjs(value).day() === 6; // Воскресенье или суббота
   return React.cloneElement(React.Children.only(children), {
-    onClick: () => console.log('add entry'),
     style: {
       ...children.props.style,
       opacity: isWeekend ? '0.6' : '',

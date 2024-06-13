@@ -9,6 +9,7 @@ import { outsideClick } from '@helpers/outSideClick';
 import CardCloser from '@components/ui/Card/CardCloser/CardCloser';
 import { CardContext } from '@components/ui/Card/provider';
 import CardButton from '@components/ui/Card/CardButton/CardButton';
+import { classNames } from '@lib/classNames/classNames';
 
 import cls from './style.module.scss';
 
@@ -58,7 +59,7 @@ const CardComponent = ({
               handleChange,
             }) => !loading && (
               (
-                <form ref={refEditCard} className={cls.form} onSubmit={handleSubmit}>
+                <form ref={refEditCard} className={classNames(cls.form, {}, [])} onSubmit={handleSubmit}>
                   {typeof children === 'function'
                     ? children({
                       values, handleChange, handleSubmit,

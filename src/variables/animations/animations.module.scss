@@ -1,0 +1,60 @@
+.fadeIn {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.popIn {
+    animation: popIn 0.3s ease-out forwards;
+}
+@keyframes popIn {
+    from {
+        transform: translateY(100%) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform:translateY(0) scale(1);
+        opacity: 1;
+
+    }
+}
+
+
+.growIn {
+    animation: growIn 0.3s ease-out forwards;
+}
+
+@keyframes growIn {
+    from { height: 0; padding: 0; }
+    to { height: 300px; padding: 20px; }
+}
+
+
+.borderRadiusChange {
+    animation: borderRadiusChange 0.3s ease-out forwards;
+}
+
+@keyframes borderRadiusChange {
+    from { border-radius: 0; }
+    to { border-radius: var(--border-radius); }
+}
+
+.borderColorChange {
+    animation: borderColorChange 0.3s ease-out forwards;
+}
+
+@keyframes borderColorChange {
+    from { border-width: 0; }
+    to { border-width: 1px; }
+}
+
+

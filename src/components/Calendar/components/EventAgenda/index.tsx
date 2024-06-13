@@ -21,6 +21,7 @@ const EventAgenda = ({ event }: EventProps<EntriesEventsReturn>) => {
       <p>{`Майстер: ${employeeInfo.name}`}</p>
       <p>{`Клієнт: ${clientInfo.name}`}</p>
       <ul>
+        {/* @ts-ignore */}
         {services?.map(({ name, price }) => <li>{`${name}: ${price}`}</li>)}
       </ul>
     </div>

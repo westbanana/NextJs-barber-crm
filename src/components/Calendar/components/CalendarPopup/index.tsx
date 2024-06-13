@@ -4,9 +4,8 @@ import dayjs from 'dayjs';
 import { EntriesEventsReturn } from '@components/Calendar/Calendar';
 import Portal from '@components/Portal';
 import { outsideClick } from '@helpers/outSideClick';
-import { useAppDispatch } from '@lib/hooks/useAppDispatch';
-import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
-import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
+import { classNames } from '@lib/classNames/classNames';
+import animations from '@variables/animations/animations.module.scss';
 
 import cls from './style.module.scss';
 
@@ -22,7 +21,6 @@ interface CalendarPopupProps {
 }
 
 const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps) => {
-  const dispatch = useAppDispatch();
   const refPopup = useRef<HTMLDivElement>(null);
   const handleOutsideClick = useCallback((e: MouseEvent) => {
     outsideClick(e, onClose, refPopup, '[data-ignore-outside-clicks]');
@@ -51,7 +49,7 @@ const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps
       <div
         className={cls.popupBackground}
       >
-        <div className={cls.popupContainer} ref={refPopup}>
+        <div className={classNames(cls.popupContainer, {}, [animations.fadeIn])} ref={refPopup}>
           <div className={cls.date}>
             {dayjs(data.date)
               .format('DD-MM-YYYY')}

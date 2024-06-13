@@ -13,6 +13,7 @@ import Tooltip from '@components/Tooltip/Tooltip';
 import MiniCard from '@components/MiniCard';
 import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
+import { IBarberServices } from '@constants/barber-services';
 
 import cls from './style.module.scss';
 
@@ -31,7 +32,7 @@ const MiniEntry = memo(({
   const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
   const [clientFirstName, clientLastName] = client.name.split(' ');
   const clientShortName = `${clientLastName} ${clientFirstName[0]}.`;
-  const selectedServicesNames:string[] = services.map((serv) => serv.name);
+  const selectedServicesNames:string[] = (services as IBarberServices[]).map((serv) => serv.name);
   const entryMods:Mods = {
     [cls.completed]: currentEntry.completed,
   };

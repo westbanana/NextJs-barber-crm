@@ -21,6 +21,12 @@ export type IEntry = {
   date: string
 }
 
+export type StrictEntry = Omit<IEntry, 'employee' | 'client' | 'services'> & {
+  employee: IEmployee;
+  client: IClient;
+  services: IBarberServices[];
+};
+
 export interface EntryProps extends ComponentPropsWithoutRef<'div'>{
   currentEntry: IEntry
 }

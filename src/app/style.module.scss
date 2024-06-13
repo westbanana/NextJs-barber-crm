@@ -4,3 +4,19 @@
   gap: 40px;
   overflow: auto;
 }
+
+.PlusIconContainer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  transform: translateX(-50%);
+
+}
+
+.PlusIcon {
+  height: 100%;
+  width: 100%;
+}

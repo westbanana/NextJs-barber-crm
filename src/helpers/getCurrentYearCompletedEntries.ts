@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { barberServices } from '@constants/barber-services';
+import { barberServices, IBarberServices } from '@constants/barber-services';
 import { allMonths } from '@constants/allMonths';
 
 export const getCurrentYearCompletedEntries = (entries:IEntry[]) => {
@@ -10,7 +10,9 @@ export const getCurrentYearCompletedEntries = (entries:IEntry[]) => {
     && entry.completed);
 
   const currentYearEntriesWithFormattedServices = currentYearEntries.map((entry) => {
-    const entryBarberServices = barberServices.filter((service) => entry.services.includes(service.id));
+    const entryBarberServices = barberServices.filter((service) => (
+      (entry.services as string[]).includes(service.id)
+    ));
     return ({
       ...entry,
       services: entryBarberServices,
