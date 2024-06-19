@@ -3,10 +3,8 @@ import { Event, EventProps } from 'react-big-calendar';
 
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
+import { EntriesEventsReturn } from '@components/Calendar/Calendar';
 
-interface EntriesEventsReturn extends Event {
-  data?: IEntry
-}
 const EventAgenda = ({ event }: EventProps<EntriesEventsReturn>) => {
   const { data } = event;
   const {

@@ -4,7 +4,7 @@
     border: 1px var(--border-color) solid !important;
     border-radius: 5px !important;
     box-shadow: var(--shadow);
-    z-index: 999 !important;
+    z-index: 999999 !important;
 }
 .react-tooltip > .react-tooltip-arrow {
     opacity: 0;

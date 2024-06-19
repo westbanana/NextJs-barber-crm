@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis,
@@ -6,7 +8,7 @@ import {
 import { StatisticTooltipProps } from '@components/Statistic/statistic.types';
 import cls from '@components/Statistic/StatisticComponents/style.module.scss';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
-import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 
 const EmployeeCompletedEntriesTooltip = ({

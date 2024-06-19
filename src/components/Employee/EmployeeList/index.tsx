@@ -10,16 +10,16 @@ import { IEmployeeProps } from '@/components/Employee/EmployeeList/employee-list
 import Button from '@/components/ui/Button/Button';
 import { classNames } from '@/lib/classNames/classNames';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
-import { getEmployeeList } from '@/components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
 import { ColDefs, defaultColProps } from '@/constants/colDefs';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import EmployeeCard from '@/components/Employee/EmployeeCard';
 import { EmployeeCardMode } from '@/components/Employee/EmployeeCard/employee-card.type';
-import { getEmployeeCardMod } from '@/components/Employee/EmployeeCard/selectors/getEmployeeCardMod';
-import { closeCard, openCard } from '@/components/Employee/EmployeeList/slices/employeeListSlice';
-import { fetchEmployeeList } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
-import { getEmployeeLoading } from '@/components/Employee/EmployeeCard/selectors/getEmployeeLoading';
-import { deleteEmployee } from '@/components/Employee/EmployeeCard/services/deleteEmployee';
+import { getEmployeeCardMod } from '@components/Employee/selectors/getEmployeeCardMod';
+import { closeCard, openCard } from '@components/Employee/slices/employeeListSlice';
+import { fetchEmployeeList } from '@components/Employee/services/fetchEmployeeList';
+import { getEmployeeLoading } from '@components/Employee/selectors/getEmployeeLoading';
+import { deleteEmployee } from '@components/Employee/services/deleteEmployee';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import Skeleton from '@/components/ui/Skeleton/Skeleton';
 

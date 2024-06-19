@@ -1,8 +1,8 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, ComponentProps } from 'react';
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
+export interface InputProps extends ComponentProps<'input'>{
   value?: string | number;
-  id?: string;
+  id?: string | undefined;
   label?: string;
   className?: string;
 }

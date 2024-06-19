@@ -8,7 +8,7 @@ import { classNames } from '@lib/classNames/classNames';
 import Skeleton from '@components/ui/Skeleton/Skeleton';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading';
-import { getEmployeeLoading } from '@components/Employee/EmployeeCard/selectors/getEmployeeLoading';
+import { getEmployeeLoading } from '@components/Employee/selectors/getEmployeeLoading';
 
 import cls from './style.module.scss';
 

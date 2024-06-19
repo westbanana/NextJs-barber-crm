@@ -14,7 +14,7 @@ import EntryCard from '@components/Entry/EntryCard';
 import { getEntryDates } from '@components/Entry/selectors/getEntriesDates';
 import { clearOpenedEntry } from '@components/Entry/slices/entrySlice';
 import EntryCreator from '@components/Entry/EntryCreator';
-import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
 import { getClientList } from '@components/Client/selectors/getClientList';
 
 const TodayEntries = () => {
@@ -25,6 +25,7 @@ const TodayEntries = () => {
   const loading = useAppSelector(getEntriesLoading);
   const employees = useAppSelector(getEmployeeList);
   const clients = useAppSelector(getClientList);
+
   useEffect(() => {
     dispatch(fetchTodayEntries());
   }, [dispatch]);

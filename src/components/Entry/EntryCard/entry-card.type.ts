@@ -12,6 +12,7 @@ export interface EntryEditCardProps {
   onClose: () => void;
   mode: EntryCardMode | undefined;
   entryDates: string[];
+  disableFetchTodayEntries?: boolean
   data: {
     employees: IEmployee[],
     clients: IClient[]

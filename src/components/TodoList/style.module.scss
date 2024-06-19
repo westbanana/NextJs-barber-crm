@@ -1,0 +1,29 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: var(--bg-color);
+  border: 1px var(--border-color) solid;
+  border-radius: var(--border-radius);
+  min-width: 90px;
+  cursor: pointer;
+  min-height: 46px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  gap: 10px;
+}
+
+.todoCreator input {
+  width: 100%;
+}
+
+.List {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  overflow: auto;
+}

@@ -6,6 +6,11 @@ import Portal from '@components/Portal';
 import { outsideClick } from '@helpers/outSideClick';
 import { classNames } from '@lib/classNames/classNames';
 import animations from '@variables/animations/animations.module.scss';
+import Tooltip from '@components/Tooltip/Tooltip';
+import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
+import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import { IBarberServices } from '@constants/barber-services';
+import CalendarPopupTooltip from '@components/Calendar/components/CalendarPopup/tooltip';
 
 import cls from './style.module.scss';
 
@@ -55,15 +60,31 @@ const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps
               .format('DD-MM-YYYY')}
           </div>
           <div className={cls.eventList}>
-            {data.events.map((event) => (
-              <span
-                onDoubleClick={() => onDoubleClickEvent(event)}
-                className={cls.event}
-                key={event.data?.id}
-              >
-                {event.title}
-              </span>
-            ))}
+            {data.events.map((event) => {
+              const {
+                date, time, services, id, client, employee,
+              } = event.data as IEntry;
+              return (
+                <>
+                  <span
+                    data-tooltip-id={`event-tooltip-${id}`}
+                    onDoubleClick={() => onDoubleClickEvent(event)}
+                    className={cls.event}
+                    key={id}
+                  >
+                    {event.title}
+                  </span>
+                  <CalendarPopupTooltip
+                    id={id}
+                    employee={employee as IEmployee}
+                    client={client as IClient}
+                    time={time}
+                    date={date}
+                    services={services as IBarberServices[]}
+                  />
+                </>
+              );
+            })}
           </div>
         </div>
       </div>

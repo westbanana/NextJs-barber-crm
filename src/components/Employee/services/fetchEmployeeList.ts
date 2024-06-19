@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { fetchEmployeeListToasts, toastDefaultParams } from '@/constants/toast-constants';
+import { toastDefaultParams } from '@constants/toast-constants';
+import { fetchEmployeeListToasts } from '@components/Employee/toasts';
 
 export interface ErrorResponse {
   message: string;

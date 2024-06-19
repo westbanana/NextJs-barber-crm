@@ -1,5 +1,5 @@
 import { getAllEmployees } from '@components/Entry/services/getEmployees';
-import { getAllEntries } from '@components/Entry/services/getTodayEntries';
+import { getAllEntries } from '@components/Entry/services/getEntries';
 import { getAllClients } from '@components/Entry/services/getClients';
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';

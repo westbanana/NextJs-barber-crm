@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import { ErrorResponse, fetchEmployeeList } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
+import { ErrorResponse, fetchEmployeeList } from '@components/Employee/services/fetchEmployeeList';
 import { fetchClientList } from '@components/Client/services/fetchClientList';
 
 export interface ClientsState {

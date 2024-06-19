@@ -11,6 +11,7 @@ body.lightTheme {
     --border-color: rgba(0, 0, 0, 0.14);
     --hover-color: rgba(0, 0, 0, 0.24);
     --shadow: rgba(72, 73, 73, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
+    --shadow-transparent: rgba(72, 73, 73, 0) 0px 4px 8px -2px, rgba(0, 0, 0, 0) 0px 0px 0px 1px;
     --disabled-text: rgba(41, 43, 44, 0.32);
     --selectItemHover: linear-gradient(90.43202015117753deg, rgba(0, 0, 0, 0.1) 0.01%, rgba(255, 255, 255, 0) 100%);
 }
@@ -28,6 +29,7 @@ body.darkTheme {
     --border-color: rgba(255, 255, 255, 0.02);
     --hover-color: rgba(255, 255, 255, 0.24);
     --shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
+    --shadow-transparent: rgba(0, 0, 0, 0) 0px 4px 8px -2px, rgba(0, 0, 0, 0) 0px 0px 0px 1px;
     --disabled-text: rgba(221, 222, 223, 0.09);
     --selectItemHover: linear-gradient(90.43202015117753deg, rgba(0, 0, 0, 0.1) 0.01%, rgba(255, 255, 255, 0) 100%);
 }
@@ -46,6 +48,7 @@ body.greenTheme {
     --border-color: rgba(0, 0, 0, 0.07);
     --hover-color: rgba(170, 221, 170, 1);
     --shadow: rgb(0 0 0 / 25%) 0px 4px 8px -2px, rgba(0, 0, 0, 0.14) 0px 0px 0px 1px;
+    --shadow-transparent: rgba(0, 0, 0, 0) 0px 4px 8px -2px, rgba(0, 0, 0, 0) 0px 0px 0px 1px;
     --disabled-text: rgba(115, 204, 115, 0.55);
     --selectItemHover: linear-gradient(90.43202015117753deg, rgba(115, 204, 115, 0.3), rgba(204, 229, 204, 0) 100%);
 }

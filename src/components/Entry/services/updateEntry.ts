@@ -1,9 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-import { toastDefaultParams, updateEmployeeToasts } from '@constants/toast-constants';
+import { toastDefaultParams } from '@constants/toast-constants';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
+import { updateEmployeeToasts } from '@components/Employee/toasts';
+import { updateEntryToasts } from '@components/Entry/toasts';
 
 export const updateEntry = createAsyncThunk(
   'entries/updateEntry',
@@ -14,7 +15,7 @@ export const updateEntry = createAsyncThunk(
           method: 'PUT',
           body: JSON.stringify(entry),
         }),
-        updateEmployeeToasts,
+        updateEntryToasts,
         toastDefaultParams,
       );
 

@@ -3,14 +3,12 @@ import dayjs from 'dayjs';
 
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { updateEntry } from '@components/Entry/services/updateEntry';
-import { fetchEntries } from '@components/Entry/services/fetchEntries';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import { fetchEntryDates } from '@components/Entry/services/fetchEntryDates';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 import { createEntry } from '@components/Entry/services/createEntry';
 import { completeEntry } from '@components/Entry/services/completeEntry';
 import { EntryCardMode } from '@/components/Entry/EntryCard/entry-card.type';
-import { ErrorResponse } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
+import { ErrorResponse } from '@components/Employee/services/fetchEmployeeList';
 
 export interface EntriesState {
   entryList: IEntry[],
@@ -55,29 +53,6 @@ export const entrySlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchEntryDates.pending, (state) => {
-      state.error = undefined;
-    });
-    builder.addCase(fetchEntryDates.fulfilled, (state, action) => {
-      state.entriesDates = action.payload;
-    });
-    builder.addCase(fetchEntryDates.rejected, (state, action) => {
-      const { message } = action.payload as ErrorResponse;
-      state.error = message;
-    });
-    builder.addCase(fetchEntries.pending, (state) => {
-      state.error = undefined;
-      state.loading = true;
-    });
-    builder.addCase(fetchEntries.fulfilled, (state, action: PayloadAction<IEntry[]>) => {
-      state.entryList = action.payload;
-      state.loading = false;
-    });
-    builder.addCase(fetchEntries.rejected, (state, action) => {
-      const { message } = action.payload as ErrorResponse;
-      state.loading = false;
-      state.error = message;
-    });
     builder.addCase(fetchTodayEntries.pending, (state) => {
       state.error = undefined;
       state.loading = true;

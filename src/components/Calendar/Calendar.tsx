@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  useCallback, useEffect, useRef, useState,
+  useCallback, useState,
 } from 'react';
 import dayjs from 'dayjs';
 import {
@@ -17,9 +17,10 @@ import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import EventAgenda from '@components/Calendar/components/EventAgenda';
-import EventDay from '@components/Calendar/components/EventDay';
 import { newEntry } from '@constants/newEntry';
 import CalendarPopup, { CalendarPopupData } from '@components/Calendar/components/CalendarPopup';
+import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import EventMonth from '@components/Calendar/components/EventMonth';
 
 import cls from './style.module.scss';
 
@@ -38,7 +39,7 @@ const Calendar = ({ entries }: CalendarProps) => {
   const [popupData, setPopupData] = useState<CalendarPopupData>();
 
   const entriesEvents: EntriesEventsReturn[] = (entries).map((entry) => ({
-    title: 'Запис',
+    title: `${(entry.employee as IEmployee).name} - ${entry.time}`,
     data: entry,
     start: dayjs(`${entry.date} ${entry.time}`).toDate(),
     end: dayjs(`${entry.date} ${entry.time}`).add(30, 'minutes').toDate(),
@@ -48,8 +49,8 @@ const Calendar = ({ entries }: CalendarProps) => {
     agenda: {
       event: EventAgenda,
     },
-    day: {
-      event: EventDay,
+    month: {
+      event: EventMonth,
     },
   };
 
@@ -85,6 +86,9 @@ const Calendar = ({ entries }: CalendarProps) => {
       date,
     });
   }, []);
+
+  const onPopupCloseHandler = () => setShowPopup(false);
+
   return (
     <div className={classNames(cls.wrapper, {}, ['afterLoading'])} id="calendar-wrapper">
       <Label label="Calendar" alwaysOnBorder />
@@ -104,7 +108,7 @@ const Calendar = ({ entries }: CalendarProps) => {
           <CalendarPopup
             data={popupData}
             onDoubleClickEvent={onDoubleClickEventHandler}
-            onClose={() => setShowPopup(false)}
+            onClose={onPopupCloseHandler}
           />
         )}
     </div>

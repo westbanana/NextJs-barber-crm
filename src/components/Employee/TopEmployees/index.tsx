@@ -1,20 +1,28 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import { getTopEmployees } from '@components/Entry/services/getEmployees';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import TopCard from '@components/Employee/TopEmployees/TopCard/TopCard';
 import ExpandableContainer from '@components/ExpandableContainer';
-import Skeleton from '@components/ui/Skeleton/Skeleton';
-import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
+import { getTopEmployees } from '@components/Entry/services/getEmployees';
+
+import cls from './style.module.scss';
 
 const TopEmployees = async () => {
   const topTreeEmployees:IEmployee[] = await getTopEmployees();
 
   return (
-    <ExpandableContainer label="Top Employees">
-      {topTreeEmployees.map((employee: IEmployee) => (
-        <TopCard key={employee.id} employee={employee} />
-      ))}
+    <ExpandableContainer label="Top Employees" className={cls.expand}>
+      {topTreeEmployees.length
+        ? (
+          topTreeEmployees.map((employee: IEmployee) => (
+            <TopCard key={employee.id} employee={employee} />
+          ))
+        )
+        : (
+          <span className={cls.no}>
+            No one employee💇‍♂️.️
+          </span>
+        )}
     </ExpandableContainer>
   );
 };

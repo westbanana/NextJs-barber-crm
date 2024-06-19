@@ -17,7 +17,7 @@ import { convertObjectToIds } from '@helpers/convertObjectToIds';
 import { createEntry } from '@components/Entry/services/createEntry';
 import Card from '@components/ui/Card/Card';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
-import { getEmployeeList } from '@components/Employee/EmployeeList/selectors/getEmployeeList';
+import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
 import { getClientList } from '@components/Client/selectors/getClientList';
 import DateTimePicker from '@/components/DatePicker';
 import Select from '@/components/ui/Select/Select';
@@ -43,25 +43,28 @@ const EntryCard = memo(({
   mode,
   onClose,
   data,
+  disableFetchTodayEntries = false,
 }:EntryEditCardProps) => {
   const { refresh } = useRouter();
   const dispatch = useAppDispatch();
   const { employees, clients } = data;
   const { entry } = useAppSelector(getOpenedEntry);
-  // const employees = useAppSelector(getEmployeeList);
-  // const clients = useAppSelector(getClientList);
   const entryDate = dayjs(`${entry?.date} ${entry?.time}`);
   const onSubmitHandler = async (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {
       await dispatch(updateEntry(formattedValues));
-      await dispatch(fetchTodayEntries());
+      if (!disableFetchTodayEntries) {
+        await dispatch(fetchTodayEntries());
+      }
       refresh();
       return;
     }
     if (mode === EntryCardMode.CREATE) {
       await dispatch(createEntry(formattedValues));
-      await dispatch(fetchTodayEntries());
+      if (!disableFetchTodayEntries) {
+        await dispatch(fetchTodayEntries());
+      }
       refresh();
     }
   };

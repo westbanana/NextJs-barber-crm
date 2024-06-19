@@ -19,10 +19,11 @@ interface ExpandableContainerProps extends ComponentPropsWithoutRef<'div'> {
   label: string
   loading?: boolean
   adaptiveListHeight?: boolean
+  className?: string
 }
 
 const ExpandableContainer = ({
-  children, controlPanel, label, loading = false, adaptiveListHeight = false,
+  children, controlPanel, label, loading = false, adaptiveListHeight = false, className,
 }: ExpandableContainerProps) => {
   const { focusedRef, setFocused, focused } = useInFocus();
   const [showAccordion, setShowAccordion] = useState<boolean>(false);
@@ -55,14 +56,12 @@ const ExpandableContainer = ({
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };
-  }, [focusedRef, showAccordion]);
-
+  }, [focusedRef, showAccordion, loading]);
   const listMods: Mods = {
     [cls.emptyList]: Array.isArray(children) ? !children.length : children,
     [cls.openedList]: listOpened,
   };
 
-  // TestFunction
   useEffect(() => {
     if (!adaptiveListHeight) return;
     const adaptiveListHeightHandler = () => {
@@ -76,38 +75,38 @@ const ExpandableContainer = ({
     const height = adaptiveListHeightHandler();
     setListHeight(height);
   }, [listOpened, adaptiveListHeight, focusedRef, children]);
-
-  return (loading
-    ? <Skeleton rounded height="135px" width="100%" />
-    : (
-      <div
-        ref={focusedRef}
-        className={classNames(cls.mainContainer, {}, ['afterLoading'])}
-      >
-        <Label label={label} alwaysOnBorder />
-        <div className={cls.controlPanel}>
-          {showAccordion && (
-            <Accordion
-              dependencyState={listOpened}
-              callback={toggleList}
-              className={cls.todayEntriesAccordion}
-            />
-          )}
-          {Array.isArray(controlPanel)
-            ? controlPanel.map((element, idx) => <React.Fragment key={idx}>{element}</React.Fragment>)
-            : controlPanel}
-        </div>
-        <div
-          ref={listRef}
-          style={{
-            height: listOpened && adaptiveListHeight ? listHeight : '',
-          }}
-          className={classNames(cls.list, listMods, [])}
-        >
-          {children}
-        </div>
+  return (
+    <div
+      ref={focusedRef}
+      className={classNames(cls.mainContainer, {}, ['afterLoading', className])}
+    >
+      <Label label={label} alwaysOnBorder />
+      <div className={cls.controlPanel}>
+        {showAccordion && (
+          <Accordion
+            dependencyState={listOpened}
+            callback={toggleList}
+            className={cls.todayEntriesAccordion}
+          />
+        )}
+        {Array.isArray(controlPanel)
+          ? controlPanel.map((element, idx) => <React.Fragment key={idx}>{element}</React.Fragment>)
+          : controlPanel}
       </div>
-    )
+      {loading
+        ? (<Skeleton rounded height="135px" width="100%" />)
+        : (
+          <div
+            ref={listRef}
+            style={{
+              height: listOpened && adaptiveListHeight ? listHeight : '',
+            }}
+            className={classNames(cls.list, listMods, [])}
+          >
+            {children}
+          </div>
+        )}
+    </div>
   );
 };
 

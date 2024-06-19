@@ -2,7 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { deleteEmployeeToasts, toastDefaultParams } from '@/constants/toast-constants';
+import { toastDefaultParams } from '@/constants/toast-constants';
+import { deleteEmployeeToasts } from '@components/Employee/toasts';
+import { deleteEntryToasts } from '@components/Entry/toasts';
 
 export const deleteEntry = createAsyncThunk(
   'employee/deleteEmployee',
@@ -11,7 +13,7 @@ export const deleteEntry = createAsyncThunk(
     try {
       const response = await toast.promise(
         fetch(`http://localhost:4000/entries/${id}`, { method: 'DELETE' }),
-        deleteEmployeeToasts('1231'),
+        deleteEntryToasts,
         toastDefaultParams,
       );
 

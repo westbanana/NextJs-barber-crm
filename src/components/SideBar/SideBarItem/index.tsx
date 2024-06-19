@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -7,7 +7,7 @@ import { classNames, Mods } from '@/lib/classNames/classNames';
 
 import cls from './style.module.scss';
 
-const SideBarItem = ({
+const SideBarItem = memo(({
   href,
   className,
   Icon,
@@ -30,6 +30,6 @@ const SideBarItem = ({
       {!collapsed && <span className={cls.title}>{title}</span>}
     </Link>
   );
-};
+});
 
 export default SideBarItem;

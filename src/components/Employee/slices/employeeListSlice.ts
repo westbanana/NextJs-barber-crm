@@ -2,12 +2,12 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
-import { EmployeeCardMode } from '@/components/Employee/EmployeeCard/employee-card.type';
-import { ErrorResponse, fetchEmployeeList } from '@/components/Employee/EmployeeList/services/fetchEmployeeList';
-import { updateEmployee } from '@/components/Employee/EmployeeCard/services/updateEmployee';
-import { createEmployee } from '@/components/Employee/EmployeeCard/services/createEmployee';
-import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
-import { deleteEmployee } from '@/components/Employee/EmployeeCard/services/deleteEmployee';
+import { EmployeeCardMode } from '@components/Employee/EmployeeCard/employee-card.type';
+import { ErrorResponse, fetchEmployeeList } from '@components/Employee/services/fetchEmployeeList';
+import { updateEmployee } from '@components/Employee/services/updateEmployee';
+import { createEmployee } from '@components/Employee/services/createEmployee';
+import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import { deleteEmployee } from '@components/Employee/services/deleteEmployee';
 
 export interface EmployeeListState {
   data: IEmployee[]

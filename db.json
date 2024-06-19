@@ -231,98 +231,6 @@
       "date": "2024-1-17"
     },
     {
-      "id": "2",
-      "completed": false,
-      "client": "1",
-      "employee": "1",
-      "time": "12:00",
-      "services": [
-        "1"
-      ],
-      "date": "2024-6-13"
-    },
-    {
-      "id": "3",
-      "completed": false,
-      "client": "1",
-      "employee": "1",
-      "time": "11:00",
-      "services": [
-        "1",
-        "2"
-      ],
-      "date": "2024-6-13"
-    },
-    {
-      "id": "5",
-      "completed": false,
-      "client": "2",
-      "employee": "1711063565006",
-      "time": "15:00",
-      "services": [
-        "2",
-        "3"
-      ],
-      "date": "2024-6-13"
-    },
-    {
-      "id": "6",
-      "completed": false,
-      "client": "6",
-      "employee": "1",
-      "time": "14:30",
-      "services": [
-        "2",
-        "3"
-      ],
-      "date": "2024-6-13"
-    },
-    {
-      "id": "7",
-      "completed": false,
-      "client": "1",
-      "employee": "1",
-      "time": "17:30",
-      "services": [
-        "2",
-        "3"
-      ],
-      "date": "2024-6-13"
-    },
-    {
-      "id": "1714139426533",
-      "completed": false,
-      "time": "18:00",
-      "client": "1",
-      "services": [
-        "4"
-      ],
-      "employee": "2",
-      "date": "2024-6-13"
-    },
-    {
-      "id": "1715089434412",
-      "time": "16:00",
-      "completed": false,
-      "client": "2",
-      "services": [
-        "1"
-      ],
-      "employee": "3",
-      "date": "2024-6-13"
-    },
-    {
-      "id": "1715292595873",
-      "time": "10:00",
-      "completed": false,
-      "client": "1",
-      "services": [
-        "1"
-      ],
-      "employee": "1",
-      "date": "2024-6-13"
-    },
-    {
       "id": "1715296202750",
       "time": "10:30",
       "completed": true,
@@ -334,32 +242,18 @@
       "date": "2023-5-22"
     },
     {
-      "id": "1715297198354",
-      "time": "11:30",
-      "completed": false,
-      "client": "1",
-      "services": [
-        "3",
-        "2",
-        "1",
-        "4"
-      ],
-      "employee": "1",
-      "date": "2024-6-13"
-    },
-    {
       "id": "kokos",
       "time": "08:30",
       "completed": true,
       "client": "1",
       "services": [
-        "4",
-        "3",
+        "1",
         "2",
-        "1"
+        "3",
+        "4"
       ],
       "employee": "1",
-      "date": "2024-6-13"
+      "date": "2024-6-19"
     },
     {
       "id": "1716040154268",
@@ -388,7 +282,7 @@
       "date": "2024-6-8"
     },
     {
-      "id": 1718155923177,
+      "id": "1718155923177",
       "completed": false,
       "client": "1",
       "services": [
@@ -399,7 +293,7 @@
       "time": "09:30"
     },
     {
-      "id": 1718155939914,
+      "id": "1718155939914",
       "completed": false,
       "client": "1",
       "services": [
@@ -408,6 +302,28 @@
       "employee": "1",
       "date": "2024-6-14",
       "time": "08:30"
+    },
+    {
+      "id": 1718823170584,
+      "completed": false,
+      "client": "1",
+      "services": [
+        "1"
+      ],
+      "employee": "1",
+      "date": "2024-6-19",
+      "time": "08:30"
+    },
+    {
+      "id": 1718823193660,
+      "completed": false,
+      "client": "1",
+      "services": [
+        "1"
+      ],
+      "employee": "1",
+      "date": "2024-6-19",
+      "time": "10:00"
     }
   ],
   "clients": [
@@ -452,6 +368,26 @@
       "visits": 600,
       "phoneNumber": "+380970977782",
       "clientIcon": ""
+    }
+  ],
+  "todos": [
+    {
+      "id": "1",
+      "description": "First todosdxxx",
+      "completed": false,
+      "createdAt": "19-06-2024 18:17"
+    },
+    {
+      "id": "2",
+      "description": "Second todos",
+      "completed": false,
+      "createdAt": "19-06-2024 18:17"
+    },
+    {
+      "id": "3",
+      "description": "Заказать шапмунь х2 ",
+      "completed": false,
+      "createdAt": "19-06-2024 18:29"
     }
   ]
 }

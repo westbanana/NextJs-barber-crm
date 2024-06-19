@@ -32,6 +32,7 @@ const CalendarWrapper = ({ entries, clients, employees }: CalendarWrapperProps) 
       <Calendar entries={entries} />
       {(openedEntry.mode && openedEntry.entry) && (
         <EntryCard
+          disableFetchTodayEntries
           onClose={onCloseCardHandler}
           mode={openedEntry.mode}
           entryDates={entriesDates!!}

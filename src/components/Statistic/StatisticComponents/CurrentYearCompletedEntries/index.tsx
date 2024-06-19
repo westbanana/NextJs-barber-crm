@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import {
   CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis,
@@ -5,8 +7,6 @@ import {
 
 import { StatisticTooltipProps } from '@components/Statistic/statistic.types';
 import cls from '@components/Statistic/StatisticComponents/style.module.scss';
-import { useAppSelector } from '@lib/hooks/useAppSelector';
-import { getEntryList } from '@components/Entry/selectors/getEntryList';
 import { getCurrentYearCompletedEntries } from '@helpers/getCurrentYearCompletedEntries';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 

@@ -1,18 +1,6 @@
-.mainContainer {
-  padding: 20px;
-  position: relative;
-  //border-radius: var(--border-radius);
-  //border: 1px var(--border-color) solid;
-  height: 135px;
-  display: flex;
-  align-items: center;
-  transition: 0.3s linear;
-  max-width: 594px;
-  scrollbar-gutter: stable;
+.no {
+  width: 100%;
+  text-align: center;
+  line-height: 93px;
 }
 
-.list {
-  display: flex;
-  flex-direction: row;
-  gap: 22px;
-}

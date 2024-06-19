@@ -1,8 +1,7 @@
-import { IClient } from '@components/Entry/MiniEntry/entries.type';
+import { toast } from 'react-toastify';
 
-export const getClients = (arr:string[]) => fetch('http://localhost:4000/clients')
-  .then((response) => response.json())
-  .then((response) => response.filter((client: IClient) => arr.includes(client?.id)));
+import { fetchClientListToasts } from '@components/Client/toasts';
+import { toastDefaultParams } from '@constants/toast-constants';
 
 export const getAllClients = () => fetch(
   'http://localhost:4000/clients',
