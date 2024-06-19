@@ -374,8 +374,9 @@
     {
       "id": "1",
       "description": "First todosdxxx",
-      "completed": false,
-      "createdAt": "19-06-2024 18:17"
+      "completed": true,
+      "createdAt": "19-06-2024 18:17",
+      "completedAt": "19-06-2024 22:28"
     },
     {
       "id": "2",
