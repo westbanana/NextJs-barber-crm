@@ -51,33 +51,18 @@ const Todo = memo(({ data }: TodoProps) => {
   const disableTooltip = editedTodo && editedTodo?.id !== data.id;
   return (
     <div className={classNames(cls.todo, mods, [animations.fadeIn])}>
-      <span
-        className={cls.todoDescription}
-        data-tooltip-id={`todo-tooltip-${data.id}`}
-      >
+      <span className={cls.todoDescription}>
         {data.description}
       </span>
       <TodoControllers
         todoId={data.id}
+        data={data}
         disableTooltipCondition={disableTooltip}
         isTodoCompleted={data.completed}
         onEditControllerClick={onEditControllerClick}
         onCompleteControllerClick={onCompleteControllerClick}
         onDeleteControllerClick={onDeleteControllerClick}
       />
-      <Tooltip id={`todo-tooltip-${data.id}`} disabled={editedTodo && editedTodo?.id !== data.id} place="bottom-start">
-        <ul className={cls.infoList}>
-          <li>
-            {`Id: ${data.id}`}
-          </li>
-          <li>
-            {`Створено: ${data.createdAt}`}
-          </li>
-          <li>
-            {`Завершено: ${data.completedAt || 'не заверешено'}`}
-          </li>
-        </ul>
-      </Tooltip>
     </div>
   );
 });
