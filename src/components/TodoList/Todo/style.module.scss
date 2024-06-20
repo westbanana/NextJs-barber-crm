@@ -26,6 +26,7 @@
 }
 
 .controller {
+  display: flex;
   height: 15px;
   width: 15px;
   border-radius: 100%;
@@ -63,4 +64,8 @@
 
 .notEdited {
   opacity: 0.2 !important;
+}
+
+.infoList {
+  padding: 0;
 }

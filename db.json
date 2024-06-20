@@ -437,6 +437,20 @@
       "employee": "1",
       "date": "2024-6-20",
       "time": "17:00"
+    },
+    {
+      "id": 1718919386770,
+      "completed": false,
+      "client": "2",
+      "services": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "employee": "1",
+      "date": "2024-6-21",
+      "time": "12:00"
     }
   ],
   "clients": [

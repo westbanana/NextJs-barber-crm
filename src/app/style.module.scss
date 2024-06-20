@@ -28,11 +28,35 @@
 }
 
 .errorPage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  scrollbar-gutter: auto;
   span {
     font-size: 10vw
   }
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background-color: transparent;
+  //backdrop-filter: blur(100px);
+  position: relative;
+  z-index: 2;
+}
+
+.homeButton {
+  box-shadow: var(--shadow);
 }
