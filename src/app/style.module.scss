@@ -26,3 +26,13 @@
   flex-direction: row;
   gap: 20px;
 }
+
+.errorPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span {
+    font-size: 10vw
+  }
+}
