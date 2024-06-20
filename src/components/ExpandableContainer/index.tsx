@@ -1,21 +1,25 @@
 'use client';
 
 import React, {
-  ComponentPropsWithoutRef, memo, ReactNode, useEffect, useRef, useState,
+  ComponentPropsWithoutRef, ReactNode, useEffect, useRef, useState,
 } from 'react';
-import { ReactComponent } from 'ag-grid-react/lib/shared/reactComponent';
 
 import { classNames, Mods } from '@lib/classNames/classNames';
 import Accordion from '@components/ui/Accordion/Accordion';
 import Label from '@components/Label/Label';
 import useInFocus from '@lib/hooks/useInFocus';
 import Skeleton from '@components/ui/Skeleton/Skeleton';
+import Tooltip from '@components/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
 
+interface ControlPanelElement {
+  element: ReactNode,
+  tooltip: string
+}
 interface ExpandableContainerProps extends ComponentPropsWithoutRef<'div'> {
   children: ReactNode[] | ReactNode
-  controlPanel?: ReactNode[] | ReactNode
+  controlPanel?: ControlPanelElement[] | ControlPanelElement
   label: string
   loading?: boolean
   adaptiveListHeight?: boolean
@@ -83,15 +87,46 @@ const ExpandableContainer = ({
       <Label label={label} alwaysOnBorder />
       <div className={cls.controlPanel}>
         {showAccordion && (
-          <Accordion
-            dependencyState={listOpened}
-            callback={toggleList}
-            className={cls.todayEntriesAccordion}
-          />
+          <div data-tooltip-id={`accordion-${label}`}>
+            <Accordion
+              dependencyState={listOpened}
+              callback={toggleList}
+              className={cls.todayEntriesAccordion}
+            />
+          </div>
         )}
+        <Tooltip
+          withPortal={false}
+          id={`accordion-${label}`}
+        >
+          {listOpened ? 'Close list' : 'Open List'}
+        </Tooltip>
         {Array.isArray(controlPanel)
-          ? controlPanel.map((element, idx) => <React.Fragment key={idx}>{element}</React.Fragment>)
-          : controlPanel}
+          ? controlPanel.map((control, idx) => (
+            <div
+              data-tooltip-id={`panel-control-${control?.tooltip}${idx}`}
+              key={`${control}`}
+            >
+              {control.element}
+              <Tooltip
+                id={`panel-control-${control?.tooltip}${idx}`}
+              >
+                {control.tooltip}
+              </Tooltip>
+            </div>
+          ))
+          : (
+            <div
+              data-tooltip-id={`panel-control-${controlPanel?.tooltip}`}
+            >
+              {controlPanel?.element}
+              <Tooltip
+                id={`panel-control-${controlPanel?.tooltip}`}
+              >
+                {controlPanel?.tooltip}
+              </Tooltip>
+            </div>
+          )}
       </div>
       {loading
         ? (<Skeleton rounded height="135px" width="100%" />)

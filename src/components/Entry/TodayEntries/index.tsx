@@ -33,13 +33,15 @@ const TodayEntries = () => {
   const onCloseHandler = () => {
     dispatch(clearOpenedEntry());
   };
-
   return (
     <>
       <ExpandableContainer
         label="Today Entries"
         loading={loading}
-        controlPanel={<EntryCreator />}
+        controlPanel={{
+          element: <EntryCreator />,
+          tooltip: 'Create Entry',
+        }}
       >
         {(todayEntries.length)
           ? (todayEntries.map((entry) => (

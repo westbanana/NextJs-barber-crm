@@ -41,17 +41,12 @@
 }
 
 .addEntryContainer {
-  position: absolute;
   background-color: var(--bg-color);
   border-radius: 100%;
   border: 1px var(--border-color) solid;
-  right: 0;
-  top: 0;
-  transform: translateY(-46%) translateX(46%);
   display: flex;
   align-items: center;
   justify-items: center;
-  z-index: 10;
   cursor: pointer;
   transition: background-color var(--transition);
   &:hover {
