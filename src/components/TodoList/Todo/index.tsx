@@ -14,6 +14,7 @@ import { updateTodo } from '@components/TodoList/services/updateTodo';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEditedTodo } from '@components/TodoList/selectors/getEditedTodo';
 import Tooltip from '@components/Tooltip/Tooltip';
+import TodoControllers from '@components/TodoList/TodoControllers';
 
 import cls from './style.module.scss';
 
@@ -29,17 +30,17 @@ const Todo = memo(({ data }: TodoProps) => {
     [cls.edited]: editedTodo?.id === data.id,
     [cls.notEdited]: (editedTodo?.id !== data.id) && editedTodo !== undefined,
   };
-  const deleteTodoHandler = () => {
+  const onDeleteControllerClick = () => {
     if (editedTodo) return;
     dispatch(deleteTodo(data));
   };
 
-  const editTodoHandler = () => {
+  const onEditControllerClick = () => {
     if (editedTodo) return;
     dispatch(changeEditedTodo(data));
   };
 
-  const toggleCompleteTodoHandler = () => {
+  const onCompleteControllerClick = () => {
     if (editedTodo) return;
     dispatch(updateTodo({
       ...data,
@@ -56,36 +57,14 @@ const Todo = memo(({ data }: TodoProps) => {
       >
         {data.description}
       </span>
-      <div className={cls.controllers}>
-        <Button
-          data-tooltip-id={`tooltip-edit-${data.id}`}
-          onClick={editTodoHandler}
-          className={cls.controller}
-        >
-          <Settings2 />
-        </Button>
-        <Button
-          data-tooltip-id={`tooltip-complete-${data.id}`}
-          onClick={toggleCompleteTodoHandler}
-          className={cls.controller}
-        >
-          {!data.completed ? <Check /> : <X />}
-        </Button>
-        <Button
-          data-tooltip-id={`tooltip-delete-${data.id}`}
-          onClick={deleteTodoHandler}
-          className={cls.controller}
-        >
-          <Trash2 />
-        </Button>
-      </div>
-      <Tooltip id={`tooltip-edit-${data.id}`} disabled={disableTooltip}>Edit todo</Tooltip>
-      <Tooltip id={`tooltip-complete-${data.id}`} disabled={disableTooltip}>
-        {!data.completed
-          ? 'Complete todo'
-          : 'Uncomplete todo' }
-      </Tooltip>
-      <Tooltip id={`tooltip-delete-${data.id}`} disabled={disableTooltip}>Delete todo</Tooltip>
+      <TodoControllers
+        todoId={data.id}
+        disableTooltipCondition={disableTooltip}
+        isTodoCompleted={data.completed}
+        onEditControllerClick={onEditControllerClick}
+        onCompleteControllerClick={onCompleteControllerClick}
+        onDeleteControllerClick={onDeleteControllerClick}
+      />
       <Tooltip id={`todo-tooltip-${data.id}`} disabled={editedTodo && editedTodo?.id !== data.id} place="bottom-start">
         <ul className={cls.infoList}>
           <li>
