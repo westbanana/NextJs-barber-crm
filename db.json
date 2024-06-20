@@ -392,7 +392,7 @@
       "time": "08:30"
     },
     {
-      "id": 1718823170584,
+      "id": "1718823170584",
       "completed": false,
       "client": "1",
       "services": [
@@ -403,7 +403,7 @@
       "time": "08:30"
     },
     {
-      "id": 1718823193660,
+      "id": "1718823193660",
       "completed": false,
       "client": "1",
       "services": [
@@ -414,7 +414,7 @@
       "time": "10:00"
     },
     {
-      "id": 1718886244888,
+      "id": "1718886244888",
       "completed": false,
       "client": "1",
       "services": [
@@ -425,7 +425,7 @@
       "time": "16:00"
     },
     {
-      "id": 1718886271791,
+      "id": "1718886271791",
       "completed": false,
       "client": "1",
       "services": [
@@ -486,22 +486,33 @@
   "todos": [
     {
       "id": "1",
-      "description": "First todosdxxx",
-      "completed": true,
-      "createdAt": "19-06-2024 18:17",
-      "completedAt": "19-06-2024 22:28"
+      "description": "Создать страницу клиентов",
+      "completed": false,
+      "createdAt": "20-06-2024 22:38"
     },
     {
       "id": "2",
-      "description": "Second todos",
+      "description": "Добавить возможность создавать клиентов при создании записи",
       "completed": false,
-      "createdAt": "19-06-2024 18:17"
+      "createdAt": "20-06-2024 22:39"
     },
     {
       "id": "3",
-      "description": "Заказать шапмунь х2 ",
+      "description": "Добавить топ клиентов в статистику по посещениям",
       "completed": false,
-      "createdAt": "19-06-2024 18:29"
+      "createdAt": "20-06-2024 22:41"
+    },
+    {
+      "id": "4",
+      "description": "Средний чек в месяц (статистика)",
+      "completed": false,
+      "createdAt": "20-06-2024 22:42"
+    },
+    {
+      "id": "5",
+      "description": "Среднее к-ство посещений в месяц",
+      "completed": false,
+      "createdAt": "20-06-2024 22:42"
     }
   ]
 }

@@ -10,7 +10,7 @@ import cls from './style.module.scss';
 
 const ErrorPage = () => (
   <Page className={cls.errorPage}>
-    <span className={animations.growIn}>ERROR 404</span>
+    <span className={animations.growIn}>Page not found</span>
     <Button>
       <Link href={PAGES_LINKS_INSTANCE.HOME}>Home</Link>
     </Button>
