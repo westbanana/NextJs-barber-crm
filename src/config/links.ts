@@ -16,6 +16,10 @@ class PAGES_LINKS {
     return { ...this.BASE, pathname: '/employees' };
   }
 
+  public get CLIENTS(): UrlObject {
+    return { ...this.BASE, pathname: '/clients' };
+  }
+
   public get SETTINGS(): UrlObject {
     return { ...this.BASE, pathname: '/settings' };
   }
