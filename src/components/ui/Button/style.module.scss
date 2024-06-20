@@ -5,6 +5,7 @@
   border-radius: 5px;
   transition: all var(--transition);
   position: relative;
+  color: var(--text-color);
   &:has(.loader) {
     min-width: 100px;
     justify-content: center;
