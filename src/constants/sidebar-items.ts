@@ -1,5 +1,5 @@
 import {
-  Home, Scissors, Settings, CalendarDays, AreaChart,
+  Home, Scissors, Settings, CalendarDays, AreaChart, Users,
 } from 'lucide-react';
 
 import { PAGES_LINKS_INSTANCE } from '@/config/links';
@@ -15,6 +15,11 @@ export const sidebarItems: ISidebarItem[] = [
     title: 'Employees',
     href: PAGES_LINKS_INSTANCE.EMPLOYEES,
     Icon: Scissors,
+  },
+  {
+    title: 'Clients',
+    href: PAGES_LINKS_INSTANCE.CLIENTS,
+    Icon: Users,
   },
   {
     title: 'Calendar',
