@@ -7,15 +7,21 @@ import './style.css';
 import Portal from '@components/Portal';
 
 const Tooltip = ({
-  children, place = 'bottom', id, disabled = false,
+  children, place = 'bottom', id, disabled = false, withPortal = true,
 }:TooltipProps) => {
   if (disabled) return null;
   return (
-    <Portal>
+    withPortal ? (
+      <Portal>
+        <ReactTooltip id={id} className="reactTooltip" place={place} opacity={1}>
+          {children}
+        </ReactTooltip>
+      </Portal>
+    ) : (
       <ReactTooltip id={id} className="reactTooltip" place={place} opacity={1}>
         {children}
       </ReactTooltip>
-    </Portal>
+    )
   );
 };
 
