@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import MiniCard from '@components/MiniCard';
+import Tooltip from '@components/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
 
@@ -19,16 +22,23 @@ const TopCard = ({ employee }: TopCardProps) => {
 
   return (
     <MiniCard className={cls.topCard}>
-      <div className={cls.employee}>
+      <div
+        data-tooltip-id={`top-card-employee-${employee.id}`}
+        className={cls.employee}
+      >
         <UserIcon
           userName={employee?.name}
           value={employee?.userIcon}
           className={cls.iconSize}
         />
-        <span className={cls.name}>{employeeShortName}</span>
+        <span className={cls.name}>
+          {employeeShortName}
+        </span>
       </div>
       <h1 className={cls.totalCompletedEntries}>{employee.completedEntries.length}</h1>
-
+      <Tooltip id={`top-card-employee-${employee.id}`}>
+        {employee.name}
+      </Tooltip>
     </MiniCard>
   );
 };
