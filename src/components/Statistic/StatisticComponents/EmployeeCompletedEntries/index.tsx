@@ -10,6 +10,7 @@ import cls from '@components/Statistic/StatisticComponents/style.module.scss';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
+import EmptyStatistic from '@components/Statistic/StatisticComponents/EmptyStatistic/indext';
 
 const EmployeeCompletedEntriesTooltip = ({
   payload, active, label,
@@ -35,19 +36,24 @@ const EmployeeCompletedEntries = ({ employees }: EmployeeCompletedEntriesProps) 
     name: employee.name,
     completed: employee.completedEntries.length,
   }));
-
   return (
-    <ResponsiveContainer width="100%" height="100%" className="afterLoading">
-      <BarChart
-        data={data}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip content={<EmployeeCompletedEntriesTooltip />} cursor={{ fill: 'var(--chart-inverted)' }} />
-        <Bar dataKey="completed" fill="var(--chart)" />
-      </BarChart>
-    </ResponsiveContainer>
+    !data.length
+      ? (
+        <EmptyStatistic description="No one completed entry💇‍♂️.️" />
+      )
+      : (
+        <ResponsiveContainer width="100%" height="100%" className="afterLoading">
+          <BarChart
+            data={data}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip content={<EmployeeCompletedEntriesTooltip />} cursor={{ fill: 'var(--chart-inverted)' }} />
+            <Bar dataKey="completed" fill="var(--chart)" />
+          </BarChart>
+        </ResponsiveContainer>
+      )
   );
 };
 export default EmployeeCompletedEntries;

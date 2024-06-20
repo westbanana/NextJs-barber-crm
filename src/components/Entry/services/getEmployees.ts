@@ -6,6 +6,7 @@ import { toastDefaultParams } from '@constants/toast-constants';
 
 export const getAllEmployees = () => fetch(
   'http://localhost:4000/employees',
+  { next: { revalidate: 0 } },
 ).then((response) => response.json())
   .catch((e) => {
     throw new Error(e);

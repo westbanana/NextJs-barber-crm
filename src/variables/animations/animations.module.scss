@@ -2,6 +2,7 @@
     animation: fadeIn 0.3s ease-out forwards;
 }
 
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -16,6 +17,7 @@
 .popIn {
     animation: popIn 0.3s ease-out forwards;
 }
+
 @keyframes popIn {
     from {
         transform: translateY(100%) scale(0);
@@ -57,4 +59,15 @@
     to { border-width: 1px; }
 }
 
+.slowShow {
+  animation: slowShow 0.3s ease-out forwards;
+}
 
+@keyframes slowShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

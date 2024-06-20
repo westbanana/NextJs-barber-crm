@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import { ISidebarItem } from '@/components/SideBar/types/sidebar-items.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
+import Tooltip from '@components/Tooltip/Tooltip';
+import animations from '@/variables/animations/animations.module.scss';
 
 import cls from './style.module.scss';
 
@@ -22,13 +24,21 @@ const SideBarItem = memo(({
     [cls.active]: isActive,
   };
   return (
-    <Link
-      href={href}
-      className={classNames(cls.SideBarItem, mods, [className])}
-    >
-      {Icon && <Icon />}
-      {!collapsed && <span className={cls.title}>{title}</span>}
-    </Link>
+    <>
+      <Link
+        href={href}
+        data-tooltip-id={`sidebar-item-${title}`}
+        className={classNames(cls.SideBarItem, mods, [className, animations.slowShow])}
+      >
+        {Icon && <Icon />}
+        {!collapsed && <span className={cls.title}>{title}</span>}
+      </Link>
+      {collapsed && (
+        <Tooltip id={`sidebar-item-${title}`}>
+          <span>{title}</span>
+        </Tooltip>
+      )}
+    </>
   );
 });
 

@@ -3,7 +3,6 @@ import { Montserrat } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import './globals.css';
 import '@/variables/size/style.css';
-import '@variables/animations/animations.module.scss';
 import '@/variables/colors/calendar.css';
 import '@/variables/colors/style.css';
 import 'react-toastify/dist/ReactToastify.css';

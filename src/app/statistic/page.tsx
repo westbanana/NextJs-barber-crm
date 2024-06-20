@@ -4,16 +4,16 @@ import Page from '@components/ui/Page/Page';
 import EmployeeCompletedEntries from '@components/Statistic/StatisticComponents/EmployeeCompletedEntries';
 import CurrentYearCompletedEntries from '@components/Statistic/StatisticComponents/CurrentYearCompletedEntries';
 import Label from '@components/Label/Label';
-import { getAllEmployees, getAllEmployeesServ } from '@components/Entry/services/getEmployees';
+import { getAllEmployees } from '@components/Entry/services/getEmployees';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
-import { getAllEntries, getAllEntriesServ } from '@components/Entry/services/getEntries';
+import { getAllEntries } from '@components/Entry/services/getEntries';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 
 import cls from './style.module.scss';
 
 const StatisticPage = async () => {
-  const allEmployees: IEmployee[] = await getAllEmployeesServ();
-  const allEntries:IEntry[] = await getAllEntriesServ();
+  const allEmployees: IEmployee[] = await getAllEmployees();
+  const allEntries:IEntry[] = await getAllEntries();
 
   return (
     <Page className={cls.statisticPage}>

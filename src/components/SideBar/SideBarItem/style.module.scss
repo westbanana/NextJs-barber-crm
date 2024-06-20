@@ -35,7 +35,28 @@
 }
 
 .active {
+  position: relative;
   flex-grow: 0.1;
+  &::before {
+    content: "";
+    position: absolute;
+    height: 5px;
+    width: 5px;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 100%;
+    background-color: var(--bg-color-inverted);
+    animation: show 0.5s ease-out forwards;
+    @keyframes show {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 0.3;
+      }
+    }
+  }
 }
 
 @keyframes item_text_showed {
