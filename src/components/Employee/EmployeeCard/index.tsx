@@ -13,7 +13,7 @@ import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import TimeInput from '@/components/testPicker/TimeInput';
-import { days } from '@/constants/days';
+import { days, DayType } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
@@ -122,11 +122,15 @@ const EmployeeCard = ({
                     name="work_schedule.days.from"
                   >
                     {(props: FieldProps) => (
-                      <Select
+                      <Select<DayType>
                         callback={(value) => {
-                          changeFormikField<SelectItem>(value, props.field);
+                          console.log(value);
+                          // changeFormikField<DayType>(value.name, props.field);
                         }}
-                        defaultValue={values?.work_schedule?.days?.from}
+                        defaultValue={[{
+                          name: values?.work_schedule?.days?.from,
+                          id: values?.work_schedule?.days?.from,
+                        }]}
                         className={cls.DataSelect}
                         label="From"
                         data={days}
@@ -138,10 +142,11 @@ const EmployeeCard = ({
                     name="work_schedule.days.to"
                   >
                     {(props: FieldProps) => (
-                      <Select
+                      <Select<DayType>
                         defaultValue={values?.work_schedule?.days?.to}
                         callback={(value) => {
-                          changeFormikField<SelectItem>(value, props.field);
+                          console.log(value);
+                          // changeFormikField<DayType>(value, props.field);
                         }}
                         className={cls.DataSelect}
                         selectMode={SelectMode.SINGLESELECT}

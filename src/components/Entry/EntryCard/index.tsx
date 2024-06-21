@@ -99,7 +99,7 @@ const EntryCard = memo(({
                   name="employee"
                 >
                   {(props: FieldProps) => (
-                    <Select
+                    <Select<IEmployee>
                       data={employees}
                       label="employee"
                       disabled={mode === EntryCardMode.READ_ONLY}
@@ -114,7 +114,7 @@ const EntryCard = memo(({
               <div className={cls.client}>
                 <Field name="client">
                   {(props: FieldProps) => (
-                    <Select
+                    <Select<IClient>
                       data={clients}
                       label="client"
                       defaultValue={values.client}
@@ -129,7 +129,7 @@ const EntryCard = memo(({
               <div className={cls.services}>
                 <Field name="services">
                   {(props: FieldProps) => (
-                    <Select
+                    <Select<IBarberServices>
                       data={barberServices}
                       label="services"
                       disabled={mode === EntryCardMode.READ_ONLY}

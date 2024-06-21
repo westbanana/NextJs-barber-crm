@@ -1,0 +1,17 @@
+{
+  "Test": "it is test",
+  "buttons": {
+    "home": "Home"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Russian",
+    "uk": "Ukrainian"
+  },
+  "not-found-page": {
+    "title": "Page not found"
+  },
+  "settings-page": {
+    "change-language": "Change language"
+  }
+}

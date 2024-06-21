@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 
 import SideBar from '@/components/SideBar';
 import { IMainLayoutTypes } from '@/components/MainLayout/main-layout.types';
-import StoreProvider from '@/app/StoreProvider';
+import StoreProvider from '@app/[locale]/StoreProvider';
 
 import cls from './style.module.scss';
 
