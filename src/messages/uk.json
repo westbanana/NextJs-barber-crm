@@ -1,0 +1,17 @@
+{
+  "Test": "це тест",
+  "buttons": {
+    "home": "Головна"
+  },
+  "languages": {
+    "en": "Англійська",
+    "ru": "Російська",
+    "uk": "Українська"
+  },
+  "not-found-page": {
+    "title": "Сторінку не знайдено"
+  },
+  "settings-page": {
+    "change-language": "Змінити мову"
+  }
+}
