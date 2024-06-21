@@ -92,13 +92,14 @@ const Select = ({
     };
   }, [handleOutsideClick, isOpened]);
 
-  // TODO переделать логику если работаем с строками
-  // eslint-disable-next-line no-nested-ternary
-  const resultStroke = Array.isArray(result) && true
-    ? result.map((item) => typeof item !== 'string' && item?.name).join(',')
-    : resultTypeObject && result.name
-      ? result.name
-      : result;
+  const getResultStroke = (input: any): string => {
+    if (Array.isArray(input)) {
+      return input.map((item) => (typeof item === 'string' ? item : item.name)).join(',');
+    }
+    return typeof input === 'string' ? input : input.name;
+  };
+  const resultStroke = getResultStroke(result);
+
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
