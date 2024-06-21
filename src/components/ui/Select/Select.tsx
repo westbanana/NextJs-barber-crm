@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { ChevronDown } from 'lucide-react';
 
-import { SelectItem, SelectMode, SelectProps } from '@/components/ui/Select/select.type';
+import { SelectMode, SelectProps } from '@/components/ui/Select/select.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { outsideClick } from '@/helpers/outSideClick';
 import Label from '@/components/Label/Label';
@@ -13,11 +13,11 @@ import Label from '@/components/Label/Label';
 import cls from './style.module.scss';
 import { closeSelectTimeout } from './constants/close-select-timeout';
 
-const Select = ({
+const Select = <T extends {id: string | undefined, name: string | undefined} >({
   data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT, disabled,
-}:SelectProps) => {
+}:SelectProps<T>) => {
   const selectData = data.length ? data : defaultValue;
-  const [result, setResult] = useState<SelectItem[] | SelectItem>(defaultValue);
+  const [result, setResult] = useState<T[]>(defaultValue);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
@@ -27,15 +27,15 @@ const Select = ({
   const closeHandler = useCallback(() => {
     if (isOpened) {
       if (selectMode === SelectMode.MULTISELECT && Array.isArray(result)) {
-        const ids = result.map((el:SelectItem) => typeof el !== 'string' && el.id);
-        callback?.(ids as string[]);
+        callback?.(result);
       }
       setIsClosing(true);
       timerRef.current = setTimeout(() => {
         setIsOpened(false);
       }, closeSelectTimeout);
     }
-  }, [callback, isOpened, result, selectMode]);
+  }, [isOpened, selectMode, result, callback]);
+
   const selectListToggle = () => {
     if (!isOpened) {
       if (disabled) return;
@@ -46,26 +46,23 @@ const Select = ({
       closeHandler();
     }
   };
-  const selectItem = (el: SelectItem, e: React.MouseEvent) => {
-    e.stopPropagation();
-    const elTypeObject = typeof el === 'object';
-    const element = elTypeObject ? el.id : el;
+
+  const selectItem = (element: T, event: React.MouseEvent) => {
+    event.stopPropagation();
     if (selectMode === SelectMode.MULTISELECT) {
-      setResult((prev) => {
-        const contained = elTypeObject
-          ? (prev as SelectItem[]).some((item) => typeof item !== 'string' && item.id === element)
-          : (prev as SelectItem[]).some((item) => item === element);
-        if (contained) {
-          return (prev as SelectItem[]).filter((item) => typeof item !== 'string' && item.id !== element);
-        }
-        return [el, ...(prev as SelectItem[])];
-      });
+      const contained = result.some((item) => (item.id === element.id));
+      if (contained) {
+        setResult((prev) => prev.filter((item) => (item.id !== element.id)));
+      } else {
+        setResult((prev) => [element, ...prev]);
+      }
     } else {
-      setResult(el);
+      setResult([element]);
       closeHandler();
-      callback?.(el);
+      callback?.([element]);
     }
   };
+
   const listMods: Mods = {
     [cls.isClosing]: isClosing,
   };
@@ -94,9 +91,9 @@ const Select = ({
 
   const getResultStroke = (input: any): string => {
     if (Array.isArray(input)) {
-      return input.map((item) => (typeof item === 'string' ? item : item.name)).join(',');
+      return input.map((item) => (item.name)).join(',');
     }
-    return typeof input === 'string' ? input : input.name;
+    return input.name;
   };
   const resultStroke = getResultStroke(result);
 
@@ -115,19 +112,14 @@ const Select = ({
         <div className={classNames(cls.list, listMods, [])}>
           {selectData.map((item) => {
             const itemTypeObject = typeof item === 'object';
+            const key = itemTypeObject ? item.id : item;
             return (
               <div
-                key={itemTypeObject ? item.id : item}
+                key={key}
                 className={classNames(
                   cls.item,
                   {
-                    // TODO переделать логику если работаем с строками
-                    // eslint-disable-next-line no-nested-ternary
-                    [cls.selectedItem]: Array.isArray(result)
-                      ? result.includes(item)
-                      : (itemTypeObject && resultTypeObject) && result.id === item.id
-                        ? result === item
-                        : false,
+                    [cls.selectedItem]: result.includes(item),
                   },
                   [],
                 )}

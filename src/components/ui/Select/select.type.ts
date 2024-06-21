@@ -9,11 +9,11 @@ export enum SelectMode {
   MULTISELECT = 'multiselect',
   SINGLESELECT = 'singleselect'
 }
-export interface SelectProps extends Omit<ComponentPropsWithoutRef<'select'>, 'defaultValue'>{
-  data: SelectItem[];
-  callback?: (result:SelectItem[] | SelectItem) => void;
+export interface SelectProps<T> extends Omit<ComponentPropsWithoutRef<'select'>, 'defaultValue'>{
+  data: T[];
+  callback?: (result:T[] | T) => void;
   label:string;
   className?: string;
-  defaultValue: SelectItem[];
+  defaultValue: T[];
   selectMode?: SelectMode;
 }
