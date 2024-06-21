@@ -2,6 +2,7 @@
 
 import React from 'react';
 import dayjs from 'dayjs';
+import { useTranslations } from 'next-intl';
 
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
@@ -13,11 +14,12 @@ import { getEntriesLoading } from '@components/Entry/selectors/getEntriesLoading
 import cls from '@components/Employee/TopEmployees/style.module.scss';
 
 const TodayEmployees = () => {
+  const t = useTranslations();
   const employees = useAppSelector(getEmployeeList);
   const loading = useAppSelector(getEntriesLoading);
 
   return (
-    <ExpandableContainer label="Today Employees" loading={loading} className={cls.todayEmployeesContainer}>
+    <ExpandableContainer label={t('today-employees.label')} loading={loading} className={cls.todayEmployeesContainer}>
       {employees.length
         ? employees.map((employee) => <TodayEmployeeCard key={employee.id} employee={employee} />)
         : (

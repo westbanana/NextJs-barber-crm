@@ -177,14 +177,14 @@
   "entries": [
     {
       "id": "322",
-      "completed": true,
+      "completed": false,
       "client": "1",
       "employee": "1",
       "time": "12:00",
       "services": [
         "1"
       ],
-      "date": "2024-6-20"
+      "date": "2024-6-22"
     },
     {
       "id": "3222",
@@ -439,18 +439,19 @@
       "time": "17:00"
     },
     {
-      "id": "1718919386770",
+      "id": 1719003394160,
       "completed": false,
-      "client": "2",
-      "services": [
-        "1",
-        "3",
-        "4",
+      "client": [
         "2"
       ],
-      "employee": "1",
-      "date": "2024-6-21",
-      "time": "12:00"
+      "services": [
+        "1"
+      ],
+      "employee": [
+        "1"
+      ],
+      "date": "2024-6-24",
+      "time": "08:00"
     }
   ],
   "clients": [

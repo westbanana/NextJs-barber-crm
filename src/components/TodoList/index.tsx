@@ -4,6 +4,7 @@ import React, {
   ChangeEventHandler, KeyboardEventHandler, memo, useEffect, useRef, useState,
 } from 'react';
 import dayjs from 'dayjs';
+import { useTranslations } from 'next-intl';
 
 import Input from '@components/ui/Input/Input';
 import Label from '@components/Label/Label';
@@ -24,6 +25,7 @@ import cls from './style.module.scss';
 
 export const revalidate = 0;
 const TodoList = () => {
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const editedTodo = useAppSelector(getEditedTodo);
   const todos = useAppSelector(getTodos);
@@ -78,12 +80,12 @@ const TodoList = () => {
     ? <Skeleton rounded height="400px" width="100%" />
     : (
       <div className={cls.main}>
-        <Label alwaysOnBorder label="Todos" />
+        <Label alwaysOnBorder label={t('todos.label')} />
         <Input
           ref={inputRef}
           onBlur={onBlurHandler}
           className={cls.todoCreator}
-          placeholder="Type Todo description"
+          placeholder={t('todos.placeholder')}
           onChange={(e) => setCreatorValue(e.target.value)}
           value={creatorValue}
           onKeyDown={onKeyDownHandler}

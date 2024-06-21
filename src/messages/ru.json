@@ -1,7 +1,22 @@
 {
   "Test": "это тест",
+  "accordion": {
+    "collapse ": "Свернуть список",
+    "expand": "Развернуть список"
+  },
   "buttons": {
-    "home": "Главная"
+    "home": "Главная",
+    "theme-switcher-dark": "Темная тема",
+    "theme-switcher-light": "Светлая тема"
+  },
+  "entry-card": {
+    "create": "Создать",
+    "inputs": {
+      "clients": "Клиенты",
+      "employee": "Сотрудники",
+      "services": "Услуги"
+    },
+    "save": "Сохранить"
   },
   "languages": {
     "en": "Английский",
@@ -11,7 +26,51 @@
   "not-found-page": {
     "title": "Страница не найдена"
   },
+  "pages": {
+    "calendar": "Календарь",
+    "clients": "Клиенты",
+    "employees": "Сотрудники",
+    "main": "Главная",
+    "settings": "Настройки",
+    "statistic": "Статистика"
+  },
   "settings-page": {
     "change-language": "Изменить язык"
+  },
+  "today-employees": {
+    "label": "Сегодняшние сотрудники"
+  },
+  "today-entries": {
+    "controller": {
+      "complete": "Завершить запись",
+      "delete": "Удалить запись"
+    },
+    "create": "Создать запись",
+    "empty": "Записи отсутсвуют",
+    "info": {
+      "client": "Клиент",
+      "date": "Дата",
+      "employee": "Сотрудник",
+      "services": "Услуги"
+    },
+    "label": "Сегодняшние записи"
+  },
+  "todos": {
+    "controllers": {
+      "complete": "Завершить задачу",
+      "delete": "Удалить задачу",
+      "edit": "Редактировать задачу",
+      "incomplete": "Отменить завершение",
+      "info": {
+        "completedAt": "Завершено",
+        "createAt": "Создано",
+        "notCompleted": "Не завершено"
+      }
+    },
+    "label": "Задачи",
+    "placeholder": "Создайте задачу"
+  },
+  "top-employees": {
+    "label": "Топ сотрудников"
   }
 }

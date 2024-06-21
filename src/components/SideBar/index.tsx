@@ -2,6 +2,7 @@
 
 import React, { memo, useState } from 'react';
 import { QrCode } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { sidebarItems } from '@/constants/sidebar-items';
 import SideBarItem from '@/components/SideBar/SideBarItem';
@@ -12,6 +13,7 @@ import ThemeSwitcher from '@/components/SideBar/ThemeSwitcher';
 import cls from './style.module.scss';
 
 const SideBar = memo(() => {
+  const t = useTranslations();
   const [isCollapsed, setIsCollapsed] = useState(true);
   const handleToggle = () => setIsCollapsed((prev) => !prev);
   const mods: Mods = {
@@ -26,7 +28,7 @@ const SideBar = memo(() => {
         {sidebarItems.map((item) => (
           <SideBarItem
             key={item.title}
-            title={item.title}
+            title={t(`${item.title}`)}
             href={item.href}
             Icon={item.Icon}
             collapsed={isCollapsed}

@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Menu, User } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import TotalPrice from '@components/Entry/TotalPrice';
@@ -23,6 +24,7 @@ const MiniEntry = memo(({
   const {
     time, services, id, completed,
   } = currentEntry;
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const employee = currentEntry.employee as IEmployee;
   const client = currentEntry.client as IClient;
@@ -110,10 +112,10 @@ const MiniEntry = memo(({
           <span>{employee.name}</span>
         </Tooltip>
         <Tooltip id={`delete-entry-${id}`} disabled={completed}>
-          Delete Entry
+          {t('today-entries.controller.delete')}
         </Tooltip>
         <Tooltip id={`complete-entry-${id}`} disabled={completed}>
-          Complete entry
+          {t('today-entries.controller.complete')}
         </Tooltip>
       </>
     </>

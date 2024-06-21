@@ -9,6 +9,7 @@ import {
 } from 'formik';
 import { Trash2 } from 'lucide-react';
 import dayjs from 'dayjs';
+import { useTranslations } from 'next-intl';
 
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { changeFormikField, changeFormikFields } from '@helpers/changeFormikField';
@@ -45,6 +46,7 @@ const EntryCard = memo(({
   data,
   disableFetchTodayEntries = false,
 }:EntryEditCardProps) => {
+  const t = useTranslations();
   const { refresh } = useRouter();
   const dispatch = useAppDispatch();
   const { employees, clients } = data;
@@ -101,7 +103,7 @@ const EntryCard = memo(({
                   {(props: FieldProps) => (
                     <Select<IEmployee>
                       data={employees}
-                      label="employee"
+                      label={t('entry-card.inputs.employee')}
                       disabled={mode === EntryCardMode.READ_ONLY}
                       defaultValue={values.employee}
                       callback={(value) => {
@@ -116,7 +118,7 @@ const EntryCard = memo(({
                   {(props: FieldProps) => (
                     <Select<IClient>
                       data={clients}
-                      label="client"
+                      label={t('entry-card.inputs.clients')}
                       defaultValue={values.client}
                       disabled={mode === EntryCardMode.READ_ONLY}
                       callback={(value) => {
@@ -131,7 +133,7 @@ const EntryCard = memo(({
                   {(props: FieldProps) => (
                     <Select<IBarberServices>
                       data={barberServices}
-                      label="services"
+                      label={t('entry-card.inputs.services')}
                       disabled={mode === EntryCardMode.READ_ONLY}
                       defaultValue={values.services}
                       callback={(value) => {
@@ -162,7 +164,7 @@ const EntryCard = memo(({
                 <Card.Button
                   onClick={handleSubmit}
                 >
-                  Зберегти
+                  {t('entry-card.save')}
                 </Card.Button>
                 <Card.Button
                   onClick={deleteCurrentEntry}
@@ -175,7 +177,7 @@ const EntryCard = memo(({
               <Card.Button
                 onClick={handleSubmit}
               >
-                Створити
+                {t('entry-card.create')}
               </Card.Button>
             )}
           </div>

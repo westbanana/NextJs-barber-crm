@@ -1,5 +1,6 @@
 import React from 'react';
 import { Info as InfoIcon } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { InfoProps } from '@components/Entry/MiniEntry/Info/info.type';
 import Tooltip from '@components/Tooltip/Tooltip';
@@ -10,6 +11,7 @@ import { IBarberServices } from '@constants/barber-services';
 import cls from './style.module.scss';
 
 const MiniEntryInfo = ({ entryInfo, entryId }:InfoProps) => {
+  const t = useTranslations();
   const { name: employeeName } = entryInfo.employee as IEmployee;
   const { name: clientName } = entryInfo.client as IClient;
   const services = entryInfo.services as IBarberServices[];
@@ -22,16 +24,16 @@ const MiniEntryInfo = ({ entryInfo, entryId }:InfoProps) => {
       <Tooltip id={`entry-info-${entryId}`} disabled={entryInfo.completed}>
         <ul className={cls.infoList}>
           <li>
-            {`Майстер: ${employeeName}`}
+            {`${t('today-entries.info.employee')}: ${employeeName}`}
           </li>
           <li>
-            {`Клієнт: ${clientName}`}
+            {`${t('today-entries.info.client')}: ${clientName}`}
           </li>
           <li>
-            {`Дата: ${time}/${date}`}
+            {`${t('today-entries.info.date')}: ${time}/${date}`}
           </li>
           <li>
-            {`Послуги: ${services.map((serv) => serv.name).join(', ')}.`}
+            {`${t('today-entries.info.services')}: ${services.map((serv) => serv.name).join(', ')}.`}
           </li>
         </ul>
       </Tooltip>

@@ -34,12 +34,12 @@ interface CalendarProps {
 const localizer = dayjsLocalizer(dayjs);
 
 const Calendar = ({ entries }: CalendarProps) => {
+  console.log(entries);
   const dispatch = useAppDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [popupData, setPopupData] = useState<CalendarPopupData>();
-
   const entriesEvents: EntriesEventsReturn[] = (entries).map((entry) => ({
-    title: `${(entry.employee as IEmployee).name} - ${entry.time}`,
+    title: `${(entry.employee as IEmployee)?.name} - ${entry.time}`,
     data: entry,
     start: dayjs(`${entry.date} ${entry.time}`).toDate(),
     end: dayjs(`${entry.date} ${entry.time}`).add(30, 'minutes').toDate(),

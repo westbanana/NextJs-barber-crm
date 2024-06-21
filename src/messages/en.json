@@ -1,7 +1,22 @@
 {
   "Test": "it is test",
+  "accordion": {
+    "collapse ": "Collapse list",
+    "expand": "Expand list"
+  },
   "buttons": {
-    "home": "Home"
+    "home": "Home",
+    "theme-switcher-dark": "Dark theme",
+    "theme-switcher-light": "Light theme"
+  },
+  "entry-card": {
+    "create": "Create",
+    "inputs": {
+      "clients": "Clients",
+      "employee": "Employees",
+      "services": "Services"
+    },
+    "save": "Save"
   },
   "languages": {
     "en": "English",
@@ -11,7 +26,51 @@
   "not-found-page": {
     "title": "Page not found"
   },
+  "pages": {
+    "calendar": "Calendar",
+    "clients": "Clients",
+    "employees": "Employees",
+    "main": "Main",
+    "settings": "Settings",
+    "statistic": "Statistic"
+  },
   "settings-page": {
     "change-language": "Change language"
+  },
+  "today-employees": {
+    "label": "Today's employees"
+  },
+  "today-entries": {
+    "controller": {
+      "complete": "Complete entry",
+      "delete": "Delete entry"
+    },
+    "create": "Create entry",
+    "empty": "There are no entries",
+    "info": {
+      "client": "Client",
+      "date": "Date",
+      "employee": "Employee",
+      "services": "Services"
+    },
+    "label": "Today entries"
+  },
+  "todos": {
+    "controllers": {
+      "complete": "Complete todo",
+      "delete": "Delete todo",
+      "edit": "Edit todo",
+      "incomplete": "Incomplete todo",
+      "info": {
+        "completedAt": "СompletedAt",
+        "createAt": "СreatedAt",
+        "notCompleted": "Not completed"
+      }
+    },
+    "label": "Todos",
+    "placeholder": "Create todo"
+  },
+  "top-employees": {
+    "label": "Top employees"
   }
 }

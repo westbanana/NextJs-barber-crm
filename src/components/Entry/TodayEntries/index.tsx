@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 import MiniEntry from '@components/Entry/MiniEntry';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
@@ -18,6 +19,7 @@ import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList'
 import { getClientList } from '@components/Client/selectors/getClientList';
 
 const TodayEntries = () => {
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const todayEntries = useAppSelector(getTodayEntries);
   const openedEntry = useAppSelector(getOpenedEntry);
@@ -36,11 +38,11 @@ const TodayEntries = () => {
   return (
     <>
       <ExpandableContainer
-        label="Today Entries"
+        label={t('today-entries.label')}
         loading={loading}
         controlPanel={{
           element: <EntryCreator />,
-          tooltip: 'Create Entry',
+          tooltip: `${t('today-entries.create')}`,
         }}
       >
         {(todayEntries.length)
@@ -51,7 +53,7 @@ const TodayEntries = () => {
             />
           )))
           : (
-            'No recordings today💇‍♂️.️'
+            `${t('today-entries.empty')}💇‍♂️.️`
           )}
       </ExpandableContainer>
       {(openedEntry.entry && openedEntry.mode) && (

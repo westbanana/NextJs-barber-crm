@@ -3,6 +3,7 @@
 import React, {
   ComponentPropsWithoutRef, ReactNode, useEffect, useRef, useState,
 } from 'react';
+import { useTranslations } from 'next-intl';
 
 import { classNames, Mods } from '@lib/classNames/classNames';
 import Accordion from '@components/ui/Accordion/Accordion';
@@ -29,6 +30,7 @@ interface ExpandableContainerProps extends ComponentPropsWithoutRef<'div'> {
 const ExpandableContainer = ({
   children, controlPanel, label, loading = false, adaptiveListHeight = false, className,
 }: ExpandableContainerProps) => {
+  const t = useTranslations();
   const { focusedRef, setFocused, focused } = useInFocus();
   const [showAccordion, setShowAccordion] = useState<boolean>(false);
   const [listOpened, setListOpened] = useState<boolean>(focused);
@@ -99,7 +101,7 @@ const ExpandableContainer = ({
           withPortal={false}
           id={`accordion-${label}`}
         >
-          {listOpened ? 'Close list' : 'Open List'}
+          {listOpened ? t('accordion.collapse ') : t('accordion.expand')}
         </Tooltip>
         {Array.isArray(controlPanel)
           ? controlPanel.map((control, idx) => (

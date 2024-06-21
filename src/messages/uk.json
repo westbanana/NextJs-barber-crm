@@ -1,7 +1,22 @@
 {
   "Test": "це тест",
+  "accordion": {
+    "collapse ": "Згорнути список",
+    "expand": "Розгорнути список"
+  },
   "buttons": {
-    "home": "Головна"
+    "home": "Головна",
+    "theme-switcher-dark": "Темна тема",
+    "theme-switcher-light": "Світла тема"
+  },
+  "entry-card": {
+    "create": "Створити",
+    "inputs": {
+      "clients": "Клієнти",
+      "employee": "Працівники",
+      "services": "Послуги"
+    },
+    "save": "Зберегти"
   },
   "languages": {
     "en": "Англійська",
@@ -11,7 +26,51 @@
   "not-found-page": {
     "title": "Сторінку не знайдено"
   },
+  "pages": {
+    "calendar": "Календар",
+    "clients": "Клієнти",
+    "employees": "Працівники",
+    "main": "Головна",
+    "settings": "Налаштування",
+    "statistic": "Статистика"
+  },
   "settings-page": {
     "change-language": "Змінити мову"
+  },
+  "today-employees": {
+    "label": "Сьогоднішні працівники"
+  },
+  "today-entries": {
+    "controller": {
+      "complete": "Завершити запис",
+      "delete": "Видалити запис"
+    },
+    "create": "Створити запис",
+    "empty": "Записи відсутні",
+    "info": {
+      "client": "Клієнт",
+      "date": "Дата",
+      "employee": "Працівник",
+      "services": "Послуги"
+    },
+    "label": "Сьогоднішні записи"
+  },
+  "todos": {
+    "controllers": {
+      "complete": "Завершити завдання",
+      "delete": "Видалити завдання",
+      "edit": "Редагувати завдання",
+      "incomplete": "Відмінити завершення",
+      "info": {
+        "completedAt": "Завершено",
+        "createAt": "Створено",
+        "notCompleted": "Не завершено"
+      }
+    },
+    "label": "Завдання",
+    "placeholder": "Створіть завдання"
+  },
+  "top-employees": {
+    "label": "Топ працівників"
   }
 }
