@@ -11,7 +11,7 @@ export enum SelectMode {
 }
 export interface SelectProps<T> extends Omit<ComponentPropsWithoutRef<'select'>, 'defaultValue'>{
   data: T[];
-  callback?: (result:T[] | T) => void;
+  callback?: (result:T[]) => void;
   label:string;
   className?: string;
   defaultValue: T[];

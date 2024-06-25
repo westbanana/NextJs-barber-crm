@@ -34,7 +34,6 @@ interface CalendarProps {
 const localizer = dayjsLocalizer(dayjs);
 
 const Calendar = ({ entries }: CalendarProps) => {
-  console.log(entries);
   const dispatch = useAppDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [popupData, setPopupData] = useState<CalendarPopupData>();

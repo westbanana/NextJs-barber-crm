@@ -24,6 +24,7 @@ const MiniEntry = memo(({
   const {
     time, services, id, completed,
   } = currentEntry;
+
   const t = useTranslations();
   const dispatch = useAppDispatch();
   const employee = currentEntry.employee as IEmployee;

@@ -18,8 +18,14 @@
           "to": "17:00"
         },
         "days": {
-          "from": "СР",
-          "to": "ПТ"
+          "from": {
+            "id": "ПН",
+            "name": "ПН"
+          },
+          "to": {
+            "id": "ПН",
+            "name": "ПН"
+          }
         }
       },
       "services_provided": []
@@ -439,19 +445,37 @@
       "time": "17:00"
     },
     {
-      "id": 1719003394160,
+      "id": "1719239420801",
       "completed": false,
-      "client": [
-        "2"
-      ],
+      "client": "1",
       "services": [
         "1"
       ],
-      "employee": [
+      "employee": "1",
+      "date": "2024-6-24",
+      "time": "18:00"
+    },
+    {
+      "id": "1719242141541",
+      "completed": false,
+      "client": "2",
+      "services": [
+        "2"
+      ],
+      "employee": "1",
+      "date": "2024-6-24",
+      "time": "19:00"
+    },
+    {
+      "id": "1719315311395",
+      "completed": false,
+      "client": "1",
+      "services": [
         "1"
       ],
-      "date": "2024-6-24",
-      "time": "08:00"
+      "employee": "1",
+      "date": "2024-6-25",
+      "time": "14:00"
     }
   ],
   "clients": [

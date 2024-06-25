@@ -14,7 +14,7 @@ interface Language {
   name: string,
   locale: string,
 }
-type LANGs = 'en' | 'uk' | 'ru';
+export type LANGs = 'en' | 'uk' | 'ru';
 const SettingsPage = () => {
   const t = useTranslations();
   const router = useRouter();
@@ -27,9 +27,9 @@ const SettingsPage = () => {
     name: t(`languages.${currentLocal}`),
     locale: currentLocal,
   };
-  const changeLanguage = (language: Language) => {
+  const changeLanguage = (language: Language[]) => {
     const newPathname = pathname.split('/').slice(2).join('/');
-    const newRoute = `/${language.locale}/${newPathname}`;
+    const newRoute = `/${language[0].locale}/${newPathname}`;
     router.push(newRoute);
     router.refresh();
   };
@@ -46,11 +46,10 @@ const SettingsPage = () => {
     <Page>
       <div>
         <Select<Language>
-          selectMode={SelectMode.MULTISELECT}
           data={languages}
           label={t('settings-page.change-language')}
           defaultValue={[currentLanguage]}
-          callback={(result) => console.log(result)}
+          callback={changeLanguage}
         />
       </div>
     </Page>

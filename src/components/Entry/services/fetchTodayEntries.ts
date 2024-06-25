@@ -16,7 +16,6 @@ export const fetchTodayEntries = createAsyncThunk(
       const allEntries:IEntry[] = await getAllEntries();
       const allEmployees = await getAllEmployees();
       const allClients = await getAllClients();
-
       const entriesDates = allEntries.map(({
         date,
         time,
@@ -31,12 +30,10 @@ export const fetchTodayEntries = createAsyncThunk(
       const employeeIds = Array.from(new Set(todayEntries.map((entry) => entry.employee)));
 
       const clientIds = todayEntries.map((entry) => entry.client);
-
       const todayEmployees = allEmployees.filter((employee:IEmployee) => employeeIds.includes(employee.id!!));
-
       const todayClients = allClients.filter((client:IClient) => clientIds.includes(client.id!!));
 
-      const neededEntries = todayEntries.map((entry) => {
+      const formattedTodayEntries = todayEntries.map((entry) => {
         const {
           employee,
           client,
@@ -52,11 +49,10 @@ export const fetchTodayEntries = createAsyncThunk(
           services: selectedServices,
         });
       });
-
       return {
         allEntries,
         entriesDates,
-        todayEntries: neededEntries,
+        todayEntries: formattedTodayEntries,
         allClients,
         allEmployees,
       };

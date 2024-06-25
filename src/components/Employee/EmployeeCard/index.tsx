@@ -124,8 +124,7 @@ const EmployeeCard = ({
                     {(props: FieldProps) => (
                       <Select<DayType>
                         callback={(value) => {
-                          console.log(value);
-                          // changeFormikField<DayType>(value.name, props.field);
+                          changeFormikField<DayType>(value[0], props.field);
                         }}
                         defaultValue={[{
                           name: values?.work_schedule?.days?.from,
@@ -143,10 +142,12 @@ const EmployeeCard = ({
                   >
                     {(props: FieldProps) => (
                       <Select<DayType>
-                        defaultValue={values?.work_schedule?.days?.to}
+                        defaultValue={[{
+                          name: values?.work_schedule?.days?.to,
+                          id: values?.work_schedule?.days?.to,
+                        }]}
                         callback={(value) => {
-                          console.log(value);
-                          // changeFormikField<DayType>(value, props.field);
+                          changeFormikField<DayType>(value[0], props.field);
                         }}
                         className={cls.DataSelect}
                         selectMode={SelectMode.SINGLESELECT}

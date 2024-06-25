@@ -22,7 +22,6 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const refContainer = useRef<HTMLDivElement>(null);
-  const resultTypeObject = typeof result === 'object';
 
   const closeHandler = useCallback(() => {
     if (isOpened) {
@@ -113,13 +112,15 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
           {selectData.map((item) => {
             const itemTypeObject = typeof item === 'object';
             const key = itemTypeObject ? item.id : item;
+            const selectedItem = result.find((element) => element.id === item.id);
+            console.log(selectedItem);
             return (
               <div
                 key={key}
                 className={classNames(
                   cls.item,
                   {
-                    [cls.selectedItem]: result.includes(item),
+                    [cls.selectedItem]: Boolean(selectedItem),
                   },
                   [],
                 )}

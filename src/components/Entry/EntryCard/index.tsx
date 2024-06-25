@@ -105,9 +105,9 @@ const EntryCard = memo(({
                       data={employees}
                       label={t('entry-card.inputs.employee')}
                       disabled={mode === EntryCardMode.READ_ONLY}
-                      defaultValue={values.employee}
+                      defaultValue={[values.employee]}
                       callback={(value) => {
-                        changeFormikField<SelectItem>(value, props.field);
+                        changeFormikField<SelectItem>(value[0], props.field);
                       }}
                     />
                   )}
@@ -119,10 +119,10 @@ const EntryCard = memo(({
                     <Select<IClient>
                       data={clients}
                       label={t('entry-card.inputs.clients')}
-                      defaultValue={values.client}
+                      defaultValue={[values.client]}
                       disabled={mode === EntryCardMode.READ_ONLY}
                       callback={(value) => {
-                        changeFormikField<SelectItem>(value, props.field);
+                        changeFormikField<SelectItem>(value[0], props.field);
                       }}
                     />
                   )}
@@ -148,7 +148,8 @@ const EntryCard = memo(({
                 <Field>
                   {(props: FieldProps) => (
                     <DateTimePicker
-                      callback={(value) => dateTimePickerCallback(value, props)}
+                      // callback={(value) => dateTimePickerCallback(value, props)}
+                      callback={(value) => console.log(value)}
                       dates={entryDates}
                       defaultValue={entryDate}
                       disabled={mode === EntryCardMode.READ_ONLY}

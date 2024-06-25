@@ -1,8 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {
+  enUS, ukUA, ruRU, deDE,
+} from '@mui/x-date-pickers/locales';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimeView } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
@@ -10,6 +14,7 @@ import dayjs from 'dayjs';
 import './dateTimePicker.css';
 
 import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
+import { LANGs } from '@app/[locale]/settings/page';
 
 import cls from './style.module.scss';
 
@@ -23,6 +28,31 @@ export type DateTimePickerProps = {
 const DateTimePicker = ({
   dates, defaultValue, callback, disabled = false,
 }: DateTimePickerProps) => {
+  // const [datePickerLocale, setDatePickerLocale] = useState<any>();
+  // const pathname = usePathname();
+  // const currentLocal = pathname
+  //   .split('/')
+  //   .slice(1)[0] as LANGs;
+  // const changePickerLocale = useCallback(() => {
+  //   switch (currentLocal) {
+  //   case 'ru':
+  //     setDatePickerLocale(ruRU.components.MuiLocalizationProvider.defaultProps.localeText);
+  //     break;
+  //   case 'en':
+  //     setDatePickerLocale(enUS.components.MuiLocalizationProvider.defaultProps.localeText);
+  //     break;
+  //   case 'uk':
+  //     setDatePickerLocale(ukUA.components.MuiLocalizationProvider.defaultProps.localeText);
+  //     break;
+  //   default:
+  //     setDatePickerLocale(ukUA.components.MuiLocalizationProvider.defaultProps.localeText);
+  //   }
+  // }, [currentLocal]);
+  // console.log();
+  // useEffect(() => {
+  //   changePickerLocale();
+  // }, [changePickerLocale, currentLocal]);
+
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
   const maxTime = selectedDate.set('hour', 19).set('minute', 0);
@@ -65,10 +95,15 @@ const DateTimePicker = ({
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
   };
-
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className={cls.dateTimePickerWrapper}>
+    <LocalizationProvider
+      dateAdapter={AdapterDayjs}
+      // adapterLocale="uk"
+      // localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
+    >
+      <div
+        className={cls.dateTimePickerWrapper}
+      >
         <MuiDateTimePicker
           defaultValue={defaultValue}
           className={cls.dateTimePicker}

@@ -6,6 +6,7 @@ export const outsideClick = (
   ref: RefObject<HTMLDivElement | HTMLFormElement | HTMLElement | Element>,
   disableContainerSelector: string = '.base-Popper-root',
 ) => {
+  e.stopPropagation();
   const disabledOutsideClickContainer = document.querySelector(disableContainerSelector);
   if (disabledOutsideClickContainer?.contains(e.target as Element)) {
     return;
