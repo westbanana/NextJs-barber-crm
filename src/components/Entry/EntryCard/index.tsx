@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  memo,
+  memo, useState,
 } from 'react';
 import { useRouter } from 'next/navigation';
 import {
@@ -51,6 +51,7 @@ const EntryCard = memo(({
   const dispatch = useAppDispatch();
   const { employees, clients } = data;
   const { entry } = useAppSelector(getOpenedEntry);
+  const [isDatePickerOpened, setIsDatePickerOpened] = useState<boolean>(false);
   const entryDate = dayjs(`${entry?.date} ${entry?.time}`);
   const onSubmitHandler = async (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
@@ -87,6 +88,7 @@ const EntryCard = memo(({
       initialValues={entry}
       loading={false}
       onClose={onClose}
+      disabledOutsideClick={isDatePickerOpened}
     >
       {({
         values,
@@ -153,6 +155,7 @@ const EntryCard = memo(({
                       dates={entryDates}
                       defaultValue={entryDate}
                       disabled={mode === EntryCardMode.READ_ONLY}
+                      setIsOpened={setIsDatePickerOpened}
                     />
                   )}
                 </Field>

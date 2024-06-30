@@ -23,10 +23,11 @@ export type DateTimePickerProps = {
   defaultValue: dayjs.Dayjs | undefined | null
   callback: (value:dayjs.Dayjs) => void
   disabled?: boolean
+  setIsOpened: (state: boolean) => void
 }
 
 const DateTimePicker = ({
-  dates, defaultValue, callback, disabled = false,
+  dates, defaultValue, callback, disabled = false, setIsOpened,
 }: DateTimePickerProps) => {
   // const [datePickerLocale, setDatePickerLocale] = useState<any>();
   // const pathname = usePathname();
@@ -109,6 +110,8 @@ const DateTimePicker = ({
           className={cls.dateTimePicker}
           ampm={false}
           disablePast
+          onOpen={() => setIsOpened(true)}
+          onClose={() => setIsOpened(false)}
           minTime={minTime}
           maxTime={maxTime}
           onChange={handleDateChange}

@@ -24,6 +24,7 @@ export type CardProps = {
   onClose: () => void;
   validationSchema?: any;
   loading?: boolean;
+  disabledOutsideClick: boolean
 }
 const CardComponent = ({
   children,
@@ -32,11 +33,17 @@ const CardComponent = ({
   validationSchema,
   loading = false,
   onClose,
+  disabledOutsideClick = false,
 }: CardProps) => {
   const refEditCard = useRef<HTMLFormElement>(null);
   const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, onClose, refEditCard);
-  }, [onClose]);
+    outsideClick({
+      event: e,
+      callback: onClose,
+      ref: refEditCard,
+      disableClick: disabledOutsideClick,
+    });
+  }, [onClose, disabledOutsideClick]);
 
   useEffect(() => {
     document.addEventListener('click', handleOutsideClick);

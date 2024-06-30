@@ -21,7 +21,11 @@ const useInFocus = (): UseInFocusReturn => {
   }, [focused]);
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, disableFocus, focusedRef);
+    outsideClick({
+      event: e,
+      callback: disableFocus,
+      ref: focusedRef,
+    });
   }, [disableFocus]);
 
   useEffect(() => {

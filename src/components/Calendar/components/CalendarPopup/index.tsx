@@ -28,7 +28,12 @@ interface CalendarPopupProps {
 const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps) => {
   const refPopup = useRef<HTMLDivElement>(null);
   const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, onClose, refPopup, '[data-ignore-outside-clicks]');
+    outsideClick({
+      event: e,
+      callback: onClose,
+      ref: refPopup,
+      disableContainerSelector: '[data-ignore-outside-clicks]',
+    });
   }, [onClose]);
 
   useEffect(() => {

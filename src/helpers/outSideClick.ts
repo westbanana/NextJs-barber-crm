@@ -1,17 +1,27 @@
 import { RefObject } from 'react';
 
-export const outsideClick = (
-  e: MouseEvent,
-  callback: () => void,
-  ref: RefObject<HTMLDivElement | HTMLFormElement | HTMLElement | Element>,
-  disableContainerSelector: string = '.base-Popper-root',
-) => {
-  e.stopPropagation();
-  const disabledOutsideClickContainer = document.querySelector(disableContainerSelector);
-  if (disabledOutsideClickContainer?.contains(e.target as Element)) {
+interface OutsideClickProps {
+    event: MouseEvent,
+    callback: () => void,
+    ref: RefObject<HTMLDivElement | HTMLFormElement | HTMLElement | Element>,
+    disableContainerSelector?: string,
+    disableClick?: boolean,
+}
+export const outsideClick = ({
+  disableClick = false,
+  disableContainerSelector,
+  ref,
+  event,
+  callback,
+}:OutsideClickProps) => {
+  if (disableClick) return;
+  const disabledOutsideClickContainer = disableContainerSelector
+    ? document.querySelector(disableContainerSelector)
+    : null;
+  if (disabledOutsideClickContainer?.contains(event.target as Element)) {
     return;
   }
-  if (ref.current && !ref.current.contains(e.target as Element)) {
+  if (ref.current && !ref.current.contains(event.target as Element)) {
     callback();
   }
 };

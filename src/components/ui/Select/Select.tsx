@@ -76,7 +76,11 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
   };
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
-    outsideClick(e, closeHandler, refContainer);
+    outsideClick({
+      event: e,
+      callback: closeHandler,
+      ref: refContainer,
+    });
   }, [closeHandler]);
 
   useEffect(() => {
