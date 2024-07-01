@@ -96,6 +96,19 @@ const DateTimePicker = ({
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
   };
+
+  const onOpen = useCallback(() => {
+    setTimeout(() => {
+      setIsOpened(true);
+    }, 0);
+  }, [setIsOpened]);
+
+  const onClose = useCallback(() => {
+    setTimeout(() => {
+      setIsOpened(false);
+    }, 0);
+  }, [setIsOpened]);
+
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -111,7 +124,7 @@ const DateTimePicker = ({
           ampm={false}
           disablePast
           onOpen={() => setIsOpened(true)}
-          onClose={() => setIsOpened(false)}
+          onClose={onClose}
           minTime={minTime}
           maxTime={maxTime}
           onChange={handleDateChange}

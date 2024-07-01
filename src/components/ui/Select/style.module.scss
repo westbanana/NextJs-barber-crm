@@ -17,6 +17,13 @@ $transition-timing-ease-out: ease-out;
   }
 }
 
+.employeeCreator {
+  position: absolute;
+  top: 0;
+  left: -200px;
+}
+
+
 .mainContainer {
   display: flex;
   flex-direction: column;

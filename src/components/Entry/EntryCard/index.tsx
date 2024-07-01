@@ -11,17 +11,15 @@ import { Trash2 } from 'lucide-react';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 
+import Card from '@components/ui/Card/Card';
+import Select from '@/components/ui/Select/Select';
+import DateTimePicker from '@/components/DatePicker';
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { changeFormikField, changeFormikFields } from '@helpers/changeFormikField';
 import { updateEntry } from '@components/Entry/services/updateEntry';
 import { convertObjectToIds } from '@helpers/convertObjectToIds';
 import { createEntry } from '@components/Entry/services/createEntry';
-import Card from '@components/ui/Card/Card';
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
-import { getEmployeeList } from '@components/Employee/selectors/getEmployeeList';
-import { getClientList } from '@components/Client/selectors/getClientList';
-import DateTimePicker from '@/components/DatePicker';
-import Select from '@/components/ui/Select/Select';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import { getOpenedEntry } from '@/components/Entry/selectors/getOpenedEntry';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
@@ -32,12 +30,6 @@ import { SelectItem, SelectMode } from '@/components/ui/Select/select.type';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 
 import cls from './style.module.scss';
-
-export type TSelectsData = {
-  clients: IClient[];
-  employees: IEmployee[];
-  services: IBarberServices[];
-}
 
 const EntryCard = memo(({
   entryDates,

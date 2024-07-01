@@ -1,25 +1,48 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IClient } from '@components/Entry/MiniEntry/entries.type';
+import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
 import { ErrorResponse, fetchEmployeeList } from '@components/Employee/services/fetchEmployeeList';
 import { fetchClientList } from '@components/Client/services/fetchClientList';
+import { ClientCardMode } from '@components/Client/ClientCard';
+import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 
 export interface ClientsState {
   error: string | undefined;
   loading: boolean;
-  clientList: IClient[]
+  clientList: IClient[];
+  openedClient: {
+    client: IClient | undefined,
+    mode: ClientCardMode | undefined
+  };
 }
 
 const initialState: ClientsState = {
   error: undefined,
   loading: true,
   clientList: [],
+  openedClient: {
+    client: undefined,
+    mode: undefined,
+  },
 };
 export const clientSlice = createSlice({
   name: 'clients',
   initialState,
-  reducers: {},
+  reducers: {
+    changeOpenedClient: (
+      state,
+      action:PayloadAction<{
+        client: IClient | undefined,
+        mode: ClientCardMode | undefined
+      }>,
+    ) => {
+      state.openedClient = action.payload;
+    },
+    clearOpenedClient: (state) => {
+      state.openedClient = { client: undefined, mode: undefined };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTodayEntries.pending, (state) => {
       state.error = undefined;
@@ -49,5 +72,5 @@ export const clientSlice = createSlice({
     });
   },
 });
-
+export const { changeOpenedClient, clearOpenedClient } = clientSlice.actions;
 export default clientSlice.reducer;

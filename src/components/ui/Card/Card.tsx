@@ -24,7 +24,7 @@ export type CardProps = {
   onClose: () => void;
   validationSchema?: any;
   loading?: boolean;
-  disabledOutsideClick: boolean
+  disabledOutsideClick?: boolean
 }
 const CardComponent = ({
   children,

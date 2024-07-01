@@ -3,7 +3,7 @@
 import React, {
   MutableRefObject, useCallback, useEffect, useRef, useState,
 } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Plus } from 'lucide-react';
 
 import { SelectMode, SelectProps } from '@/components/ui/Select/select.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
@@ -35,7 +35,8 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
     }
   }, [isOpened, selectMode, result, callback]);
 
-  const selectListToggle = () => {
+  const selectListToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!isOpened) {
       if (disabled) return;
       setIsOpened(true);
@@ -99,7 +100,6 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
     return input.name;
   };
   const resultStroke = getResultStroke(result);
-
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
@@ -117,7 +117,6 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
             const itemTypeObject = typeof item === 'object';
             const key = itemTypeObject ? item.id : item;
             const selectedItem = result.find((element) => element.id === item.id);
-            console.log(selectedItem);
             return (
               <div
                 key={key}

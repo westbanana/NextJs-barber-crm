@@ -14,6 +14,7 @@ export const outsideClick = ({
   event,
   callback,
 }:OutsideClickProps) => {
+  event.stopPropagation();
   if (disableClick) return;
   const disabledOutsideClickContainer = disableContainerSelector
     ? document.querySelector(disableContainerSelector)
