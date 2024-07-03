@@ -1,10 +1,14 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import { Trash2 } from 'lucide-react';
 
 import Card from '@components/ui/Card/Card';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import cls from '@components/Entry/EntryCard/style.module.scss';
 import Input from '@components/ui/Input/Input';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
+import { deleteClient } from '@components/Client/services/deleteClient';
+import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 
 export enum ClientCardMode {
     CREATE = 'create',
@@ -19,8 +23,15 @@ interface ClientCardProps {
 }
 
 const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
-  console.log('1');
-  const onSubmitHandler = () => {};
+  const dispatch = useAppDispatch();
+  const { refresh } = useRouter();
+  const onSubmitHandler = (values) => {
+    console.log(values);
+  };
+  const onDeleteHandler = () => {
+    deleteClient(client);
+    refresh();
+  };
   return (
     <Card
       initialValues={client}
@@ -61,26 +72,25 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
               />
             </div>
           </div>
-          {/* <div className={cls.buttonsWrapper}> */}
-          {/*   {mode === 'edit' && ( */}
-          {/*     <> */}
-          {/*       <Card.Button onClick={handleSubmit} loading={loading}> */}
-          {/*         Зберегти */}
-          {/*       </Card.Button> */}
-          {/*       <Card.Button onClick={deleteCurrentEmployee}> */}
-          {/*         <Trash2 /> */}
-          {/*       </Card.Button> */}
-          {/*     </> */}
-          {/*   )} */}
-          {/*   {mode === 'create' && ( */}
-          {/*     <Card.Button */}
-          {/*       onClick={handleSubmit} */}
-          {/*       loading={loading} */}
-          {/*     > */}
-          {/*       Створити */}
-          {/*     </Card.Button> */}
-          {/*   )} */}
-          {/* </div> */}
+          <div className={cls.buttonsWrapper}>
+            {mode === 'edit' && (
+              <>
+                <Card.Button onClick={handleSubmit}>
+                  Зберегти
+                </Card.Button>
+                <Card.Button onClick={onDeleteHandler}>
+                  <Trash2 />
+                </Card.Button>
+              </>
+            )}
+            {mode === 'create' && (
+              <Card.Button
+                onClick={handleSubmit}
+              >
+                Створити
+              </Card.Button>
+            )}
+          </div>
         </>
 
       )}

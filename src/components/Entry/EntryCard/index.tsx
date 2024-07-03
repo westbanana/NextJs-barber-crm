@@ -142,8 +142,7 @@ const EntryCard = memo(({
                 <Field>
                   {(props: FieldProps) => (
                     <DateTimePicker
-                      // callback={(value) => dateTimePickerCallback(value, props)}
-                      callback={(value) => console.log(value)}
+                      callback={(value) => dateTimePickerCallback(value, props)}
                       dates={entryDates}
                       defaultValue={entryDate}
                       disabled={mode === EntryCardMode.READ_ONLY}

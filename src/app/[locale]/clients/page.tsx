@@ -13,6 +13,8 @@ import ClientCard, { ClientCardMode } from '@components/Client/ClientCard';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { changeOpenedClient, clearOpenedClient } from '@components/Client/slice/clientSlice';
 import Button from '@components/ui/Button/Button';
+import MiniClientCard from '@components/Client/MiniClientCard';
+import ExpandableContainer from '@components/ExpandableContainer';
 
 const ClientsPage = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +24,7 @@ const ClientsPage = () => {
   useEffect(() => {
     dispatch(fetchClientList());
   }, [dispatch]);
+
   const openClient = (client: IClient) => {
     dispatch(changeOpenedClient({
       client,
@@ -33,11 +36,15 @@ const ClientsPage = () => {
   };
   return (
     <Page>
-      {clients.map((client) => (
-        <Button key={client.id} onClick={() => openClient(client)}>
-          {`${client.name} - ${client.phoneNumber}`}
-        </Button>
-      ))}
+      <ExpandableContainer label="клиенты">
+        {clients.map((client) => (
+          <MiniClientCard
+            key={client.id}
+            client={client}
+            onDoubleClick={() => openClient(client)}
+          />
+        ))}
+      </ExpandableContainer>
       {(openedClient.mode && openedClient.client) && (
         <ClientCard
           client={openedClient.client}

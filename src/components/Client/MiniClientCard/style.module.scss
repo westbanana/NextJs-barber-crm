@@ -1,0 +1,90 @@
+@mixin overflow-text-ellipsis($max-width: 90px) {
+  max-width: $max-width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin mini-card-field() {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.borderInfoContainer {
+  position: absolute;
+  left: 7px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.iconSize {
+  height: 19px;
+  width: 19px;
+  min-width: 19px;
+}
+
+
+.copyIcon {
+  position: absolute;
+  left: -2px;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+
+.fieldIconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  svg {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.withBg {
+  background-color: var(--bg-color);
+  border-radius: var(--border-radius-label);
+  border: 1px var(--border-color) solid;
+  padding: 0 4px;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+
+.interactField {
+  transition: background-color var(--transition);
+  border-radius: var(--border-radius);
+  &:hover {
+    background: var(--hover-color);
+  }
+}
+
+.phoneNumber {
+  cursor: copy;
+}
+
+.phoneNumberContainer {
+  position: relative;
+}
+
+.phoneNumberContainer,
+.visitContainer {
+  @include mini-card-field();
+}
+
+.clientName,
+.visits,
+.phoneNumber {
+  @include overflow-text-ellipsis(90px);
+}

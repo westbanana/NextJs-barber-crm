@@ -21,6 +21,7 @@ const useInFocus = (): UseInFocusReturn => {
   }, [focused]);
 
   const handleOutsideClick = useCallback((e: MouseEvent) => {
+    e.stopPropagation();
     outsideClick({
       event: e,
       callback: disableFocus,

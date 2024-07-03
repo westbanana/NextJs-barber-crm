@@ -1,5 +1,8 @@
 import React, { memo } from 'react';
-import { Menu, User } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import {
+  Check, Menu, User, X,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import UserIcon from '@components/ui/UserIcon/UserIcon';
@@ -8,13 +11,16 @@ import { classNames, Mods } from '@lib/classNames/classNames';
 import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
-import MiniEntryController from '@components/Entry/MiniEntry/MiniEntryController';
 import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
 import Tooltip from '@components/Tooltip/Tooltip';
 import MiniCard from '@components/MiniCard';
 import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { IBarberServices } from '@constants/barber-services';
+import { getShortName } from '@helpers/getShortName';
+import { completeEntry } from '@components/Entry/services/completeEntry';
+import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries';
+import { deleteEntry } from '@components/Entry/services/deleteEntry';
 
 import cls from './style.module.scss';
 
@@ -29,10 +35,7 @@ const MiniEntry = memo(({
   const dispatch = useAppDispatch();
   const employee = currentEntry.employee as IEmployee;
   const client = currentEntry.client as IClient;
-  const [employeeFirstName, employeeLastName] = employee?.name
-    ? employee.name.split(' ')
-    : ['?', '?'];
-  const employeeShortName = `${employeeLastName} ${employeeFirstName[0]}.`;
+  const employeeShortName = employee.name ? getShortName(employee?.name) : 'unknown';
   const [clientFirstName, clientLastName] = client.name.split(' ');
   const clientShortName = `${clientLastName} ${clientFirstName[0]}.`;
   const selectedServicesNames:string[] = (services as IBarberServices[]).map((serv) => serv.name);
@@ -49,9 +52,36 @@ const MiniEntry = memo(({
       mode: entryOpenerMode,
     }));
   };
+
+  const completeCurrentEntry = async () => {
+    await dispatch(completeEntry(currentEntry));
+    await dispatch(fetchTodayEntries());
+  };
+  const deleteCurrentEntry = async () => {
+    if (currentEntry) {
+      await dispatch(deleteEntry(currentEntry));
+      await dispatch(fetchTodayEntries());
+    }
+  };
+
   return (
     <>
       <MiniCard
+        controllers={{
+          data: [
+            {
+              onClick: deleteCurrentEntry,
+              text: <X />,
+              tooltipId: `delete-entry-${id}`,
+            },
+            {
+              onClick: completeCurrentEntry,
+              text: <Check />,
+              tooltipId: `complete-entry-${id}`,
+            },
+          ],
+          disabled: currentEntry.completed,
+        }}
         className={classNames(cls.entry, entryMods, [])}
         onDoubleClick={onDoubleClickHandler}
       >
@@ -69,13 +99,6 @@ const MiniEntry = memo(({
           </span>
         </div>
         <span className={classNames(cls.time, {}, [cls.withBg])}>{time}</span>
-        {!currentEntry.completed && (
-          <MiniEntryController
-            id={currentEntry.id}
-            entry={currentEntry}
-            className={cls.controller}
-          />
-        )}
         <div className={cls.client}>
           <div className={cls.clientInfo}>
             <div className={cls.fieldIcon}>
