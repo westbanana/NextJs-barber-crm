@@ -14,7 +14,7 @@ export const fetchClientList = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await toast.promise(
-        fetch('http://localhost:4000/clients'),
+        fetch('http://localhost:4000/clients', { cache: 'no-cache' }),
         fetchClientListToasts,
         toastDefaultParams,
       );
