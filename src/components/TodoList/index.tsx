@@ -82,6 +82,7 @@ const TodoList = () => {
       <div className={cls.main}>
         <Label alwaysOnBorder label={t('todos.label')} />
         <Input
+          // @ts-ignore
           ref={inputRef}
           onBlur={onBlurHandler}
           className={cls.todoCreator}

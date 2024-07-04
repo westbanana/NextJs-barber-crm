@@ -30,7 +30,7 @@ const SettingsPage = () => {
   const changeLanguage = (language: Language[]) => {
     const newPathname = pathname.split('/').slice(2).join('/');
     const newRoute = `/${language[0].locale}/${newPathname}`;
-    router.push(newRoute);
+    router.push(newRoute as any);
     router.refresh();
   };
   const languages = locales.map((item) => {
