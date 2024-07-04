@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
 
 import Input from '@components/ui/Input/Input';
-import Label from '@components/Label/Label';
+import Label from '@components/ui/Label/Label';
 import Todo from '@components/TodoList/Todo';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getTodos } from '@components/TodoList/selectors/getTodos';

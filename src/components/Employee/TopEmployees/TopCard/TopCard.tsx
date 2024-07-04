@@ -4,10 +4,11 @@ import React from 'react';
 
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
-import MiniCard from '@components/MiniCard';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
+
+import MiniCard from '../../../ui/MiniCard';
 
 export interface TopCardProps {
     employee: IEmployee;

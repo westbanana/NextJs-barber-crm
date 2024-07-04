@@ -6,7 +6,7 @@ import Portal from '@components/Portal';
 import { outsideClick } from '@helpers/outSideClick';
 import { classNames } from '@lib/classNames/classNames';
 import animations from '@variables/animations/animations.module.scss';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IBarberServices } from '@constants/barber-services';

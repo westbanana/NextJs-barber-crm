@@ -8,7 +8,7 @@ import { ChevronDown, Plus } from 'lucide-react';
 import { SelectMode, SelectProps } from '@/components/ui/Select/select.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { outsideClick } from '@/helpers/outSideClick';
-import Label from '@/components/Label/Label';
+import Label from '@components/ui/Label/Label';
 
 import cls from './style.module.scss';
 import { closeSelectTimeout } from './constants/close-select-timeout';

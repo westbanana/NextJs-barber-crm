@@ -3,7 +3,7 @@ import React from 'react';
 import Page from '@components/ui/Page/Page';
 import EmployeeCompletedEntries from '@components/Statistic/StatisticComponents/EmployeeCompletedEntries';
 import CurrentYearCompletedEntries from '@components/Statistic/StatisticComponents/CurrentYearCompletedEntries';
-import Label from '@components/Label/Label';
+import Label from '@components/ui/Label/Label';
 import { getAllEmployees } from '@components/Entry/services/getEmployees';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { getAllEntries } from '@components/Entry/services/getEntries';

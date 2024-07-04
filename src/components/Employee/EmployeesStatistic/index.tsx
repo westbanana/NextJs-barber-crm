@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Label from '@components/Label/Label';
+import Label from '@components/ui/Label/Label';
 import Statistic from '@components/Statistic';
 import { classNames } from '@lib/classNames/classNames';
 import Skeleton from '@components/ui/Skeleton/Skeleton';

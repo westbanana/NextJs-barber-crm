@@ -1,15 +1,16 @@
 import React from 'react';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import TopCard from '@components/Employee/TopEmployees/TopCard/TopCard';
-import ExpandableContainer from '@components/ExpandableContainer';
 import { getTopEmployees } from '@components/Entry/services/getEmployees';
 
 import cls from './style.module.scss';
 
+import ExpandableContainer from '../../ui/ExpandableContainer';
+
 const TopEmployees = async () => {
-  const t = useTranslations();
+  const t = await getTranslations();
   const topTreeEmployees:IEmployee[] = await getTopEmployees();
 
   return (

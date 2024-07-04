@@ -3,7 +3,7 @@ import React from 'react';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { IBarberServices } from '@constants/barber-services';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
 

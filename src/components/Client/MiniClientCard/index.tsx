@@ -4,16 +4,17 @@ import {
   Copy, Menu, Phone, UserCheck, X,
 } from 'lucide-react';
 
-import MiniCard from '@components/MiniCard';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import { getShortName } from '@helpers/getShortName';
 import { classNames, Mods } from '@lib/classNames/classNames';
 import { useCopyToClipboard } from '@lib/hooks/useCopyToClipboard';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import { deleteClient } from '@components/Client/services/deleteClient';
 
 import cls from './style.module.scss';
+
+import MiniCard from '../../ui/MiniCard';
 
 interface MiniClientCardProps extends React.HTMLAttributes<HTMLDivElement> {
     client: IClient;

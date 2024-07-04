@@ -8,7 +8,7 @@ import {
   Calendar as BigCalendar, Components, dayjsLocalizer, Event, SlotInfo,
 } from 'react-big-calendar';
 
-import Label from '@components/Label/Label';
+import Label from '@components/ui/Label/Label';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import 'react-big-calendar/lib/sass/styles.scss';
 import './style.css';

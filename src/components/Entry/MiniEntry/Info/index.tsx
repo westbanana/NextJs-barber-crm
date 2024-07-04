@@ -3,7 +3,7 @@ import { Info as InfoIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { InfoProps } from '@components/Entry/MiniEntry/Info/info.type';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { IBarberServices } from '@constants/barber-services';

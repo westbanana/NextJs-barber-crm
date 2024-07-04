@@ -12,8 +12,7 @@ import { EntryProps, IClient } from '@components/Entry/MiniEntry/entries.type';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import MiniEntryInfo from '@components/Entry/MiniEntry/Info';
-import Tooltip from '@components/Tooltip/Tooltip';
-import MiniCard from '@components/MiniCard';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { IBarberServices } from '@constants/barber-services';
@@ -23,6 +22,8 @@ import { fetchTodayEntries } from '@components/Entry/services/fetchTodayEntries'
 import { deleteEntry } from '@components/Entry/services/deleteEntry';
 
 import cls from './style.module.scss';
+
+import MiniCard from '../../ui/MiniCard';
 
 const MiniEntry = memo(({
   currentEntry,

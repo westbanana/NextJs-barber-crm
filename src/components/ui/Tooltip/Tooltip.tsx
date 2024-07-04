@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 
-import { TooltipProps } from '@/components/Tooltip/tooltip.type';
+import { TooltipProps } from '@components/ui/Tooltip/tooltip.type';
 
 import './style.css';
 import Portal from '@components/Portal';

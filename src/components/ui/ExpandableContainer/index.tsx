@@ -7,10 +7,10 @@ import { useTranslations } from 'next-intl';
 
 import { classNames, Mods } from '@lib/classNames/classNames';
 import Accordion from '@components/ui/Accordion/Accordion';
-import Label from '@components/Label/Label';
+import Label from '@components/ui/Label/Label';
 import useInFocus from '@lib/hooks/useInFocus';
 import Skeleton from '@components/ui/Skeleton/Skeleton';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
 

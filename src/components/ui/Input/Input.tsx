@@ -2,7 +2,7 @@ import React, { forwardRef, memo } from 'react';
 
 import { InputProps } from '@/components/ui/Input/input.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
-import Label from '@/components/Label/Label';
+import Label from '@components/ui/Label/Label';
 
 import cls from './style.module.scss';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { LabelProps } from '@/components/Label/label.type';
-import { classNames, Mods } from '@/lib/classNames/classNames';
+import { LabelProps } from '@components/ui/Label/label.type';
+import { classNames, Mods } from '@lib/classNames/classNames';
 
 import cls from './style.module.scss';
 

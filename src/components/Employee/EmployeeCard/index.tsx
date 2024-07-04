@@ -12,7 +12,6 @@ import Input from '@/components/ui/Input/Input';
 import UserIcon from '@/components/ui/UserIcon/UserIcon';
 import { useAppDispatch } from '@/lib/hooks/useAppDispatch';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
-import TimeInput from '@/components/testPicker/TimeInput';
 import { days, DayType } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
@@ -24,6 +23,8 @@ import { createEmployee } from '@components/Employee/services/createEmployee';
 import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
 
 import cls from './style.module.scss';
+
+import TimeInput from '../../ui/TimeInput';
 
 const EmployeeCard = ({
   employeeData = newEmployee,

@@ -14,7 +14,7 @@ export const getAllEmployees = () => fetch(
 
 export const getTopEmployees = async () => fetch(
   'http://localhost:4000/employees',
-  { next: { revalidate: 0 }, cache: 'no-store' },
+  { next: { revalidate: 0 } },
 )
   .then((response) => response.json())
   .then((employees) => employees.sort((a: IEmployee, b: IEmployee) => (

@@ -14,7 +14,8 @@ import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { changeOpenedClient, clearOpenedClient } from '@components/Client/slice/clientSlice';
 import Button from '@components/ui/Button/Button';
 import MiniClientCard from '@components/Client/MiniClientCard';
-import ExpandableContainer from '@components/ExpandableContainer';
+
+import ExpandableContainer from '../../../components/ui/ExpandableContainer';
 
 const ClientsPage = () => {
   const dispatch = useAppDispatch();

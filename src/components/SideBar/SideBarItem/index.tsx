@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { ISidebarItem } from '@/components/SideBar/types/sidebar-items.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import animations from '@/variables/animations/animations.module.scss';
 
 import cls from './style.module.scss';

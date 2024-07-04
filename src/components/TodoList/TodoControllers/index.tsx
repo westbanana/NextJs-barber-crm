@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 
 import cls from '@components/TodoList/Todo/style.module.scss';
 import Button from '@components/ui/Button/Button';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import { TodoT } from '@components/TodoList/slice/todoListSlice';
 
 type TooltipChild = string | ReactNode
@@ -97,7 +97,9 @@ const TodoControllers = memo(({
               {`${t('todos.controllers.info.createAt')}: ${data.createdAt}`}
             </li>
             <li>
-              {`${t('todos.controllers.info.completedAt')}: ${data.completedAt || t('todos.controllers.info.notCompleted')}`}
+              {`${t(
+                'todos.controllers.info.completedAt',
+              )}: ${data.completedAt || t('todos.controllers.info.notCompleted')}`}
             </li>
           </ul>
         </Tooltip>

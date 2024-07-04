@@ -5,7 +5,7 @@ import entry from 'next/dist/server/typescript/rules/entry';
 
 import { TotalPriceProps } from '@/components/Entry/TotalPrice/total-price.type';
 import { IBarberServices } from '@/constants/barber-services';
-import Tooltip from '@/components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
 

@@ -26,7 +26,7 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
   const dispatch = useAppDispatch();
   const { refresh } = useRouter();
   const onSubmitHandler = (values: IClient) => {
-    console.log(values);
+    // console.log(values);
   };
   const onDeleteHandler = () => {
     deleteClient(client);

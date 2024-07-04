@@ -13,7 +13,7 @@ import animations from '@variables/animations/animations.module.scss';
 import { updateTodo } from '@components/TodoList/services/updateTodo';
 import { useAppSelector } from '@lib/hooks/useAppSelector';
 import { getEditedTodo } from '@components/TodoList/selectors/getEditedTodo';
-import Tooltip from '@components/Tooltip/Tooltip';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 import TodoControllers from '@components/TodoList/TodoControllers';
 
 import cls from './style.module.scss';
