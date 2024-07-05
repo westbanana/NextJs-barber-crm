@@ -9,6 +9,11 @@
     "theme-switcher-dark": "Темная тема",
     "theme-switcher-light": "Светлая тема"
   },
+  "calendar": {
+    "popup": {
+      "add-entry": "Добавить запись"
+    }
+  },
   "entry-card": {
     "create": "Создать",
     "inputs": {

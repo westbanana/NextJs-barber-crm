@@ -9,6 +9,11 @@
     "theme-switcher-dark": "Dark theme",
     "theme-switcher-light": "Light theme"
   },
+  "calendar": {
+    "popup": {
+      "add-entry": "Add entry"
+    }
+  },
   "entry-card": {
     "create": "Create",
     "inputs": {

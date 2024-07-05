@@ -2,7 +2,8 @@ import React, {
   Fragment, useCallback, useEffect, useRef,
 } from 'react';
 import dayjs from 'dayjs';
-import { Plus } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { useTranslations } from 'next-intl';
 
 import { EntriesEventsReturn } from '@components/Calendar/Calendar';
 import Portal from '@components/Portal';
@@ -14,6 +15,9 @@ import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IBarberServices } from '@constants/barber-services';
 import CalendarPopupTooltip from '@components/Calendar/components/CalendarPopup/tooltip';
 import Button from '@components/ui/Button/Button';
+import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
+import { newEntry } from '@constants/newEntry';
+import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
 
 import cls from './style.module.scss';
 
@@ -29,6 +33,8 @@ interface CalendarPopupProps {
 }
 
 const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps) => {
+  const dispatch = useDispatch();
+  const t = useTranslations();
   const refPopup = useRef<HTMLDivElement>(null);
   const handleOutsideClick = useCallback((e: MouseEvent) => {
     outsideClick({
@@ -56,7 +62,14 @@ const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps
     document.addEventListener('keydown', onEscapeDown);
     return () => document.removeEventListener('keypress', onEscapeDown);
   }, [onEscapeDown]);
-
+  const onAddEntry = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const formattedDate = dayjs(data.date).format('YYYY-MM-DD');
+    dispatch(changeOpenedEntry({
+      entry: { ...newEntry, date: formattedDate },
+      mode: EntryCardMode.CREATE,
+    }));
+  };
   return (
     <Portal>
       <div
@@ -94,7 +107,9 @@ const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps
               );
             })}
           </div>
-          <Button>Add entry</Button>
+          <Button onClick={onAddEntry}>
+            {t('calendar.popup.add-entry')}
+          </Button>
         </div>
       </div>
     </Portal>
