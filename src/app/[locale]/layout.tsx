@@ -1,20 +1,18 @@
+import { ReactNode } from 'react';
 import type { Metadata } from 'next';
-import { Montserrat } from 'next/font/google';
-import { ToastContainer } from 'react-toastify';
-
 import './globals.css';
 import '@variables/size/style.css';
 import '@variables/colors/calendar.css';
 import '@variables/colors/style.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import { Montserrat } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
+import { ToastContainer } from 'react-toastify';
 import { dir } from 'i18next';
 
-import i18NextConfig from '@/i18n';
 import MainLayout from '@components/MainLayout';
-import { ReactNode } from 'react';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
