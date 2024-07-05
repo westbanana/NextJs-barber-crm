@@ -1,0 +1,15 @@
+{
+  "controllers": {
+    "complete": "Complete todo",
+    "delete": "Delete todo",
+    "edit": "Edit todo",
+    "incomplete": "Incomplete todo",
+    "info": {
+      "completedAt": "СompletedAt",
+      "createAt": "СreatedAt",
+      "notCompleted": "Not completed"
+    }
+  },
+  "label": "Todos",
+  "placeholder": "Create todo"
+}

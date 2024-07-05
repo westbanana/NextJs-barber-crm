@@ -1,0 +1,9 @@
+{
+  "create": "Create",
+  "inputs": {
+    "clients": "Clients",
+    "employee": "Employees",
+    "services": "Services"
+  },
+  "save": "Save"
+}

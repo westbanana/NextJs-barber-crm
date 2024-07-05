@@ -1,0 +1,15 @@
+{
+  "controllers": {
+    "complete": "Завершить задачу",
+    "delete": "Удалить задачу",
+    "edit": "Редактировать задачу",
+    "incomplete": "Отменить завершение",
+    "info": {
+      "completedAt": "Завершено",
+      "createAt": "Создано",
+      "notCompleted": "Не завершено"
+    }
+  },
+  "label": "Задачи",
+  "placeholder": "Создайте задачу"
+}

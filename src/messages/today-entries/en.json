@@ -1,0 +1,15 @@
+{
+  "controller": {
+    "complete": "Complete entry",
+    "delete": "Delete entry"
+  },
+  "create": "Create entry",
+  "empty": "There are no entries",
+  "info": {
+    "client": "Client",
+    "date": "Date",
+    "employee": "Employee",
+    "services": "Services"
+  },
+  "label": "Today entries"
+}
