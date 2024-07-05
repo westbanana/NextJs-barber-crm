@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useLocale } from 'next-intl';
 
 import { ISidebarItem } from '@/components/SideBar/types/sidebar-items.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
@@ -16,9 +17,10 @@ const SideBarItem = memo(({
   title,
   collapsed = false,
 }:ISidebarItem) => {
+  const locale = useLocale();
   const pathname = usePathname();
   // @ts-ignore
-  const isActive = pathname === href.pathname;
+  const isActive = pathname === `/${locale}${href.pathname}`;
   const mods: Mods = {
     [cls.collapsed]: collapsed,
     [cls.active]: isActive,
