@@ -5,6 +5,7 @@
   border-radius: 5px;
   transition: all var(--transition);
   position: relative;
+  justify-content: center;
   color: var(--text-color);
   &:has(.loader) {
     min-width: 100px;
@@ -13,6 +14,35 @@
   &:not(:disabled):hover {
     background-color: var(--hover-color);
     border-color: transparent;
+  }
+  &:active {
+    outline: none; /* Отключаем стандартное выделение фокуса */
+    box-shadow: 0 0 0 3px rgba(76, 160, 73, 0.7); /* Создаём собственный эффект фокуса */
+  }
+  overflow: hidden;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    background-color: red;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes circleAnimation {
+  from  {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(10);
+    opacity: 1;
   }
 }
 

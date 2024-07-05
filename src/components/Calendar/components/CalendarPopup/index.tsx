@@ -1,16 +1,19 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, {
+  Fragment, useCallback, useEffect, useRef,
+} from 'react';
 import dayjs from 'dayjs';
+import { Plus } from 'lucide-react';
 
 import { EntriesEventsReturn } from '@components/Calendar/Calendar';
 import Portal from '@components/Portal';
 import { outsideClick } from '@helpers/outSideClick';
 import { classNames } from '@lib/classNames/classNames';
 import animations from '@variables/animations/animations.module.scss';
-import Tooltip from '@components/ui/Tooltip/Tooltip';
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IBarberServices } from '@constants/barber-services';
 import CalendarPopupTooltip from '@components/Calendar/components/CalendarPopup/tooltip';
+import Button from '@components/ui/Button/Button';
 
 import cls from './style.module.scss';
 
@@ -70,7 +73,7 @@ const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps
                 date, time, services, id, client, employee,
               } = event.data as IEntry;
               return (
-                <>
+                <Fragment key={event.data?.id}>
                   <span
                     data-tooltip-id={`event-tooltip-${id}`}
                     onDoubleClick={() => onDoubleClickEvent(event)}
@@ -87,10 +90,11 @@ const CalendarPopup = ({ data, onDoubleClickEvent, onClose }: CalendarPopupProps
                     date={date}
                     services={services as IBarberServices[]}
                   />
-                </>
+                </Fragment>
               );
             })}
           </div>
+          <Button>Add entry</Button>
         </div>
       </div>
     </Portal>

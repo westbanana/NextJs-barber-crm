@@ -97,10 +97,11 @@ const Calendar = ({ entries }: CalendarProps) => {
         events={entriesEvents}
         doShowMoreDrillDown={false}
         step={60}
+        selectable
         onSelectSlot={onSelectSlotHandler}
         popup={false}
         onShowMore={onShowMoreHandler}
-        onDoubleClickEvent={(event) => onDoubleClickEventHandler(event)}
+        onDoubleClickEvent={onDoubleClickEventHandler}
       />
       {(showPopup && popupData)
         && (

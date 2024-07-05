@@ -4,6 +4,7 @@ import { Event, EventProps } from 'react-big-calendar';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
 import { IClient, IEntry } from '@components/Entry/MiniEntry/entries.type';
 import { EntriesEventsReturn } from '@components/Calendar/Calendar';
+import { IBarberServices } from '@constants/barber-services';
 
 const EventAgenda = ({ event }: EventProps<EntriesEventsReturn>) => {
   const { data } = event;
@@ -19,8 +20,7 @@ const EventAgenda = ({ event }: EventProps<EntriesEventsReturn>) => {
       <p>{`Майстер: ${employeeInfo.name}`}</p>
       <p>{`Клієнт: ${clientInfo.name}`}</p>
       <ul>
-        {/* @ts-ignore */}
-        {services?.map(({ name, price }) => <li>{`${name}: ${price}`}</li>)}
+        {(services as IBarberServices[])?.map(({ name, price }) => <li>{`${name}: ${price}`}</li>)}
       </ul>
     </div>
   );
