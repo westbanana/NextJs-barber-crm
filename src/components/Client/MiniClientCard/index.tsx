@@ -1,8 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import {
+  Check,
   Copy, Menu, Phone, UserCheck, X,
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
@@ -23,6 +25,7 @@ interface MiniClientCardProps extends React.HTMLAttributes<HTMLDivElement> {
 const MiniClientCard = ({ client, ...otherProps }: MiniClientCardProps) => {
   const clientShortName = client.name ? getShortName(client?.name) : 'unknown';
   const { copied, copy } = useCopyToClipboard({ timeout: 500 });
+  const t = useTranslations();
 
   const onPhoneNumberClick = () => {
     copy(client.phoneNumber);
@@ -31,7 +34,6 @@ const MiniClientCard = ({ client, ...otherProps }: MiniClientCardProps) => {
   const onClientDelete = async () => {
     deleteClient(client);
   };
-
   return (
     <MiniCard
       controllers={{
@@ -80,6 +82,9 @@ const MiniClientCard = ({ client, ...otherProps }: MiniClientCardProps) => {
             className={classNames(cls.phoneNumber, {}, [cls.interactField])}
           >
             {client.phoneNumber}
+            {!copied
+              ? <Copy className={classNames(cls.copyIcon, {}, [])} />
+              : <Check className={classNames(cls.copyIcon, {}, [])} />}
           </span>
         </div>
         <div className={cls.visitContainer}>
@@ -91,7 +96,7 @@ const MiniClientCard = ({ client, ...otherProps }: MiniClientCardProps) => {
             :
           </div>
           <span className={cls.visits}>
-            {`${client.visits} раз`}
+            {client.visits}
           </span>
         </div>
       </div>
@@ -102,22 +107,22 @@ const MiniClientCard = ({ client, ...otherProps }: MiniClientCardProps) => {
         <span>
           {
             copied
-              ? `${client.phoneNumber} - copied`
+              ? `${client.phoneNumber} - ${t('client-page.mini-card.copied')}`
               : client.phoneNumber
           }
         </span>
       </Tooltip>
       <Tooltip id={`client-phone-${client.id}`}>
-        <span>Номер телефона клиента</span>
+        <span>{t('client-page.client-card.phone')}</span>
       </Tooltip>
       <Tooltip id={`client-visits-${client.id}`}>
-        <span>Посещений</span>
+        <span>{t('client-page.mini-card.visits')}</span>
       </Tooltip>
       <Tooltip id={`tel-client-${client.id}`}>
-        <span>Позвонить клиенту</span>
+        <span>{t('client-page.mini-card.call')}</span>
       </Tooltip>
       <Tooltip id={`delete-client-${client.id}`}>
-        <span>Удалить клиента</span>
+        <span>{t('client-page.mini-card.delete')}</span>
       </Tooltip>
     </MiniCard>
   );

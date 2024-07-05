@@ -18,14 +18,8 @@
           "to": "17:00"
         },
         "days": {
-          "from": {
-            "id": "ПН",
-            "name": "ПН"
-          },
-          "to": {
-            "id": "ПН",
-            "name": "ПН"
-          }
+          "from": "ПН",
+          "to": "ПН"
         }
       },
       "services_provided": []
@@ -476,6 +470,17 @@
       "employee": "1",
       "date": "2024-6-25",
       "time": "14:00"
+    },
+    {
+      "id": "1720184318422",
+      "completed": false,
+      "client": "1",
+      "services": [
+        "1"
+      ],
+      "employee": "1",
+      "date": "2024-7-5",
+      "time": "19:00"
     }
   ],
   "clients": [

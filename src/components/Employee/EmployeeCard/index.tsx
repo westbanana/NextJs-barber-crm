@@ -3,6 +3,7 @@
 import React from 'react';
 import { Field, FieldProps } from 'formik';
 import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { SelectItem, SelectMode } from '@components/ui/Select/select.type';
 import { changeFormikField } from '@helpers/changeFormikField';
@@ -31,6 +32,7 @@ const EmployeeCard = ({
   mode,
   onClose,
 }:EmployeeEditCardProps) => {
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const loading = useAppSelector(getEmployeeLoading);
   const onSubmitFormik = (values:IEmployee) => {
@@ -74,20 +76,20 @@ const EmployeeCard = ({
             <div className={cls.nameInputs}>
               <Input
                 id="name"
-                label="Ім'я"
+                label={t('employee-page.employee-card.name')}
                 value={values?.name}
                 onChange={handleChange}
               />
               <Input
                 id="position"
-                label="Посада"
+                label={t('employee-page.employee-card.position')}
                 value={values?.position}
                 onChange={handleChange}
               />
             </div>
             <div className={cls.dateInputs}>
               <div className={cls.workScheduleTime}>
-                Час роботи
+                {t('employee-page.employee-card.time')}
                 <div className={cls.timeSelector}>
                   <Field
                     name="work_schedule.time.from"
@@ -97,9 +99,9 @@ const EmployeeCard = ({
                         callback={(value) => {
                           changeFormikField<string>(value, props.field);
                         }}
+                        label={t('employee-page.employee-card.from')}
                         time={values?.work_schedule?.time.from}
                       />
-
                     )}
                   </Field>
                   <Field
@@ -110,6 +112,7 @@ const EmployeeCard = ({
                         callback={(value) => {
                           changeFormikField<string>(value, props.field);
                         }}
+                        label={t('employee-page.employee-card.to')}
                         time={values?.work_schedule?.time.to}
                       />
                     )}
@@ -117,7 +120,7 @@ const EmployeeCard = ({
                 </div>
               </div>
               <div className={cls.workScheduleTime}>
-                Дні роботи
+                {t('employee-page.employee-card.days')}
                 <div className={cls.timeSelector}>
                   <Field
                     name="work_schedule.days.from"
@@ -125,14 +128,14 @@ const EmployeeCard = ({
                     {(props: FieldProps) => (
                       <Select<DayType>
                         callback={(value) => {
-                          changeFormikField<DayType>(value[0], props.field);
+                          changeFormikField<string>(value[0].name, props.field);
                         }}
                         defaultValue={[{
                           name: values?.work_schedule?.days?.from,
                           id: values?.work_schedule?.days?.from,
                         }]}
                         className={cls.DataSelect}
-                        label="From"
+                        label={t('employee-page.employee-card.from')}
                         data={days}
                         selectMode={SelectMode.SINGLESELECT}
                       />
@@ -148,11 +151,11 @@ const EmployeeCard = ({
                           id: values?.work_schedule?.days?.to,
                         }]}
                         callback={(value) => {
-                          changeFormikField<DayType>(value[0], props.field);
+                          changeFormikField<string>(value[0].name, props.field);
                         }}
                         className={cls.DataSelect}
                         selectMode={SelectMode.SINGLESELECT}
-                        label="To"
+                        label={t('employee-page.employee-card.to')}
                         data={days}
                       />
                     )}
@@ -165,7 +168,7 @@ const EmployeeCard = ({
             {mode === 'edit' && (
               <>
                 <Card.Button onClick={handleSubmit} loading={loading}>
-                  Зберегти
+                  {t('employee-page.employee-card.save')}
                 </Card.Button>
                 <Card.Button onClick={deleteCurrentEmployee}>
                   <Trash2 />
@@ -177,7 +180,8 @@ const EmployeeCard = ({
                 onClick={handleSubmit}
                 loading={loading}
               >
-                Створити
+                $
+                {t('employee-page.employee-card.create')}
               </Card.Button>
             )}
           </div>

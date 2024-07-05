@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 import Page from '@components/ui/Page/Page';
 import { fetchClientList } from '@components/Client/services/fetchClientList';
@@ -18,6 +19,7 @@ import MiniClientCard from '@components/Client/MiniClientCard';
 import ExpandableContainer from '../../../components/ui/ExpandableContainer';
 
 const ClientsPage = () => {
+  const t = useTranslations();
   const dispatch = useAppDispatch();
   const clients = useAppSelector(getClientList);
   const loading = useAppSelector(getClientLoading);
@@ -37,7 +39,7 @@ const ClientsPage = () => {
   };
   return (
     <Page>
-      <ExpandableContainer label="клиенты">
+      <ExpandableContainer label={t('client-page.title')}>
         {clients.map((client) => (
           <MiniClientCard
             key={client.id}

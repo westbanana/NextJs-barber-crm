@@ -24,11 +24,12 @@ interface ExpandableContainerProps extends ComponentPropsWithoutRef<'div'> {
   label: string
   loading?: boolean
   adaptiveListHeight?: boolean
+  staticHeight?: boolean
   className?: string
 }
 
 const ExpandableContainer = ({
-  children, controlPanel, label, loading = false, adaptiveListHeight = false, className,
+  children, controlPanel, label, loading = false, adaptiveListHeight = false, className, staticHeight = false,
 }: ExpandableContainerProps) => {
   const t = useTranslations();
   const { focusedRef, setFocused, focused } = useInFocus();
@@ -49,6 +50,7 @@ const ExpandableContainer = ({
 
   useEffect(() => {
     const resizeHandler = () => {
+      if (staticHeight) return;
       if (focusedRef.current && listRef.current) {
         if (listRef.current.scrollHeight <= focusedRef.current.clientHeight) {
           setShowAccordion(false);
@@ -69,7 +71,7 @@ const ExpandableContainer = ({
   };
 
   useEffect(() => {
-    if (!adaptiveListHeight) return;
+    if (!adaptiveListHeight || staticHeight) return;
     const adaptiveListHeightHandler = () => {
       const containerWidth = listRef.current?.clientWidth;
       const containerHeight = focusedRef.current?.clientHeight;

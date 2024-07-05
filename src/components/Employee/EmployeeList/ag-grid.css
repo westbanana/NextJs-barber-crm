@@ -32,3 +32,19 @@ body .ag-root-wrapper .ag-row-hover::before{
     border: none !important;
     outline: none;
 }
+
+body .ag-row-selected::before {
+    transition: all 0.3s ease-out;
+    background-color: rgba(82, 82, 255, 1);
+    animation: showSelected 0.3s ease-out forwards;
+}
+@keyframes showSelected {
+    from {
+        opacity: 0;
+        width: 0;
+    }
+    to {
+        opacity: 1;
+        width: 100%;;
+    }
+}

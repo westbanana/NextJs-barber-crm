@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import Card from '@components/ui/Card/Card';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
@@ -24,6 +25,7 @@ interface ClientCardProps {
 
 const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
   const dispatch = useAppDispatch();
+  const t = useTranslations();
   const { refresh } = useRouter();
   const onSubmitHandler = (values: IClient) => {
     // console.log(values);
@@ -58,7 +60,7 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
             <div className={cls.nameInputs}>
               <Input
                 id="name"
-                label="Ім'я"
+                label={t('client-page.client-card.name')}
                 value={values?.name}
                 onChange={handleChange}
               />
@@ -66,7 +68,7 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
             <div className={cls.nameInputs}>
               <Input
                 id="phoneNumber"
-                label="Номер телефону"
+                label={t('client-page.client-card.phone')}
                 value={values?.phoneNumber}
                 onChange={handleChange}
               />
@@ -76,7 +78,7 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
             {mode === 'edit' && (
               <>
                 <Card.Button onClick={handleSubmit}>
-                  Зберегти
+                  {t('client-page.client-card.save')}
                 </Card.Button>
                 <Card.Button onClick={onDeleteHandler}>
                   <Trash2 />
@@ -87,7 +89,7 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
               <Card.Button
                 onClick={handleSubmit}
               >
-                Створити
+                {t('client-page.client-card.create')}
               </Card.Button>
             )}
           </div>

@@ -46,14 +46,14 @@
     top: 50%;
     transform: translateY(-50%);
     border-radius: 100%;
-    background-color: var(--bg-color-inverted);
+    background-color: rgba(82, 82, 255, 0.74);
     animation: show 0.5s ease-out forwards;
     @keyframes show {
       from {
         opacity: 0;
       }
       to {
-        opacity: 0.3;
+        opacity: 1;
       }
     }
   }

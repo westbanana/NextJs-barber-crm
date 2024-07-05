@@ -12,6 +12,55 @@
   "calendar": {
     "popup": {
       "add-entry": "Add entry"
+    },
+    "title": "Calendar"
+  },
+  "client-page": {
+    "client-card": {
+      "create": "Create",
+      "name": "Name",
+      "phone": "Phone number",
+      "save": "Save"
+    },
+    "mini-card": {
+      "call": "Call the client",
+      "copied": "copied",
+      "delete": "Delete client",
+      "phone": "Client phone number",
+      "visits": "Number of visits"
+    },
+    "title": "Clients"
+  },
+  "employee-page": {
+    "columns": {
+      "name": {
+        "title": "Name",
+        "tooltip": "Displays the employee's first and last name"
+      },
+      "position": {
+        "title": "Position",
+        "tooltip": "Display the employee's position"
+      },
+      "schedule": {
+        "title": "Schedule",
+        "tooltip": "Display the employee's work schedule"
+      }
+    },
+    "edit-row": "Edit employee",
+    "employee-card": {
+      "create": "Create",
+      "days": "Days of work",
+      "from": "From",
+      "name": "Name",
+      "position": "Position",
+      "save": "Save",
+      "time": "Working hours",
+      "to": "To"
+    },
+    "empty-list": "No workers 🤷‍♂️",
+    "list-controller": {
+      "create": "Create employee",
+      "delete": "Delete employee"
     }
   },
   "entry-card": {
@@ -41,6 +90,14 @@
   },
   "settings-page": {
     "change-language": "Change language"
+  },
+  "statistic-page": {
+    "completed-entries-year": {
+      "title": "Current year completed entries"
+    },
+    "employee-completed-entries": {
+      "title": "Employee completed entries"
+    }
   },
   "today-employees": {
     "label": "Today's employees"

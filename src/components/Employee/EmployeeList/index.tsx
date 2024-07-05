@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { PlusSquare, Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 import { IEmployeeProps } from '@/components/Employee/EmployeeList/employee-list.type';
 import Button from '@/components/ui/Button/Button';
@@ -28,8 +29,10 @@ import cls from './style.module.scss';
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
+  const t = useTranslations();
   const employees = useAppSelector(getEmployeeList);
   const loading = useAppSelector(getEmployeeLoading);
   const cardMod = useAppSelector(getEmployeeCardMod);
@@ -60,20 +63,30 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
     dispatch(closeCard());
   };
 
+  const disableDeleteButton = !selectedRow?.length;
+
+  const columns = ColDefs.map((column) => {
+    if ('headerName' in column && 'tooltipField' in column) {
+      return { ...column, headerName: t(column.headerName), tooltipField: t(column.tooltipField) };
+    }
+    return column;
+  });
   return loading
     ? (<Skeleton rounded height="771px" width="100%" />)
     : (
       <div className={classNames(cls.EmployeesList, {}, ['ag-theme-quartz', className])}>
         <div className={cls.optionsWrapper}>
           <Button
+            data-tooltip-id="delete-employee-button"
             onClick={deleteRow}
-            disabled={!selectedRow?.length}
+            disabled={disableDeleteButton}
             className={cls.trashBacket}
             withoutBorder
           >
             <Trash2 />
           </Button>
           <Button
+            data-tooltip-id="create-employee-button"
             withoutBorder
             onClick={openCreateCard}
           >
@@ -82,9 +95,9 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
         </div>
         <AgGridReact
           ref={gridRef}
-          overlayNoRowsTemplate="Робітники відсутні🤷‍♂️"
+          overlayNoRowsTemplate={t('employee-page.empty-list')}
           rowData={employees}
-          columnDefs={ColDefs}
+          columnDefs={columns}
           rowSelection="single"
           defaultColDef={defaultColProps}
           onSelectionChanged={onSelectionChanged}
@@ -95,6 +108,15 @@ const EmployeeList = ({ className }: IEmployeeProps) => {
             onClose={closeEmployeeCard}
           />
         )}
+        <Tooltip id="create-employee-button">
+          {t('employee-page.list-controller.delete')}
+        </Tooltip>
+        <Tooltip
+          id="delete-employee-button"
+          disabled={disableDeleteButton}
+        >
+          {t('employee-page.list-controller.create')}
+        </Tooltip>
       </div>
     );
 };

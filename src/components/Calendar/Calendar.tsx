@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import {
   Calendar as BigCalendar, Event, SlotInfo,
 } from 'react-big-calendar';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 import Label from '@components/ui/Label/Label';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
@@ -41,6 +41,7 @@ interface CalendarProps {
 
 const Calendar = ({ entries }: CalendarProps) => {
   const dispatch = useAppDispatch();
+  const t = useTranslations();
   const locale = useLocale();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [popupData, setPopupData] = useState<CalendarPopupData>();
@@ -92,7 +93,7 @@ const Calendar = ({ entries }: CalendarProps) => {
 
   return (
     <div className={classNames(cls.wrapper, {}, ['afterLoading'])} id="calendar-wrapper">
-      <Label label="Calendar" alwaysOnBorder />
+      <Label label={t('calendar.title')} alwaysOnBorder />
       <BigCalendar
         culture={locale}
         messages={calendarMessages[locale]}

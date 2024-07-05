@@ -2,6 +2,8 @@
 
 import React, { memo, useState } from 'react';
 
+import Label from '@components/ui/Label/Label';
+
 import cls from './style.module.scss';
 
 export enum timeFieldType {
@@ -9,7 +11,7 @@ export enum timeFieldType {
   MINUTE = 'minute',
 }
 
-const TimeInput = ({ time, callback }: {time: string, callback: (value: string) => void}) => {
+const TimeInput = ({ time, callback, label = '' }: {label?: string, time: string, callback: (value: string) => void}) => {
   const [hour, minute] = time.split(':');
   const [hourValue, setHoursValue] = useState(hour);
   const [minuteValue, setMinuteValue] = useState(minute);
@@ -71,6 +73,15 @@ const TimeInput = ({ time, callback }: {time: string, callback: (value: string) 
 
   return (
     <div className={cls.timeWrapper}>
+      <Label
+        alwaysOnBorder
+        label={label}
+        style={{
+          fontSize: '12px',
+          color: 'var(--text-color)',
+          fontWeight: 'normal',
+        }}
+      />
       <input
         type="number"
         max={24}

@@ -1,4 +1,5 @@
 import { ColDef, ValueGetterParams, ITooltipParams } from 'ag-grid-community';
+import i18next from 'i18next';
 
 import EditRowCell from '@/components/Employee/EmployeeList/EditRowCell';
 
@@ -10,16 +11,22 @@ export const defaultColProps: ColDef = {
   tooltipValueGetter: (params: ITooltipParams) => params.value,
 };
 
-export const ColDefs:ColDef[] = [
+export const ColDefs = [
   {
-    field: 'name', headerName: "Ім'я", tooltipField: "Ім'я",
+    field: 'name',
+    headerName: 'employee-page.columns.name.title',
+    tooltipField: 'employee-page.columns.name.tooltip',
   },
-  { field: 'position', headerName: 'Посада', tooltipField: 'Посада' },
+  {
+    field: 'position',
+    headerName: 'employee-page.columns.position.title',
+    tooltipField: 'employee-page.columns.position.tooltip',
+  },
   {
     field: 'work_schedule',
-    headerName: 'Графік роботи',
-    tooltipField: 'Графік роботи',
-    valueGetter: (params) => {
+    headerName: 'employee-page.columns.schedule.title',
+    tooltipField: 'employee-page.columns.schedule.tooltip',
+    valueGetter: (params: ValueGetterParams) => {
       const { time, days } = params.data.work_schedule;
       const timeResult = `${time.from}/${time.to}`;
       const daysResult = days ? `${days?.from}-${days?.to}` : 'ПН-ПТ';
