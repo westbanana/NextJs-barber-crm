@@ -1,28 +1,35 @@
 'use client';
 
 import React, {
-  useCallback, useState,
+  useCallback, useEffect, useState,
 } from 'react';
 import dayjs from 'dayjs';
 import {
-  Calendar as BigCalendar, Components, dayjsLocalizer, Event, SlotInfo,
+  Calendar as BigCalendar, Event, SlotInfo,
 } from 'react-big-calendar';
+import { useLocale } from 'next-intl';
 
 import Label from '@components/ui/Label/Label';
 import { IEntry } from '@components/Entry/MiniEntry/entries.type';
 import 'react-big-calendar/lib/sass/styles.scss';
 import './style.css';
+import 'dayjs/locale/ru';
+import 'dayjs/locale/uk';
 import { classNames } from '@lib/classNames/classNames';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
 import { changeOpenedEntry } from '@components/Entry/slices/entrySlice';
 import { EntryCardMode } from '@components/Entry/EntryCard/entry-card.type';
-import EventAgenda from '@components/Calendar/components/EventAgenda';
 import { newEntry } from '@constants/newEntry';
 import CalendarPopup, { CalendarPopupData } from '@components/Calendar/components/CalendarPopup';
 import { IEmployee } from '@components/Employee/EmployeeCard/employee.type';
-import EventMonth from '@components/Calendar/components/EventMonth';
+import { calendarMessages } from '@components/Calendar/messages';
+import { components } from '@components/Calendar/components';
+import { localizer } from '@components/Calendar/localizer';
 
 import cls from './style.module.scss';
+
+require('globalize/lib/cultures/globalize.culture.uk');
+require('globalize/lib/cultures/globalize.culture.ru');
 
 export interface EntriesEventsReturn extends Event {
   data?: IEntry
@@ -31,10 +38,10 @@ export interface EntriesEventsReturn extends Event {
 interface CalendarProps {
   entries: IEntry[],
 }
-const localizer = dayjsLocalizer(dayjs);
 
 const Calendar = ({ entries }: CalendarProps) => {
   const dispatch = useAppDispatch();
+  const locale = useLocale();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [popupData, setPopupData] = useState<CalendarPopupData>();
   const entriesEvents: EntriesEventsReturn[] = (entries).map((entry) => ({
@@ -44,14 +51,9 @@ const Calendar = ({ entries }: CalendarProps) => {
     end: dayjs(`${entry.date} ${entry.time}`).add(30, 'minutes').toDate(),
   }));
 
-  const components: Components = {
-    agenda: {
-      event: EventAgenda,
-    },
-    month: {
-      event: EventMonth,
-    },
-  };
+  useEffect(() => {
+    dayjs.locale(locale);
+  }, [locale]);
 
   const onDoubleClickEventHandler = useCallback(({ data }: EntriesEventsReturn) => {
     if (data) {
@@ -92,6 +94,8 @@ const Calendar = ({ entries }: CalendarProps) => {
     <div className={classNames(cls.wrapper, {}, ['afterLoading'])} id="calendar-wrapper">
       <Label label="Calendar" alwaysOnBorder />
       <BigCalendar
+        culture={locale}
+        messages={calendarMessages[locale]}
         components={components}
         localizer={localizer}
         events={entriesEvents}
