@@ -64,7 +64,7 @@ const ExpandableContainer = ({
     return () => {
       window.removeEventListener('resize', resizeHandler);
     };
-  }, [focusedRef, showAccordion, loading]);
+  }, [focusedRef, showAccordion, loading, staticHeight]);
   const listMods: Mods = {
     [cls.emptyList]: Array.isArray(children) ? !children.length : children,
     [cls.openedList]: listOpened,
@@ -82,7 +82,7 @@ const ExpandableContainer = ({
     };
     const height = adaptiveListHeightHandler();
     setListHeight(height);
-  }, [listOpened, adaptiveListHeight, focusedRef, children]);
+  }, [listOpened, adaptiveListHeight, focusedRef, children, staticHeight]);
   return (
     <div
       ref={focusedRef}

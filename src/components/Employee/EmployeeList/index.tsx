@@ -23,13 +23,12 @@ import { getEmployeeLoading } from '@components/Employee/selectors/getEmployeeLo
 import { deleteEmployee } from '@components/Employee/services/deleteEmployee';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
 import Skeleton from '@/components/ui/Skeleton/Skeleton';
+import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 import cls from './style.module.scss';
-
 import './ag-grid.css';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
-import Tooltip from '@components/ui/Tooltip/Tooltip';
 
 const EmployeeList = ({ className }: IEmployeeProps) => {
   const t = useTranslations();

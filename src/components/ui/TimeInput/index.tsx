@@ -11,7 +11,13 @@ export enum timeFieldType {
   MINUTE = 'minute',
 }
 
-const TimeInput = ({ time, callback, label = '' }: {label?: string, time: string, callback: (value: string) => void}) => {
+const TimeInput = ({
+  time, callback, label = '',
+}: {
+  label?: string,
+  time: string,
+  callback: (value: string) => void
+}) => {
   const [hour, minute] = time.split(':');
   const [hourValue, setHoursValue] = useState(hour);
   const [minuteValue, setMinuteValue] = useState(minute);
