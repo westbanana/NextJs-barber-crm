@@ -10,16 +10,19 @@ const Input = memo(forwardRef<HTMLInputElement, InputProps>(({
   label,
   id,
   className,
+  error = false,
   ...otherProps
 }, ref) => {
-  const mods:Mods = {};
+  const inputMods:Mods = {
+    [cls.error]: error,
+  };
   return (
-    <div className={classNames(cls.inputContainer, mods, [className])}>
+    <div className={classNames(cls.inputContainer, {}, [className])}>
       <Label className={cls.label} label={label!!} id={id!!} />
       <input
         ref={ref}
         id={id}
-        className={cls.Input}
+        className={classNames(cls.Input, inputMods, [])}
         {...otherProps}
       />
     </div>
