@@ -1,126 +1,84 @@
 'use client';
 
 import React, { useCallback, useState } from 'react';
-// import { usePathname } from 'next/navigation';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import {
-//   enUS, ukUA, ruRU, deDE,
-// } from '@mui/x-date-pickers/locales';
+import { ukUA, enUS, ruRU } from '@mui/x-date-pickers/locales';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
-// import { TimeView } from '@mui/x-date-pickers';
+import { useLocale } from 'next-intl';
 
-// import './dateTimePicker.css';
-
-// import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
-// import { LANGs } from '@app/[locale]/settings/page';
 import Label from '@components/ui/Label/Label';
+import { FormFieldErrors } from '@constants/formFieldErrors';
 
 import cls from './style.module.scss';
 
 export type DateTimePickerProps = {
-  dates: string[],
-  defaultValue: dayjs.Dayjs | undefined | null
+  defaultValue?: dayjs.Dayjs | undefined | null
   callback: (value:dayjs.Dayjs) => void
   disabled?: boolean
   setIsOpened: (state: boolean) => void
+  label: string
+  error?: string
+}
+
+type localeTextType = {
+  components: {
+    MuiLocalizationProvider: {
+      defaultProps: {
+        localeText: {
+          previousMonth?: string | undefined
+        }
+        nextMonth?: string | undefined
+        calendarWeekNumberHeaderLabel?: string | undefined
+        calendarWeekNumberHeaderText?: string | undefined
+        calendarWeekNumberAriaLabelText?: ((weekNumber: number) => string) | undefined
+      }
+  }
+  }
 }
 
 const DateTimePicker = ({
-  dates, defaultValue, callback, disabled = false, setIsOpened,
+  defaultValue = undefined, callback, disabled = false, setIsOpened, label, error,
 }: DateTimePickerProps) => {
-  // const [datePickerLocale, setDatePickerLocale] = useState<any>();
-  // const pathname = usePathname();
-  // const currentLocal = pathname
-  //   .split('/')
-  //   .slice(1)[0] as LANGs;
-  // const changePickerLocale = useCallback(() => {
-  //   switch (currentLocal) {
-  //   case 'ru':
-  //     setDatePickerLocale(ruRU.components.MuiLocalizationProvider.defaultProps.localeText);
-  //     break;
-  //   case 'en':
-  //     setDatePickerLocale(enUS.components.MuiLocalizationProvider.defaultProps.localeText);
-  //     break;
-  //   case 'uk':
-  //     setDatePickerLocale(ukUA.components.MuiLocalizationProvider.defaultProps.localeText);
-  //     break;
-  //   default:
-  //     setDatePickerLocale(ukUA.components.MuiLocalizationProvider.defaultProps.localeText);
-  //   }
-  // }, [currentLocal]);
-  // console.log();
-  // useEffect(() => {
-  //   changePickerLocale();
-  // }, [changePickerLocale, currentLocal]);
+  const locale = useLocale();
 
   const [selectedDate, setSelectedDate] = useState(dayjs());
   const minTime = selectedDate.set('hour', 8).set('minute', 0);
   const maxTime = selectedDate.set('hour', 19).set('minute', 0);
-  const formattedDates = dates.map((date) => dayjs(date));
   const shouldDisableDate = (day: dayjs.Dayjs) => {
-    const currentDate = day.format('YYYY-MM-DD');
-    const matchingTimes = formattedDates
-      .filter((date) => date.isSame(currentDate, 'day'))
-      .map((date) => dayjs(date).format('HH:mm'));
-    if (day.day() === 0 || day.day() === 6) {
-      return true;
-    }
-
-    return matchingTimes.length === entriesPossibleTime.length;
+    const dayIdx = day.day();
+    return dayIdx === 6 || dayIdx === 0;
   };
-
-  // const shouldDisableTime = (timeValue: dayjs.Dayjs, clockType: TimeView) => {
-  //   const currentHour = timeValue.format('HH');
-  //   const currentMinutes = parseInt(timeValue.format('mm'), 10);
-  //   const currentDate = timeValue.format('YYYY-MM-DD');
-  //   const matchingDate = formattedDates.some((date) => date.isSame(currentDate, 'day'));
-  //
-  //   if (matchingDate) {
-  //     const matchingTime = formattedDates
-  //       .filter((date) => dayjs(date).isSame(currentDate, 'day'))
-  //       .map((date) => dayjs(date).format('HH:mm'));
-  //     const full = timeValue.format('HH:mm');
-  //     if (matchingTime.includes(`${currentHour}:00`) && matchingTime.includes(`${currentHour}:30`)) {
-  //       return true; // Время уже выбрано и нужно его отключить
-  //     }
-  //     if (clockType === 'minutes') {
-  //       if (matchingTime.includes(full)) {
-  //         return true;
-  //       }
-  //     }
-  //   }
-  //   return currentMinutes % 30 !== 0;
-  // };
 
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
   };
-
-  const onOpen = useCallback(() => {
-    setTimeout(() => {
-      setIsOpened(true);
-    }, 0);
-  }, [setIsOpened]);
 
   const onClose = useCallback(() => {
     setTimeout(() => {
       setIsOpened(false);
     }, 0);
   }, [setIsOpened]);
+
+  const setLocaleText = useCallback((): localeTextType => {
+    if (locale === 'uk') {
+      return ukUA;
+    } if (locale === 'en') {
+      return enUS;
+    }
+    return ruRU;
+  }, [locale]);
+  const errorMessage = error ? FormFieldErrors[error as keyof typeof FormFieldErrors] : undefined;
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
-      // adapterLocale="uk"
-      // localeText={ukUA.components.MuiLocalizationProvider.defaultProps.localeText}
+      localeText={setLocaleText().components.MuiLocalizationProvider.defaultProps.localeText}
     >
       <div
         className={cls.dateTimePickerWrapper}
       >
-        <Label label="Date" className={cls.label} />
+        <Label label={errorMessage || label} className={cls.label} />
         <MuiDateTimePicker
           defaultValue={defaultValue}
           className={cls.dateTimePicker}
@@ -130,17 +88,17 @@ const DateTimePicker = ({
           minTime={minTime}
           maxTime={maxTime}
           onChange={handleDateChange}
-          // minutesStep={30}
           reduceAnimations
           onAccept={(value) => {
             callback(value!!);
           }}
           shouldDisableDate={shouldDisableDate}
-          // shouldDisableTime={shouldDisableTime}
           disabled={disabled}
           format="DD.MM.YYYY  HH:mm"
           sx={{
             '.MuiInputBase-input': { color: 'var(--text-color)' },
+            '.MuiOutlinedInput-notchedOutline': { borderColor: errorMessage ? 'red' : 'var(--border-color)' },
+            '.MuiFormControl-root-MuiTextField-root': { borderColor: 'orange' },
             '.MuiOutlinedInput-notchedOutline .Mui-focused': { borderColor: 'rgba(82, 82, 255, 0.74)' },
             '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
               { borderColor: 'rgba(82, 82, 255, 0.74)' },
@@ -154,6 +112,7 @@ const DateTimePicker = ({
                 '.MuiPickersYear-yearButton.Mui-selected': { backgroundColor: 'rgba(82, 82, 255, 0.74)' },
                 '.Mui-selected:focus': { backgroundColor: 'rgba(82, 82, 255, 0.74)' },
                 '.Mui-selected: hover': { backgroundColor: 'rgba(82, 82, 255, 1)' },
+                '.MuiPickersDay-root.Mui-selected:hover': { backgroundColor: 'rgba(82, 82, 255, 1)' },
                 '.MuiMenuItem-root.Mui-selected': {
                   backgroundColor: 'rgba(82, 82, 255, 1)',
                   color: 'var(--text-color-inverted)',

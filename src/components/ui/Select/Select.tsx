@@ -1,7 +1,7 @@
 'use client';
 
 import React, {
-  MutableRefObject, useCallback, useEffect, useRef, useState,
+  MutableRefObject, useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
 import { ChevronDown } from 'lucide-react';
 
@@ -23,6 +23,10 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
   const [isClosing, setIsClosing] = useState(false);
   const timerRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
   const refContainer = useRef<HTMLDivElement>(null);
+  const errorMessage = useMemo(() => (
+    error
+      ? FormFieldErrors[error as keyof typeof FormFieldErrors]
+      : undefined), [error]);
 
   const closeHandler = useCallback(() => {
     if (isOpened) {
@@ -74,6 +78,7 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
 
   const mainContainerMods: Mods = {
     [cls.disabled]: disabled,
+    [cls.error]: errorMessage,
     // [cls.mainContainerDisabled]: !data.length,
   };
 
@@ -101,7 +106,6 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
     return input.name;
   };
   const resultStroke = getResultStroke(result);
-  const errorMessage = error ? FormFieldErrors[error as keyof typeof FormFieldErrors] : undefined;
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}

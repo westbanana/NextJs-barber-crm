@@ -20,10 +20,6 @@ interface CalendarWrapperProps {
 const CalendarWrapper = ({ entries, clients, employees }: CalendarWrapperProps) => {
   const dispatch = useAppDispatch();
   const openedEntry = useAppSelector(getOpenedEntry);
-  const entriesDates = entries.map(({
-    date,
-    time,
-  }) => `${date} ${time}`);
   const onCloseCardHandler = useCallback(() => {
     dispatch(clearOpenedEntry());
   }, [dispatch]);
@@ -35,7 +31,6 @@ const CalendarWrapper = ({ entries, clients, employees }: CalendarWrapperProps) 
           disableFetchTodayEntries
           onClose={onCloseCardHandler}
           mode={openedEntry.mode}
-          entryDates={entriesDates!!}
           data={{
             clients,
             employees,

@@ -8,3 +8,8 @@
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
 }
+
+
+.disabledDay {
+  background-color: var(--calendar-day-out-of-range);
+}

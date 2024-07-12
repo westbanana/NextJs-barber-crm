@@ -65,32 +65,39 @@ const Calendar = ({ entries }: CalendarProps) => {
     }
   }, [dispatch]);
 
-  const onSelectSlotHandler = (slotInfo: SlotInfo) => {
+  const onSelectSlotHandler = useCallback((slotInfo: SlotInfo) => {
+    const disabledDays = slotInfo.slots[0].getDay() === 6 || slotInfo.slots[0].getDay() === 0;
+    if (disabledDays) return;
     const currentSlotDate = dayjs(slotInfo.slots[0]);
     const today = dayjs();
     if (currentSlotDate.isSame(today) || currentSlotDate.isAfter(today)) {
       const currentSlotDateFormatted = currentSlotDate.format('YYYY-MM-DD');
       dispatch(changeOpenedEntry({
-        entry: { ...newEntry, date: currentSlotDateFormatted },
+        entry: { ...newEntry, date: currentSlotDateFormatted, time: dayjs().hour(8).format('HH:mm') },
         mode: EntryCardMode.CREATE,
       }));
     }
-  };
+  }, [dispatch]);
 
-  const openPopup = (data: CalendarPopupData) => {
+  const openPopup = useCallback((data: CalendarPopupData) => {
     setShowPopup(true);
     setPopupData(data);
-  };
+  }, []);
 
   const onShowMoreHandler = useCallback((events: EntriesEventsReturn[], date: Date) => {
     openPopup({
       events,
       date,
     });
+  }, [openPopup]);
+
+  const onPopupCloseHandler = useCallback(() => setShowPopup(false), []);
+  const dayPropGetter = useCallback((date: Date) => {
+    if (dayjs(date).day() === 0 || dayjs(date).day() === 6 || dayjs(date).isBefore(dayjs(), 'day')) {
+      return { className: cls.disabledDay }; // Возвращаем объект с className
+    }
+    return {}; // Возвращаем пустой объект, если нет класса
   }, []);
-
-  const onPopupCloseHandler = () => setShowPopup(false);
-
   return (
     <div className={classNames(cls.wrapper, {}, ['afterLoading'])} id="calendar-wrapper">
       <Label label={t('calendar.title')} alwaysOnBorder />
@@ -102,6 +109,7 @@ const Calendar = ({ entries }: CalendarProps) => {
         events={entriesEvents}
         doShowMoreDrillDown={false}
         step={60}
+        dayPropGetter={dayPropGetter}
         selectable
         onSelectSlot={onSelectSlotHandler}
         popup={false}

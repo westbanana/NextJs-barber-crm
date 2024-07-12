@@ -3,7 +3,6 @@
 import React, {
   memo, useState,
 } from 'react';
-import { useRouter } from 'next/navigation';
 import { Trash2 } from 'lucide-react';
 import dayjs from 'dayjs';
 import { useTranslations } from 'next-intl';
@@ -30,7 +29,6 @@ import Form from '@components/Form';
 import cls from './style.module.scss';
 
 const EntryCard = memo(({
-  entryDates,
   mode,
   onClose,
   data,
@@ -41,7 +39,7 @@ const EntryCard = memo(({
   const { employees, clients } = data;
   const { entry } = useAppSelector(getOpenedEntry);
   const [isDatePickerOpened, setIsDatePickerOpened] = useState<boolean>(false);
-  const entryDate = entry?.date ? dayjs(`${entry?.date} ${entry?.time}`) : dayjs();
+  const entryDate = entry?.date ? dayjs(`${entry?.date} ${entry?.time}`) : undefined;
   const onSubmitHandler = async (values:IEntry) => {
     const formattedValues = convertObjectToIds<IEntry>(values);
     if (mode === EntryCardMode.EDIT) {
@@ -90,6 +88,9 @@ const EntryCard = memo(({
                   <Controller
                     name="employee"
                     control={control}
+                    rules={{
+                      required: true,
+                    }}
                     render={({ field }) => (
                       <Select<IEmployee>
                         error={errors.employee?.type}
@@ -108,6 +109,9 @@ const EntryCard = memo(({
                   <Controller
                     name="client"
                     control={control}
+                    rules={{
+                      required: true,
+                    }}
                     render={({ field }) => (
                       <Select<IClient>
                         error={errors.client?.type}
@@ -126,6 +130,9 @@ const EntryCard = memo(({
                   <Controller
                     name="services"
                     control={control}
+                    rules={{
+                      required: true,
+                    }}
                     render={({ field }) => (
                       <Select<IBarberServices>
                         error={errors.services?.type}
@@ -143,10 +150,14 @@ const EntryCard = memo(({
                   <Controller
                     name="date"
                     control={control}
+                    rules={{
+                      required: true,
+                    }}
                     render={() => (
                       <DateTimePicker
+                        error={errors.date?.type}
+                        label="Date"
                         callback={(value) => dateTimePickerCallback(value, setValue)}
-                        dates={entryDates}
                         defaultValue={entryDate}
                         disabled={mode === EntryCardMode.READ_ONLY}
                         setIsOpened={setIsDatePickerOpened}

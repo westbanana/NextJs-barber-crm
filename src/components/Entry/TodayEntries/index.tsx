@@ -24,7 +24,6 @@ const TodayEntries = () => {
   const dispatch = useAppDispatch();
   const todayEntries = useAppSelector(getTodayEntries);
   const openedEntry = useAppSelector(getOpenedEntry);
-  const entryDates = useAppSelector(getEntryDates);
   const loading = useAppSelector(getEntriesLoading);
   const employees = useAppSelector(getEmployeeList);
   const clients = useAppSelector(getClientList);
@@ -61,7 +60,6 @@ const TodayEntries = () => {
         <EntryCard
           onClose={onCloseHandler}
           mode={openedEntry.mode}
-          entryDates={entryDates}
           data={{
             clients,
             employees,

@@ -23,7 +23,9 @@ $transition-timing-ease-out: ease-out;
   left: -200px;
 }
 
-
+.error {
+  border-color: red !important;
+}
 .mainContainer {
   display: flex;
   flex-direction: column;

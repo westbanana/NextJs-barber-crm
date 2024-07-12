@@ -11,7 +11,6 @@ export enum EntryCardMode {
 export interface EntryEditCardProps {
   onClose: () => void;
   mode: EntryCardMode | undefined;
-  entryDates: string[];
   disableFetchTodayEntries?: boolean
   data: {
     employees: IEmployee[],
