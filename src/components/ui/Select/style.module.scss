@@ -67,6 +67,29 @@ $transition-timing-ease-out: ease-out;
   user-select: none;
 }
 
+.errorMessageContainer {
+  width: 100%;
+  background-color: var(--bg-color);
+  padding: 5px;
+  border: 1px solid red;
+  position: absolute;
+  border-radius: var(--border-radius);
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  animation: show 0.3s ease-out forwards;
+  @keyframes show {
+    from {
+      transform: translate(0%, 80%);
+      opacity: 0;
+    }
+    to {
+      transform: translate(0%, 120%);
+      opacity: 1;
+    }
+  }
+}
+
 .result {
   cursor: pointer;
   white-space: nowrap;

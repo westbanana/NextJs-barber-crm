@@ -33,6 +33,7 @@ const MiniEntry = memo(({
   } = currentEntry;
 
   const t = useTranslations();
+  const { refresh } = useRouter();
   const dispatch = useAppDispatch();
   const employee = currentEntry.employee as IEmployee;
   const client = currentEntry.client as IClient;
@@ -57,6 +58,7 @@ const MiniEntry = memo(({
   const completeCurrentEntry = async () => {
     await dispatch(completeEntry(currentEntry));
     await dispatch(fetchTodayEntries());
+    refresh();
   };
   const deleteCurrentEntry = async () => {
     if (currentEntry) {

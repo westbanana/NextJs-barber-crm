@@ -3,18 +3,19 @@
 import React, {
   MutableRefObject, useCallback, useEffect, useRef, useState,
 } from 'react';
-import { ChevronDown, Plus } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 import { SelectMode, SelectProps } from '@/components/ui/Select/select.type';
 import { classNames, Mods } from '@/lib/classNames/classNames';
 import { outsideClick } from '@/helpers/outSideClick';
 import Label from '@components/ui/Label/Label';
+import { FormFieldErrors } from '@constants/formFieldErrors';
 
 import cls from './style.module.scss';
 import { closeSelectTimeout } from './constants/close-select-timeout';
 
 const Select = <T extends {id: string | undefined, name: string | undefined} >({
-  data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT, disabled,
+  data, callback, label, className, defaultValue = [], selectMode = SelectMode.SINGLESELECT, disabled, error,
 }:SelectProps<T>) => {
   const selectData = data.length ? data : defaultValue;
   const [result, setResult] = useState<T[]>(defaultValue);
@@ -100,13 +101,14 @@ const Select = <T extends {id: string | undefined, name: string | undefined} >({
     return input.name;
   };
   const resultStroke = getResultStroke(result);
+  const errorMessage = error ? FormFieldErrors[error as keyof typeof FormFieldErrors] : undefined;
   return (
     <div
       className={classNames(cls.mainContainer, mainContainerMods, [className])}
       ref={refContainer}
       onClick={selectListToggle}
     >
-      <Label label={label} id={label} className={cls.label} />
+      <Label label={errorMessage || label!!} id={label} className={cls.label} />
       <div className={cls.resultWrapper}>
         <div className={cls.result}>{resultStroke as string}</div>
         <ChevronDown className={classNames(cls.arrow, arrowMods, [])} />

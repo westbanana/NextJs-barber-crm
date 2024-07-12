@@ -3,7 +3,7 @@ import React, { ComponentPropsWithoutRef } from 'react';
 import Button from '@components/ui/Button/Button';
 
 interface CardButtonProps extends ComponentPropsWithoutRef<'button'> {
-    onClick: () => void;
+    onClick?: () => void;
     loading?: boolean;
     children: React.ReactNode
 }

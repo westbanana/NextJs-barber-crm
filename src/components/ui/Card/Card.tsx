@@ -1,46 +1,33 @@
 import React, {
+  RefObject,
   useCallback, useEffect, useMemo, useRef,
 } from 'react';
 import { Portal } from '@mui/base';
-import { Formik, FormikHandlers, FormikValues } from 'formik';
 
 import CardBackground from '@components/ui/Card/CardBackground/CardBackground';
 import { outsideClick } from '@helpers/outSideClick';
 import CardCloser from '@components/ui/Card/CardCloser/CardCloser';
 import { CardContext } from '@components/ui/Card/provider';
 import CardButton from '@components/ui/Card/CardButton/CardButton';
-import { classNames } from '@lib/classNames/classNames';
 
-import cls from './style.module.scss';
-
-export type CardProps = {
-  children: React.ReactNode | ((props: {
-    values: FormikValues,
-    handleChange: FormikHandlers['handleChange'],
-    handleSubmit: FormikHandlers['handleSubmit'],
-  }) => React.ReactNode),
-  initialValues: any;
-  onSubmit: (values: any) => void;
+export type CardProps<T> = {
+  children: React.ReactNode,
   onClose: () => void;
-  validationSchema?: any;
   loading?: boolean;
   disabledOutsideClick?: boolean
 }
-const CardComponent = ({
+const CardComponent = <T, >({
   children,
-  initialValues,
-  onSubmit,
-  validationSchema,
   loading = false,
   onClose,
   disabledOutsideClick = false,
-}: CardProps) => {
-  const refEditCard = useRef<HTMLFormElement>(null);
+}: CardProps<T>) => {
+  const ref = useRef<HTMLDivElement>(null);
   const handleOutsideClick = useCallback((e: MouseEvent) => {
     outsideClick({
       event: e,
       callback: onClose,
-      ref: refEditCard,
+      ref,
       disableClick: disabledOutsideClick,
     });
   }, [onClose, disabledOutsideClick]);
@@ -55,27 +42,16 @@ const CardComponent = ({
   const memoizeContextValue = useMemo(() => ({
     onClose,
   }), [onClose]);
+
   return (
     <CardContext.Provider value={memoizeContextValue}>
       <Portal>
         <CardBackground>
-          <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-            {({
-              handleSubmit,
-              values,
-              handleChange,
-            }) => !loading && (
-              (
-                <form ref={refEditCard} className={classNames(cls.form, {}, [])} onSubmit={handleSubmit}>
-                  {typeof children === 'function'
-                    ? children({
-                      values, handleChange, handleSubmit,
-                    })
-                    : children}
-                </form>
-              )
-            )}
-          </Formik>
+          {!loading && (
+            <div ref={ref}>
+              {children}
+            </div>
+          )}
         </CardBackground>
       </Portal>
     </CardContext.Provider>

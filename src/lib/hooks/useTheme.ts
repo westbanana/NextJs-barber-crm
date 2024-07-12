@@ -13,7 +13,6 @@ export enum Theme {
 const defaultTheme = typeof window !== 'undefined'
   ? localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme || Theme.DARK
   : Theme.DARK;
-
 const useTheme = () => {
   const [theme, setTheme] = useState(defaultTheme);
   useEffect(() => {

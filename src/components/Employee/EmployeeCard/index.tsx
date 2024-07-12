@@ -1,12 +1,11 @@
 'use client';
 
 import React from 'react';
-import { Field, FieldProps } from 'formik';
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Controller } from 'react-hook-form';
 
-import { SelectItem, SelectMode } from '@components/ui/Select/select.type';
-import { changeFormikField } from '@helpers/changeFormikField';
+import { SelectMode } from '@components/ui/Select/select.type';
 import Card from '@components/ui/Card/Card';
 import { deleteEmployee } from '@components/Employee/services/deleteEmployee';
 import Input from '@/components/ui/Input/Input';
@@ -17,11 +16,11 @@ import { days, DayType } from '@/constants/days';
 import Select from '@/components/ui/Select/Select';
 import { newEmployee } from '@/constants/employee';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
-import { EmployeeSchema } from '@/components/Employee/EmployeeCard/validation';
 import { getEmployeeLoading } from '@components/Employee/selectors/getEmployeeLoading';
+import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
+import Form from '@components/Form';
 import { updateEmployee } from '@components/Employee/services/updateEmployee';
 import { createEmployee } from '@components/Employee/services/createEmployee';
-import { EmployeeCardMode, EmployeeEditCardProps } from '@/components/Employee/EmployeeCard/employee-card.type';
 
 import cls from './style.module.scss';
 
@@ -50,144 +49,170 @@ const EmployeeCard = ({
     }
   };
   return (
-    <Card
-      validationSchema={EmployeeSchema}
-      initialValues={employeeData}
-      onSubmit={onSubmitFormik}
-      onClose={onClose}
-    >
-      {({
-        values,
-        handleChange,
-        handleSubmit,
-      }) => (
-        <>
-          <Card.Closer />
-          <div className={cls.userIconContainer}>
-            <UserIcon
-              userName={employeeData?.name}
-              withUpload
-              id="userIcon"
-              value={values?.userIcon}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={cls.inputsWrapper}>
-            <div className={cls.nameInputs}>
-              <Input
-                id="name"
-                label={t('employee-page.employee-card.name')}
-                value={values?.name}
-                onChange={handleChange}
-              />
-              <Input
-                id="position"
-                label={t('employee-page.employee-card.position')}
-                value={values?.position}
-                onChange={handleChange}
+    <Card<HTMLFormElement> onClose={onClose}>
+      <Form<IEmployee> initialState={employeeData}>
+        {({
+          errors, control, handleSubmit,
+        }) => (
+          <>
+            <Card.Closer />
+            <div className={cls.userIconContainer}>
+              <Controller
+                name="userIcon"
+                control={control}
+                render={({ field }) => (
+                  <UserIcon
+                    userName={employeeData?.name}
+                    withUpload
+                    id="userIcon"
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
               />
             </div>
-            <div className={cls.dateInputs}>
-              <div className={cls.workScheduleTime}>
-                {t('employee-page.employee-card.time')}
-                <div className={cls.timeSelector}>
-                  <Field
-                    name="work_schedule.time.from"
-                  >
-                    {(props: FieldProps) => (
-                      <TimeInput
-                        callback={(value) => {
-                          changeFormikField<string>(value, props.field);
-                        }}
-                        label={t('employee-page.employee-card.from')}
-                        time={values?.work_schedule?.time.from}
-                      />
-                    )}
-                  </Field>
-                  <Field
-                    name="work_schedule.time.to"
-                  >
-                    {(props: FieldProps) => (
-                      <TimeInput
-                        callback={(value) => {
-                          changeFormikField<string>(value, props.field);
-                        }}
-                        label={t('employee-page.employee-card.to')}
-                        time={values?.work_schedule?.time.to}
-                      />
-                    )}
-                  </Field>
-                </div>
+            <div className={cls.inputsWrapper}>
+              <div className={cls.nameInputs}>
+                <Controller
+                  name="name"
+                  rules={{
+                    minLength: 5,
+                    maxLength: 20,
+                    required: true,
+                  }}
+                  control={control}
+                  render={({ field }) => (
+                    <Input
+                      id="name"
+                      error={errors.name?.type}
+                      label={t('employee-page.employee-card.name')}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+                <Controller
+                  name="position"
+                  control={control}
+                  rules={{
+                    minLength: 5,
+                    maxLength: 20,
+                    required: true,
+                  }}
+                  render={({ field }) => (
+                    <Input
+                      error={errors.position?.type}
+                      id="position"
+                      label={t('employee-page.employee-card.position')}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
               </div>
-              <div className={cls.workScheduleTime}>
-                {t('employee-page.employee-card.days')}
-                <div className={cls.timeSelector}>
-                  <Field
-                    name="work_schedule.days.from"
-                  >
-                    {(props: FieldProps) => (
-                      <Select<DayType>
-                        callback={(value) => {
-                          changeFormikField<string>(value[0].name, props.field);
-                        }}
-                        defaultValue={[{
-                          name: values?.work_schedule?.days?.from,
-                          id: values?.work_schedule?.days?.from,
-                        }]}
-                        className={cls.DataSelect}
-                        label={t('employee-page.employee-card.from')}
-                        data={days}
-                        selectMode={SelectMode.SINGLESELECT}
-                      />
-                    )}
-                  </Field>
-                  <Field
-                    name="work_schedule.days.to"
-                  >
-                    {(props: FieldProps) => (
-                      <Select<DayType>
-                        defaultValue={[{
-                          name: values?.work_schedule?.days?.to,
-                          id: values?.work_schedule?.days?.to,
-                        }]}
-                        callback={(value) => {
-                          changeFormikField<string>(value[0].name, props.field);
-                        }}
-                        className={cls.DataSelect}
-                        selectMode={SelectMode.SINGLESELECT}
-                        label={t('employee-page.employee-card.to')}
-                        data={days}
-                      />
-                    )}
-                  </Field>
+              <div className={cls.dateInputs}>
+                <div className={cls.workScheduleTime}>
+                  {t('employee-page.employee-card.time')}
+                  <div className={cls.timeSelector}>
+                    <Controller
+                      name="work_schedule.time.from"
+                      control={control}
+                      render={({ field }) => (
+                        <TimeInput
+                          callback={field.onChange}
+                          label={t('employee-page.employee-card.from')}
+                          time={field.value}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="work_schedule.time.to"
+                      control={control}
+                      render={({ field }) => (
+                        <TimeInput
+                          callback={field.onChange}
+                          label={t('employee-page.employee-card.to')}
+                          time={field.value}
+                        />
+                      )}
+                    />
+                  </div>
+                </div>
+                <div className={cls.workScheduleTime}>
+                  {t('employee-page.employee-card.days')}
+                  <div className={cls.timeSelector}>
+                    <Controller
+                      name="work_schedule.days.from"
+                      control={control}
+                      rules={{
+                        required: true,
+                      }}
+                      render={({ field }) => (
+                        <Select<DayType>
+                          error={errors.work_schedule?.days?.from?.type}
+                          callback={(value) => field.onChange(value[0].name)}
+                          defaultValue={[{
+                            name: field.value,
+                            id: field.value,
+                          }]}
+                          className={cls.DataSelect}
+                          label={t('employee-page.employee-card.from')}
+                          data={days}
+                          selectMode={SelectMode.SINGLESELECT}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="work_schedule.days.to"
+                      control={control}
+                      rules={{
+                        required: true,
+                      }}
+                      render={({ field }) => (
+                        <Select<DayType>
+                          error={errors.work_schedule?.days?.to?.type}
+                          defaultValue={[{
+                            name: field.value,
+                            id: field.value,
+                          }]}
+                          callback={(value) => field.onChange(value[0].name)}
+                          className={cls.DataSelect}
+                          selectMode={SelectMode.SINGLESELECT}
+                          label={t('employee-page.employee-card.to')}
+                          data={days}
+                        />
+                      )}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className={cls.buttonsWrapper}>
-            {mode === 'edit' && (
-              <>
-                <Card.Button onClick={handleSubmit} loading={loading}>
-                  {t('employee-page.employee-card.save')}
+            <div className={cls.buttonsWrapper}>
+              {mode === 'edit' && (
+                <>
+                  <Card.Button
+                    onClick={handleSubmit(onSubmitFormik)}
+                    loading={loading}
+                  >
+                    {t('employee-page.employee-card.save')}
+                  </Card.Button>
+                  <Card.Button onClick={deleteCurrentEmployee}>
+                    <Trash2 />
+                  </Card.Button>
+                </>
+              )}
+              {mode === 'create' && (
+                <Card.Button
+                  onClick={handleSubmit(onSubmitFormik)}
+                  loading={loading}
+                >
+                  {t('employee-page.employee-card.create')}
                 </Card.Button>
-                <Card.Button onClick={deleteCurrentEmployee}>
-                  <Trash2 />
-                </Card.Button>
-              </>
-            )}
-            {mode === 'create' && (
-              <Card.Button
-                onClick={handleSubmit}
-                loading={loading}
-              >
-                $
-                {t('employee-page.employee-card.create')}
-              </Card.Button>
-            )}
-          </div>
-        </>
-
-      )}
+              )}
+            </div>
+          </>
+        )}
+      </Form>
     </Card>
   );
 };

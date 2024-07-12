@@ -1,4 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
+import { LiteralUnion } from 'react-hook-form';
 
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
 import { IEmployee } from '@/components/Employee/EmployeeCard/employee.type';
@@ -16,4 +17,20 @@ export interface SelectProps<T> extends Omit<ComponentPropsWithoutRef<'select'>,
   className?: string;
   defaultValue: T[];
   selectMode?: SelectMode;
+  error?: LiteralUnion<'pattern' |
+    'value' |
+    'required' |
+    'minLength' |
+    'maxLength' |
+    'disabled' |
+    'max' |
+    'min' |
+    'onChange' |
+    'onBlur' |
+    'shouldUnregister' |
+    'valueAsNumber' |
+    'valueAsDate' |
+    'setValueAs' |
+    'validate' |
+    'deps', string> | undefined
 }

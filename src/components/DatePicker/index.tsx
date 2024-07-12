@@ -11,10 +11,13 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimeView } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 
-import './dateTimePicker.css';
+// import './dateTimePicker.css';
+
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
 import { LANGs } from '@app/[locale]/settings/page';
+import Label from '@components/ui/Label/Label';
 
 import cls from './style.module.scss';
 
@@ -70,28 +73,28 @@ const DateTimePicker = ({
     return matchingTimes.length === entriesPossibleTime.length;
   };
 
-  const shouldDisableTime = (timeValue: dayjs.Dayjs, clockType: TimeView) => {
-    const currentHour = timeValue.format('HH');
-    const currentMinutes = parseInt(timeValue.format('mm'), 10);
-    const currentDate = timeValue.format('YYYY-MM-DD');
-    const matchingDate = formattedDates.some((date) => date.isSame(currentDate, 'day'));
-
-    if (matchingDate) {
-      const matchingTime = formattedDates
-        .filter((date) => dayjs(date).isSame(currentDate, 'day'))
-        .map((date) => dayjs(date).format('HH:mm'));
-      const full = timeValue.format('HH:mm');
-      if (matchingTime.includes(`${currentHour}:00`) && matchingTime.includes(`${currentHour}:30`)) {
-        return true; // Время уже выбрано и нужно его отключить
-      }
-      if (clockType === 'minutes') {
-        if (matchingTime.includes(full)) {
-          return true;
-        }
-      }
-    }
-    return currentMinutes % 30 !== 0;
-  };
+  // const shouldDisableTime = (timeValue: dayjs.Dayjs, clockType: TimeView) => {
+  //   const currentHour = timeValue.format('HH');
+  //   const currentMinutes = parseInt(timeValue.format('mm'), 10);
+  //   const currentDate = timeValue.format('YYYY-MM-DD');
+  //   const matchingDate = formattedDates.some((date) => date.isSame(currentDate, 'day'));
+  //
+  //   if (matchingDate) {
+  //     const matchingTime = formattedDates
+  //       .filter((date) => dayjs(date).isSame(currentDate, 'day'))
+  //       .map((date) => dayjs(date).format('HH:mm'));
+  //     const full = timeValue.format('HH:mm');
+  //     if (matchingTime.includes(`${currentHour}:00`) && matchingTime.includes(`${currentHour}:30`)) {
+  //       return true; // Время уже выбрано и нужно его отключить
+  //     }
+  //     if (clockType === 'minutes') {
+  //       if (matchingTime.includes(full)) {
+  //         return true;
+  //       }
+  //     }
+  //   }
+  //   return currentMinutes % 30 !== 0;
+  // };
 
   const handleDateChange = (value: any) => {
     setSelectedDate(value);
@@ -108,7 +111,6 @@ const DateTimePicker = ({
       setIsOpened(false);
     }, 0);
   }, [setIsOpened]);
-
   return (
     <LocalizationProvider
       dateAdapter={AdapterDayjs}
@@ -118,25 +120,57 @@ const DateTimePicker = ({
       <div
         className={cls.dateTimePickerWrapper}
       >
+        <Label label="Date" className={cls.label} />
         <MuiDateTimePicker
           defaultValue={defaultValue}
           className={cls.dateTimePicker}
           ampm={false}
-          disablePast
           onOpen={() => setIsOpened(true)}
           onClose={onClose}
           minTime={minTime}
           maxTime={maxTime}
           onChange={handleDateChange}
-          minutesStep={30}
+          // minutesStep={30}
           reduceAnimations
           onAccept={(value) => {
             callback(value!!);
           }}
           shouldDisableDate={shouldDisableDate}
-          shouldDisableTime={shouldDisableTime}
+          // shouldDisableTime={shouldDisableTime}
           disabled={disabled}
           format="DD.MM.YYYY  HH:mm"
+          sx={{
+            '.MuiInputBase-input': { color: 'var(--text-color)' },
+            '.MuiOutlinedInput-notchedOutline .Mui-focused': { borderColor: 'rgba(82, 82, 255, 0.74)' },
+            '.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+              { borderColor: 'rgba(82, 82, 255, 0.74)' },
+          }}
+          slotProps={{
+            popper: {
+              sx: {
+                '.MuiPaper-root': { backgroundColor: 'var(--bg-color)' },
+                '.Mui-selected': { backgroundColor: 'rgba(82, 82, 255, 0.74)' },
+                '.MuiPickersDay-root.Mui-selected': { backgroundColor: 'rgba(82, 82, 255, 0.74)' },
+                '.MuiPickersYear-yearButton.Mui-selected': { backgroundColor: 'rgba(82, 82, 255, 0.74)' },
+                '.Mui-selected:focus': { backgroundColor: 'rgba(82, 82, 255, 0.74)' },
+                '.Mui-selected: hover': { backgroundColor: 'rgba(82, 82, 255, 1)' },
+                '.MuiMenuItem-root.Mui-selected': {
+                  backgroundColor: 'rgba(82, 82, 255, 1)',
+                  color: 'var(--text-color-inverted)',
+                },
+                '.MuiPickersDay-root:hover': { backgroundColor: 'var(--hover-color)' },
+                '.MuiButtonBase-root:hover': { backgroundColor: 'var(--hover-color)' },
+                '.MuiPickersCalendarHeader-label': { color: 'var(--text-color)' },
+                '.MuiPickersYear-root': { color: 'var(--text-color)' },
+                '.Mui-disabled': { color: 'var(--text-color)', opacity: 0.2 },
+                '.MuiPickersDay-root': { color: 'var(--text-color)' },
+                '.MuiPickersDay-root.Mui-disabled': { color: 'var(--text-color)' },
+                '.MuiDayCalendar-weekDayLabel': { color: 'var(--text-color)' },
+                '.MuiButtonBase-root': { color: 'var(--text-color)' },
+                '.MuiPickersDay-today': { borderColor: 'var(--hover-color)' },
+              },
+            },
+          }}
         />
       </div>
     </LocalizationProvider>
