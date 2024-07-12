@@ -20,7 +20,7 @@ const SideBarItem = memo(({
   const locale = useLocale();
   const pathname = usePathname();
   // @ts-ignore
-  const isActive = pathname === `/${locale}${href.pathname}`;
+  const isActive = pathname === `/${locale}${href.pathname === '/' ? '' : href.pathname}`;
   const mods: Mods = {
     [cls.collapsed]: collapsed,
     [cls.active]: isActive,
