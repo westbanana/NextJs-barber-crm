@@ -1,22 +1,22 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import React, { useCallback, useState } from 'react';
+// import { usePathname } from 'next/navigation';
 import { DateTimePicker as MuiDateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import {
-  enUS, ukUA, ruRU, deDE,
-} from '@mui/x-date-pickers/locales';
+// import {
+//   enUS, ukUA, ruRU, deDE,
+// } from '@mui/x-date-pickers/locales';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TimeView } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
+// import { TimeView } from '@mui/x-date-pickers';
 
 // import './dateTimePicker.css';
 
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { entriesPossibleTime } from '@/constants/entriesPossibleTime';
-import { LANGs } from '@app/[locale]/settings/page';
+// import { LANGs } from '@app/[locale]/settings/page';
 import Label from '@components/ui/Label/Label';
 
 import cls from './style.module.scss';

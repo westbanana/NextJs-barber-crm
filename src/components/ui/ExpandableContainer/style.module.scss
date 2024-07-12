@@ -22,12 +22,14 @@
 }
 
 .openedList {
-  height: 634px;
-  max-height: 634px;
+  height: 628px;
+  max-height: 628px;
+}
+
+.overflowAuto {
   overflow: auto;
   scrollbar-gutter: stable;
 }
-
 
 .emptyList {
   display: flex;

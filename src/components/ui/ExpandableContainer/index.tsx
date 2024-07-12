@@ -71,6 +71,16 @@ const ExpandableContainer = ({
   };
 
   useEffect(() => {
+    if (listOpened) {
+      setTimeout(() => {
+        if (listRef.current) {
+          listRef.current.classList.add(cls.overflowAuto);
+        }
+      }, 300);
+    }
+  }, [listOpened]);
+
+  useEffect(() => {
     if (!adaptiveListHeight || staticHeight) return;
     const adaptiveListHeightHandler = () => {
       const containerWidth = listRef.current?.clientWidth;

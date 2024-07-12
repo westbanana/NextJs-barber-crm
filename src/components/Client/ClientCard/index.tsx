@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { Trash2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Controller } from 'react-hook-form';
 
 import Card from '@components/ui/Card/Card';
 import { IClient } from '@components/Entry/MiniEntry/entries.type';
@@ -10,6 +11,7 @@ import Input from '@components/ui/Input/Input';
 import UserIcon from '@components/ui/UserIcon/UserIcon';
 import { deleteClient } from '@components/Client/services/deleteClient';
 import { useAppDispatch } from '@lib/hooks/useAppDispatch';
+import Form from '@components/Form';
 
 export enum ClientCardMode {
     CREATE = 'create',
@@ -35,68 +37,78 @@ const ClientCard = ({ mode, client, onClose }: ClientCardProps) => {
     refresh();
   };
   return (
-    <Card
-      initialValues={client}
-      onSubmit={onSubmitHandler}
-      onClose={onClose}
-    >
-      {({
-        values,
-        handleChange,
-        handleSubmit,
-      }) => (
-        <>
-          <Card.Closer />
-          <div className={cls.userIconContainer}>
-            <UserIcon
-              userName={client?.name}
-              withUpload
-              id="userIcon"
-              value={values?.userIcon}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={cls.inputsWrapper}>
-            <div className={cls.nameInputs}>
-              <Input
-                id="name"
-                label={t('client-page.client-card.name')}
-                value={values?.name}
-                onChange={handleChange}
+    <Card onClose={onClose}>
+      <Form<IClient> initialState={client}>
+        {({ control, handleSubmit, errors }) => (
+          <>
+            <Card.Closer />
+            <div className={cls.userIconContainer}>
+              <Controller
+                render={({ field }) => (
+                  <UserIcon
+                    userName={client?.name}
+                    withUpload
+                    id="userIcon"
+                    value={field.value as string}
+                    onChange={field.onChange}
+                  />
+                )}
+                name="clientIcon"
+                control={control}
               />
             </div>
-            <div className={cls.nameInputs}>
-              <Input
-                id="phoneNumber"
-                label={t('client-page.client-card.phone')}
-                value={values?.phoneNumber}
-                onChange={handleChange}
-              />
+            <div className={cls.inputsWrapper}>
+              <div className={cls.nameInputs}>
+                <Controller
+                  render={({ field }) => (
+                    <Input
+                      id="name"
+                      label={t('client-page.client-card.name')}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                  name="name"
+                  control={control}
+                />
+              </div>
+              <div className={cls.nameInputs}>
+                <Controller
+                  render={({ field }) => (
+                    <Input
+                      id="phoneNumber"
+                      label={t('client-page.client-card.phone')}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                  name="phoneNumber"
+                />
+              </div>
             </div>
-          </div>
-          <div className={cls.buttonsWrapper}>
-            {mode === 'edit' && (
-              <>
-                <Card.Button onClick={handleSubmit}>
-                  {t('client-page.client-card.save')}
+            <div className={cls.buttonsWrapper}>
+              {mode === 'edit' && (
+                <>
+                  <Card.Button onClick={handleSubmit(onSubmitHandler)}>
+                    {t('client-page.client-card.save')}
+                  </Card.Button>
+                  <Card.Button onClick={onDeleteHandler}>
+                    <Trash2 />
+                  </Card.Button>
+                </>
+              )}
+              {mode === 'create' && (
+                <Card.Button
+                  onClick={handleSubmit(onSubmitHandler)}
+                >
+                  {t('client-page.client-card.create')}
                 </Card.Button>
-                <Card.Button onClick={onDeleteHandler}>
-                  <Trash2 />
-                </Card.Button>
-              </>
-            )}
-            {mode === 'create' && (
-              <Card.Button
-                onClick={handleSubmit}
-              >
-                {t('client-page.client-card.create')}
-              </Card.Button>
-            )}
-          </div>
-        </>
+              )}
+            </div>
+          </>
 
-      )}
-
+        )}
+      </Form>
     </Card>
   );
 };

@@ -542,32 +542,43 @@
     {
       "id": "1",
       "description": "Создать страницу клиентов",
-      "completed": false,
-      "createdAt": "20-06-2024 22:38"
+      "completed": true,
+      "createdAt": "20-06-2024 22:38",
+      "completedAt": "12-07-2024 15:17"
     },
     {
       "id": "2",
       "description": "Добавить возможность создавать клиентов при создании записи",
-      "completed": false,
-      "createdAt": "20-06-2024 22:39"
+      "completed": true,
+      "createdAt": "20-06-2024 22:39",
+      "completedAt": "12-07-2024 15:17"
     },
     {
       "id": "3",
       "description": "Добавить топ клиентов в статистику по посещениям",
-      "completed": false,
-      "createdAt": "20-06-2024 22:41"
+      "completed": true,
+      "createdAt": "20-06-2024 22:41",
+      "completedAt": "12-07-2024 15:17"
     },
     {
       "id": "4",
       "description": "Средний чек в месяц (статистика)",
-      "completed": false,
-      "createdAt": "20-06-2024 22:42"
+      "completed": true,
+      "createdAt": "20-06-2024 22:42",
+      "completedAt": "12-07-2024 15:17"
     },
     {
       "id": "5",
       "description": "Среднее к-ство посещений в месяц",
+      "completed": true,
+      "createdAt": "20-06-2024 22:42",
+      "completedAt": "12-07-2024 15:17"
+    },
+    {
+      "id": "6",
+      "description": "Тестове завдання",
       "completed": false,
-      "createdAt": "20-06-2024 22:42"
+      "createdAt": "12-07-2024 15:17"
     }
   ]
 }
